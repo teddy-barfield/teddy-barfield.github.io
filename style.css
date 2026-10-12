@@ -72,7 +72,8 @@ p + p { margin-top: 1rem; }
 .exams { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: .75rem; }
 .exams li { background: var(--sheet); padding: 1rem; border-left: 4px solid var(--mark); }
 .exams strong { display: block; font: 600 1.25rem var(--serif); }
-.exams span { font-size: .875rem; color: var(--muted); }
+.exams span { display: block; font-size: .875rem; color: var(--muted); }
+.exams .date { margin-top: .35rem; color: var(--ink); font-weight: 500; }
 
 /* Project pages */
 .back { font-size: .95rem; }
