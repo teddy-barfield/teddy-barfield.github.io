@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>[Project title] — Teddy Barfield</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <nav aria-label="Main">
+    <div class="wrap">
+      <a href="../index.html">Home</a>
+      <div class="menu">
+        <button class="menu-toggle" aria-expanded="false" aria-controls="projects-menu">Projects</button>
+        <!-- EDIT: add a <li> for each project page. Group headings are optional. -->
+        <ul class="menu-list" id="projects-menu" hidden>
+          <li class="group">Teaching</li>
+          <li><a href="../projects/math-practice-book.html">Math practice book</a></li>
+          <li class="group">Actuarial</li>
+          <li><a href="../projects/project-template.html">[Project title]</a></li>
+        </ul>
+      </div>
+      <a href="../index.html#exams">Exams</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- TEMPLATE: copy this file, rename it, and add a link to it in the Projects menu on every page -->
+  <header>
+    <div class="wrap">
+      <a class="back" href="../index.html">Back to home</a>
+      <h1 style="margin-top:1.5rem">[Project title]</h1>
+      <p class="meta">[Tools, e.g. R, Excel, Python]</p>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="wrap">
+        <h2>The question</h2>
+        <p class="placeholder">[placeholder - What problem you set out to answer]</p>
+      </div>
+    </section>
+    <section>
+      <div class="wrap">
+        <h2>Approach</h2>
+        <p class="placeholder">[placeholder - Data, methods, and assumptions]</p>
+      </div>
+    </section>
+    <section>
+      <div class="wrap">
+        <h2>Results</h2>
+        <p class="placeholder">[placeholder - What you found and what it means]</p>
+        <div class="links">
+          <a href="https://github.com/[username]/[repo]">View code</a>
+          <a href="../files/[report].pdf">Read the write-up (PDF)</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Teddy Barfield, 2026</div>
+  </footer>
+
+  <script src="../menu.js"></script>
+</body>
+</html>
