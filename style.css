@@ -20,8 +20,8 @@
 body::before {
   content: ""; position: fixed; top: 0; bottom: 0; left: 0; width: 1.75rem; z-index: 20;
   background: linear-gradient(to bottom,
-    var(--band-1) 0 27%, var(--band-2) 27% 37%, var(--band-3) 37% 62%,
-    var(--band-4) 62% 82%, var(--band-5) 82% 100%);
+    var(--band-1) 0 20%, var(--band-2) 20% 40%, var(--band-3) 40% 60%,
+    var(--band-4) 60% 80%, var(--band-5) 80% 100%);
 }
 body { padding-left: 1.75rem; }
 @media (max-width: 600px) {
