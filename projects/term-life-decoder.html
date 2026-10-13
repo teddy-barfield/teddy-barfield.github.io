@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Life Insurance Policy Decoder — Teddy Barfield</title>
+<meta name="description" content="See what your term or whole life insurance policy is really worth: chance of a payout, expected value, and outcomes at every age.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --paper:#FFFFFF; --sheet:#F4F7FB; --ink:#000000; --muted:#4D4D4D; --rule:#D9D9D9;
+    --teal:#376092; --brick:#B3473B; --ochre:#C29A2E; --dot:#D3DCE6;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.55 "Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+  h1,h2,.verdict,.figures dd{font-family:"Newsreader",Georgia,"Times New Roman",serif;font-weight:600}
+  .wrap{max-width:1200px;margin:0 auto;padding:44px 28px 64px}
+  header{max-width:60ch;margin-bottom:40px}
+  h1{font-size:2.6rem;line-height:1.1;margin:0 0 12px;letter-spacing:-0.01em}
+  header p{color:var(--muted);margin:0;font-size:1.05rem}
+  .layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:52px;align-items:start}
+
+  /* Inputs */
+  .inputs{position:sticky;top:24px;background:var(--sheet);border:1px solid var(--rule);border-radius:4px;padding:24px 22px}
+  .inputs h2{font-size:1.3rem;margin:0 0 18px}
+  .field{margin-bottom:16px}
+  .field > label,.field > .lbl{display:block;font-weight:500;font-size:.92rem;margin-bottom:6px}
+  input[type=number],select{width:100%;font:inherit;font-size:1rem;padding:9px 10px;border:1px solid var(--rule);border-radius:3px;background:#fff;color:var(--ink)}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .seg{display:flex;border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+  .seg label{flex:1;position:relative;cursor:pointer}
+  .seg input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+  .seg span{display:block;text-align:center;padding:8px 6px;font-size:.95rem;font-weight:500}
+  .seg label + label span{border-left:1px solid var(--rule)}
+  .seg input:checked + span{background:var(--ink);color:#fff}
+  .seg input:focus-visible + span{outline:2px solid var(--teal);outline-offset:-3px}
+  .check{display:flex;gap:10px;align-items:flex-start;font-size:.92rem}
+  .check input{margin-top:4px;accent-color:var(--teal)}
+  .hint{font-size:.82rem;color:var(--muted);margin:5px 0 0;line-height:1.4}
+  .field-err{color:var(--brick);font-weight:500;font-size:.86rem;line-height:1.4;margin:6px 0 0}
+  input[aria-invalid=true],select[aria-invalid=true]{border-color:var(--brick);box-shadow:0 0 0 1px var(--brick)}
+  .paused{background:var(--sheet);border:1px solid var(--brick);border-left-width:4px;border-radius:4px;padding:12px 16px;margin:0 0 24px;font-weight:500}
+  .paused[hidden]{display:none}
+  #results.stale > :not(.paused){opacity:.3;filter:grayscale(1);pointer-events:none;user-select:none}
+  .crowd circle.b1{fill:var(--teal)} .crowd circle.b2{fill:var(--ochre)} .crowd circle.b3{fill:#6E7A86}
+  .field[hidden]{display:none}
+  input:focus-visible,select:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+
+  /* Results */
+  .verdict{font-size:1.8rem;line-height:1.3;margin:0 0 12px;max-width:34ch}
+  .verdict-sub{color:var(--muted);max-width:62ch;margin:0 0 22px}
+  .crowd svg{display:block;width:100%;max-width:640px;height:auto}
+  .crowd circle{fill:var(--dot);transition:fill .45s ease}
+  .crowd circle.hit{fill:var(--teal)}
+  .legend{display:flex;flex-wrap:wrap;gap:20px;font-size:.88rem;color:var(--muted);margin:10px 0 0}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px;vertical-align:0}
+
+  .figures{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:24px;margin:40px 0 0;border-top:2px solid var(--ink)}
+  .figures div{padding:14px 0 16px;border-bottom:1px solid var(--rule)}
+  .figures dt{font-size:.86rem;color:var(--muted);line-height:1.35;min-height:2.4em}
+  .figures dd{margin:4px 0 0;font-size:1.55rem;line-height:1.2}
+  .figures dd.pos{color:var(--teal)} .figures dd.neg{color:var(--brick)}
+
+  .reading{max-width:66ch;margin:28px 0 0}
+  .reading p{margin:0 0 12px}
+
+  .charts{margin-top:44px}
+  .charts h2{font-size:1.5rem;margin:0 0 10px}
+  .tabs{display:flex;flex-wrap:wrap;gap:4px 22px;border-bottom:1px solid var(--rule);margin-bottom:18px}
+  .tabs button{font:inherit;font-weight:500;background:none;border:0;border-bottom:3px solid transparent;padding:8px 0;color:var(--muted);cursor:pointer;margin-bottom:-1px}
+  .tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--ink)}
+  .chart-box{position:relative;height:390px;background:var(--sheet);border:1px solid var(--rule);border-radius:4px;padding:16px 14px 10px}
+  .note{color:var(--muted);max-width:70ch;margin:14px 0 0;font-size:.97rem}
+
+  details{margin-top:48px;border-top:1px solid var(--rule);padding-top:16px}
+  summary{font-family:"Newsreader",Georgia,serif;font-weight:600;font-size:1.25rem;cursor:pointer}
+  .method{max-width:70ch;font-size:.97rem}
+  .method h3{font-size:1rem;margin:22px 0 6px}
+  .method table{border-collapse:collapse;font-size:.92rem;margin:8px 0}
+  .method th,.method td{border-bottom:1px solid var(--rule);padding:5px 14px 5px 0;text-align:left}
+  .formula{font-family:"Newsreader",Georgia,serif;font-size:1.08rem;background:var(--sheet);border-left:3px solid var(--teal);padding:10px 14px;margin:10px 0;overflow-x:auto}
+  footer{margin-top:48px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--rule);padding-top:16px}
+
+  @media (max-width:900px){
+    .layout{grid-template-columns:1fr;gap:36px}
+    .inputs{position:static}
+    .figures{grid-template-columns:repeat(2,minmax(0,1fr))}
+    h1{font-size:2.1rem}
+    .verdict{font-size:1.5rem}
+    .chart-box{height:330px}
+  }
+  @media (prefers-reduced-motion:reduce){.crowd circle{transition:none}}
+
+/* ===== Site navigation bar (shared with the portfolio site) ===== */
+body{padding-left:1.75rem}
+body::before{content:"";position:fixed;top:0;bottom:0;left:0;width:1.75rem;z-index:50;
+  background:linear-gradient(to bottom,#DCE6F2 0 27%,#B9CDE5 27% 37%,#95B3D7 37% 62%,#376092 62% 82%,#254061 82% 100%)}
+@media (max-width:600px){body::before{width:.6rem} body{padding-left:.6rem}}
+.site-bar{background:#FFFFFF;border-bottom:1px solid #D9D9D9;padding:1rem 1.5rem;
+  font:400 .95rem/1.4 "Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;position:relative;z-index:40}
+.site-bar .bar{display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;max-width:1240px}
+.site-bar a,.site-bar .menu-toggle{color:#4D4D4D;text-decoration:none}
+.site-bar a:hover,.site-bar .menu-toggle:hover{color:#000;text-decoration:underline;text-underline-offset:3px}
+.site-bar .home{font-weight:600;color:#000}
+.site-bar .menu{position:relative}
+.site-bar .menu-toggle{background:none;border:0;font:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:.35em;padding:0}
+.site-bar .menu-toggle::after{content:"";width:.45em;height:.45em;margin-top:-.2em;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg)}
+.site-bar .menu-toggle[aria-expanded="true"]::after{transform:rotate(-135deg);margin-top:.2em}
+.site-bar .menu-list{position:absolute;top:calc(100% + .6rem);left:0;min-width:16rem;list-style:none;margin:0;padding:.4rem 0;
+  background:#DCE6F2;border:1px solid #D9D9D9;border-top:3px solid #376092;box-shadow:0 6px 18px rgba(0,0,0,.12)}
+.site-bar .menu-list[hidden]{display:none}
+.site-bar .menu-list a{display:block;padding:.55rem 1rem;color:#000}
+.site-bar .menu-list a:hover{background:#FFFFFF;text-decoration:none}
+.site-bar .menu-list .group{padding:.6rem 1rem .2rem;font-size:.8rem;font-weight:600;color:#4D4D4D}
+.site-bar .menu-list .group:not(:first-child){border-top:1px solid #D9D9D9;margin-top:.4rem}
+.site-bar :focus-visible{outline:3px solid #376092;outline-offset:3px}
+</style>
+</head>
+<body>
+<nav class="site-bar" aria-label="Site">
+  <div class="bar">
+    <a class="home" href="../index.html">Teddy Barfield</a>
+    <div class="menu">
+      <button class="menu-toggle" aria-expanded="false" aria-controls="projects-menu">Projects</button>
+      <ul class="menu-list" id="projects-menu" hidden>
+          <li class="group">Actuarial</li>
+          <li><a href="../projects/term-life-decoder.html">Life insurance policy decoder</a></li>
+          <li class="group">Data analysis</li>
+          <li><a href="../projects/nyc-causes-of-death.html">NYC leading causes of death</a></li>
+          <li class="group">Teaching</li>
+          <li><a href="../projects/math-practice-book.html">Math practice book</a></li>
+      </ul>
+    </div>
+    <a href="../index.html#exams">Exams</a>
+    <a href="../index.html#contact">Contact</a>
+  </div>
+</nav>
+<div class="wrap">
+  <header>
+    <h1>What is your life insurance policy actually worth?</h1>
+    <p>Enter the details of a term or whole life insurance policy to see how likely it is to pay out, what it's worth on average, and how the deal looks depending on when you die.</p>
+  </header>
+
+  <div class="layout">
+    <aside class="inputs" aria-labelledby="inputs-h">
+      <h2 id="inputs-h">Your policy</h2>
+
+      <div class="field">
+        <span class="lbl" id="type-l">Policy type</span>
+        <div class="seg" role="radiogroup" aria-labelledby="type-l">
+          <label><input type="radio" name="ptype" value="term" checked><span>Term</span></label>
+          <label><input type="radio" name="ptype" value="whole"><span>Whole life</span></label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="age">Age today</label>
+          <input id="age" type="number" min="18" max="80" step="1" value="35">
+        </div>
+        <div class="field" id="term-field">
+          <label for="term">Term (years)</label>
+          <input id="term" type="number" min="1" max="80" step="1" value="20">
+        </div>
+      </div>
+
+      <div class="field" id="pay-field" hidden>
+        <label for="payPeriod">Premiums are paid</label>
+        <select id="payPeriod">
+          <option value="life" selected>For life</option>
+          <option value="65">Until age 65</option>
+          <option value="20">For 20 years</option>
+          <option value="10">For 10 years</option>
+        </select>
+        <p class="hint">Whole life covers you until death, whenever that is.</p>
+      </div>
+
+      <div class="field">
+        <span class="lbl" id="sex-l">Sex</span>
+        <div class="seg" role="radiogroup" aria-labelledby="sex-l">
+          <label><input type="radio" name="sex" value="male" checked><span>Male</span></label>
+          <label><input type="radio" name="sex" value="female"><span>Female</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="health">Health class</label>
+        <select id="health">
+          <option value="0.45">Preferred plus</option>
+          <option value="0.6" selected>Preferred</option>
+          <option value="0.8">Standard</option>
+          <option value="1.8">Tobacco user</option>
+          <option value="1">US population average</option>
+        </select>
+        <p class="hint">Use the class on your policy. It scales mortality relative to the US population.</p>
+      </div>
+
+      <div class="field">
+        <label for="db">Death benefit ($)</label>
+        <input id="db" type="number" min="1000" step="1000" value="500000">
+      </div>
+
+      <div class="field">
+        <label for="prem">Premium ($)</label>
+        <input id="prem" type="number" min="1" step="1" value="45">
+      </div>
+
+      <div class="field">
+        <span class="lbl" id="mode-l">Paid</span>
+        <div class="seg" role="radiogroup" aria-labelledby="mode-l">
+          <label><input type="radio" name="mode" value="monthly" checked><span>Monthly</span></label>
+          <label><input type="radio" name="mode" value="annual"><span>Yearly</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="rate">Interest rate (%)</label>
+        <input id="rate" type="number" min="0" max="15" step="0.25" value="4">
+        <p class="hint">What your money could earn elsewhere. Used to express future dollars in today's dollars.</p>
+      </div>
+
+      <div class="field">
+        <label class="check"><input id="selection" type="checkbox" checked> Account for recent medical underwriting</label>
+        <p class="hint">People who just passed an insurance medical exam die at lower rates for the first several years.</p>
+      </div>
+    </aside>
+
+    <main id="results">
+      <p class="paused" id="paused" role="status" hidden></p>
+      <section aria-live="polite">
+        <p class="verdict" id="verdict"></p>
+        <p class="verdict-sub" id="verdict-sub"></p>
+        <div class="crowd">
+          <svg id="crowd" viewBox="0 0 600 240" role="img" aria-labelledby="verdict"></svg>
+          <div class="legend" id="legend"></div>
+        </div>
+      </section>
+
+      <dl class="figures" id="figures"></dl>
+
+      <section class="reading" id="reading"></section>
+
+      <section class="charts" aria-labelledby="charts-h">
+        <h2 id="charts-h">Outcomes in detail</h2>
+        <div class="tabs" role="tablist" aria-label="Chart views">
+          <button role="tab" aria-selected="true" data-tab="outcomes">Result by age at death</button>
+          <button role="tab" aria-selected="false" data-tab="ev">Building the expected value</button>
+          <button role="tab" aria-selected="false" data-tab="return">Return on premiums</button>
+          <button role="tab" aria-selected="false" data-tab="survival">Survival curve</button>
+        </div>
+        <div class="chart-box"><canvas id="chart" aria-describedby="note"></canvas></div>
+        <p class="note" id="note"></p>
+      </section>
+
+      <details>
+        <summary>How the numbers are calculated</summary>
+        <div class="method">
+          <h3>Mortality</h3>
+          <p>Death rates follow Makeham's law, where the force of mortality at age <i>x</i> is μ<sub>x</sub> = A + B·c<sup>x</sup>. Parameters were fitted to approximate recent US population period life tables:</p>
+          <table>
+            <thead><tr><th></th><th>A</th><th>B</th><th>c</th></tr></thead>
+            <tbody>
+              <tr><td>Male</td><td>0.00060</td><td>7.50 × 10<sup>−5</sup></td><td>1.0838</td></tr>
+              <tr><td>Female</td><td>0.00030</td><td>3.25 × 10<sup>−5</sup></td><td>1.0923</td></tr>
+            </tbody>
+          </table>
+          <p>The health class multiplies the force of mortality. When underwriting is switched on, a select factor of min(1, 0.45 + 0.055·<i>k</i>) is also applied in policy year <i>k</i>, so the benefit of passing a medical exam fades out over ten years. One-year death probabilities are q<sub>x</sub> = 1 − exp(−∫<sub>x</sub><sup>x+1</sup> μ<sub>t</sub> dt).</p>
+
+          <h3>Timing</h3>
+          <p>The model runs month by month. Deaths are spread evenly through each year of age (the uniform distribution of deaths assumption), premiums are paid at the start of each month or year while the insured is alive, and the death benefit is paid at the end of the month of death.</p>
+
+          <h3>Expected values</h3>
+          <p>With v = 1/(1+i) and death benefit DB, the expected present value of benefits is the monthly term insurance A<sup>1(12)</sup><sub>x:n̅|</sub> scaled by the benefit:</p>
+          <div class="formula">EPV(benefits) = DB · Σ<sub>m=0</sub><sup>12n−1</sup> v<sup>(m+1)/12</sup> · <sub>m/12</sub>p<sub>x</sub> · <sub>1/12</sub>q<sub>x+m/12</sub></div>
+          <p>The expected present value of premiums is a temporary life annuity-due on the payment schedule:</p>
+          <div class="formula">EPV(premiums) = Σ<sub>payment times t</sub> P · v<sup>t</sup> · <sub>t</sub>p<sub>x</sub></div>
+          <p>The actuarially fair (net) premium sets the two equal. Real premiums sit above or below it depending on the insurer's mortality assumptions, expenses, commissions, profit margin and the lapse rate it expects.</p>
+
+          <h3>Whole life</h3>
+          <p>Whole life coverage runs to age 120, where the model treats death as certain, so EPV(benefits) becomes the whole life insurance A<sup>(12)</sup><sub>x</sub>. Premiums run for life or for the limited period chosen.</p>
+
+          <h3>Not included</h3>
+          <p>Cash values, dividends and policy loans on whole life policies, policy lapses, taxes, riders, conversion privileges, return-of-premium features, insurer expenses and the risk of insurer default. This tool is for education and is not financial advice.</p>
+        </div>
+      </details>
+
+      <footer>
+        Built by Teddy Barfield, actuarial candidate. SOA Exams P, FM and SRM passed.
+      </footer>
+    </main>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const css = getComputedStyle(document.documentElement);
+  const C = {
+    ink: css.getPropertyValue('--ink').trim(), muted: css.getPropertyValue('--muted').trim(),
+    rule: css.getPropertyValue('--rule').trim(), teal: css.getPropertyValue('--teal').trim(),
+    brick: css.getPropertyValue('--brick').trim(), ochre: css.getPropertyValue('--ochre').trim(),
+    dot: css.getPropertyValue('--dot').trim()
+  };
+  const usd0 = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
+  const usd2 = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:2});
+  const usdK = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',notation:'compact',maximumFractionDigits:1});
+  const num = new Intl.NumberFormat('en-US');
+  const compact = new Intl.NumberFormat('en-US',{notation:'compact',maximumFractionDigits:1});
+  const pct = (p,d=1) => (p*100).toFixed(d) + '%';
+  const signed = v => (v < 0 ? '−' : '+') + usd0.format(Math.abs(v));
+  const rateTxt = r => Math.abs(r) >= 10 ? compact.format(r*100) + '%' : (r*100).toFixed(1) + '%';
+
+  const MAX_TERM_AGE = 105;   // term coverage must end by this age
+  const OMEGA = 120;          // whole life: death assumed certain by this age
+
+  // ---------- Mortality model ----------
+  const MORT = {
+    male:   {A:0.00060, B:7.50e-5, c:1.0838},
+    female: {A:0.00030, B:3.25e-5, c:1.0923}
+  };
+  function qx(age, sex, mult){
+    if (age >= OMEGA) return 1;
+    const p = MORT[sex], lc = Math.log(p.c);
+    const H = p.A + p.B * Math.pow(p.c, age) * (p.c - 1) / lc; // integrated force over [x, x+1]
+    return Math.min(1, 1 - Math.exp(-mult * H));
+  }
+  const selFactor = (k, on) => on ? Math.min(1, 0.45 + 0.055*k) : 1;
+
+  // ---------- Inputs ----------
+  function readInputs(){
+    return {
+      type: document.querySelector('input[name=ptype]:checked').value,
+      age: Math.round(+$('age').value),
+      n: Math.round(+$('term').value),
+      pay: $('payPeriod').value,
+      sex: document.querySelector('input[name=sex]:checked').value,
+      mult: +$('health').value,
+      sel: $('selection').checked,
+      db: +$('db').value,
+      prem: +$('prem').value,
+      mode: document.querySelector('input[name=mode]:checked').value,
+      i: +$('rate').value / 100
+    };
+  }
+  // Returns null, or {id, msg} naming the input to highlight
+  function validate(x){
+    if (!(x.age >= 18 && x.age <= 80)) return {id: 'age', msg: 'Enter an age between 18 and 80.'};
+    if (x.type === 'term'){
+      if (!(x.n >= 1 && x.n <= 80)) return {id: 'term', msg: 'Enter a term between 1 and 80 years.'};
+      if (x.age + x.n > MAX_TERM_AGE){
+        const longest = MAX_TERM_AGE - x.age;
+        return {id: 'term', msg: `A ${x.n}-year term starting at age ${x.age} would run to age ${x.age + x.n}, but term policies here can only run to age ${MAX_TERM_AGE}. The longest term you can enter at age ${x.age} is ${longest} years. For coverage that lasts your whole life, choose Whole life above.`};
+      }
+    } else if (x.pay === '65' && x.age >= 65){
+      return {id: 'payPeriod', msg: 'You are already 65 or older, so choose another premium period.'};
+    }
+    if (!(x.db > 0)) return {id: 'db', msg: 'Enter a death benefit above $0.'};
+    if (!(x.prem > 0)) return {id: 'prem', msg: 'Enter a premium above $0.'};
+    if (!(x.i >= 0 && x.i <= 0.15)) return {id: 'rate', msg: 'Enter an interest rate between 0% and 15%.'};
+    return null;
+  }
+  function showError(err){
+    document.querySelectorAll('.field-err').forEach(e => e.remove());
+    document.querySelectorAll('[aria-invalid]').forEach(e => { e.removeAttribute('aria-invalid'); e.removeAttribute('aria-describedby'); });
+    $('results').classList.toggle('stale', !!err);
+    $('paused').hidden = !err;
+    if (!err) return;
+    const input = $(err.id), p = document.createElement('p');
+    p.className = 'field-err'; p.id = err.id + '-err'; p.textContent = err.msg;
+    input.closest('.field').appendChild(p);
+    input.setAttribute('aria-invalid', 'true'); input.setAttribute('aria-describedby', p.id);
+    $('paused').textContent = 'Results are paused until the highlighted entry under “Your policy” is fixed.';
+  }
+
+  // ---------- Actuarial engine ----------
+  function irr(db, mIdx, premAt){
+    const tDeath = (mIdx + 1) / 12;
+    const f = r => {
+      const vr = 1/(1+r); let pv = 0;
+      for (let m = 0; m <= mIdx; m++){ const p = premAt(m); if (p) pv += p * Math.pow(vr, m/12); }
+      return db * Math.pow(vr, tDeath) - pv;
+    };
+    let lo = -0.99, hi = 1;
+    if (f(lo) < 0) return lo;
+    while (f(hi) > 0 && hi < 1e15) hi *= 4;
+    for (let it = 0; it < 120; it++){ const mid = (lo+hi)/2; if (f(mid) > 0) lo = mid; else hi = mid; }
+    return (lo+hi)/2;
+  }
+
+  function compute(x){
+    const whole = x.type === 'whole';
+    const cover = whole ? OMEGA - x.age : x.n;                       // years of coverage
+    const payYears = !whole ? cover : x.pay === 'life' ? cover : x.pay === '65' ? 65 - x.age : Math.min(+x.pay, cover);
+    const v = 1/(1+x.i), N = 12*cover, P = 12*payYears;
+    const premAt = m => (m < P && (x.mode === 'monthly' || m % 12 === 0)) ? x.prem : 0;
+    const cumPV = [], cumNom = []; let s = 0, s2 = 0;
+    for (let m = 0; m < N; m++){ s += premAt(m) * Math.pow(v, m/12); s2 += premAt(m); cumPV.push(s); cumNom.push(s2); }
+
+    let alive = 1, epvB = 0, epvP = 0; const years = [];
+    for (let k = 0; k < cover; k++){
+      const q = (whole && k === cover - 1) ? 1 : qx(x.age + k, x.sex, x.mult * selFactor(k, x.sel));
+      const a0 = alive; let dY = 0, cond = 0;
+      for (let j = 0; j < 12; j++){
+        const m = 12*k + j;
+        epvP += alive * premAt(m) * Math.pow(v, m/12);
+        const d = a0 * q / 12;                       // UDD within the year
+        const ben = x.db * Math.pow(v, (m+1)/12);
+        epvB += d * ben;
+        cond += (ben - cumPV[m]) / 12;               // PV result given death in month m
+        dY += d; alive -= d;
+      }
+      const mMid = 12*k + 5;
+      years.push({k, age: x.age + k, q, aliveStart: a0, death: dY, outcome: cond, contrib: dY * cond,
+                  mMid, paid: cumNom[mMid], multiple: x.db / cumNom[mMid], irr: null});
+    }
+    if (whole) alive = 0;
+
+    // Survival curve and life expectancy
+    const curve = []; let a = 1, e = 0;
+    const curveEnd = whole ? 110 : Math.min(x.age + 75, 110);
+    for (let t = x.age, k = 0; t < OMEGA; t++, k++){
+      if (t <= curveEnd) curve.push({age: t, p: a});
+      const q = qx(t, x.sex, x.mult * selFactor(k, x.sel));
+      e += a * (1 - q/2); a *= (1 - q);
+    }
+
+    const ratio = epvB / epvP;
+    const paidBy = age => cumNom[Math.min(N - 1, Math.max(0, Math.round((age - x.age) * 12) - 1))];
+    return {whole, cover, payYears, years, survive: alive, pClaim: 1 - alive, epvB, epvP, ratio, net: epvB - epvP,
+            netPrem: x.prem * ratio, pvAll: cumPV[N-1], nomAll: cumNom[N-1], e, curve, premAt, paidBy};
+  }
+
+  // Age bands for describing whole life outcomes
+  function bands(x, r){
+    const b1 = Math.max(65, Math.ceil((x.age + 10) / 5) * 5), b2 = b1 + 20;
+    let p1 = 0, p2 = 0;
+    r.years.forEach(y => { if (y.age < b1) p1 += y.death; else if (y.age < b2) p2 += y.death; });
+    const k1 = Math.round(p1 * 1000), k2 = Math.round((p1 + p2) * 1000);
+    return {b1, b2, p1, k1, k2};
+  }
+
+  // ---------- Crowd of 1,000 ----------
+  const svg = $('crowd'); const dots = [];
+  (function buildCrowd(){
+    const ns = 'http://www.w3.org/2000/svg';
+    for (let i = 0; i < 1000; i++){
+      const c = document.createElementNS(ns, 'circle');
+      c.setAttribute('cx', 6 + (i % 50) * 12); c.setAttribute('cy', 6 + Math.floor(i / 50) * 12);
+      c.setAttribute('r', 4.2); svg.appendChild(c); dots.push(c);
+    }
+  })();
+  // Stable scatter order (seeded shuffle) so highlighted people don't jump around
+  const order = (function(){
+    let t = 20261012; const rnd = () => { t += 0x6D2B79F5; let r = Math.imul(t ^ t >>> 15, 1 | t); r ^= r + Math.imul(r ^ r >>> 7, 61 | r); return ((r ^ r >>> 14) >>> 0) / 4294967296; };
+    const o = [...Array(1000).keys()];
+    for (let i = 999; i > 0; i--){ const j = Math.floor(rnd() * (i+1)); [o[i], o[j]] = [o[j], o[i]]; }
+    return o;
+  })();
+  const sw = color => `<i style="background:${color}"></i>`;
+  function renderCrowd(x, r){
+    dots.forEach(d => d.setAttribute('class', ''));
+    if (!r.whole){
+      const k = Math.round(r.pClaim * 1000);
+      for (let i = 0; i < k; i++) dots[order[i]].setAttribute('class', 'hit');
+      $('legend').innerHTML = `<span>${sw('var(--teal)')}Dies during the term, benefit paid</span><span>${sw('var(--dot)')}Outlives the term, no payout</span>`;
+    } else {
+      const {b1, b2, k1, k2} = bands(x, r);
+      for (let i = 0; i < 1000; i++) dots[order[i]].setAttribute('class', i < k1 ? 'b1' : i < k2 ? 'b2' : 'b3');
+      $('legend').innerHTML = `<span>${sw('var(--teal)')}Dies before age ${b1}</span><span>${sw('var(--ochre)')}Dies at ${b1} to ${b2 - 1}</span><span>${sw('#6E7A86')}Dies at ${b2} or older</span>`;
+    }
+  }
+
+  // ---------- Summary text ----------
+  function renderSummary(x, r){
+    const who = `${x.age}-year-old ${x.sex === 'male' ? 'men' : 'women'}`;
+    const per = x.mode === 'monthly' ? '/mo' : '/yr';
+    const eAge = x.age + r.e;
+    let figs;
+
+    if (!r.whole){
+      const claims = r.pClaim * 1000;
+      const claimTxt = claims < 0.5 ? 'fewer than 1' : 'about ' + num.format(Math.round(claims));
+      $('verdict').textContent = `Out of 1,000 ${who} holding this ${x.n}-year policy, ${claimTxt} would die during the term and leave their families ${usd0.format(x.db)}.`;
+      $('verdict-sub').textContent = `The rest would outlive the policy, each paying ${usd0.format(r.nomAll)} in premiums over ${x.n} years and receiving nothing back. That is how term insurance works: many people pay a little so the few families who need it are protected.`;
+      figs = [['Chance the policy pays out', pct(r.pClaim, 2)],
+              ['Expected age at death', eAge.toFixed(1)],
+              ['Premiums paid if you outlive the term', usd0.format(r.nomAll)]];
+    } else {
+      const {b1, b2, p1, k1, k2} = bands(x, r);
+      const about = k => k === 0 ? 'almost none' : 'about ' + num.format(k);
+      $('verdict').textContent = `Whole life always pays out eventually. Out of 1,000 ${who} holding this policy, ${about(k1)} would die before age ${b1}, ${about(k2 - k1)} at ${b1} to ${b2 - 1}, and ${about(1000 - k2)} at ${b2} or older.`;
+      const payTxt = x.pay === 'life' ? 'for life' : x.pay === '65' ? 'until age 65' : `for ${r.payYears} years`;
+      $('verdict-sub').textContent = `Every family receives ${usd0.format(x.db)}. What changes is how much was paid in first. With premiums paid ${payTxt}, living to the expected age of ${eAge.toFixed(0)} means paying about ${usd0.format(r.paidBy(eAge))} in premiums for that benefit.`;
+      figs = [[`Chance of a claim before age ${b1}`, pct(p1, 1)],
+              ['Expected age at death', eAge.toFixed(1)],
+              ['Premiums paid by expected age at death', usd0.format(r.paidBy(eAge))]];
+    }
+    figs.push(['Actuarially fair premium', usd2.format(r.netPrem) + per],
+              ['Expected benefits, today’s dollars', usd0.format(r.epvB)],
+              ['Expected premiums, today’s dollars', usd0.format(r.epvP)],
+              ['Expected benefit per premium dollar', usd2.format(r.ratio)],
+              ['Expected net value to you', signed(r.net), r.net >= 0 ? 'pos' : 'neg']);
+    $('figures').innerHTML = figs.map(([t, v, cls]) => `<div><dt>${t}</dt><dd${cls ? ` class="${cls}"` : ''}>${v}</dd></div>`).join('');
+
+    const premWord = x.mode === 'monthly' ? 'monthly' : 'yearly';
+    const paras = [];
+    if (r.ratio < 1){
+      paras.push(`On average, each dollar of premium buys about ${usd2.format(r.ratio)} of expected benefit in today's dollars. Under these assumptions a break-even ${premWord} premium would be ${usd2.format(r.netPrem)}, compared with the ${usd2.format(x.prem)} you pay.`);
+      paras.push(r.whole
+        ? `A negative expected value is normal and isn't a sign of a bad policy. The gap pays for the insurer's expenses, capital and profit. In exchange, you get a premium that never rises and a benefit that is guaranteed to be paid, whenever you die.`
+        : `A negative expected value is normal and isn't a sign of a bad policy. The gap pays for the insurer's expenses, capital and profit. What you're really buying is certainty: if the unlikely happens, your family gets ${usd0.format(x.db)} instead of facing that loss on its own.`);
+    } else {
+      paras.push(`Under these assumptions, each dollar of premium buys about ${usd2.format(r.ratio)} of expected benefit in today's dollars, so the policy is worth more than it costs on average. A break-even ${premWord} premium would be ${usd2.format(r.netPrem)}, compared with the ${usd2.format(x.prem)} you pay.`);
+      paras.push(`This usually means the premium is low for the coverage, the insurer expects you to be healthier than the mortality used here, or it is counting on some policyholders giving up their policies before they ever claim. Try a better health class to see how sensitive the result is to that assumption.`);
+    }
+    if (r.whole) paras.push(`Whole life policies also build cash value, which you can borrow against or take by surrendering the policy. This tool leaves cash value out and assumes you keep the policy until death.`);
+    $('reading').innerHTML = paras.map(t => `<p>${t}</p>`).join('');
+  }
+
+  // ---------- Charts ----------
+  Chart.defaults.font.family = '"Public Sans", system-ui, sans-serif';
+  Chart.defaults.font.size = 13;
+  Chart.defaults.color = C.muted;
+  Chart.defaults.borderColor = C.rule;
+
+  let chart = null, tab = 'outcomes', state = null;
+  const alpha = (hex, a) => { const n = parseInt(hex.slice(1), 16); return `rgba(${n>>16},${n>>8&255},${n&255},${a})`; };
+  const baseOpts = () => ({
+    responsive: true, maintainAspectRatio: false, animation: false,
+    interaction: {mode: 'index', intersect: false},
+    plugins: {legend: {position: 'top', align: 'start', labels: {boxWidth: 12, boxHeight: 12}},
+              tooltip: {backgroundColor: C.ink, padding: 10, titleFont: {weight: '700'}}},
+  });
+  const xAxis = {title: {display: true, text: 'Age at death'}, grid: {display: false}, ticks: {maxRotation: 0, autoSkip: true}};
+
+  function cfgOutcomes(x, r){
+    const o = baseOpts();
+    o.scales = {
+      x: xAxis,
+      y: {title: {display: true, text: 'Net result, today’s $'}, ticks: {callback: v => usdK.format(v)}},
+      y1: {position: 'right', title: {display: true, text: 'Chance of death'}, grid: {drawOnChartArea: false}, beginAtZero: true,
+           ticks: {callback: v => v.toFixed(2) + '%'}}
+    };
+    o.plugins.tooltip.callbacks = {
+      title: items => `Death at age ${items[0].label}`,
+      label: c => c.dataset.type === 'bar' ? ` Chance: ${c.raw.toFixed(3)}%`
+        : (c.raw >= 0 ? ` Family comes out ahead by ${usd0.format(c.raw)}` : ` Premiums exceed the benefit by ${usd0.format(-c.raw)}`)
+    };
+    return {data: {labels: r.years.map(y => y.age), datasets: [
+      {type: 'line', label: 'Benefit minus premiums paid (today’s $)', data: r.years.map(y => y.outcome), yAxisID: 'y',
+       borderColor: C.teal, backgroundColor: C.teal, pointRadius: r.whole ? 0 : 2, borderWidth: 2.5, order: 0},
+      {type: 'bar', label: 'Chance of dying at this age', data: r.years.map(y => y.death * 100), yAxisID: 'y1',
+       backgroundColor: alpha(C.ochre, 0.7), order: 1}
+    ]}, options: o};
+  }
+  function noteOutcomes(x, r){
+    const base = `Bars show the chance of dying at each age${r.whole ? '' : ' while the policy is active'}. The line shows how far ahead the family comes out: the benefit minus every premium paid up to that point, in today's dollars.`;
+    if (r.whole){
+      const lose = r.years.find(y => y.outcome < 0);
+      return base + (lose ? ` From about age ${lose.age}, the premiums paid (in today's dollars) are worth more than the benefit.` : ' At every age, the benefit is worth more than the premiums paid in.');
+    }
+    return base + ` If you outlive the term (a ${pct(r.survive)} chance), you will have paid ${usd0.format(r.nomAll)} (${usd0.format(r.pvAll)} in today's dollars) and the policy pays nothing.`;
+  }
+
+  function cfgEV(x, r){
+    const labels = [], data = [], colors = [], info = [];
+    let cum = 0;
+    r.years.forEach(y => { labels.push(String(y.age)); data.push([cum, cum + y.contrib]); cum += y.contrib;
+      colors.push(y.contrib >= 0 ? C.teal : C.brick);
+      info.push(` ${pct(y.death, 3)} chance × ${signed(y.outcome)} = ${signed(y.contrib)}`); });
+    if (!r.whole){
+      const sc = -r.survive * r.pvAll;
+      labels.push('Outlives term'); data.push([cum, cum + sc]); cum += sc; colors.push(C.brick);
+      info.push(` ${pct(r.survive)} chance × −${usd0.format(r.pvAll)} = ${signed(sc)}`);
+    }
+    labels.push('Expected value'); data.push([0, cum]); colors.push(C.ink);
+    info.push(` Expected net value: ${signed(cum)}`);
+    const o = baseOpts();
+    o.plugins.legend.display = false;
+    o.interaction = {mode: 'nearest', intersect: true};
+    o.scales = {x: {grid: {display: false}, ticks: {autoSkip: true, maxRotation: 0}},
+                y: {title: {display: true, text: 'Running total, today’s $'}, ticks: {callback: v => usdK.format(v)}}};
+    o.plugins.tooltip.callbacks = {
+      title: items => /^\d+$/.test(items[0].label) ? `Death at age ${items[0].label}` : items[0].label,
+      label: c => info[c.dataIndex]
+    };
+    return {type: 'bar', data: {labels, datasets: [{data, backgroundColor: colors, borderSkipped: false, barPercentage: 0.9, categoryPercentage: 0.9}]}, options: o};
+  }
+  function noteEV(x, r){
+    if (r.whole) return `Expected value is a probability-weighted average of every possible outcome. Each step is one age's contribution (chance of dying then × the family's result). Early deaths add value, while deaths after decades of premiums take it away. Together they net to ${signed(r.net)} in today's dollars.`;
+    return `Expected value is a probability-weighted average of every possible outcome. Each green step is one age's contribution (chance of dying then × the family's result). The red step is the much more likely outcome of outliving the term and losing the premiums. Together they net to ${signed(r.net)} in today's dollars.`;
+  }
+
+  function cfgReturn(x, r){
+    r.years.forEach(y => { if (y.irr === null) y.irr = irr(x.db, y.mMid, r.premAt); });
+    const o = baseOpts();
+    o.plugins.legend.display = false;
+    o.scales = {x: xAxis, y: {type: 'logarithmic', title: {display: true, text: 'Benefit ÷ premiums paid (log scale)'},
+                ticks: {callback: v => { const l = Math.log10(v); return Math.abs(l - Math.round(l)) < 1e-9 ? compact.format(v) + '×' : ''; }}}};
+    o.plugins.tooltip.callbacks = {
+      title: items => `Death at age ${items[0].label}`,
+      label: c => { const y = r.years[c.dataIndex];
+        return [` Benefit is ${compact.format(y.multiple)}× premiums paid (${usd0.format(y.paid)})`,
+                ` Same as earning ${rateTxt(y.irr)} a year on the premiums`]; }
+    };
+    return {type: 'bar', data: {labels: r.years.map(y => y.age), datasets: [{data: r.years.map(y => y.multiple),
+            backgroundColor: r.years.map(y => y.multiple >= 1 ? alpha(C.teal, 0.85) : alpha(C.brick, 0.85))}]}, options: o};
+  }
+  function noteReturn(x, r){
+    if (r.whole){
+      const y = r.years[Math.min(r.years.length - 1, Math.floor(r.e))];
+      return `Assumes death halfway through the year. Early on, the benefit dwarfs what has been paid in. At your expected age at death (${y.age}), it is ${compact.format(y.multiple)}× the premiums paid, equal to a ${rateTxt(y.irr)} annual return on them.`;
+    }
+    const last = r.years[r.years.length - 1];
+    return `Assumes death halfway through the year. Early on, the benefit dwarfs what has been paid in. Even in the final year it is ${compact.format(last.multiple)}× the premiums, equal to a ${rateTxt(last.irr)} annual return. Keep in mind this return only happens in the ${pct(r.pClaim, 2)} of cases where the policy pays.`;
+  }
+
+  function cfgSurvival(x, r){
+    const end = x.age + r.cover;
+    const o = baseOpts();
+    o.plugins.legend.display = false;
+    o.scales = {x: {title: {display: true, text: 'Age'}, grid: {display: false}, ticks: {maxRotation: 0, autoSkip: true}},
+                y: {min: 0, max: 1, title: {display: true, text: 'Chance of being alive'}, ticks: {callback: v => Math.round(v*100) + '%'}}};
+    o.plugins.tooltip.callbacks = {title: items => `Age ${items[0].label}`, label: c => ` ${pct(c.raw)} chance of being alive`};
+    return {type: 'line', data: {labels: r.curve.map(p => p.age), datasets: [{
+      data: r.curve.map(p => p.p), borderWidth: 2.5, pointRadius: 0, pointHoverRadius: 4, fill: 'origin',
+      segment: {borderColor: c => r.curve[c.p1DataIndex].age <= end ? C.teal : C.muted,
+                backgroundColor: c => r.curve[c.p1DataIndex].age <= end ? alpha(C.teal, 0.15) : 'rgba(0,0,0,0)'},
+      borderColor: C.teal
+    }]}, options: o};
+  }
+  function noteSurvival(x, r){
+    if (r.whole) return `The chance of being alive at each age. A whole life policy covers every age, so the only question is when it pays. Expected age at death: ${(x.age + r.e).toFixed(1)}.`;
+    return `The shaded section is the policy term. You have a ${pct(r.survive)} chance of reaching age ${x.age + x.n}, when coverage ends, and an expected age at death of ${(x.age + r.e).toFixed(1)}. Most people outlive a term policy, which is exactly why it is affordable.`;
+  }
+
+  const VIEWS = {outcomes: [cfgOutcomes, noteOutcomes], ev: [cfgEV, noteEV], return: [cfgReturn, noteReturn], survival: [cfgSurvival, noteSurvival]};
+  function renderChart(){
+    if (!state) return;
+    const [cfg, note] = VIEWS[tab];
+    if (chart) chart.destroy();
+    chart = new Chart($('chart'), cfg(state.x, state.r));
+    $('note').textContent = note(state.x, state.r);
+  }
+
+  // ---------- Wiring ----------
+  let pending = false;
+  function update(){
+    pending = false;
+    const x = readInputs();
+    $('term-field').hidden = x.type !== 'term';
+    $('pay-field').hidden = x.type !== 'whole';
+    const err = validate(x);
+    showError(err);
+    if (err) return;
+    const r = compute(x);
+    state = {x, r};
+    renderSummary(x, r); renderCrowd(x, r); renderChart();
+  }
+  const schedule = () => { if (!pending){ pending = true; requestAnimationFrame(update); } };
+  document.querySelectorAll('.inputs input, .inputs select').forEach(el => { el.addEventListener('input', schedule); el.addEventListener('change', schedule); });
+  document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => {
+    tab = b.dataset.tab;
+    document.querySelectorAll('.tabs button').forEach(o => o.setAttribute('aria-selected', String(o === b)));
+    renderChart();
+  }));
+  update();
+})();
+</script>
+<script src="../menu.js"></script>
+</body>
+</html>
