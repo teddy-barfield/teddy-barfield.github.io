@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Auto insurer complaint rankings — Teddy Barfield</title>
+  <meta name="description" content="Which New York auto insurers draw the most upheld complaints relative to their premiums, using NY Department of Financial Services rankings, 2009 to 2024.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../assets/css/projects.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" integrity="sha512-CQBWl4fJHWbryGE+Pc7UAxWMUMNMWzWxF4SQo9CgkJIN1kx6djDQZjh3Y8SZ1d+6I+1zze6Z7kHXO7q3UyZAWw==" crossorigin="anonymous"></script>
+  <script defer src="../assets/js/charts.js"></script>
+  <style>
+    .controls{display:flex;flex-wrap:wrap;gap:.75rem 1rem;align-items:center;margin:1rem 0}
+    .controls select,.controls button{font:inherit;padding:.35rem .6rem;max-width:100%;min-width:0}
+    .chips{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0}
+    .chips li{background:var(--sheet);padding:.2rem .3rem .2rem .6rem;font-size:.85rem;border-left:4px solid var(--mark)}
+    .chips button{font:inherit;border:0;background:none;cursor:pointer;padding:0 .3rem}
+    .note{font-size:.875rem;color:var(--muted);margin-top:.5rem}
+    .lists{display:grid;gap:1rem;grid-template-columns:minmax(0,1fr)}
+    @media(min-width:760px){.lists{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    .lists h3{font:600 1.1rem var(--serif);margin-bottom:.4rem}
+    .lists ol{padding-left:1.25rem}.lists li{margin:.25rem 0}
+  </style>
+</head>
+<body>
+
+  <nav aria-label="Main">
+    <div class="wrap">
+      <a href="../index.html">Home</a>
+      <div class="menu">
+        <button class="menu-toggle" aria-expanded="false" aria-controls="projects-menu">Projects</button>
+        <ul class="menu-list" id="projects-menu" hidden>
+          <li class="group">Actuarial</li>
+          <li><a href="../projects/term-life-decoder.html">Life insurance policy decoder</a></li>
+          <li class="group">Data analysis</li>
+          <li><a href="../projects/nyc-causes-of-death.html">NYC leading causes of death</a></li>
+          <li class="group">New York data</li>
+          <li><a href="../projects/ny-data/index.html">New York by the Numbers</a></li>
+          <li class="group">Teaching</li>
+          <li><a href="../projects/math-practice-book.html">Math practice book</a></li>
+        </ul>
+      </div>
+      <a href="../index.html#exams">Exams</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <header>
+    <div class="wrap">
+      <a class="back" href="../index.html">Back to home</a>
+      <h1 style="margin-top:1.5rem">Auto insurer complaint rankings</h1>
+      <p class="lede" id="lede">Loading the latest figures from the data files.</p>
+      <p class="meta">Python, Chart.js · Data last pulled <span id="pulled">2026-11-10</span></p>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="wrap">
+        <h2>The question</h2>
+        <div class="prose">
+          <p>New York's Department of Financial Services (DFS) ranks every auto insurer each year by its <em>complaint ratio</em>: the number of consumer complaints DFS upheld against the insurer, per $1 million of premium the insurer wrote in New York. Dividing by premium puts a small company and a very large one on the same scale. This page shows where each insurer stands, how the picture changed from 2009 to 2024, and which insurers stand out.</p>
+        </div>
+        <ul class="stats" aria-label="Key figures" id="stats"></ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap-wide">
+        <h2>Every insurer, latest year</h2>
+        <p class="note" id="table-intro"></p>
+        <div class="controls">
+          <label><input type="checkbox" id="hide-small"> Hide insurers with under $1 million of premium (marked †)</label>
+        </div>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Insurer table, sortable">
+          <table class="data" id="tbl">
+            <caption id="tbl-cap"></caption>
+            <thead><tr>
+              <th scope="col" data-k="name">Insurer</th>
+              <th scope="col" class="num" data-k="rank">DFS rank</th>
+              <th scope="col" class="num" data-k="ratio">Complaint ratio</th>
+              <th scope="col" class="num" data-k="upheld">Upheld complaints</th>
+              <th scope="col" class="num" data-k="total">All complaints</th>
+              <th scope="col" class="num" data-k="prem">Premium ($M)</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="note">Rank 1 is the lowest ratio. Click a column heading to sort. A † marks an insurer with under $1 million of premium, where one or two complaints can produce an extreme ratio.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap-wide">
+        <h2>Trend by insurer</h2>
+        <p class="note">The thick line is the whole market: all upheld complaints divided by all premium that year. Pick insurers to compare (up to six). Lines are drawn only for years the insurer was ranked.</p>
+        <div class="controls">
+          <label for="pick">Add an insurer</label>
+          <select id="pick"></select>
+          <button type="button" id="add">Add</button>
+        </div>
+        <ul class="chips" id="chips" aria-label="Insurers on the chart"></ul>
+        <figure class="chart">
+          <div class="chart-box">
+            <canvas id="chart-trend" role="img" aria-label="Line chart of complaint ratio by year for the market and the chosen insurers"></canvas>
+          </div>
+          <figcaption>Complaint ratio (upheld complaints per $1 million of premium) by DFS filing year. Lower is better. The 2016 year is left out because the source's 2016 table is identical to 2015 (see caveats).</figcaption>
+        </figure>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Chart values">
+          <table class="data" id="trend-tbl"><caption>Chart values (complaint ratio by year)</caption><thead></thead><tbody></tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap-wide">
+        <h2>Best and most improved</h2>
+        <div class="callout" id="callout"></div>
+        <div class="lists">
+          <div><h3 id="best-h"></h3><ol id="best"></ol><p class="note" id="best-note"></p></div>
+          <div><h3 id="imp-h"></h3><ol id="imp"></ol><p class="note" id="imp-note"></p></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>Approach and caveats</h2>
+        <div class="prose">
+          <p>The ratio is DFS's own published figure; this page does not recompute it. It counts only complaints DFS upheld, not every complaint filed, and the denominator is premium rather than the number of policies. Insurers with very little premium can show huge ratios on one or two complaints, so the best and most improved lists require a minimum size, stated beside each list.</p>
+          <p>The source's 2016 table is identical to its 2015 table in all 158 rows, which looks like a publishing repeat, so 2016 is omitted from the chart. Year-to-year changes for an individual insurer can reflect a handful of complaints. A full methodology write-up is planned as the next step in this project.</p>
+        </div>
+        <aside class="data-source" aria-label="Data source">
+          <dl>
+            <dt>Dataset</dt><dd>Automobile Insurance Company Complaint Rankings: Beginning 2009</dd>
+            <dt>Agency</dt><dd>New York State Department of Financial Services (DFS)</dd>
+            <dt>Link</dt><dd><a href="https://data.ny.gov/d/h2wd-9xfe">https://data.ny.gov/d/h2wd-9xfe</a></dd>
+            <dt>Data pulled</dt><dd>2026-11-10</dd>
+          </dl>
+        </aside>
+        <div class="links">
+          <a href="https://github.com/teddy-barfield/teddy-barfield.github.io/blob/main/scripts/fetch_auto_complaints.py">View the code</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Teddy Barfield, 2026</div>
+  </footer>
+
+  <script src="../menu.js"></script>
+  <script>
+  window.addEventListener('load', function () {
+    var BASE = '../data/auto-complaints/';
+    var SKIP = 2016;
+    function csv(text) {
+      var rows = [], row = [], f = '', q = false;
+      for (var i = 0; i < text.length; i++) {
+        var c = text[i];
+        if (q) { if (c === '"') { if (text[i+1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+        else if (c === '"') q = true;
+        else if (c === ',') { row.push(f); f = ''; }
+        else if (c === '\n') { row.push(f); rows.push(row); row = []; f = ''; }
+        else if (c !== '\r') f += c;
+      }
+      if (f || row.length) { row.push(f); rows.push(row); }
+      var h = rows.shift();
+      return rows.filter(function (r) { return r.length === h.length; }).map(function (r) { var o = {}; h.forEach(function (k, i) { o[k] = r[i]; }); return o; });
+    }
+    function get(u) { return fetch(BASE + u).then(function (r) { if (!r.ok) throw new Error(u); return r; }); }
+    Promise.all([get('rankings_long.csv').then(function (r) { return r.text(); }), get('year_summary.csv').then(function (r) { return r.text(); }), get('meta.json').then(function (r) { return r.json(); })])
+    .then(function (res) { init(csv(res[0]).map(function (x) {
+        return { naic: x.naic, name: x.company_name, year: +x.filing_year, rank: +x.rank, ratio: +x.ratio, upheld: +x.upheld_complaints, total: +x.total_complaints, prem: +x.premiums_written_in_millions, small: x.small_book === '1' };
+      }), csv(res[1]).map(function (x) { return { year: +x.filing_year, ratio: +x.pooled_ratio, n: +x.insurers, zero: +x.insurers_zero_upheld, prem: +x.premiums_millions, upheld: +x.upheld }; }), res[2]); })
+    .catch(function (e) { document.getElementById('lede').textContent = 'The data files could not be loaded (' + e.message + ').'; });
+
+    function f2(x) { return x.toFixed(2); }
+    function f3(x) { return x.toFixed(3); }
+    function money(x) { return x.toLocaleString('en-US', { maximumFractionDigits: 1, minimumFractionDigits: 1 }); }
+    function int(x) { return x.toLocaleString('en-US'); }
+    function li(parent, html) { var e = document.createElement('li'); e.innerHTML = html; parent.appendChild(e); }
+    function esc(s) { return s.replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+    function init(rows, ys, meta) {
+      document.getElementById('pulled').textContent = meta.pulled;
+      var years = ys.map(function (y) { return y.year; });
+      var last = years[years.length - 1], first = years[0];
+      var L = ys.filter(function (y) { return y.year === last; })[0];
+      var F = ys.filter(function (y) { return y.year === first; })[0];
+      var cur = rows.filter(function (r) { return r.year === last; });
+
+      document.getElementById('lede').textContent = 'In ' + last + ', DFS ranked ' + L.n + ' auto insurers; ' + L.zero + ' of them had no upheld complaints. Across the whole market there were ' + f3(L.ratio) + ' upheld complaints per $1 million of premium, down from ' + f3(F.ratio) + ' in ' + first + '.';
+      var st = document.getElementById('stats');
+      li(st, '<span class="num">' + L.n + '</span><span class="lbl">insurers ranked in ' + last + '</span>');
+      li(st, '<span class="num">' + L.zero + '</span><span class="lbl">with zero upheld complaints in ' + last + '</span>');
+      li(st, '<span class="num">' + f3(L.ratio) + '</span><span class="lbl">market complaint ratio, ' + last + '</span>');
+      li(st, '<span class="num">' + f3(F.ratio) + '</span><span class="lbl">market complaint ratio, ' + first + '</span>');
+      li(st, '<span class="num">$' + int(Math.round(L.prem)) + 'M</span><span class="lbl">premium covered, ' + last + '</span>');
+
+      /* ---- sortable table ---- */
+      document.getElementById('table-intro').textContent = 'Filing year ' + last + ', ' + cur.length + ' insurers.';
+      document.getElementById('tbl-cap').textContent = 'Insurers ranked by DFS, filing year ' + last;
+      var sortK = 'rank', dir = 1, hide = document.getElementById('hide-small');
+      var ths = document.querySelectorAll('#tbl th');
+      ths.forEach(function (th) {
+        var b = document.createElement('button'); b.type = 'button'; b.textContent = th.textContent; th.textContent = ''; th.appendChild(b);
+        b.addEventListener('click', function () { var k = th.dataset.k; if (sortK === k) dir = -dir; else { sortK = k; dir = (k === 'name' || k === 'rank' || k === 'ratio') ? 1 : -1; } draw(); });
+      });
+      function draw() {
+        ths.forEach(function (th) { if (th.dataset.k === sortK) th.setAttribute('aria-sort', dir > 0 ? 'ascending' : 'descending'); else th.removeAttribute('aria-sort'); });
+        var d = cur.filter(function (r) { return !(hide.checked && r.small); }).sort(function (a, b) {
+          var x = a[sortK], y = b[sortK]; return (typeof x === 'string' ? x.localeCompare(y) : x - y) * dir || a.rank - b.rank; });
+        var tb = document.querySelector('#tbl tbody'); tb.innerHTML = '';
+        d.forEach(function (r) {
+          var tr = document.createElement('tr');
+          tr.innerHTML = '<td>' + esc(r.name) + (r.small ? ' †' : '') + '</td><td class="num">' + r.rank + '</td><td class="num">' + r.ratio.toFixed(4) + '</td><td class="num">' + r.upheld + '</td><td class="num">' + r.total + '</td><td class="num">' + money(r.prem) + '</td>';
+          tb.appendChild(tr);
+        });
+      }
+      hide.addEventListener('change', draw); draw();
+
+      /* ---- trend chart ---- */
+      var byN = {}; rows.forEach(function (r) { (byN[r.naic] = byN[r.naic] || { name: r.name, y: {} }).y[r.year] = r; byN[r.naic].name = r.name; });
+      var cy = years.filter(function (y) { return y !== SKIP; });
+      var sel = cur.slice().sort(function (a, b) { return b.prem - a.prem; }).slice(0, 4).map(function (r) { return r.naic; });
+      var pick = document.getElementById('pick');
+      Object.keys(byN).sort(function (a, b) { return byN[a].name.localeCompare(byN[b].name); }).forEach(function (k) {
+        var o = document.createElement('option'); o.value = k; o.textContent = byN[k].name; pick.appendChild(o); });
+      var chart;
+      function trend() {
+        var ds = [{ label: 'Whole market', data: cy.map(function (y) { return ys.filter(function (s) { return s.year === y; })[0].ratio; }), color: '#222', borderWidth: 4, pointRadius: 3, borderDash: [] }];
+        sel.forEach(function (k, i) { ds.push({ label: byN[k].name, spanGaps: true, data: cy.map(function (y) { var r = byN[k].y[y]; return r ? r.ratio : null; }), color: NYCharts.palette[i % 9] }); });
+        if (chart) chart.destroy();
+        chart = NYCharts.line(document.getElementById('chart-trend'), cy, ds, { yTitle: 'Upheld complaints per $1M premium', xTitle: 'DFS filing year', legend: true });
+        var tb = document.querySelector('#trend-tbl tbody'), th = document.querySelector('#trend-tbl thead');
+        th.innerHTML = '<tr><th scope="col">Series</th>' + cy.map(function (y) { return '<th scope="col" class="num">' + y + '</th>'; }).join('') + '</tr>';
+        tb.innerHTML = '';
+        ds.forEach(function (d) { var tr = document.createElement('tr'); tr.innerHTML = '<td>' + esc(d.label) + '</td>' + d.data.map(function (v) { return '<td class="num">' + (v == null ? '–' : v.toFixed(3)) + '</td>'; }).join(''); tb.appendChild(tr); });
+        var ch = document.getElementById('chips'); ch.innerHTML = '';
+        sel.forEach(function (k) { var e = document.createElement('li'); e.appendChild(document.createTextNode(byN[k].name));
+          var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Remove ' + byN[k].name); b.textContent = '×';
+          b.addEventListener('click', function () { sel = sel.filter(function (s) { return s !== k; }); trend(); }); e.appendChild(b); ch.appendChild(e); });
+      }
+      document.getElementById('add').addEventListener('click', function () { if (sel.indexOf(pick.value) < 0 && sel.length < 6) { sel.push(pick.value); trend(); } });
+      trend();
+
+      /* ---- best and most improved ---- */
+      var BIG = 100, bigs = cur.filter(function (r) { return r.prem >= BIG; });
+      var zeroBig = bigs.filter(function (r) { return r.upheld === 0; }).sort(function (a, b) { return b.prem - a.prem; });
+      var lowBig = bigs.slice().sort(function (a, b) { return a.ratio - b.ratio || b.prem - a.prem; }).slice(0, 5);
+      document.getElementById('best-h').textContent = 'Lowest ratios among large insurers';
+      lowBig.forEach(function (r) { li(document.getElementById('best'), esc(r.name) + ': ' + r.ratio.toFixed(4) + ' (' + r.upheld + ' upheld on $' + money(r.prem) + 'M)'); });
+      document.getElementById('best-note').textContent = 'Large means at least $' + BIG + ' million of premium in ' + last + ' (' + bigs.length + ' insurers). ' + (zeroBig.length ? zeroBig.length + ' of them had' : 'None of them had') + ' zero upheld complaints' + (zeroBig.length ? '.' : ', so every ratio in this list is above zero.');
+
+      var A = [2017, 2018, 2019], B = [last - 2, last - 1, last], MIN = 10, MINU = 10;
+      function pool(k, yrs) { var u = 0, p = 0, ok = true; yrs.forEach(function (y) { var r = byN[k].y[y]; if (!r) ok = false; else { u += r.upheld; p += r.prem; } }); return ok ? { u: u, p: p, r: u / p } : null; }
+      var imp = [];
+      Object.keys(byN).forEach(function (k) {
+        var a = pool(k, A), b = pool(k, B);
+        if (a && b && a.p / 3 >= MIN && b.p / 3 >= MIN && a.u >= MINU) imp.push({ n: byN[k].name, a: a, b: b, d: a.r - b.r });
+      });
+      imp.sort(function (x, y) { return y.d - x.d; });
+      document.getElementById('imp-h').textContent = 'Most improved (' + A[0] + '–' + A[2] + ' to ' + B[0] + '–' + B[2] + ')';
+      imp.slice(0, 5).forEach(function (x) { li(document.getElementById('imp'), esc(x.n) + ': ' + x.a.r.toFixed(3) + ' to ' + x.b.r.toFixed(3) + ' (' + x.a.u + ' to ' + x.b.u + ' upheld)'); });
+      document.getElementById('imp-note').textContent = 'Compares each insurer\'s pooled ratio (total upheld ÷ total premium) over three years. Only insurers ranked in all six years, averaging at least $' + MIN + ' million of premium a year and at least ' + MINU + ' upheld complaints in the earlier period, are eligible (' + imp.length + ' insurers).';
+      var top = imp[0], bt = lowBig[0];
+      document.getElementById('callout').innerHTML = '<strong>Two ways to stand out</strong>Among insurers writing at least $' + BIG + ' million, <b>' + esc(bt.name) + '</b> had the lowest ' + last + ' ratio (' + bt.ratio.toFixed(4) + ')' + (top ? '; the biggest improvement over the period was <b>' + esc(top.n) + '</b>, from ' + top.a.r.toFixed(3) + ' to ' + top.b.r.toFixed(3) + ' upheld complaints per $1 million.' : '.') + ' Neither measure says an insurer is good or bad on its own: see the caveats below.';
+    }
+  });
+  </script>
+</body>
+</html>

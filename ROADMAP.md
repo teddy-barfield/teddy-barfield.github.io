@@ -33,7 +33,7 @@ For the scheduled agent: this file is the source of truth. Each night, do the fi
 Dataset: Automobile Insurance Company Complaint Rankings: Beginning 2009 (DFS)
 
 - [x] 1.1 Write the fetch and clean script. Build a ranking-over-time table and a complaint-ratio distribution.
-- [ ] 1.2 Build the page: a sortable insurer table, a trend line per insurer and a "best and most improved" callout.
+- [x] 1.2 Build the page: a sortable insurer table, a trend line per insurer and a "best and most improved" callout.
 - [ ] 1.3 Write the analysis and methodology: what a complaint ratio is, why it's normalized by premium, and its limitations. Use actuarial framing.
 
 ## Milestone 2 — Fun: NY State Parks Attendance (nights 7–9)
