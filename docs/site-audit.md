@@ -2,6 +2,8 @@
 
 Audited 2026-11-10 at commit `b0b109a`. Nothing on the site was changed by this audit.
 
+> **Update, 2026-11-10 (roadmap task 8.5):** `projects/project-template.html` has since been removed from the repository. It was public, redundant and full of placeholders once `projects/_template.html` existed. This audit describes the site as it was at the commit above, so the template still appears in the counts and tables below; each place that names the file is marked "removed in task 8.5". New pages start from `projects/_template.html`.
+
 Method: read every tracked file, then loaded every page in headless Chromium at 390px and 1280px wide, recording console errors, chart rendering, horizontal overflow and internal-link status. One caveat: the audit sandbox could not reach `cdnjs.cloudflare.com`, so for the chart checks Chart.js 4.4.1 (the same version, taken from npm) was substituted locally. See §8.
 
 ## 1. Summary
@@ -22,7 +24,7 @@ Method: read every tracked file, then loaded every page in headless Chromium at 
 | `projects/term-life-decoder.html` | 40 KB | Life insurance policy decoder (interactive, self-contained) |
 | `projects/nyc-causes-of-death.html` | 142 KB | NYC leading causes of death dashboard (self-contained, data inline) |
 | `projects/math-practice-book.html` | 2.4 KB | Math practice book (mostly placeholders) |
-| `projects/project-template.html` | 2.7 KB | Blank project template, not linked from anywhere but publicly reachable |
+| `projects/project-template.html` (removed in task 8.5) | 2.7 KB | Blank project template, not linked from anywhere but publicly reachable |
 
 Not present: `files/` (resume and sample chapter are linked but not uploaded), `assets/`, `scripts/`, `data/`, `README.md`, favicon, 404 page, sitemap, any Open Graph tags.
 
@@ -65,7 +67,7 @@ The roadmap calls this the "term life visualizer".
 - Both sections ("Overview", "How it's built") are **placeholders**.
 - Links to `files/sample-chapter.pdf`, which **returns 404**.
 
-### `projects/project-template.html`
+### `projects/project-template.html` (removed in task 8.5)
 
 - Uses `style.css`. Sections: "The question", "Approach", "Results", plus placeholder links.
 - Not linked from the nav, but it is published at `/projects/project-template.html` with placeholder text and a dead `files/[report].pdf` link.
@@ -173,7 +175,7 @@ Chart containers on both pages follow the same pattern: a `position: relative` b
 | `projects/term-life-decoder.html` | none* | yes* | yes | none |
 | `projects/nyc-causes-of-death.html` | none* | yes* | **no** (952px) | none |
 | `projects/math-practice-book.html` | none | n/a | yes | `files/sample-chapter.pdf` (404) |
-| `projects/project-template.html` | none | n/a | yes | `files/[report].pdf` (404, placeholder) |
+| `projects/project-template.html` (removed in task 8.5) | none | n/a | yes | `files/[report].pdf` (404, placeholder) |
 
 \* With Chart.js 4.4.1 served locally. **In the sandbox this audit ran in, requests to `cdnjs.cloudflare.com` and `data.ny.gov` were refused by the environment's network policy** (proxy answered 403). Google Fonts and npm were reachable. Unless those two hosts are allowed for the nightly runs:
 
@@ -188,7 +190,7 @@ Chart containers on both pages follow the same pattern: a `position: relative` b
 4. **Avoid the overflow bug by construction.** Use `minmax(0, 1fr)` for every grid column and wrap every table in an `overflow-x: auto` container. This is the exact cause of the sideways scroll on the causes-of-death page.
 5. **Chart setup in one file**, for example `assets/js/charts.js`: set `Chart.defaults` the way the life insurance page already does (Public Sans, `--muted` text, `--rule` gridlines), turn on `maintainAspectRatio: false`, and export one palette. Start the palette from the existing one (`#376092`, `#9B2C2C`, `#C08A2B`, `#4C7A3D`, `#6A4C93`, …) so new charts match the old ones, and pick one red for "negative" rather than keeping both `#B3473B` and `#9B2C2C`.
 6. **Stay on Chart.js 4.4.1 from cdnjs**, the version already in use, and add `defer` plus an `integrity` hash. Chart.js has no built-in map or heatmap, which matters for task 3.3: ranked bars and an HTML-table heatmap (the approach the causes-of-death page already uses) need no extra library.
-7. **Template naming.** The roadmap asks for `projects/_template.html`. GitHub Pages builds with Jekyll by default, and Jekyll does not publish files whose names start with an underscore, so the new template will stay out of the live site. That is the desired behaviour, but it only holds while there is no `.nojekyll` file. The old `projects/project-template.html` is public and becomes redundant; removing it needs Teddy's approval.
+7. **Template naming.** The roadmap asks for `projects/_template.html`. GitHub Pages builds with Jekyll by default, and Jekyll does not publish files whose names start with an underscore, so the new template will stay out of the live site. That is the desired behaviour, but it only holds while there is no `.nojekyll` file. The old `projects/project-template.html` is public and becomes redundant; removing it needs Teddy's approval. (Approved as roadmap task 8.5 and removed.)
 8. **Load data from files, not inline.** New pages should `fetch()` small JSON files from `data/<project>/` rather than embedding arrays, in line with the roadmap's data rules. Use paths relative to the page.
 9. **Give every new page** a meta description and a visible "last pulled" date from the start, so tasks 6.2 and 6.3 are a check rather than a retrofit.
 
