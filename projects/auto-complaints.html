@@ -78,7 +78,7 @@
       <div class="wrap">
         <h2>The question</h2>
         <div class="prose">
-          <p>New York's Department of Financial Services (DFS) ranks every auto insurer each year by its <em>complaint ratio</em>: the number of consumer complaints DFS upheld against the insurer, per $1 million of premium the insurer wrote in New York. Dividing by premium puts a small company and a very large one on the same scale. This page shows where each insurer stands, how the picture changed from 2009 to 2024, and which insurers stand out.</p>
+          <p>New York's Department of Financial Services (DFS) ranks every auto insurer each year by its <em>complaint ratio</em>: the number of consumer complaints DFS upheld against the insurer, per $1 million of premium the insurer wrote in New York. Dividing by premium puts a small company and a very large one on the same scale. This page shows where each insurer stands, how the picture changed from <span data-fig="first">…</span> to <span data-fig="last">…</span>, and which insurers stand out.</p>
         </div>
         <ul class="stats" aria-label="Key figures" id="stats"></ul>
       </div>
@@ -89,7 +89,7 @@
         <h2>Every insurer, latest year</h2>
         <p class="note" id="table-intro"></p>
         <div class="controls">
-          <label><input type="checkbox" id="hide-small"> Hide insurers with under $1 million of premium (marked †)</label>
+          <label><input type="checkbox" id="hide-small"> Hide insurers with under $<span data-fig="small_m">…</span> million of premium (marked †)</label>
         </div>
         <div class="table-scroll" tabindex="0" role="region" aria-label="Insurer table, sortable">
           <table class="data" id="tbl">
@@ -105,7 +105,7 @@
             <tbody></tbody>
           </table>
         </div>
-        <p class="note">Rank 1 is the lowest ratio. Click a column heading to sort. A † marks an insurer with under $1 million of premium, where one or two complaints can produce an extreme ratio.</p>
+        <p class="note">Rank 1 is the lowest ratio. Click a column heading to sort. A † marks an insurer with under $<span data-fig="small_m">…</span> million of premium, where one or two complaints can produce an extreme ratio.</p>
       </div>
     </section>
 
@@ -123,7 +123,7 @@
           <div class="chart-box">
             <canvas id="chart-trend" data-has-table role="img" aria-label="Line chart of complaint ratio by year for the market and the chosen insurers"></canvas>
           </div>
-          <figcaption>Complaint ratio (upheld complaints per $1 million of premium) by DFS filing year. Lower is better. The 2016 year is left out because the source's 2016 table is identical to 2015 (see caveats).</figcaption>
+          <figcaption>Complaint ratio (upheld complaints per $1 million of premium) by DFS filing year. Lower is better. <span data-if-dup>The <span data-fig="dup">…</span> year is left out because the source's <span data-fig="dup">…</span> table is identical to <span data-fig="dup_prev">…</span> (see caveats).</span></figcaption>
         </figure>
         <div class="table-scroll" tabindex="0" role="region" aria-label="Chart values">
           <table class="data" id="trend-tbl"><caption>Chart values (complaint ratio by year)</caption><thead></thead><tbody></tbody></table>
@@ -147,31 +147,31 @@
         <h2>Methodology and limitations</h2>
         <div class="prose">
           <h3>What the complaint ratio is</h3>
-          <p>Consumers can complain to DFS about their auto insurer. DFS reviews each complaint and classifies it as upheld (the insurer was wrong), not upheld, or a question of fact it cannot settle. The <em>complaint ratio</em> is the number of upheld complaints divided by the insurer's New York premium written, in millions of dollars. An insurer with 3 upheld complaints on $100 million of premium has a ratio of 0.03. DFS publishes the ratio, and the data files here carry both the published ratio and its ingredients.</p>
+          <p>Consumers can complain to DFS about their auto insurer. DFS reviews each complaint and classifies it as upheld (the insurer was wrong), not upheld, or a question of fact it cannot settle. The <em>complaint ratio</em> is the number of upheld complaints divided by the insurer's New York premium written, in millions of dollars. As an illustration (not a figure from the data), an insurer with 3 upheld complaints on $100 million of premium would have a ratio of 0.03. DFS publishes the ratio, and the data files here carry both the published ratio and its ingredients.</p>
 
           <h3>Why divide by premium</h3>
-          <p>Count the raw complaints and the biggest insurers always look worst, simply because they have the most customers. In 2024 the five largest insurers wrote about 52% of all premium in the table, so they would dominate any raw count. Premium is a stand-in for the insurer's <em>exposure</em>: the amount of business that could generate a complaint. Dividing by it turns a count into a rate, the same move an actuary makes when turning a claim count into claim <em>frequency</em> (claims per unit of exposure) so that books of different sizes can be compared.</p>
+          <p>Count the raw complaints and the biggest insurers always look worst, simply because they have the most customers. In <span data-fig="last">…</span> the five largest insurers wrote about <span data-fig="top5_pct">…</span>% of all premium in the table, so they would dominate any raw count. Premium is a stand-in for the insurer's <em>exposure</em>: the amount of business that could generate a complaint. Dividing by it turns a count into a rate, the same move an actuary makes when turning a claim count into claim <em>frequency</em> (claims per unit of exposure) so that books of different sizes can be compared.</p>
           <p>Premium is an imperfect exposure base. Actuaries usually prefer a count of policies or car-years, because premium also moves with price. An insurer that raises rates lowers its ratio without treating anyone better, and an insurer that writes expensive coverage looks better than one that writes cheap coverage with the same number of customers. Policy counts are not in this dataset.</p>
 
           <h3>Pooled ratio versus the typical insurer</h3>
-          <p>The market line on the trend chart is a <em>pooled</em> ratio: all upheld complaints divided by all premium, which weights each insurer by its size. In 2024 that was 0.034, while the median insurer's ratio was 0.023 and 47 of 128 insurers had no upheld complaints at all. The pooled figure answers "how many upheld complaints per dollar of premium in the market", and the median answers "what is the typical insurer like". Averaging the 128 individual ratios gives 0.54, which is not meaningful: a handful of tiny insurers with ratios above 1 dominate it.</p>
+          <p>The market line on the trend chart is a <em>pooled</em> ratio: all upheld complaints divided by all premium, which weights each insurer by its size. In <span data-fig="last">…</span> that was <span data-fig="pooled">…</span>, while the median insurer's ratio was <span data-fig="median">…</span> and <span data-fig="zero">…</span> of <span data-fig="n">…</span> insurers had no upheld complaints at all. The pooled figure answers "how many upheld complaints per dollar of premium in the market", and the median answers "what is the typical insurer like". Averaging the <span data-fig="n">…</span> individual ratios gives <span data-fig="mean">…</span>, which is not meaningful: it is dominated by the <span data-fig="gt1_n">…</span> insurers with ratios above 1, <span data-fig="gt1_small_n">…</span> of which wrote under $<span data-fig="small_m">…</span> million of premium.</p>
 
           <h3>Frequency, not severity</h3>
-          <p>The ratio counts complaints, not how serious they were. A single upheld complaint about a slow letter and one about a wrongly denied total-loss claim count the same. In actuarial terms this is a frequency measure with no severity side. Also, the table shows that most complaints are not upheld: in 2024, 629 of 5,151 complaints (12%) were upheld. The ratio therefore reflects only the small fraction where DFS found the insurer at fault.</p>
+          <p>The ratio counts complaints, not how serious they were. A single upheld complaint about a slow letter and one about a wrongly denied total-loss claim count the same. In actuarial terms this is a frequency measure with no severity side. Also, the table shows that most complaints are not upheld: in <span data-fig="last">…</span>, <span data-fig="upheld">…</span> of <span data-fig="total">…</span> complaints (<span data-fig="upheld_pct">…</span>%) were upheld. The ratio therefore reflects only the small fraction where DFS found the insurer at fault.</p>
 
           <h3>Small numbers are noisy</h3>
-          <p>Upheld complaints are rare events, so the ratio of a small insurer is mostly chance. A simple model shows the size of the problem. If complaints arrive at random at the 2024 market rate of 0.034 per $1 million, an insurer with $100 million of premium would expect about 3.4 upheld complaints in a year, with a typical swing of about 1.8, or 54% of the expected value. At $1,000 million it would expect 34, with a swing of about 5.8, or 17%. At $10 million the expected count is 0.34, so the model gives a 71% chance of seeing none at all, which is why a zero is not proof of good service. This is the idea behind actuarial <em>credibility</em>: the less data a company has, the less its own experience should be trusted on its own. This page does not apply a credibility adjustment. It uses minimum sizes instead (see below).</p>
-          <p>The same effect produces absurd ratios at the other end. Six insurers in 2024 wrote under $1 million of premium (marked † in the table), and one upheld complaint on that little premium can produce a ratio above 40. Those rows are kept and flagged, not deleted.</p>
+          <p>Upheld complaints are rare events, so the ratio of a small insurer is mostly chance. An illustration with a simple model (a Poisson model, in which complaints arrive independently and at random) shows the size of the problem. The three insurer sizes are chosen for the example; the rate is the market's. If complaints arrive at random at the <span data-fig="last">…</span> market rate of <span data-fig="pooled">…</span> per $1 million, an insurer with $<span data-fig="ill_p1">…</span> million of premium would expect about <span data-fig="ill_e1">…</span> upheld complaints in a year, with a typical swing (one standard deviation) of about <span data-fig="ill_sd1">…</span>, or <span data-fig="ill_cv1">…</span>% of the expected value. At $<span data-fig="ill_p2">…</span> million it would expect <span data-fig="ill_e2">…</span>, with a swing of about <span data-fig="ill_sd2">…</span>, or <span data-fig="ill_cv2">…</span>%. At $<span data-fig="ill_p3">…</span> million the expected count is <span data-fig="ill_e3">…</span>, so the model gives a <span data-fig="ill_p0">…</span>% chance of seeing none at all, which is why a zero is not proof of good service. This is the idea behind actuarial <em>credibility</em>: the less data a company has, the less its own experience should be trusted on its own. This page does not apply a credibility adjustment. It uses minimum sizes instead (see below).</p>
+          <p>The same effect produces absurd ratios at the other end. In <span data-fig="last">…</span>, <span data-fig="small_n">…</span> insurers wrote under $<span data-fig="small_m">…</span> million of premium (marked † in the table), and a few upheld complaints on that little premium produce a very large ratio: the highest in the <span data-fig="last">…</span> table, <span data-fig="max_ratio">…</span>, comes from <span data-fig="max_upheld">…</span> upheld complaints on $<span data-fig="max_prem">…</span> million of premium. Those rows are kept and flagged, not deleted.</p>
 
           <h3>How the callouts were chosen</h3>
-          <p>"Lowest ratios among large insurers" ranks only insurers with at least $100 million of premium in 2024 (31 insurers), so the ranking is less affected by chance. "Most improved" compares each insurer's pooled ratio for 2017–2019 with 2022–2024, using three years on each side to damp the noise. It requires the insurer to be ranked in all six years, to average at least $10 million of premium a year, and to have had at least 10 upheld complaints in the earlier period. These thresholds are judgment calls: a different cut-off would give a different list.</p>
+          <p>"Lowest ratios among large insurers" ranks only insurers with at least $<span data-fig="big">…</span> million of premium in <span data-fig="last">…</span> (<span data-fig="big_n">…</span> insurers), so the ranking is less affected by chance. "Most improved" compares each insurer's pooled ratio for <span data-fig="a0">…</span>–<span data-fig="a1">…</span> with <span data-fig="b0">…</span>–<span data-fig="b1">…</span>, using three years on each side to damp the noise. It requires the insurer to be ranked in all six years, to average at least $<span data-fig="min_p">…</span> million of premium a year, and to have had at least <span data-fig="min_u">…</span> upheld complaints in the earlier period. These thresholds are judgment calls: a different cut-off would give a different list.</p>
 
           <h3>Other limits of the data</h3>
           <ul>
             <li><strong>Complaints are self-selected.</strong> Only customers who know to complain, and choose to, are counted. An insurer with an easier complaint process, or with more customers who are likely to complain, can look worse for reasons unrelated to quality.</li>
             <li><strong>Premium is New York premium written in the filing year,</strong> and the complaints may relate to policies written earlier, so the match between the two is approximate.</li>
-            <li><strong>Some years are repeated or rounded in the source.</strong> The 2016 table is identical to 2015 in all 158 rows, so 2016 is left off the chart. In 2017–2019 the published ratio is rounded to two decimal places (all but one of the 449 values in those three years have at most two decimals), so for example a published 0.03 can hide a true value anywhere from 0.025 to 0.035. The "most improved" list does not use the published ratio; it recomputes upheld complaints divided by premium from the underlying counts.</li>
-            <li><strong>Insurers appear, merge and exit.</strong> 229 insurers appear over 2009–2024 but only 128 in 2024, so trends for an individual insurer may reflect a corporate change rather than its behaviour.</li>
+            <li><strong>Some years are repeated or rounded in the source.</strong> <span data-if-dup>The <span data-fig="dup">…</span> table is identical to <span data-fig="dup_prev">…</span> in <span data-fig="dup_rows">…</span> rows, so <span data-fig="dup">…</span> is left off the chart.</span> In <span data-fig="r0">…</span>–<span data-fig="r1">…</span> the published ratio is rounded to two decimal places (<span data-fig="r_ok">…</span> of the <span data-fig="r_n">…</span> values in those <span data-fig="r_years">…</span> years have at most two decimals), so for example a published 0.03 can hide a true value anywhere from 0.025 to 0.035. The "most improved" list does not use the published ratio; it recomputes upheld complaints divided by premium from the underlying counts.</li>
+            <li><strong>Insurers appear, merge and exit.</strong> <span data-fig="ever">…</span> insurers appear over <span data-fig="first">…</span>–<span data-fig="last">…</span> but only <span data-fig="n">…</span> in <span data-fig="last">…</span>, so trends for an individual insurer may reflect a corporate change rather than its behaviour.</li>
             <li><strong>This is not a recommendation.</strong> The ratio is one lagging indicator. It says nothing about price, coverage or claim payment speed, and a low ratio does not mean an insurer is the right choice for a given driver.</li>
           </ul>
         </div>
@@ -180,7 +180,7 @@
             <dt>Dataset</dt><dd>Automobile Insurance Company Complaint Rankings: Beginning 2009</dd>
             <dt>Agency</dt><dd>New York State Department of Financial Services (DFS)</dd>
             <dt>Link</dt><dd><a href="https://data.ny.gov/d/h2wd-9xfe">https://data.ny.gov/d/h2wd-9xfe</a></dd>
-            <dt>Data pulled</dt><dd>2026-11-10</dd>
+            <dt>Data pulled</dt><dd><span data-fig="pulled">…</span></dd>
           </dl>
         </aside>
         <div class="links">
@@ -198,7 +198,6 @@
   <script>
   window.addEventListener('load', function () {
     var BASE = '../data/auto-complaints/';
-    var SKIP = 2016;
     function csv(text) {
       var rows = [], row = [], f = '', q = false;
       for (var i = 0; i < text.length; i++) {
@@ -216,8 +215,8 @@
     function get(u) { return fetch(BASE + u).then(function (r) { if (!r.ok) throw new Error(u); return r; }); }
     Promise.all([get('rankings_long.csv').then(function (r) { return r.text(); }), get('year_summary.csv').then(function (r) { return r.text(); }), get('meta.json').then(function (r) { return r.json(); })])
     .then(function (res) { init(csv(res[0]).map(function (x) {
-        return { naic: x.naic, name: x.company_name, year: +x.filing_year, rank: +x.rank, ratio: +x.ratio, upheld: +x.upheld_complaints, total: +x.total_complaints, prem: +x.premiums_written_in_millions, small: x.small_book === '1' };
-      }), csv(res[1]).map(function (x) { return { year: +x.filing_year, ratio: +x.pooled_ratio, n: +x.insurers, zero: +x.insurers_zero_upheld, prem: +x.premiums_millions, upheld: +x.upheld }; }), res[2]); })
+        return { naic: x.naic, name: x.company_name, year: +x.filing_year, rank: +x.rank, ratio: +x.ratio, ratioText: x.ratio, upheld: +x.upheld_complaints, total: +x.total_complaints, prem: +x.premiums_written_in_millions, small: x.small_book === '1' };
+      }), csv(res[1]).map(function (x) { return { year: +x.filing_year, ratio: +x.pooled_ratio, median: +x.median, total: +x.total_complaints, n: +x.insurers, zero: +x.insurers_zero_upheld, prem: +x.premiums_millions, upheld: +x.upheld }; }), res[2]); })
     .catch(function (e) { document.getElementById('lede').textContent = 'The data files could not be loaded (' + e.message + ').'; });
 
     function f2(x) { return x.toFixed(2); }
@@ -227,7 +226,20 @@
     function li(parent, html) { var e = document.createElement('li'); e.innerHTML = html; parent.appendChild(e); }
     function esc(s) { return s.replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
+    // Write computed values into every <span data-fig="key"> in the prose, so no figure is typed by hand.
+    function fill(map) {
+      document.querySelectorAll('[data-fig]').forEach(function (e) {
+        var v = map[e.dataset.fig];
+        if (v === undefined || v === null || v === '' || (typeof v === 'number' && !isFinite(v))) { console.error('No value for figure "' + e.dataset.fig + '"'); return; }
+        e.textContent = v;
+      });
+    }
+    var WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+    function word(n) { return WORDS[n] || String(n); }
+
     function init(rows, ys, meta) {
+      var SKIP = (meta.years_identical_to_prior_year || [])[0];   // a year whose table repeats the year before; left off the chart
+      var SMALL = meta.small_book_threshold_millions;             // the † threshold set in the fetch script, $ millions
       document.getElementById('pulled').textContent = meta.pulled;
       var years = ys.map(function (y) { return y.year; });
       var last = years[years.length - 1], first = years[0];
@@ -298,7 +310,7 @@
       lowBig.forEach(function (r) { li(document.getElementById('best'), esc(r.name) + ': ' + r.ratio.toFixed(4) + ' (' + r.upheld + ' upheld on $' + money(r.prem) + 'M)'); });
       document.getElementById('best-note').textContent = 'Large means at least $' + BIG + ' million of premium in ' + last + ' (' + bigs.length + ' insurers). ' + (zeroBig.length ? zeroBig.length + ' of them had' : 'None of them had') + ' zero upheld complaints' + (zeroBig.length ? '.' : ', so every ratio in this list is above zero.');
 
-      var A = [2017, 2018, 2019], B = [last - 2, last - 1, last], MIN = 10, MINU = 10;
+      var A = [2017, 2018, 2019], B = [last - 2, last - 1, last], MIN = 10, MINU = 10, ROUNDED = [2017, 2018, 2019], SIZES = [100, 1000, 10];
       function pool(k, yrs) { var u = 0, p = 0, ok = true; yrs.forEach(function (y) { var r = byN[k].y[y]; if (!r) ok = false; else { u += r.upheld; p += r.prem; } }); return ok ? { u: u, p: p, r: u / p } : null; }
       var imp = [];
       Object.keys(byN).forEach(function (k) {
@@ -311,6 +323,47 @@
       document.getElementById('imp-note').textContent = 'Compares each insurer\'s pooled ratio (total upheld ÷ total premium) over three years. Only insurers ranked in all six years, averaging at least $' + MIN + ' million of premium a year and at least ' + MINU + ' upheld complaints in the earlier period, are eligible (' + imp.length + ' insurers).';
       var top = imp[0], bt = lowBig[0];
       document.getElementById('callout').innerHTML = '<strong>Two ways to stand out</strong>Among insurers writing at least $' + BIG + ' million, <b>' + esc(bt.name) + '</b> had the lowest ' + last + ' ratio (' + bt.ratio.toFixed(4) + ')' + (top ? '; the biggest improvement over the period was <b>' + esc(top.n) + '</b>, from ' + top.a.r.toFixed(3) + ' to ' + top.b.r.toFixed(3) + ' upheld complaints per $1 million.' : '.') + ' Neither measure says an insurer is good or bad on its own: see the caveats below.';
+
+      /* ---- figures quoted in the write-up, all computed from the files loaded above ---- */
+      function sig2(x) { return Number(x.toPrecision(2)).toLocaleString('en-US'); }
+      function pct0(x) { return Math.round(x * 100); }
+      var byPrem = cur.slice().sort(function (a, b) { return b.prem - a.prem; });
+      var premAll = cur.reduce(function (s, r) { return s + r.prem; }, 0);
+      var gt1 = cur.filter(function (r) { return r.ratio > 1; });
+      var smalls = cur.filter(function (r) { return r.small; });
+      var mx = cur.slice().sort(function (a, b) { return b.ratio - a.ratio; })[0];
+      var rate = L.upheld / L.prem;   // market rate, upheld complaints per $1 million
+      var ex = SIZES.map(function (p) { return rate * p; });
+      var rr = rows.filter(function (r) { return ROUNDED.indexOf(r.year) >= 0; });
+      var figs = {
+        first: first, last: last, pulled: meta.pulled, small_m: int(SMALL), n: L.n, zero: L.zero,
+        top5_pct: pct0(byPrem.slice(0, 5).reduce(function (s, r) { return s + r.prem; }, 0) / premAll),
+        pooled: f3(L.ratio), median: f3(L.median),
+        mean: f2(cur.reduce(function (s, r) { return s + r.ratio; }, 0) / cur.length),
+        gt1_n: gt1.length, gt1_small_n: gt1.filter(function (r) { return r.small; }).length,
+        upheld: int(L.upheld), total: int(L.total), upheld_pct: pct0(L.upheld / L.total),
+        ill_p1: int(SIZES[0]), ill_p2: int(SIZES[1]), ill_p3: int(SIZES[2]),
+        ill_e1: sig2(ex[0]), ill_e2: sig2(ex[1]), ill_e3: sig2(ex[2]),
+        ill_sd1: sig2(Math.sqrt(ex[0])), ill_sd2: sig2(Math.sqrt(ex[1])),
+        ill_cv1: pct0(1 / Math.sqrt(ex[0])), ill_cv2: pct0(1 / Math.sqrt(ex[1])), ill_p0: pct0(Math.exp(-ex[2])),
+        small_n: smalls.length, max_ratio: mx.ratio.toFixed(1), max_upheld: int(mx.upheld), max_prem: mx.prem.toFixed(1),
+        big: int(BIG), big_n: bigs.length, a0: A[0], a1: A[A.length - 1], b0: B[0], b1: B[B.length - 1], min_p: int(MIN), min_u: int(MINU),
+        r0: ROUNDED[0], r1: ROUNDED[ROUNDED.length - 1], r_years: word(ROUNDED.length), r_n: int(rr.length),
+        r_ok: int(rr.filter(function (r) { return (r.ratioText.split('.')[1] || '').length <= 2; }).length),
+        ever: Object.keys(byN).length
+      };
+      if (SKIP && byN) {
+        // count the insurers whose row in the repeated year matches the year before, field for field
+        var dupN = 0, dupSame = 0;
+        Object.keys(byN).forEach(function (k) {
+          var a = byN[k].y[SKIP - 1], b = byN[k].y[SKIP]; if (!b) return; dupN++;
+          if (a && a.rank === b.rank && a.ratioText === b.ratioText && a.upheld === b.upheld && a.total === b.total && a.prem === b.prem) dupSame++;
+        });
+        figs.dup = SKIP; figs.dup_prev = SKIP - 1; figs.dup_rows = dupSame === dupN ? 'all ' + int(dupN) : int(dupSame) + ' of ' + int(dupN);
+      } else {
+        document.querySelectorAll('[data-if-dup]').forEach(function (e) { e.remove(); });
+      }
+      fill(figs);
     }
   });
   </script>

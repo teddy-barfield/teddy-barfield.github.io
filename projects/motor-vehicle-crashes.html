@@ -99,7 +99,7 @@
     <section>
       <div class="wrap-wide">
         <h2>When crashes happen: hour by day of week</h2>
-        <p>Each cell is one hour of one weekday, summed over four years. Darker means more (or, in the second view, more serious). Read down a column to follow a day, across a row to compare days at the same hour.</p>
+        <p>Each cell is one hour of one weekday, summed over <span data-fig="nyears_w">…</span> years. Darker means more (or, in the second view, more serious). Read down a column to follow a day, across a row to compare days at the same hour.</p>
         <div class="ctl">
           <label for="heat-metric">Show</label>
           <select id="heat-metric">
@@ -149,17 +149,17 @@
         <div class="prose">
           <p id="method"></p>
           <h3>What a "crash" is here</h3>
-          <p>Each row in the DMV file is one crash case, not one person or one vehicle. The file covers 2021 to 2024, the only window the DMV publishes in this form, so the month and hour patterns are four-year totals. Severity is the DMV's own four-level descriptor: Fatal, Injury, Property Damage &amp; Injury, and Property Damage. I kept those levels as published. "Injury or fatal" is my grouping of the first three levels, because the mixed "Property Damage &amp; Injury" level does not say how serious the injury was.</p>
+          <p>Each row in the DMV file is one crash case, not one person or one vehicle. The file covers <span data-fig="y0">…</span> to <span data-fig="y1">…</span>, the only window the DMV publishes in this form, so the month and hour patterns are <span data-fig="nyears_w">…</span>-year totals. Severity is the DMV's own four-level descriptor: Fatal, Injury, Property Damage &amp; Injury, and Property Damage. I kept those levels as published. "Injury or fatal" is my grouping of the first three levels, because the mixed "Property Damage &amp; Injury" level does not say how serious the injury was.</p>
           <h3>Frequency, severity and exposure</h3>
-          <p>In insurance terms, frequency is how often a loss happens and severity is how bad it is when it does. Both depend on exposure, the amount of risk-taking that opens people to the loss. The best exposure measure for driving is vehicle miles travelled (VMT). I did not find a county-level VMT table on data.ny.gov that I could verify, so I used county population (NYS Department of Labor estimates, averaged over 2021 to 2024) as a rougher stand-in. That is why the county chart shows crashes per 1,000 residents per year and not crashes per mile.</p>
-          <p>Population is a weak substitute. Residents of rural counties tend to drive more miles per person, and visitors and through traffic are counted in crashes but not in population. Hamilton County, with about 5,000 residents, tops the list at 43.6 crashes per 1,000 residents per year, and its 887 crashes include many that involve people who do not live there. Treat the ranking as a description of crashes relative to residents and not as a ranking of how risky each county's drivers are.</p>
+          <p>In insurance terms, frequency is how often a loss happens and severity is how bad it is when it does. Both depend on exposure, the amount of risk-taking that opens people to the loss. The best exposure measure for driving is vehicle miles travelled (VMT). I did not find a county-level VMT table on data.ny.gov that I could verify, so I used county population (NYS Department of Labor estimates, averaged over <span data-fig="py0">…</span> to <span data-fig="py1">…</span>) as a rougher stand-in. That is why the county chart shows crashes per 1,000 residents per year and not crashes per mile.</p>
+          <p>Population is a weak substitute. Residents of rural counties tend to drive more miles per person, and visitors and through traffic are counted in crashes but not in population. <span data-fig="top_c">…</span> County, with about <span data-fig="top_pop">…</span> residents, tops the list at <span data-fig="top_f">…</span> crashes per 1,000 residents per year, and its <span data-fig="top_n">…</span> crashes include many that involve people who do not live there. Treat the ranking as a description of crashes relative to residents and not as a ranking of how risky each county's drivers are.</p>
           <h3>The reporting threshold problem</h3>
-          <p>The crash file does not capture every crash. Minor property-damage crashes are reported only above a damage threshold, and many are never reported at all, while injury and fatal crashes almost always are. That makes the mix of outcomes depend on how much minor damage gets recorded. The five New York City counties show it clearly: together they hold 42.7% of the state's population but 24.6% of its recorded crashes, and their injury-or-fatal shares run from 45.0% (Richmond) to 56.5% (Bronx) against a county median of 15.7%. They also have the lowest crash frequencies in the state (9.0 per 1,000 residents in New York County). The likeliest reading is that fewer minor crashes reach the file there, which would push the injury share up and the frequency down. The data cannot prove that, but it means a high injury share in this file should not be read as more dangerous driving.</p>
-          <p>Fatal crashes are the most complete measure, so the fatal rate per 100,000 residents is the steadiest comparison between counties. Even that is noisy for small counties: 13 of the 62 counties had fewer than 20 fatal crashes in four years and are flagged in the table, where one extra crash moves the rate noticeably. This is the same small-numbers idea actuaries call credibility: a small county's experience alone says little about its underlying risk.</p>
+          <p>The crash file does not capture every crash. Minor property-damage crashes are reported only above a damage threshold, and many are never reported at all, while injury and fatal crashes almost always are. That makes the mix of outcomes depend on how much minor damage gets recorded. The five New York City counties show it clearly: together they hold <span data-fig="nyc_pop">…</span>% of the state's population but <span data-fig="nyc_cr">…</span>% of its recorded crashes, and their injury-or-fatal shares run from <span data-fig="nyc_lo">…</span>% (<span data-fig="nyc_lo_c">…</span>) to <span data-fig="nyc_hi">…</span>% (<span data-fig="nyc_hi_c">…</span>) against a county median of <span data-fig="med_sh">…</span>%. They also have the lowest crash frequencies in the state (<span data-fig="nyc_minf">…</span> per 1,000 residents in <span data-fig="nyc_minf_c">…</span> County). The likeliest reading is that fewer minor crashes reach the file there, which would push the injury share up and the frequency down. The data cannot prove that, but it means a high injury share in this file should not be read as more dangerous driving.</p>
+          <p>Fatal crashes are the most complete measure, so the fatal rate per 100,000 residents is the steadiest comparison between counties. Even that is noisy for small counties: <span data-fig="low_n">…</span> of the <span data-fig="n_c">…</span> counties had fewer than <span data-fig="low_thr">…</span> fatal crashes in <span data-fig="nyears_w">…</span> years and are flagged in the table, where one extra crash moves the rate noticeably. This is the same small-numbers idea actuaries call credibility: a small county's experience alone says little about its underlying risk.</p>
           <h3>Time of day and data quality</h3>
-          <p>Hour 0 (midnight to 12:59 am) holds 49,778 crashes, more than double the 22,262 in hour 1, and its fatal rate per 1,000 crashes (3.6) is about half that of hour 1 (6.9). That pattern fits a default midnight time for crashes whose time is unknown, mixing ordinary daytime crashes into that hour. Read hour 0 with care. The hour-by-day heatmap has no exposure either, since it shows how many crashes occurred, not how many cars were on the road, so rush hours are busy because roads are busy. Weather, road surface and light carry the same limit: most driving happens on dry roads in daylight, and their "Unknown" rows have almost no fatal crashes, which points to fields left blank on minor crashes.</p>
+          <p>Hour 0 (midnight to 12:59 am) holds <span data-fig="h0_n">…</span> crashes, <span data-fig="h0_x">…</span> times the <span data-fig="h1_n">…</span> in hour 1, and its fatal rate per 1,000 crashes (<span data-fig="h0_f">…</span>) is <span data-fig="h0_fpct">…</span>% of hour 1's (<span data-fig="h1_f">…</span>). That pattern fits a default midnight time for crashes whose time is unknown, mixing ordinary daytime crashes into that hour. Read hour 0 with care. The hour-by-day heatmap has no exposure either, since it shows how many crashes occurred, not how many cars were on the road, so rush hours are busy because roads are busy. Weather, road surface and light carry the same limit: most driving happens on dry roads in daylight, and their "Unknown" rows have almost no fatal crashes, which points to fields left blank on minor crashes.</p>
           <h3>What this page does not show</h3>
-          <p>It does not show the cause of any crash, the fault of any driver, or the chance that a given trip ends in a crash. It uses crashes as recorded, with no adjustment for under-reporting, and compares counties with no adjustment for road type, climate or traffic mix. It is best used to ask where to look more closely, for example by pairing the data with VMT if that becomes available. The 16 crashes with an unknown county are left out of the county table only.</p>
+          <p>It does not show the cause of any crash, the fault of any driver, or the chance that a given trip ends in a crash. It uses crashes as recorded, with no adjustment for under-reporting, and compares counties with no adjustment for road type, climate or traffic mix. It is best used to ask where to look more closely, for example by pairing the data with VMT if that becomes available. The <span data-fig="unk">…</span> crashes with an unknown county are left out of the county table only.</p>
         </div>
         <aside class="data-source" aria-label="Data source">
           <dl>
@@ -226,6 +226,18 @@
       return o;
     }
 
+    // Write computed values into every <span data-fig="key"> in the prose, so no figure is typed by hand.
+    function fill(map) {
+      document.querySelectorAll('[data-fig]').forEach(function (e) {
+        var v = map[e.dataset.fig];
+        if (v === undefined || v === null || v === '' || (typeof v === 'number' && !isFinite(v))) { console.error('No value for figure "' + e.dataset.fig + '"'); return; }
+        e.textContent = v;
+      });
+    }
+    var WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+    function word(n) { return WORDS[n] || String(n); }
+    var MINCELL = 500, MINCOND = 1000;   // smallest heatmap cell given a fatal rate; smallest condition drawn on the chart
+
     function init(county, hd, cond, ys, meta, am) {
       document.getElementById('pulled').textContent = meta.pulled;
       document.getElementById('pulled2').textContent = meta.pulled;
@@ -233,9 +245,9 @@
       var total = meta.total_crashes;
       var fatalTot = ys.filter(function (r) { return r.severity === 'Fatal Accident'; }).reduce(function (s, r) { return s + +r.crashes; }, 0);
       var injTot = ys.filter(function (r) { return INJ[r.severity]; }).reduce(function (s, r) { return s + +r.crashes; }, 0);
-      var perYr = total / years.length;
+      var perYr = total / years.length, nYrs = word(years.length);
 
-      var C = county.map(function (r) { return { c: title(r.county), f: +r.crashes_per_1000_per_year, fk: +r.fatal_per_100k_per_year, sh: +r.injury_or_fatal_share_pct, q: r.quadrant, low: r.low_fatal_count === '1', pop: +r.population_avg }; });
+      var C = county.map(function (r) { return { c: title(r.county), f: +r.crashes_per_1000_per_year, fk: +r.fatal_per_100k_per_year, sh: +r.injury_or_fatal_share_pct, q: r.quadrant, low: r.low_fatal_count === '1', pop: +r.population_avg, n: +r.crashes }; });
       var byF = C.slice().sort(function (a, b) { return b.f - a.f; });
       var byS = C.slice().sort(function (a, b) { return a.sh - b.sh; });
 
@@ -255,7 +267,7 @@
       var hi = byF[0], nyc = ['Bronx', 'Kings', 'New York', 'Queens', 'Richmond'].map(function (n) { return C.filter(function (r) { return r.c === n; })[0]; }).filter(Boolean);
       var nycShare = nyc.length ? d1(Math.min.apply(null, nyc.map(function (r) { return r.sh; }))) + '% to ' + d1(Math.max.apply(null, nyc.map(function (r) { return r.sh; }))) + '%' : '';
       document.getElementById('callout').textContent = 'The rate divides crashes by residents, not by miles driven, so rural and visitor-heavy counties look worse than their driving may warrant: ' + hi.c + ' tops the list at ' + d1(hi.f) + ' with only ' + int(hi.pop) + ' residents. The lowest are ' + lowest + '. The New York City counties have the lowest frequencies but injury-or-fatal shares of ' + nycShare + ' (median county ' + d1(am.median_injury_or_fatal_share_pct) + '%), which probably reflects what gets reported (minor property-damage crashes often go unreported) rather than safer or riskier driving.';
-      document.getElementById('cap-ct').textContent = 'All ' + C.length + ' counties, by crashes per 1,000 residents. Group compares each county with the median county on frequency and on injury-or-fatal share. An asterisk marks counties with fewer than ' + am.low_fatal_threshold + ' fatal crashes in four years, whose fatal rates are unstable.';
+      document.getElementById('cap-ct').textContent = 'All ' + C.length + ' counties, by crashes per 1,000 residents. Group compares each county with the median county on frequency and on injury-or-fatal share. An asterisk marks counties with fewer than ' + am.low_fatal_threshold + ' fatal crashes in ' + nYrs + ' years, whose fatal rates are unstable.';
       rowsInto('tb-county', byF.map(function (r) { return [T(r.c), N(d1(r.f)), N(d1(r.fk) + (r.low ? '*' : '')), N(d1(r.sh) + '%'), T(r.q)]; }));
 
       // Heatmap
@@ -277,7 +289,7 @@
         var vals = [], mx = 0, best = null;
         for (var h = 0; h < 24; h++) DAYS.forEach(function (d) {
           var a = H[d + '|' + h]; var v = val(a);
-          if (m === 'fatal' && a.n < 500) v = null;
+          if (m === 'fatal' && a.n < MINCELL) v = null;
           vals.push([h, d, v]); if (v !== null && v > mx) { mx = v; best = [h, d, v]; }
         });
         var body = '';
@@ -285,7 +297,7 @@
           body += '<tr><th scope="row">' + hourLbl(h2) + '</th>';
           DAYS.forEach(function (d) {
             var v = vals[h2 * 7 + DAYS.indexOf(d)][2];
-            if (v === null) { body += '<td title="Fewer than 500 crashes">n/a</td>'; return; }
+            if (v === null) { body += '<td title="Fewer than ' + int(MINCELL) + ' crashes">n/a</td>'; return; }
             var s = shade(v / mx);
             body += '<td style="background:' + s.bg + ';color:' + s.fg + '">' + (m === 'count' ? (v >= 1000 ? d1(v / 1000) + 'k' : int(v)) : d1(v)) + '</td>';
           });
@@ -294,8 +306,8 @@
         document.getElementById('heat-body').innerHTML = body;
         document.getElementById('cap-heat').textContent = m === 'count' ? 'Crashes by hour and weekday' : 'Fatal crashes per 1,000 crashes by hour and weekday';
         document.getElementById('heat-sum').textContent = m === 'count'
-          ? 'Busiest cell: ' + best[1] + ' at ' + hourLbl(best[0]) + ', ' + int(best[2]) + ' crashes over four years. Values of 1,000 or more are shown as thousands (k).'
-          : 'Highest: ' + best[1] + ' at ' + hourLbl(best[0]) + ', ' + d1(best[2]) + ' fatal crashes per 1,000. Cells with fewer than 500 crashes are left out as too small to trust.';
+          ? 'Busiest cell: ' + best[1] + ' at ' + hourLbl(best[0]) + ', ' + int(best[2]) + ' crashes over ' + nYrs + ' years. Values of 1,000 or more are shown as thousands (k).'
+          : 'Highest: ' + best[1] + ' at ' + hourLbl(best[0]) + ', ' + d1(best[2]) + ' fatal crashes per 1,000. Cells with fewer than ' + int(MINCELL) + ' crashes are left out as too small to trust.';
       }
       document.getElementById('heat-metric').addEventListener('change', drawHeat);
       drawHeat();
@@ -317,12 +329,12 @@
       function drawCond() {
         var k = document.getElementById('cond').value, A = agg(cond[k] || (k === 'lighting' ? lightRows : []), function (r) { return r[k]; });
         var keys = Object.keys(A).sort(function (a, b) { return A[b].n - A[a].n; });
-        var shown = keys.filter(function (x) { return A[x].n >= 1000; });
+        var shown = keys.filter(function (x) { return A[x].n >= MINCOND; });
         if (cc) cc.destroy();
         cc = NYCharts.bar(document.getElementById('c-cond'), shown, [{ label: 'Injury or fatal share (%)', data: shown.map(function (x) { return +(A[x].inj / A[x].n * 100).toFixed(1); }) }], { yTitle: 'Injury or fatal share of crashes (%)' });
         var tot = keys.reduce(function (s, x) { return s + A[x].n; }, 0);
         var names = { weather: 'weather', road_surface: 'road surface', lighting: 'lighting' };
-        document.getElementById('cap-cond').textContent = 'Share of crashes with an injury or death, by ' + names[k] + '. Conditions with fewer than 1,000 crashes are in the table but not the chart.';
+        document.getElementById('cap-cond').textContent = 'Share of crashes with an injury or death, by ' + names[k] + '. Conditions with fewer than ' + int(MINCOND) + ' crashes are in the table but not the chart.';
         document.getElementById('cap-ctab').textContent = 'Crashes by ' + names[k] + ', ' + y0 + '-' + y1;
         rowsInto('tb-cond', keys.map(function (x) { var a = A[x]; return [T(x), N(int(a.n)), N(d1(a.n / tot * 100) + '%'), N(d1(a.fatal / a.n * 1000)), N(d1(a.inj / a.n * 100) + '%')]; }));
       }
@@ -331,6 +343,24 @@
       drawCond();
 
       document.getElementById('method').textContent = 'Frequency is shown as crashes per 1,000 residents per year (' + C.length + ' counties, population from the NYS Department of Labor estimates for ' + y0 + '-' + y1 + '). Severity is the DMV\'s four-level crash descriptor; the "fatal per 1,000 crashes" and "injury or fatal share" measures divide by crashes, so they show the mix of outcomes and not the chance of being in a crash. ' + int(am.crashes_total - am.crashes_matched) + ' crashes with an unknown county are left out of the county table only.';
+
+      // Figures quoted in the write-up, all computed from the files loaded above
+      var sum = function (a, f) { return a.reduce(function (s, r) { return s + f(r); }, 0); };
+      var hourTot = function (h) { var t = { n: 0, fatal: 0 }; DAYS.forEach(function (d) { var a = H[d + '|' + h]; t.n += a.n; t.fatal += a.fatal; }); return t; };
+      var h0 = hourTot(0), h1 = hourTot(1), r0 = h0.fatal / h0.n * 1000, r1 = h1.fatal / h1.n * 1000;
+      var nycLo = nyc.slice().sort(function (a, b) { return a.sh - b.sh; }), nycF = nyc.slice().sort(function (a, b) { return a.f - b.f; })[0];
+      var py = am.population_years;
+      fill({
+        nyears_w: nYrs, y0: y0, y1: y1, py0: py[0], py1: py[py.length - 1],
+        top_c: hi.c, top_pop: Number(hi.pop.toPrecision(2)).toLocaleString('en-US'), top_f: d1(hi.f), top_n: int(hi.n),
+        nyc_pop: d1(sum(nyc, function (r) { return r.pop; }) / sum(C, function (r) { return r.pop; }) * 100),
+        nyc_cr: d1(sum(nyc, function (r) { return r.n; }) / sum(C, function (r) { return r.n; }) * 100),
+        nyc_lo: d1(nycLo[0].sh), nyc_lo_c: nycLo[0].c, nyc_hi: d1(nycLo[nycLo.length - 1].sh), nyc_hi_c: nycLo[nycLo.length - 1].c,
+        med_sh: d1(am.median_injury_or_fatal_share_pct), nyc_minf: d1(nycF.f), nyc_minf_c: nycF.c,
+        low_n: C.filter(function (r) { return r.low; }).length, n_c: C.length, low_thr: am.low_fatal_threshold,
+        h0_n: int(h0.n), h1_n: int(h1.n), h0_x: d1(h0.n / h1.n), h0_f: d1(r0), h1_f: d1(r1), h0_fpct: Math.round(r0 / r1 * 100),
+        unk: int(am.crashes_total - am.crashes_matched)
+      });
     }
   });
   </script>
