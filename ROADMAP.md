@@ -92,7 +92,7 @@ Dataset: MTA Daily Ridership and Traffic: Beginning 2020
 - [x] 8.3 Replace typed figures with computed ones: in the write-ups on `projects/auto-complaints.html` and `projects/motor-vehicle-crashes.html`, every figure that is typed into the text should be read from the processed data files in the browser, so a monthly refresh cannot leave stale numbers. Illustrative figures that are not data (such as the Poisson example) may stay typed if labelled as an illustration.
 - [x] 8.4 Link preview images: add an `og:image` (and matching Twitter card image) to the hub and the five data pages. Generate each image from the page's own chart or title in the site's palette, keep each file under 300 KB in `assets/img/`, and do not use outside artwork.
 - [x] 8.5 Remove `projects/project-template.html` (public, redundant and full of placeholders now that `projects/_template.html` exists). Update any reference to it in `README.md` and `docs/`, and confirm nothing links to it.
-- [ ] 8.6 Visual review: take screenshots of the homepage, the hub and the five data pages at 390px and 1280px and inspect each one by eye, not only by measurements. Fix layout or legibility problems found on the hub and data pages, and list in `LOG.md` anything found on off-limits pages or anything that is a matter of taste for Teddy to decide.
+- [x] 8.6 Visual review: take screenshots of the homepage, the hub and the five data pages at 390px and 1280px and inspect each one by eye, not only by measurements. Fix layout or legibility problems found on the hub and data pages, and list in `LOG.md` anything found on off-limits pages or anything that is a matter of taste for Teddy to decide.
 
 ## Milestone 9 — Improvement rounds (repeating)
 

@@ -37,7 +37,7 @@
     .note{font-size:.875rem;color:var(--muted);margin-top:.5rem}
     .lists{display:grid;gap:1rem;grid-template-columns:minmax(0,1fr)}
     @media(min-width:760px){.lists{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    .prose h3{font:600 1.15rem var(--serif);margin-top:1.75rem}
+    @media(max-width:600px){.chart-box.trend{height:28rem}}
     .prose ul{padding-left:1.25rem;margin-top:1rem}.prose li{margin:.5rem 0}
     .lists h3{font:600 1.1rem var(--serif);margin-bottom:.4rem}
     .lists ol{padding-left:1.25rem}.lists li{margin:.25rem 0}
@@ -127,7 +127,7 @@
         </div>
         <ul class="chips" id="chips" aria-label="Insurers on the chart"></ul>
         <figure class="chart">
-          <div class="chart-box">
+          <div class="chart-box trend">
             <canvas id="chart-trend" data-has-table role="img" aria-label="Line chart of complaint ratio by year for the market and the chosen insurers"></canvas>
           </div>
           <figcaption>Complaint ratio (upheld complaints per $1 million of premium) by DFS filing year. Lower is better. <span data-if-dup>The <span data-fig="dup">…</span> year is left out because the source's <span data-fig="dup">…</span> table is identical to <span data-fig="dup_prev">…</span> (see caveats).</span></figcaption>

@@ -32,6 +32,7 @@
     .note{font-size:.875rem;color:var(--muted);margin-top:.5rem}
     .ctl{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin:1rem 0}
     .ctl label{font-weight:600}
+    @media(max-width:600px){table.data #tb-top th{min-width:0}}   /* the rank column holds a number, not a name */
     .ctl select{font:inherit;padding:.5rem .75rem;border:1px solid var(--rule);border-radius:6px;background:#fff;color:inherit;max-width:100%}
   </style>
 </head>
@@ -208,7 +209,7 @@
         return { label: NAMES[m], hidden: !DEFAULT_ON[m], data: months.map(function (k) { return M[m][k] ? +M[m][k].mean_share_all * 100 : null; }), spanGaps: false, pointRadius: 0 };
       });
       var c1 = NYCharts.line(document.getElementById('c-mode'), months.map(ym), ds, { yTitle: 'Share of baseline (%)' });
-      c1.options.scales.x.ticks = { maxTicksLimit: 8, autoSkip: true, maxRotation: 0 };
+      c1.options.scales.x.ticks = { maxTicksLimit: c1.width < 500 ? 4 : 8, autoSkip: true, autoSkipPadding: 12, maxRotation: 0 };
       c1.options.plugins.tooltip = { callbacks: { label: function (c) { return c.dataset.label + ': ' + Math.round(c.parsed.y) + '%'; } } };
       c1.update();
       document.getElementById('cap-mode').textContent = 'Monthly average daily ridership as a share of the baseline week, ' + ym(months[0]) + ' to ' + ym(lastMonth) + '. Shown: subway, bus, Long Island Rail Road and Metro-North; other modes are in the legend.';
@@ -228,7 +229,7 @@
         var we = months.map(function (k) { return M[m][k] ? +M[m][k].mean_share_weekend * 100 : null; });
         if (c2) c2.destroy();
         c2 = NYCharts.line(document.getElementById('c-wk'), months.map(ym), [{ label: 'Weekdays', data: wd, pointRadius: 0 }, { label: 'Weekends', data: we, pointRadius: 0 }], { yTitle: 'Share of baseline (%)' });
-        c2.options.scales.x.ticks = { maxTicksLimit: 8, autoSkip: true, maxRotation: 0 };
+        c2.options.scales.x.ticks = { maxTicksLimit: c2.width < 500 ? 4 : 8, autoSkip: true, autoSkipPadding: 12, maxRotation: 0 };
         c2.options.plugins.tooltip = { callbacks: { label: function (c) { return c.dataset.label + ': ' + Math.round(c.parsed.y) + '%'; } } };
         c2.update();
         var s = S[m];

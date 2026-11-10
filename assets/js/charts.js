@@ -31,11 +31,22 @@
 
   function color(i) { return PALETTE[i % PALETTE.length]; }
 
-  function axisTitle(text) { return text ? { display: true, text: text } : { display: false }; }
+  // Narrow charts (phones): a long axis title is split over two lines so it is not cut off.
+  function axisTitle(text, narrow) {
+    if (!text) return { display: false };
+    if (narrow && text.length > 30) {
+      var mid = text.length / 2, cut = -1;
+      for (var i = 0; i < text.length; i++) if (text[i] === ' ' && (cut < 0 || Math.abs(i - mid) < Math.abs(cut - mid))) cut = i;
+      if (cut > 0) text = [text.slice(0, cut), text.slice(cut + 1)];
+    }
+    return { display: true, text: text };
+  }
 
   function build(type, canvas, labels, datasets, o) {
     o = o || {};
     var horizontal = !!o.horizontal;
+    var box = canvas.closest('.chart-box') || canvas.parentNode;
+    var narrow = (box.clientWidth || window.innerWidth) < 500;
     datasets = datasets.map(function (d, i) {
       var c = d.color || color(i);
       var out = Object.assign({ backgroundColor: c, borderColor: c }, d);
@@ -50,11 +61,20 @@
         interaction: { mode: type === 'line' ? 'index' : 'nearest', intersect: false },
         plugins: { legend: { display: o.legend != null ? o.legend : datasets.length > 1 } },
         scales: {
-          x: { title: axisTitle(horizontal ? o.yTitle : o.xTitle), grid: { display: horizontal } },
-          y: { title: axisTitle(horizontal ? o.xTitle : o.yTitle), beginAtZero: o.beginAtZero !== false, grid: { display: !horizontal } }
+          // xTitle always labels the horizontal axis and yTitle the vertical one, whichever way the bars run.
+          x: { title: axisTitle(o.xTitle, narrow), beginAtZero: horizontal ? o.beginAtZero !== false : undefined, grid: { display: horizontal } },
+          y: { title: axisTitle(o.yTitle, narrow), beginAtZero: horizontal ? undefined : o.beginAtZero !== false, grid: { display: !horizontal } }
         }
       }
     });
+    if (horizontal) {
+      // Long category names are shortened on narrow charts so they are not cut off at the left edge; the full name stays in the table and tooltip.
+      chart.options.scales.y.ticks = { autoSkip: false, callback: function (val) {
+        var s = String(this.getLabelForValue(val)), max = this.chart.width < 500 ? 20 : 60;
+        return s.length > max ? s.slice(0, max - 1).trim() + '\u2026' : s;
+      } };
+      chart.update('none');
+    }
     if (!canvas.hasAttribute('data-has-table')) attachTable(chart, canvas);
     return chart;
   }
@@ -103,6 +123,16 @@
     chart.update = function (m) { var r = upd(m); if (det.open) render(); return r; };
     det.addEventListener('toggle', function () { if (det.open) render(); });
   }
+
+  // Mark any table wrapper that really does scroll sideways, so the CSS can show a hint above it.
+  function markScroll() {
+    document.querySelectorAll('.table-scroll').forEach(function (el) { el.classList.toggle('can-scroll', el.scrollWidth > el.clientWidth + 12); });
+  }
+  var pending = false;
+  function queueMark() { if (pending) return; pending = true; requestAnimationFrame(function () { pending = false; markScroll(); }); }
+  window.addEventListener('resize', queueMark);
+  window.addEventListener('load', queueMark);
+  if (window.MutationObserver) new MutationObserver(queueMark).observe(document.body, { childList: true, subtree: true });
 
   window.NYCharts = {
     palette: PALETTE,

@@ -13,6 +13,8 @@
 .prose { max-width: 46rem; }
 .prose p { margin-top: 1rem; }
 .prose p:first-child { margin-top: 0; }
+.prose h3 { font: 600 1.15rem var(--serif); margin-top: 1.75rem; }
+.meta span { white-space: nowrap; }   /* keeps the pull date on one line */
 
 /* Grid helpers */
 .grid { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); }
@@ -30,9 +32,9 @@
 .card a.card-link { display: inline-block; margin-top: .75rem; font-weight: 600; }
 
 /* Stat tiles */
-.stats { list-style: none; display: grid; gap: .75rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 10rem), 1fr)); }
+.stats { list-style: none; margin-top: 1.25rem; display: grid; gap: .75rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 10rem), 1fr)); }
 .stats li { background: var(--sheet); border-left: 4px solid var(--mark); padding: .8rem 1rem; min-width: 0; }
-.stats .num { display: block; font: 600 1.75rem/1.1 var(--serif); overflow-wrap: anywhere; }
+.stats .num { display: block; font: 600 1.6rem/1.1 var(--serif); white-space: nowrap; }   /* a figure never breaks mid-number */
 .stats .lbl { display: block; margin-top: .25rem; font-size: .85rem; color: var(--muted); }
 
 /* Charts */
@@ -64,6 +66,17 @@ table.data th button { all: unset; cursor: pointer; font-weight: 600; }
 table.data th button:focus-visible { outline: 3px solid var(--accent); }
 table.data th[aria-sort="ascending"] button::after { content: " \25B2"; font-size: .7em; }
 table.data th[aria-sort="descending"] button::after { content: " \25BC"; font-size: .7em; }
+/* Phones: let names and column headings wrap so the number columns are on screen, and say so when a table still scrolls */
+@media (max-width: 600px) {
+  table.data { font-size: .85rem; }
+  table.data th, table.data td { padding: .45rem .5rem; }
+  table.data thead th, table.data tbody th, table.data td:first-child { white-space: normal; }
+  table.data tbody th { min-width: 7.5rem; }
+  table.data td:first-child { min-width: 9rem; }
+  /* keep the caption readable when the table is wider than the screen (3.6rem = page gutters + stripe) */
+  table.data caption { position: sticky; left: 0; max-width: calc(100vw - 3.6rem); }
+}
+.table-scroll.can-scroll::before { content: "Scroll sideways to see every column \2192"; display: block; position: sticky; left: 0; width: max-content; max-width: 100%; margin-bottom: .35rem; font-size: .8rem; color: var(--muted); }
 
 /* Data source block: the roadmap requires dataset, link, agency and pull date on every project page */
 .data-source { margin-top: 1.5rem; padding: 1rem 1.25rem; border: 1px solid var(--rule); background: var(--tint); font-size: .92rem; }

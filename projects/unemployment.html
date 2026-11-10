@@ -303,7 +303,7 @@
       var cur = { k: 'jump', dir: -1 };
       function drawT() {
         rows.sort(function (a, b) { var x = a[cur.k], y = b[cur.k]; return (x < y ? -1 : x > y ? 1 : 0) * cur.dir; });
-        rowsInto('tb-cty', rows.map(function (r) { return [T(r.area), N(r.feb + '%'), N(r.peak + '%'), N(r.jump.toFixed(1)), N(r.months), N(sgn(r.vs))]; }));
+        rowsInto('tb-cty', rows.map(function (r) { return [T(r.area), N(r.feb.toFixed(1) + '%'), N(r.peak.toFixed(1) + '%'), N(r.jump.toFixed(1)), N(r.months), N(sgn(r.vs))]; }));
         document.querySelectorAll('th[aria-sort]').forEach(function (th) { var b = th.querySelector('button'); th.setAttribute('aria-sort', b && b.dataset.k === cur.k ? (cur.dir > 0 ? 'ascending' : 'descending') : 'none'); });
         document.getElementById('cap-cty').textContent = 'All ' + rows.length + ' counties. Click a column heading to sort.';
       }
