@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Motor vehicle crashes — Teddy Barfield</title>
+  <meta name="description" content="Crash frequency and severity across New York counties, hours of the week and road conditions, from NYS DMV crash records.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../assets/css/projects.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" integrity="sha512-CQBWl4fJHWbryGE+Pc7UAxWMUMNMWzWxF4SQo9CgkJIN1kx6djDQZjh3Y8SZ1d+6I+1zze6Z7kHXO7q3UyZAWw==" crossorigin="anonymous"></script>
+  <script defer src="../assets/js/charts.js"></script>
+  <style>
+    .note{font-size:.875rem;color:var(--muted);margin-top:.5rem}
+    .tall{height:520px}
+    .ctl{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin:1rem 0}
+    .ctl label{font-weight:600}
+    .ctl select{font:inherit;padding:.5rem .75rem;border:1px solid var(--rule);border-radius:6px;background:#fff;color:inherit;max-width:100%}
+    .heat{border-collapse:collapse;width:100%;min-width:0;font-size:.8rem;font-variant-numeric:tabular-nums}
+    .heat th{font-weight:600;padding:.2rem .3rem;text-align:center;background:none;border:0}
+    .heat th[scope=row]{text-align:right;white-space:nowrap}
+    .heat td{padding:.25rem .15rem;text-align:center;border:1px solid #fff}
+    .scroll-y{max-height:440px;overflow:auto}
+  </style>
+</head>
+<body>
+
+  <nav aria-label="Main">
+    <div class="wrap">
+      <a href="../index.html">Home</a>
+      <div class="menu">
+        <button class="menu-toggle" aria-expanded="false" aria-controls="projects-menu">Projects</button>
+        <ul class="menu-list" id="projects-menu" hidden>
+          <li class="group">Actuarial</li>
+          <li><a href="../projects/term-life-decoder.html">Life insurance policy decoder</a></li>
+          <li class="group">Data analysis</li>
+          <li><a href="../projects/nyc-causes-of-death.html">NYC leading causes of death</a></li>
+          <li class="group">New York data</li>
+          <li><a href="../projects/ny-data/index.html">New York by the Numbers</a></li>
+          <li class="group">Teaching</li>
+          <li><a href="../projects/math-practice-book.html">Math practice book</a></li>
+        </ul>
+      </div>
+      <a href="../index.html#exams">Exams</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <header>
+    <div class="wrap">
+      <a class="back" href="../index.html">Back to home</a>
+      <h1 style="margin-top:1.5rem">Motor vehicle crashes</h1>
+      <p class="lede" id="lede">Loading the latest figures from the data files.</p>
+      <p class="meta">Python, Chart.js · Data last pulled <span id="pulled">2026-11-10</span></p>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="wrap">
+        <h2>The question</h2>
+        <div class="prose"><p>Where and when do crashes happen in New York, and where and when are they more serious? An actuary separates <em>frequency</em> (how often crashes happen) from <em>severity</em> (how bad they are when they do), so this page shows both. Every figure is computed in your browser from the processed data files.</p></div>
+        <ul class="stats" id="stats" aria-label="Key figures"></ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap-wide">
+        <h2>Crashes per resident, by county</h2>
+        <figure class="chart">
+          <div class="chart-box tall"><canvas id="c-county" role="img" aria-label="Horizontal bar chart of the 15 New York counties with the most reported crashes per 1,000 residents per year."></canvas></div>
+          <figcaption id="cap-county"></figcaption>
+        </figure>
+        <div class="callout warn"><strong>Do not read this as a driving-risk ranking.</strong> <span id="callout"></span></div>
+        <div class="table-scroll scroll-y" tabindex="0" role="region" aria-label="All counties table">
+          <table class="data"><caption id="cap-ct"></caption>
+            <thead><tr><th scope="col">County</th><th scope="col" class="num">Crashes per 1,000 residents per year</th><th scope="col" class="num">Fatal crashes per 100,000 per year</th><th scope="col" class="num">Injury or fatal share</th><th scope="col">Group</th></tr></thead>
+            <tbody id="tb-county"></tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap-wide">
+        <h2>When crashes happen: hour by day of week</h2>
+        <p>Each cell is one hour of one weekday, summed over four years. Darker means more (or, in the second view, more serious). Read down a column to follow a day, across a row to compare days at the same hour.</p>
+        <div class="ctl">
+          <label for="heat-metric">Show</label>
+          <select id="heat-metric">
+            <option value="count">Number of crashes</option>
+            <option value="fatal">Fatal crashes per 1,000 crashes</option>
+          </select>
+        </div>
+        <p class="note" id="heat-sum" aria-live="polite"></p>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Heatmap of crashes by hour and day of week">
+          <table class="heat"><caption class="sr-only" id="cap-heat" style="position:absolute;left:-9999px"></caption>
+            <thead id="heat-head"></thead><tbody id="heat-body"></tbody></table>
+        </div>
+        <figure class="chart">
+          <div class="chart-box"><canvas id="c-hour" role="img" aria-label="Line chart of fatal crashes per 1,000 crashes for each hour of the day, with weekday and weekend lines."></canvas></div>
+          <figcaption id="cap-hour"></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap-wide">
+        <h2>Weather, road surface and light</h2>
+        <div class="ctl">
+          <label for="cond">Condition</label>
+          <select id="cond">
+            <option value="weather">Weather</option>
+            <option value="road_surface">Road surface</option>
+            <option value="lighting">Lighting</option>
+          </select>
+        </div>
+        <figure class="chart">
+          <div class="chart-box"><canvas id="c-cond" role="img" aria-label="Bar chart of the share of crashes that involved injury or death, for each condition in the selected group."></canvas></div>
+          <figcaption id="cap-cond"></figcaption>
+        </figure>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Conditions table">
+          <table class="data"><caption id="cap-ctab"></caption>
+            <thead><tr><th scope="col">Condition</th><th scope="col" class="num">Crashes</th><th scope="col" class="num">Share of all crashes</th><th scope="col" class="num">Fatal per 1,000 crashes</th><th scope="col" class="num">Injury or fatal share</th></tr></thead>
+            <tbody id="tb-cond"></tbody></table>
+        </div>
+        <p class="note">Conditions describe the crash, not the risk of driving in them: far more people drive on dry roads in clear weather, and no exposure (miles driven in each condition) is available here. The "Unknown" rows have almost no fatal crashes, which suggests those fields are left blank mostly on minor crashes, so treat them as a data-quality gap.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>How to read this, and what it leaves out</h2>
+        <div class="prose">
+          <p id="method"></p>
+          <p>The fuller methodology and caveats (reporting thresholds, exposure) are planned as the next step of this project. In short: counts are crash cases, "injury or fatal" combines the Fatal, Injury and Property Damage &amp; Injury levels (my grouping), crashes per resident is not crashes per mile driven, and hour 0 (midnight) holds roughly double the crashes of hour 1, which probably reflects a default time for unknown times.</p>
+        </div>
+        <aside class="data-source" aria-label="Data source">
+          <dl>
+            <dt>Dataset</dt><dd>Motor Vehicle Crashes - Case Information: Four Year Window</dd>
+            <dt>Agency</dt><dd>New York State Department of Motor Vehicles (DMV)</dd>
+            <dt>Link</dt><dd><a href="https://data.ny.gov/d/e8ky-4vqe">https://data.ny.gov/d/e8ky-4vqe</a></dd>
+            <dt>Population</dt><dd>Annual Population Estimates for New York State and Counties, NYS Department of Labor (<a href="https://data.ny.gov/d/krt9-ym2k">https://data.ny.gov/d/krt9-ym2k</a>)</dd>
+            <dt>Data pulled</dt><dd id="pulled2">2026-11-10</dd>
+          </dl>
+        </aside>
+        <div class="links">
+          <a href="https://github.com/teddy-barfield/teddy-barfield.github.io/blob/main/scripts/fetch_crashes.py">View the fetch code</a>
+          <a href="https://github.com/teddy-barfield/teddy-barfield.github.io/blob/main/scripts/analyze_crash_severity.py">View the analysis code</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Teddy Barfield, 2026</div>
+  </footer>
+
+  <script src="../menu.js"></script>
+  <script>
+  window.addEventListener('load', function () {
+    var BASE = '../data/crashes/';
+    function csv(text) {
+      var rows = [], row = [], f = '', q = false;
+      for (var i = 0; i < text.length; i++) {
+        var c = text[i];
+        if (q) { if (c === '"') { if (text[i+1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+        else if (c === '"') q = true;
+        else if (c === ',') { row.push(f); f = ''; }
+        else if (c === '\n') { row.push(f); rows.push(row); row = []; f = ''; }
+        else if (c !== '\r') f += c;
+      }
+      if (f || row.length) { row.push(f); rows.push(row); }
+      var h = rows.shift();
+      return rows.filter(function (r) { return r.length === h.length; }).map(function (r) { var o = {}; h.forEach(function (k, i) { o[k] = r[i]; }); return o; });
+    }
+    function get(u, json) { return fetch(BASE + u).then(function (r) { if (!r.ok) throw new Error(u); return json ? r.json() : r.text().then(csv); }); }
+    Promise.all([get('county_frequency_severity.csv'), get('hour_dow_severity.csv'), get('weather_severity.csv'), get('road_surface_severity.csv'), get('lighting_severity.csv'), get('year_severity.csv'), get('meta.json', 1), get('analysis_meta.json', 1)])
+    .then(function (r) { init(r[0], r[1], { weather: r[2], road_surface: r[3], lighting: r[4] }, r[5], r[6], r[7]); })
+    .catch(function (e) { document.getElementById('lede').textContent = 'The data files could not be loaded (' + e.message + ').'; });
+
+    function int(x) { return Math.round(x).toLocaleString('en-US'); }
+    function d1(x) { return x.toFixed(1); }
+    function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function title(s) { return s.toLowerCase().replace(/\b[a-z]/g, function (c) { return c.toUpperCase(); }); }
+    function li(p, h) { var e = document.createElement('li'); e.innerHTML = h; p.appendChild(e); }
+    function rowsInto(id, items) { document.getElementById(id).innerHTML = items.map(function (cells) { return '<tr>' + cells.map(function (c, i) { return '<' + (i === 0 ? 'th scope="row"' : 'td') + (c.n ? ' class="num"' : '') + '>' + c.t + '</' + (i === 0 ? 'th' : 'td') + '>'; }).join('') + '</tr>'; }).join(''); }
+    function T(t) { return { t: esc(t) }; }
+    function N(t) { return { t: t, n: 1 }; }
+    var INJ = { 'Fatal Accident': 1, 'Injury Accident': 1, 'Property Damage & Injury Accident': 1 };
+    var DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+    // Sum severity rows into {key: {n, fatal, inj}}
+    function agg(rows, keyf) {
+      var o = {};
+      rows.forEach(function (r) {
+        var k = keyf(r), a = o[k] = o[k] || { n: 0, fatal: 0, inj: 0 }, c = +r.crashes;
+        a.n += c; if (r.severity === 'Fatal Accident') a.fatal += c; if (INJ[r.severity]) a.inj += c;
+      });
+      return o;
+    }
+
+    function init(county, hd, cond, ys, meta, am) {
+      document.getElementById('pulled').textContent = meta.pulled;
+      document.getElementById('pulled2').textContent = meta.pulled;
+      var years = meta.years, y0 = years[0], y1 = years[years.length - 1];
+      var total = meta.total_crashes;
+      var fatalTot = ys.filter(function (r) { return r.severity === 'Fatal Accident'; }).reduce(function (s, r) { return s + +r.crashes; }, 0);
+      var injTot = ys.filter(function (r) { return INJ[r.severity]; }).reduce(function (s, r) { return s + +r.crashes; }, 0);
+      var perYr = total / years.length;
+
+      var C = county.map(function (r) { return { c: title(r.county), f: +r.crashes_per_1000_per_year, fk: +r.fatal_per_100k_per_year, sh: +r.injury_or_fatal_share_pct, q: r.quadrant, low: r.low_fatal_count === '1', pop: +r.population_avg }; });
+      var byF = C.slice().sort(function (a, b) { return b.f - a.f; });
+      var byS = C.slice().sort(function (a, b) { return a.sh - b.sh; });
+
+      document.getElementById('lede').textContent = 'New York recorded ' + int(total) + ' police-reported crashes from ' + y0 + ' to ' + y1 + ', about ' + int(perYr) + ' a year. ' + d1(injTot / total * 100) + '% involved an injury or death, and ' + int(fatalTot) + ' were fatal. This page separates how often crashes happen from how serious they are.';
+      var st = document.getElementById('stats');
+      li(st, '<span class="num">' + int(total) + '</span><span class="lbl">crash cases, ' + y0 + '-' + y1 + '</span>');
+      li(st, '<span class="num">' + int(fatalTot) + '</span><span class="lbl">fatal crashes (' + d1(fatalTot / total * 1000) + ' per 1,000 crashes)</span>');
+      li(st, '<span class="num">' + d1(injTot / total * 100) + '%</span><span class="lbl">of crashes involved injury or death</span>');
+      li(st, '<span class="num">' + d1(am.median_frequency) + '</span><span class="lbl">median county: crashes per 1,000 residents per year</span>');
+
+      // County chart
+      var top = byF.slice(0, 15);
+      NYCharts.bar(document.getElementById('c-county'), top.map(function (r) { return r.c; }),
+        [{ label: 'Crashes per 1,000 residents per year', data: top.map(function (r) { return r.f; }) }], { horizontal: true, xTitle: 'Crashes per 1,000 residents per year' });
+      document.getElementById('cap-county').textContent = 'The 15 counties with the most reported crashes per 1,000 residents per year, averaged over ' + y0 + '-' + y1 + '. The median county is ' + d1(am.median_frequency) + '.';
+      var lowest = byF.slice(-5).reverse().map(function (r) { return (r.c === 'New York' ? 'New York County' : r.c) + ' (' + d1(r.f) + ')'; }).join(', ');
+      var hi = byF[0], nyc = ['Bronx', 'Kings', 'New York', 'Queens', 'Richmond'].map(function (n) { return C.filter(function (r) { return r.c === n; })[0]; }).filter(Boolean);
+      var nycShare = nyc.length ? d1(Math.min.apply(null, nyc.map(function (r) { return r.sh; }))) + '% to ' + d1(Math.max.apply(null, nyc.map(function (r) { return r.sh; }))) + '%' : '';
+      document.getElementById('callout').textContent = 'The rate divides crashes by residents, not by miles driven, so rural and visitor-heavy counties look worse than their driving may warrant: ' + hi.c + ' tops the list at ' + d1(hi.f) + ' with only ' + int(hi.pop) + ' residents. The lowest are ' + lowest + '. The New York City counties have the lowest frequencies but injury-or-fatal shares of ' + nycShare + ' (median county ' + d1(am.median_injury_or_fatal_share_pct) + '%), which probably reflects what gets reported (minor property-damage crashes often go unreported) rather than safer or riskier driving.';
+      document.getElementById('cap-ct').textContent = 'All ' + C.length + ' counties, by crashes per 1,000 residents. Group compares each county with the median county on frequency and on injury-or-fatal share. An asterisk marks counties with fewer than ' + am.low_fatal_threshold + ' fatal crashes in four years, whose fatal rates are unstable.';
+      rowsInto('tb-county', byF.map(function (r) { return [T(r.c), N(d1(r.f)), N(d1(r.fk) + (r.low ? '*' : '')), N(d1(r.sh) + '%'), T(r.q)]; }));
+
+      // Heatmap
+      var H = agg(hd, function (r) { return r.day + '|' + r.hour; });
+      var head = '<tr><th scope="col"><span style="position:absolute;left:-9999px">Hour</span></th>' + DAYS.map(function (d) { return '<th scope="col">' + d.slice(0, 3) + '</th>'; }).join('') + '</tr>';
+      document.getElementById('heat-head').innerHTML = head;
+      function hourLbl(h) { return (h % 12 === 0 ? 12 : h % 12) + (h < 12 ? ' am' : ' pm'); }
+      function shade(t) { // t in 0..1, light to dark blue
+        var a = [238, 243, 250], b = [37, 64, 97];
+        var rgb = a.map(function (v, i) { return Math.round(v + (b[i] - v) * t); });
+        return { bg: 'rgb(' + rgb.join(',') + ')', fg: t > 0.45 ? '#fff' : '#111' };
+      }
+      function drawHeat() {
+        var m = document.getElementById('heat-metric').value;
+        var val = function (a) { return m === 'count' ? a.n : a.fatal / a.n * 1000; };
+        var vals = [], mx = 0, best = null;
+        for (var h = 0; h < 24; h++) DAYS.forEach(function (d) {
+          var a = H[d + '|' + h]; var v = val(a);
+          if (m === 'fatal' && a.n < 500) v = null;
+          vals.push([h, d, v]); if (v !== null && v > mx) { mx = v; best = [h, d, v]; }
+        });
+        var body = '';
+        for (var h2 = 0; h2 < 24; h2++) {
+          body += '<tr><th scope="row">' + hourLbl(h2) + '</th>';
+          DAYS.forEach(function (d) {
+            var v = vals[h2 * 7 + DAYS.indexOf(d)][2];
+            if (v === null) { body += '<td title="Fewer than 500 crashes">n/a</td>'; return; }
+            var s = shade(v / mx);
+            body += '<td style="background:' + s.bg + ';color:' + s.fg + '">' + (m === 'count' ? (v >= 1000 ? d1(v / 1000) + 'k' : int(v)) : d1(v)) + '</td>';
+          });
+          body += '</tr>';
+        }
+        document.getElementById('heat-body').innerHTML = body;
+        document.getElementById('cap-heat').textContent = m === 'count' ? 'Crashes by hour and weekday' : 'Fatal crashes per 1,000 crashes by hour and weekday';
+        document.getElementById('heat-sum').textContent = m === 'count'
+          ? 'Busiest cell: ' + best[1] + ' at ' + hourLbl(best[0]) + ', ' + int(best[2]) + ' crashes over four years. Values of 1,000 or more are shown as thousands (k).'
+          : 'Highest: ' + best[1] + ' at ' + hourLbl(best[0]) + ', ' + d1(best[2]) + ' fatal crashes per 1,000. Cells with fewer than 500 crashes are left out as too small to trust.';
+      }
+      document.getElementById('heat-metric').addEventListener('change', drawHeat);
+      drawHeat();
+
+      // Hour severity lines
+      var wk = [], we = [];
+      for (var h = 0; h < 24; h++) {
+        var w = { n: 0, fatal: 0 }, e = { n: 0, fatal: 0 };
+        DAYS.forEach(function (d) { var a = H[d + '|' + h], t = (d === 'Saturday' || d === 'Sunday') ? e : w; t.n += a.n; t.fatal += a.fatal; });
+        wk.push(w.fatal / w.n * 1000); we.push(e.fatal / e.n * 1000);
+      }
+      NYCharts.line(document.getElementById('c-hour'), Array.apply(null, Array(24)).map(function (_, i) { return hourLbl(i); }),
+        [{ label: 'Weekday (Mon-Fri)', data: wk.map(function (v) { return +v.toFixed(2); }) }, { label: 'Weekend (Sat-Sun)', data: we.map(function (v) { return +v.toFixed(2); }) }], { yTitle: 'Fatal crashes per 1,000 crashes' });
+      var pk = wk.indexOf(Math.max.apply(null, wk)), pe = we.indexOf(Math.max.apply(null, we)), lo = wk.indexOf(Math.min.apply(null, wk));
+      document.getElementById('cap-hour').textContent = 'Severity by hour: the share of crashes that are fatal is highest overnight (weekday peak ' + d1(wk[pk]) + ' per 1,000 at ' + hourLbl(pk) + ', weekend peak ' + d1(we[pe]) + ' at ' + hourLbl(pe) + ') and lowest around ' + hourLbl(lo) + ' on weekdays (' + d1(wk[lo]) + '). The evening rush hours have the most crashes, but a smaller fraction of them are fatal.';
+
+      // Conditions
+      var cc;
+      function drawCond() {
+        var k = document.getElementById('cond').value, A = agg(cond[k] || (k === 'lighting' ? lightRows : []), function (r) { return r[k]; });
+        var keys = Object.keys(A).sort(function (a, b) { return A[b].n - A[a].n; });
+        var shown = keys.filter(function (x) { return A[x].n >= 1000; });
+        if (cc) cc.destroy();
+        cc = NYCharts.bar(document.getElementById('c-cond'), shown, [{ label: 'Injury or fatal share (%)', data: shown.map(function (x) { return +(A[x].inj / A[x].n * 100).toFixed(1); }) }], { yTitle: 'Injury or fatal share of crashes (%)' });
+        var tot = keys.reduce(function (s, x) { return s + A[x].n; }, 0);
+        var names = { weather: 'weather', road_surface: 'road surface', lighting: 'lighting' };
+        document.getElementById('cap-cond').textContent = 'Share of crashes with an injury or death, by ' + names[k] + '. Conditions with fewer than 1,000 crashes are in the table but not the chart.';
+        document.getElementById('cap-ctab').textContent = 'Crashes by ' + names[k] + ', ' + y0 + '-' + y1;
+        rowsInto('tb-cond', keys.map(function (x) { var a = A[x]; return [T(x), N(int(a.n)), N(d1(a.n / tot * 100) + '%'), N(d1(a.fatal / a.n * 1000)), N(d1(a.inj / a.n * 100) + '%')]; }));
+      }
+      var lightRows = cond.lighting;
+      document.getElementById('cond').addEventListener('change', drawCond);
+      drawCond();
+
+      document.getElementById('method').textContent = 'Frequency is shown as crashes per 1,000 residents per year (' + C.length + ' counties, population from the NYS Department of Labor estimates for ' + y0 + '-' + y1 + '). Severity is the DMV\'s four-level crash descriptor; the "fatal per 1,000 crashes" and "injury or fatal share" measures divide by crashes, so they show the mix of outcomes and not the chance of being in a crash. ' + int(am.crashes_total - am.crashes_matched) + ' crashes with an unknown county are left out of the county table only.';
+    }
+  });
+  </script>
+</body>
+</html>
