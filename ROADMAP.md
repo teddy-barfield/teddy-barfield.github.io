@@ -93,3 +93,24 @@ Dataset: MTA Daily Ridership and Traffic: Beginning 2020
 - [ ] 8.4 Link preview images: add an `og:image` (and matching Twitter card image) to the hub and the five data pages. Generate each image from the page's own chart or title in the site's palette, keep each file under 300 KB in `assets/img/`, and do not use outside artwork.
 - [ ] 8.5 Remove `projects/project-template.html` (public, redundant and full of placeholders now that `projects/_template.html` exists). Update any reference to it in `README.md` and `docs/`, and confirm nothing links to it.
 - [ ] 8.6 Visual review: take screenshots of the homepage, the hub and the five data pages at 390px and 1280px and inspect each one by eye, not only by measurements. Fix layout or legibility problems found on the hub and data pages, and list in `LOG.md` anything found on off-limits pages or anything that is a matter of taste for Teddy to decide.
+
+## Milestone 9 — Improvement rounds (repeating)
+
+A round is one site-wide improvement task followed by one polish task per data page. Rounds repeat: the last task of each round writes the next one. Any numbered task Teddy adds above or below a round is done in file order as usual.
+
+Rules for every task in a round:
+
+* One focused improvement per run. Before changing anything, look at the site as a visitor would (phone and desktop) and choose the single change that helps most. Say in `LOG.md` what was chosen, why, and what else was considered and left for later.
+* Improve, don't churn. Do not redo or restyle something a previous round already changed unless it is broken. Read earlier round entries in `LOG.md` first, and do not repeat an improvement already made.
+* Keep the site's look (palette, fonts, stripe) and the plain HTML/CSS/JS setup. No frameworks, no build step, and no new library unless the task cannot be done without one, in which case say so in `LOG.md`.
+* Do not remove content, change what the data says, or add new datasets. New numbers must be computed from the existing processed data files, not typed.
+* The protocol's off-limits list and quality gate still apply. Anything that is a matter of taste or changes how the site is organised in a way Teddy might not expect goes in `LOG.md` for review.
+
+### Round 1
+
+- [ ] 9.1 Site-wide improvement: make the site more logically organised or easier to navigate. Choose one feature and build it. Examples of the kind of thing meant: previous/next links between projects, a consistent "on this page" jump list, breadcrumbs back to the hub, clearer grouping or ordering of projects, faster loading, removing duplicated code shared by the data pages. This task may edit the homepage layout (not its About, exam or contact text), the hub, the five data pages and the shared CSS and JS.
+- [ ] 9.2 Polish `projects/auto-complaints.html`: make it more polished and more interactive. Choose one improvement. Examples: search or filter in a table, linked highlighting between a chart and its table, richer tooltips, a control that changes what a chart compares, a clearer first screen, smoother behaviour on a phone.
+- [ ] 9.3 Polish `projects/state-parks.html`, on the same terms as 9.2.
+- [ ] 9.4 Polish `projects/motor-vehicle-crashes.html`, on the same terms as 9.2.
+- [ ] 9.5 Polish `projects/unemployment.html`, on the same terms as 9.2.
+- [ ] 9.6 Polish `projects/subway-comeback.html`, on the same terms as 9.2. Then start the next round: append a "Round N+1" heading below this one with a fresh copy of these six tasks, unchecked and renumbered (Round 2 is 10.1–10.6, Round 3 is 11.1–11.6, and so on), adding a polish task for any data page built since this round began.
