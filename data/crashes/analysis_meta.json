@@ -1,0 +1,26 @@
+{
+  "pulled": "2026-11-10",
+  "script": "scripts/analyze_crash_severity.py",
+  "population_dataset": "Annual Population Estimates for New York State and Counties: Beginning 1970",
+  "population_agency": "NYS Department of Labor",
+  "population_link": "https://data.ny.gov/d/krt9-ym2k",
+  "population_years": [
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "counties_matched": 62,
+  "crashes_matched": 1525107,
+  "crashes_total": 1525123,
+  "unmatched_counties": [
+    [
+      "UNKNOWN",
+      16
+    ]
+  ],
+  "median_frequency": 25.955,
+  "median_injury_or_fatal_share_pct": 15.695,
+  "low_fatal_threshold": 20,
+  "hour_total_check": 1525123
+}
