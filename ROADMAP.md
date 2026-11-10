@@ -67,7 +67,7 @@ Dataset: MTA Daily Ridership and Traffic: Beginning 2020
 
 - [x] 5.1 Fetch the data. Daily ridership by mode as a share of pre-pandemic levels.
 - [x] 5.2 Build the page: recovery curves by mode, weekday vs. weekend and the biggest days.
-- [ ] 5.3 Write it up as a positive comeback story, with honest caveats.
+- [x] 5.3 Write it up as a positive comeback story, with honest caveats.
 
 ## Milestone 6 — Polish (nights 20–22)
 

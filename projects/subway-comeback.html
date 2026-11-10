@@ -107,11 +107,18 @@
 
     <section>
       <div class="wrap">
+        <h2>The comeback story</h2>
+        <div class="prose" id="story" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
         <h2>How to read this, and what it leaves out</h2>
         <div class="prose">
           <p id="method"></p>
           <p>The MTA's published daily counts are estimates of trips: subway and bus counts come from fare-payment data (swipes and taps), the railroads from ticket and onboard counts, and Access-A-Ride (AAR) is trips by the paratransit service. They count trips, not people, and the methods can change over time. Bridges and Tunnels (BT) counts vehicle crossings, not riders. Modes with no baseline (the central business district congestion-pricing entries, which only begin in 2025) are not shown.</p>
-          <p>Some single days look like data glitches, such as a bus count near zero in May 2020, and a few days are missing for some modes. Rows with a missing or zero count were dropped. A write-up of what the comeback means, with fuller caveats, is planned as the next step.</p>
+          <p>Some single days look like data glitches, such as a bus count near zero in May 2020, and a few days are missing for some modes. Rows with a missing or zero count were dropped.</p>
         </div>
         <aside class="data-source" aria-label="Data source">
           <dl>
@@ -221,6 +228,21 @@
         document.getElementById('note-top').textContent = wk + ' of these ten days fall on a weekend. Ranking is by raw riders; the share column is shown for context.';
       }
       sel3.addEventListener('change', drawTop); drawTop();
+
+      // Comeback story (all figures computed from the data files)
+      function firstMonth(m, t) { for (var i = 0; i < months.length; i++) { var r = M[m][months[i]]; if (months[i] > '2020-05' && r && +r.mean_share_all >= t) return months[i]; } return null; }
+      function monthShare(m, k) { return M[m][k] ? +M[m][k].mean_share_all : null; }
+      var lastFull = months[months.length - 2];
+      var yAgo = months[months.length - 14];
+      var st = [];
+      var f50 = firstMonth('Subway', 0.5), f75 = firstMonth('Subway', 0.75);
+      st.push('The subway fell furthest and has climbed steadily. Its worst month was April 2020, at ' + pct(monthShare('Subway', '2020-04')) + ' of the baseline. It first averaged half of baseline in ' + (f50 ? ym(f50) : 'no month') + ' and three quarters in ' + (f75 ? ym(f75) : 'no month so far') + '. In ' + ym(lastFull) + ', the last full month in the data, it averaged ' + pct(monthShare('Subway', lastFull)) + ', compared with ' + pct(monthShare('Subway', yAgo)) + ' in ' + ym(yAgo) + '. The recovery has been gradual and still points up, but it is not complete: weekdays sit at ' + pct(+sub.last28_weekday_share) + ' in the last 28 days.');
+      st.push('Buses tell a different story. They bounced back faster, reaching ' + pct(monthShare('Bus', '2020-09')) + ' in September 2020, but have moved little since. Over the last 28 days the bus average is ' + pct(+bus.last28_mean_share) + ' (weekdays ' + pct(+bus.last28_weekday_share) + '), which is lower than the subway. This data cannot say why buses have not kept pace.');
+      var lf = firstMonth('LIRR', 0.9), mf = firstMonth('MNR', 0.9);
+      st.push('The commuter railroads are the standout. The Long Island Rail Road first averaged 90% of baseline in ' + (lf ? ym(lf) : 'no month') + ' and Metro-North in ' + (mf ? ym(mf) : 'no month') + ', and both now read above 100% (' + pct(+S.LIRR.last28_mean_share) + ' and ' + pct(+S.MNR.last28_mean_share) + ' over the last 28 days). Read those with care. A figure above 100% means more trips than the first week of March 2020, a single week used as the yardstick, and the railroads count trips with methods that can change. It is a fair sign of strong demand, not a precise measure of how much busier the railroads are.');
+      st.push('For every mode shown, weekends are further along than weekdays. For the subway, weekends are at ' + pct(+sub.last28_weekend_share) + ' of baseline against ' + pct(+sub.last28_weekday_share) + ' on weekdays. That fits the idea that leisure travel has returned faster than commuting, but the weekend yardstick is a single Saturday and a single Sunday, so the gap is partly a quirk of the baseline. Treat it as a pattern worth noticing, not a measured difference in behaviour.');
+      st.push('What this does not show: why riders returned or stayed away, how many different people ride, fares or revenue, or ridership compared with 2019, since this data starts in March 2020. Ridership counts trips, and the early-March 2020 week may itself have been touched by the start of the pandemic. The honest summary is that the subway has regained most of its early-2020 ridership and is still rising, with weekdays lagging weekends.');
+      document.getElementById('story').innerHTML = st.map(function (t) { return '<p>' + t + '</p>'; }).join('');
 
       document.getElementById('method').textContent = 'The share of baseline for a day is that day\'s count divided by the baseline for the same type of day (weekday, Saturday or Sunday) in the week of ' + ymd(meta.baseline_window[0]) + '. Comparing like with like keeps the weekly rhythm from distorting the picture. Monthly figures are the simple average of the daily shares in that month; the latest month (' + ym(lastMonth) + ') has only the days available so far. Data run from ' + ymd(meta.first_date) + ' to ' + ymd(last) + '. A comparison with a single early-March week also ignores long-run trends that began before the pandemic.';
     }
