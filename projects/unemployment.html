@@ -130,10 +130,17 @@
 
     <section>
       <div class="wrap">
+        <h2>The recovery storyline</h2>
+        <div class="prose" id="story" aria-live="polite"><p>Loading the recovery write-up from the data files.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
         <h2>How to read this, and what it leaves out</h2>
         <div class="prose">
           <p id="method"></p>
-          <p>The unemployment rate is the share of the labor force (people working or actively looking for work) who are looking and have no job. It does not count people who stopped looking, so a falling rate can partly reflect people leaving the labor force. County figures are model-based estimates, and small counties are noisier than large ones. A fuller write-up of the recovery storyline is planned as the next step for this project.</p>
+          <p>The unemployment rate is the share of the labor force (people working or actively looking for work) who are looking and have no job. It does not count people who stopped looking, so a falling rate can partly reflect people leaving the labor force. County figures are model-based estimates, and small counties are noisier than large ones.</p>
         </div>
         <aside class="data-source" aria-label="Data source">
           <dl>
@@ -282,6 +289,30 @@
       document.querySelectorAll('button[data-k]').forEach(function (b) { b.addEventListener('click', function () { var k = b.dataset.k; cur = { k: k, dir: cur.k === k ? -cur.dir : (k === 'area' ? 1 : -1) }; drawT(); }); });
       drawT();
 
+
+      // recovery storyline (all figures computed from recovery_summary.csv)
+      (function () {
+        var nyc = ['Bronx County','Kings County','New York County','Queens County','Richmond County'];
+        var byM = function (a, b) { return +a.months_peak_to_recovery - +b.months_peak_to_recovery; };
+        var rs = regs.slice().sort(byM), fastR = rs.filter(function (r) { return r.months_peak_to_recovery === rs[0].months_peak_to_recovery; }), slowR = rs[rs.length - 1];
+        var rest = ctys.filter(function (r) { return nyc.indexOf(r.area) < 0; }), cn = ctys.filter(function (r) { return nyc.indexOf(r.area) >= 0; });
+        var restMax = Math.max.apply(null, rest.map(function (r) { return +r.months_peak_to_recovery; }));
+        var restMin = Math.min.apply(null, rest.map(function (r) { return +r.months_peak_to_recovery; }));
+        var cnMin = Math.min.apply(null, cn.map(function (r) { return +r.months_peak_to_recovery; }));
+        var cnMax = Math.max.apply(null, cn.map(function (r) { return +r.months_peak_to_recovery; }));
+        var nycSlowest = cn.every(function (c) { return +c.months_peak_to_recovery > restMax; });
+        var within = ctys.filter(function (r) { return +r.months_peak_to_recovery <= 8; }).length;
+        var atOrBelow = ctys.filter(function (r) { return +r.latest_vs_same_month_2019 <= 0; }).length;
+        var oneOver = ctys.filter(function (r) { return +r.latest_vs_same_month_2019 >= 1; }).length;
+        var nycM = R['New York City'], restTop = rest.slice().sort(function (a, b) { return +b.jump_pts - +a.jump_pts; })[0];
+        var P = [];
+        P.push('Statewide, the rate peaked at ' + S.peak_rate + '% in ' + ym(S.peak_month) + ' and took ' + S.months_peak_to_recovery + ' months to get within ' + meta.recovery_tolerance_pts.toFixed(1) + ' point of the same month of 2019. That single number hides two very different recoveries.');
+        P.push('<strong>Fast and slow.</strong> ' + within + ' of ' + ctys.length + ' counties were back within the tolerance in 8 months or fewer, and the quickest took ' + fast[0].months_peak_to_recovery + ' (' + esc(fast[0].area) + '). Among the ten labor market regions, ' + fastR.map(function (r) { return esc(r.area); }).join(' and ') + ' recovered fastest (' + fastR[0].months_peak_to_recovery + ' months) and ' + esc(slowR.area) + ' slowest (' + slowR.months_peak_to_recovery + ' months). Outside the five New York City counties, recovery times ran from ' + restMin + ' to ' + restMax + ' months.');
+        P.push('<strong>New York City was the outlier.</strong> The five boroughs (counties) took ' + cnMin + ' to ' + cnMax + ' months' + (nycSlowest ? ', and each was slower than every other county in the state' : '') + '. The city region jumped ' + nycM.jump_pts + ' points to ' + nycM.peak_rate + '%; outside the city the largest county jump was ' + restTop.jump_pts + ' points (' + esc(restTop.area) + '), larger than the city region\'s, yet every county outside the city was back within ' + restMax + ' months. So the gap is in the recovery, not only in the size of the shock. The city is also a large share of the state\'s labor force, which is consistent with a statewide recovery time (' + S.months_peak_to_recovery + ' months) that is longer than most counties\'; this page does not test that.');
+        P.push('<strong>Where things stand.</strong> In ' + latestLbl + ', ' + atOrBelow + ' counties were at or below their ' + latestMon + ' 2019 rate and ' + oneOver + ' were at least a full point above it. The city region was ' + sgn(+nycM.latest_vs_same_month_2019) + ' points against ' + latestMon + ' 2019, the statewide figure ' + sgn(+S.latest_vs_same_month_2019) + '.');
+        P.push('<strong>What this does not show.</strong> A county being "recovered" means its unemployment rate matched 2019, not that its jobs or its people returned. People who left the labor force are not counted as unemployed, so a county that lost residents can look better than it is. The comparison is also sensitive to the one-point tolerance, and county estimates are model-based and noisier for small places. The data cannot say why regions differed; that would need industry and population data this page does not use.');
+        document.getElementById('story').innerHTML = P.map(function (t) { return '<p>' + t + '</p>'; }).join('');
+      })();
       document.getElementById('method').textContent = 'The data are monthly estimates for the state, ' + ctys.length + ' counties and ' + regs.length + ' labor market regions from the Local Area Unemployment Statistics program. Because the series is not seasonally adjusted, each month is compared with the same calendar month of 2019 rather than with the month before. "Recovered" means the first month after the 2020 peak when the rate was within ' + meta.recovery_tolerance_pts.toFixed(1) + ' point of that same month in 2019. That one-point tolerance is a choice made for this page; a stricter or looser line would change the recovery times. "Months to recover" counts from the peak month, not from the start of the shock. The region called New York City is separate from the New York City Metro Area, which is a different grouping and is not shown here.';
     }
   });
