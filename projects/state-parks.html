@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>State park attendance — Teddy Barfield</title>
+  <meta name="description" content="How many visits New York State parks get, which ones are busiest, which are growing fastest and which smaller parks are worth a look, from OPRHP attendance figures.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../assets/css/projects.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" integrity="sha512-CQBWl4fJHWbryGE+Pc7UAxWMUMNMWzWxF4SQo9CgkJIN1kx6djDQZjh3Y8SZ1d+6I+1zze6Z7kHXO7q3UyZAWw==" crossorigin="anonymous"></script>
+  <script defer src="../assets/js/charts.js"></script>
+  <style>
+    .note{font-size:.875rem;color:var(--muted);margin-top:.5rem}
+    .lists{display:grid;gap:1.5rem;grid-template-columns:minmax(0,1fr)}
+    @media(min-width:900px){.lists{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    .lists h3{font:600 1.15rem var(--serif);margin-bottom:.4rem}
+    .tall{height:520px}
+  </style>
+</head>
+<body>
+
+  <nav aria-label="Main">
+    <div class="wrap">
+      <a href="../index.html">Home</a>
+      <div class="menu">
+        <button class="menu-toggle" aria-expanded="false" aria-controls="projects-menu">Projects</button>
+        <ul class="menu-list" id="projects-menu" hidden>
+          <li class="group">Actuarial</li>
+          <li><a href="../projects/term-life-decoder.html">Life insurance policy decoder</a></li>
+          <li class="group">Data analysis</li>
+          <li><a href="../projects/nyc-causes-of-death.html">NYC leading causes of death</a></li>
+          <li class="group">New York data</li>
+          <li><a href="../projects/ny-data/index.html">New York by the Numbers</a></li>
+          <li class="group">Teaching</li>
+          <li><a href="../projects/math-practice-book.html">Math practice book</a></li>
+        </ul>
+      </div>
+      <a href="../index.html#exams">Exams</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <header>
+    <div class="wrap">
+      <a class="back" href="../index.html">Back to home</a>
+      <h1 style="margin-top:1.5rem">State park attendance</h1>
+      <p class="lede" id="lede">Loading the latest figures from the data files.</p>
+      <p class="meta">Python, Chart.js · Data last pulled <span id="pulled">2026-11-10</span></p>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="wrap">
+        <h2>The question</h2>
+        <div class="prose"><p>How many visits do New York State parks and historic sites receive each year, which ones are busiest, and which are growing or worth discovering? Every figure below is computed in your browser from the processed data files, so none is typed in by hand.</p></div>
+        <ul class="stats" id="stats" aria-label="Key figures"></ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap-wide">
+        <h2>Total attendance by year</h2>
+        <figure class="chart">
+          <div class="chart-box"><canvas id="c-total" role="img" aria-label="Bar chart of total state park attendance in millions of visits for each year from 2003 to 2025."></canvas></div>
+          <figcaption id="cap-total">Each bar is one year of attendance across every facility in the dataset, in millions of visits. Bars rise left to right.</figcaption>
+        </figure>
+        <p class="note" id="note-total"></p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap-wide">
+        <h2>The 15 busiest parks</h2>
+        <figure class="chart">
+          <div class="chart-box tall"><canvas id="c-top" role="img" aria-label="Horizontal bar chart of the 15 state park facilities with the most visits in the latest year."></canvas></div>
+          <figcaption id="cap-top">Visits in the latest year, in millions. Horizontal bars make the long park names readable and are easy to compare by length.</figcaption>
+        </figure>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Top 15 parks table">
+          <table class="data"><caption id="cap-top-t"></caption>
+            <thead><tr><th scope="col">Park</th><th scope="col">Region</th><th scope="col" class="num">Visits</th></tr></thead>
+            <tbody id="tb-top"></tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap-wide">
+        <h2>Growing fastest, and hidden gems</h2>
+        <div class="lists">
+          <div>
+            <h3>Fastest-growing parks</h3>
+            <div class="table-scroll" tabindex="0" role="region" aria-label="Fastest-growing parks table">
+              <table class="data"><caption id="cap-grow"></caption>
+                <thead><tr><th scope="col">Park</th><th scope="col" class="num">Early avg</th><th scope="col" class="num">Recent avg</th><th scope="col" class="num">Change</th></tr></thead>
+                <tbody id="tb-grow"></tbody></table>
+            </div>
+          </div>
+          <div>
+            <h3>Hidden gems</h3>
+            <div class="table-scroll" tabindex="0" role="region" aria-label="Hidden gems table">
+              <table class="data"><caption id="cap-gem"></caption>
+                <thead><tr><th scope="col">Park</th><th scope="col">Region</th><th scope="col" class="num">Visits</th><th scope="col" class="num">Change</th></tr></thead>
+                <tbody id="tb-gem"></tbody></table>
+            </div>
+          </div>
+        </div>
+        <div class="callout"><strong>Read the big percentages with care.</strong> <span id="callout"></span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>How the lists were built</h2>
+        <div class="prose">
+          <p id="method"></p>
+          <p>Attendance is a count of visits reported by each facility, not of distinct people, and methods of counting differ by site (for example, gate counts versus estimates). Facilities open, close or change how they count, so the system total partly grows because facilities were added. A fuller write-up is planned for the next step of this project.</p>
+        </div>
+        <aside class="data-source" aria-label="Data source">
+          <dl>
+            <dt>Dataset</dt><dd>State Park Annual Attendance Figures by Facility: Beginning 2003</dd>
+            <dt>Agency</dt><dd>New York State Office of Parks, Recreation and Historic Preservation (OPRHP)</dd>
+            <dt>Link</dt><dd><a href="https://data.ny.gov/d/8f3n-xj78">https://data.ny.gov/d/8f3n-xj78</a></dd>
+            <dt>Data pulled</dt><dd id="pulled2">2026-11-10</dd>
+          </dl>
+        </aside>
+        <div class="links">
+          <a href="https://github.com/teddy-barfield/teddy-barfield.github.io/blob/main/scripts/fetch_parks_attendance.py">View the code</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Teddy Barfield, 2026</div>
+  </footer>
+
+  <script src="../menu.js"></script>
+  <script>
+  window.addEventListener('load', function () {
+    var BASE = '../data/parks-attendance/';
+    function csv(text) {
+      var rows = [], row = [], f = '', q = false;
+      for (var i = 0; i < text.length; i++) {
+        var c = text[i];
+        if (q) { if (c === '"') { if (text[i+1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+        else if (c === '"') q = true;
+        else if (c === ',') { row.push(f); f = ''; }
+        else if (c === '\n') { row.push(f); rows.push(row); row = []; f = ''; }
+        else if (c !== '\r') f += c;
+      }
+      if (f || row.length) { row.push(f); rows.push(row); }
+      var h = rows.shift();
+      return rows.filter(function (r) { return r.length === h.length; }).map(function (r) { var o = {}; h.forEach(function (k, i) { o[k] = r[i]; }); return o; });
+    }
+    function get(u) { return fetch(BASE + u).then(function (r) { if (!r.ok) throw new Error(u); return r; }); }
+    Promise.all([get('year_total.csv').then(function (r) { return r.text(); }), get('facility_summary.csv').then(function (r) { return r.text(); }), get('meta.json').then(function (r) { return r.json(); })])
+    .then(function (res) { init(csv(res[0]).map(function (x) { return { year: +x.year, fac: +x.facilities, att: +x.attendance }; }), csv(res[1]), res[2]); })
+    .catch(function (e) { document.getElementById('lede').textContent = 'The data files could not be loaded (' + e.message + ').'; });
+
+    function int(x) { return x.toLocaleString('en-US'); }
+    function mil(x) { return (x / 1e6).toFixed(1); }
+    function pct(x) { return (x >= 0 ? '+' : '') + int(Math.round(x)) + '%'; }
+    function esc(s) { return s.replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function li(p, h) { var e = document.createElement('li'); e.innerHTML = h; p.appendChild(e); }
+    function rowsInto(id, items) { document.getElementById(id).innerHTML = items.map(function (cells) { return '<tr>' + cells.map(function (c, i) { return '<' + (i === 0 ? 'th scope="row"' : 'td') + (c.n ? ' class="num"' : '') + '>' + c.t + '</' + (i === 0 ? 'th' : 'td') + '>'; }).join('') + '</tr>'; }).join(''); }
+    function T(t) { return { t: esc(String(t)) }; }
+    function N(t) { return { t: t, n: 1 }; }
+
+    function init(yt, fs, meta) {
+      document.getElementById('pulled').textContent = meta.pulled;
+      document.getElementById('pulled2').textContent = meta.pulled;
+      var first = yt[0], last = yt[yt.length - 1];
+      var peak = yt.reduce(function (a, b) { return b.att > a.att ? b : a; });
+      var growth = (last.att / first.att - 1) * 100;
+      var vsPeak = (last.att / peak.att - 1) * 100;
+      var recordYears = yt.filter(function (y, i) { return i > 0 && y.att > Math.max.apply(null, yt.slice(0, i).map(function (z) { return z.att; })); }).length;
+      var lateRecords = recordYears;
+
+      document.getElementById('lede').textContent = 'New Yorkers keep going outside: state park attendance reached ' + mil(peak.att) + ' million visits in ' + peak.year + ', the highest in the data, and was ' + mil(last.att) + ' million in ' + last.year + ', up ' + Math.round(growth) + '% from ' + mil(first.att) + ' million in ' + first.year + '.';
+      var st = document.getElementById('stats');
+      li(st, '<span class="num">' + mil(peak.att) + 'M</span><span class="lbl">visits in ' + peak.year + ', the record year</span>');
+      li(st, '<span class="num">' + mil(last.att) + 'M</span><span class="lbl">visits in ' + last.year + ' (' + pct(vsPeak) + ' vs. ' + peak.year + ')</span>');
+      li(st, '<span class="num">' + mil(first.att) + 'M</span><span class="lbl">visits in ' + first.year + '</span>');
+      li(st, '<span class="num">' + last.fac + '</span><span class="lbl">facilities reporting in ' + last.year + ' (' + first.fac + ' in ' + first.year + ')</span>');
+
+      // Chart 1
+      NYCharts.bar(document.getElementById('c-total'), yt.map(function (y) { return String(y.year); }),
+        [{ label: 'Visits (millions)', data: yt.map(function (y) { return +(y.att / 1e6).toFixed(2); }) }], { yTitle: 'Visits (millions)' });
+      document.getElementById('note-total').textContent = 'The number of facilities reporting changed over time (' + Math.min.apply(null, yt.map(function (y) { return y.fac; })) + ' to ' + Math.max.apply(null, yt.map(function (y) { return y.fac; })) + '), so part of the rise comes from facilities being added. The total set a new high in ' + lateRecords + ' of the ' + (yt.length - 1) + ' years after ' + first.year + '.';
+
+      // Top 15
+      var cur = fs.filter(function (r) { return r.att_2025 !== ''; }).map(function (r) { return { f: r.facility, reg: r.region, a: +r.att_2025, e: +r.avg_2003_2005, n: +r.avg_2023_2025, g: r.growth_pct === '' ? null : +r.growth_pct, latest: +r.latest_year }; });
+      var top = cur.slice().sort(function (a, b) { return b.a - a.a; }).slice(0, 15);
+      NYCharts.bar(document.getElementById('c-top'), top.map(function (r) { return r.f; }),
+        [{ label: 'Visits (millions)', data: top.map(function (r) { return +(r.a / 1e6).toFixed(2); }) }], { horizontal: true, xTitle: 'Visits (millions)' });
+      document.getElementById('cap-top-t').textContent = 'Top 15 facilities by visits in ' + last.year;
+      rowsInto('tb-top', top.map(function (r) { return [T(r.f), T(r.reg), N(int(r.a))]; }));
+      var topShare = top.reduce(function (s, r) { return s + r.a; }, 0) / last.att * 100;
+      document.getElementById('cap-top').textContent = 'Visits in ' + last.year + ', in millions. These 15 facilities account for ' + Math.round(topShare) + '% of all visits in the system.';
+
+      // Growth rule and lists
+      var elig = cur.filter(function (r) { return r.g !== null && r.latest === last.year; });
+      var grow = elig.slice().sort(function (a, b) { return b.g - a.g; }).slice(0, 10);
+      document.getElementById('cap-grow').textContent = 'Top 10 of ' + elig.length + ' qualifying facilities, 2003-05 average vs. 2023-25 average';
+      rowsInto('tb-grow', grow.map(function (r) { return [T(r.f), N(int(Math.round(r.e))), N(int(Math.round(r.n))), N(pct(r.g))]; }));
+
+      var sorted = cur.filter(function (r) { return r.a > 0; }).map(function (r) { return r.a; }).sort(function (a, b) { return a - b; });
+      var mid = sorted.length % 2 ? sorted[(sorted.length - 1) / 2] : (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2;
+      var cap = 2 * mid;
+      var gems = elig.filter(function (r) { return r.a <= cap; }).sort(function (a, b) { return b.g - a.g; }).slice(0, 8);
+      document.getElementById('cap-gem').textContent = 'Smaller qualifying facilities (at most ' + int(Math.round(cap)) + ' visits in ' + last.year + '), by growth';
+      rowsInto('tb-gem', gems.map(function (r) { return [T(r.f), T(r.reg), N(int(r.a)), N(pct(r.g))]; }));
+
+      var g1 = grow[0];
+      document.getElementById('callout').textContent = g1.f + ' shows ' + pct(g1.g) + ', which is far larger than any other park. A jump that size usually means the site opened, expanded or changed how it counts visits, not that the same park became that much more popular. The dataset cannot tell which.';
+      document.getElementById('method').textContent = 'Fastest-growing: only facilities that reported more than zero visits in every year and averaged at least 50,000 visits in 2003-05 qualify (' + elig.length + ' facilities), so tiny sites with unstable counts are left out. Growth compares the 2023-25 average with the 2003-05 average; three-year averages smooth out weather and one-off events. Hidden gems: among those qualifying facilities, parks whose latest-year attendance is at most twice the median facility (' + int(Math.round(mid)) + ' visits, so at most ' + int(Math.round(cap)) + '), ranked by the same growth measure. This is my own definition of "hidden", chosen to be simple and reproducible.';
+    }
+  });
+  </script>
+</body>
+</html>
