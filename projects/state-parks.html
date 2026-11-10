@@ -18,6 +18,10 @@
     @media(min-width:900px){.lists{grid-template-columns:repeat(2,minmax(0,1fr))}}
     .lists h3{font:600 1.15rem var(--serif);margin-bottom:.4rem}
     .tall{height:520px}
+    .finder{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin:1rem 0}
+    .finder label{font-weight:600}
+    .finder select{font:inherit;padding:.5rem .75rem;border:1px solid var(--rule);border-radius:6px;background:#fff;color:inherit;max-width:100%}
+    .finder-scroll{max-height:420px;overflow:auto}
   </style>
 </head>
 <body>
@@ -114,10 +118,34 @@
 
     <section>
       <div class="wrap">
+        <h2>What the numbers say</h2>
+        <div class="prose" id="story"></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap-wide">
+        <h2>Find a park near you</h2>
+        <p>New York State groups its parks into regions. Pick the region you live in or plan to visit to see its facilities, busiest first. Regions are OPRHP's own groupings, not exact distances, so a park in a neighboring region may be closer to you.</p>
+        <div class="finder">
+          <label for="region">Region</label>
+          <select id="region"></select>
+        </div>
+        <p class="note" id="finder-sum" aria-live="polite"></p>
+        <div class="table-scroll finder-scroll" tabindex="0" role="region" aria-label="Parks in the selected region">
+          <table class="data"><caption id="cap-find"></caption>
+            <thead><tr><th scope="col">Park</th><th scope="col">County</th><th scope="col" class="num">Visits</th><th scope="col" class="num">Change since 2003-05</th></tr></thead>
+            <tbody id="tb-find"></tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
         <h2>How the lists were built</h2>
         <div class="prose">
           <p id="method"></p>
-          <p>Attendance is a count of visits reported by each facility, not of distinct people, and methods of counting differ by site (for example, gate counts versus estimates). Facilities open, close or change how they count, so the system total partly grows because facilities were added. A fuller write-up is planned for the next step of this project.</p>
+          <p>Attendance is a count of visits reported by each facility, not of distinct people, and methods of counting differ by site (for example, gate counts versus estimates). Facilities open, close or change how they count, so the system total partly grows because facilities were added.</p>
         </div>
         <aside class="data-source" aria-label="Data source">
           <dl>
@@ -157,8 +185,8 @@
       return rows.filter(function (r) { return r.length === h.length; }).map(function (r) { var o = {}; h.forEach(function (k, i) { o[k] = r[i]; }); return o; });
     }
     function get(u) { return fetch(BASE + u).then(function (r) { if (!r.ok) throw new Error(u); return r; }); }
-    Promise.all([get('year_total.csv').then(function (r) { return r.text(); }), get('facility_summary.csv').then(function (r) { return r.text(); }), get('meta.json').then(function (r) { return r.json(); })])
-    .then(function (res) { init(csv(res[0]).map(function (x) { return { year: +x.year, fac: +x.facilities, att: +x.attendance }; }), csv(res[1]), res[2]); })
+    Promise.all([get('year_total.csv').then(function (r) { return r.text(); }), get('facility_summary.csv').then(function (r) { return r.text(); }), get('meta.json').then(function (r) { return r.json(); }), get('region_year.csv').then(function (r) { return r.text(); })])
+    .then(function (res) { init(csv(res[0]).map(function (x) { return { year: +x.year, fac: +x.facilities, att: +x.attendance }; }), csv(res[1]), res[2], csv(res[3])); })
     .catch(function (e) { document.getElementById('lede').textContent = 'The data files could not be loaded (' + e.message + ').'; });
 
     function int(x) { return x.toLocaleString('en-US'); }
@@ -170,7 +198,7 @@
     function T(t) { return { t: esc(String(t)) }; }
     function N(t) { return { t: t, n: 1 }; }
 
-    function init(yt, fs, meta) {
+    function init(yt, fs, meta, ry) {
       document.getElementById('pulled').textContent = meta.pulled;
       document.getElementById('pulled2').textContent = meta.pulled;
       var first = yt[0], last = yt[yt.length - 1];
@@ -217,6 +245,39 @@
 
       var g1 = grow[0];
       document.getElementById('callout').textContent = g1.f + ' shows ' + pct(g1.g) + ', which is far larger than any other park. A jump that size usually means the site opened, expanded or changed how it counts visits, not that the same park became that much more popular. The dataset cannot tell which.';
+      // Regions
+      var regs = {};
+      ry.forEach(function (x) { var y = +x.year; (regs[x.region] = regs[x.region] || {})[y] = +x.attendance; });
+      var rl = Object.keys(regs).map(function (k) { return { r: k, a: regs[k][last.year] || 0, b: regs[k][first.year] || 0 }; });
+      rl.sort(function (a, b) { return b.a - a.a; });
+      var big = rl[0], sumL = rl.reduce(function (s, r) { return s + r.a; }, 0);
+      var gr = rl.filter(function (r) { return r.b > 0; }).map(function (r) { return { r: r.r, a: r.a, b: r.b, g: (r.a / r.b - 1) * 100 }; }).sort(function (a, b) { return b.g - a.g; });
+      var fall = gr.filter(function (r) { return r.g < 0; });
+      var story = document.getElementById('story');
+      var paras = [
+        'Attendance across the state park system went from ' + mil(first.att) + ' million visits in ' + first.year + ' to ' + mil(last.att) + ' million in ' + last.year + ', a ' + Math.round(growth) + '% rise, with the high point of ' + mil(peak.att) + ' million in ' + peak.year + '. That is the good news in the headline: a clear upward trend, with ' + last.year + ' only ' + Math.abs(Math.round(vsPeak)) + '% below the record.',
+        big.r + ' is the largest region, with ' + mil(big.a) + ' million visits in ' + last.year + ', or ' + Math.round(big.a / sumL * 100) + '% of the system. The fastest regional growth since ' + first.year + ' is in ' + gr[0].r + ' (' + pct(gr[0].g) + ', from ' + mil(gr[0].b) + ' to ' + mil(gr[0].a) + ' million) and ' + gr[1].r + ' (' + pct(gr[1].g) + ').' + (fall.length ? ' ' + fall.map(function (r) { return r.r; }).join(' and ') + ' ' + (fall.length > 1 ? 'are' : 'is') + ' the only region' + (fall.length > 1 ? 's' : '') + ' below its ' + first.year + ' level (' + fall.map(function (r) { return pct(r.g); }).join(', ') + ').' : ''),
+        'What this does not show: a rise in total visits can come from more facilities reporting, from new sites opening, or from changes in how visits are counted, not only from more people going outdoors. Region totals have the same problem, since a single large site opening can move a region. The data also has no information on who the visitors are or how far they travelled.'
+      ];
+      paras.forEach(function (t) { var p = document.createElement('p'); p.textContent = t; story.appendChild(p); });
+
+      // Region finder
+      var sel = document.getElementById('region');
+      var names = rl.map(function (r) { return r.r; });
+      sel.innerHTML = names.map(function (n) { return '<option value="' + esc(n) + '">' + esc(n) + '</option>'; }).join('');
+      function render() {
+        var rg = sel.value;
+        var items = cur.filter(function (r) { return r.reg === rg && r.latest === last.year && r.a > 0; }).sort(function (a, b) { return b.a - a.a; });
+        var county = {};
+        fs.forEach(function (r) { county[r.facility] = r.county; });
+        var tot = items.reduce(function (s, r) { return s + r.a; }, 0);
+        document.getElementById('finder-sum').textContent = rg + ': ' + items.length + ' facilities reported visits in ' + last.year + ', ' + mil(tot) + ' million in total. Change since 2003-05 is shown only for facilities that qualify under the growth rule below.';
+        document.getElementById('cap-find').textContent = 'Facilities in the ' + rg + ' region by visits in ' + last.year;
+        rowsInto('tb-find', items.map(function (r) { return [T(r.f), T(county[r.f] || ''), N(int(r.a)), N(r.g === null ? 'n/a' : pct(r.g))]; }));
+      }
+      sel.addEventListener('change', render);
+      render();
+
       document.getElementById('method').textContent = 'Fastest-growing: only facilities that reported more than zero visits in every year and averaged at least 50,000 visits in 2003-05 qualify (' + elig.length + ' facilities), so tiny sites with unstable counts are left out. Growth compares the 2023-25 average with the 2003-05 average; three-year averages smooth out weather and one-off events. Hidden gems: among those qualifying facilities, parks whose latest-year attendance is at most twice the median facility (' + int(Math.round(mid)) + ' visits, so at most ' + int(Math.round(cap)) + '), ranked by the same growth measure. This is my own definition of "hidden", chosen to be simple and reproducible.';
     }
   });
