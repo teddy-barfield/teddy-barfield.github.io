@@ -1,0 +1,24 @@
+{
+  "dataset": "Automobile Insurance Company Complaint Rankings: Beginning 2009",
+  "agency": "New York State Department of Financial Services (DFS)",
+  "resource_id": "h2wd-9xfe",
+  "url": "https://data.ny.gov/d/h2wd-9xfe",
+  "api": "https://data.ny.gov/resource/h2wd-9xfe.json",
+  "pulled": "2026-11-10",
+  "rows_fetched": 2461,
+  "rows_kept": 2460,
+  "dropped": {
+    "missing_key": 0,
+    "duplicate": 1
+  },
+  "years": [
+    2009,
+    2024
+  ],
+  "years_identical_to_prior_year": [
+    2016
+  ],
+  "small_book_threshold_millions": 1.0,
+  "small_book_rows": 89,
+  "insurers": 229
+}
