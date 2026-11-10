@@ -26,8 +26,11 @@ Each page states its dataset, link, agency and the date the data was pulled. Fig
 
 Run a script from the repository root, for example `python3 scripts/fetch_auto_complaints.py`. Each script queries the data.ny.gov SODA API, aggregates on the server where possible and writes small files to `data/<project>/`.
 
+After a refresh, run `node scripts/make_og_images.js` (needs Node and Playwright with Chromium) to rebuild the link preview images in `assets/img/`. Each image is a 1200 x 630 card made from the page's own title and one of its own charts, so it is a snapshot that goes stale when the data changes.
+
 ## Layout
 
 - `assets/css/projects.css`, `assets/js/charts.js` — shared styles and chart setup (Chart.js from cdnjs).
+- `assets/img/og-*.png` — link preview images (`og:image`), built by `scripts/make_og_images.js`.
 - `projects/_template.html` — starting point for a new project page.
 - `ROADMAP.md`, `LOG.md`, `docs/site-audit.md` — plan, run log and site inventory.

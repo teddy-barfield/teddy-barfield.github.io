@@ -4,6 +4,7 @@
   1. Copy to projects/<slug>.html (or projects/<slug>/index.html, then add one more ../ to every path).
   2. Fill every [bracket]. Every figure in the text must come from data/<project>/*.json.
   3. Add the page to the Projects menu on every page (see roadmap task 0.3).
+  4. Add the page to PAGES in scripts/make_og_images.js and run it to make the link preview image (assets/img/og-<page>.png).
   The leading underscore keeps this file out of the published site (GitHub Pages' Jekyll skips it).
 -->
 <html lang="en">
@@ -18,9 +19,16 @@
   <meta property="og:title" content="[Project title] — Teddy Barfield">
   <meta property="og:description" content="[Same sentence as the description above.]">
   <meta property="og:url" content="https://teddy-barfield.github.io/projects/[page].html">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://teddy-barfield.github.io/assets/img/og-[page].png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="[One sentence describing the preview image: the page title and which chart it shows.]">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="[Project title] — Teddy Barfield">
   <meta name="twitter:description" content="[Same sentence as the description above.]">
+  <meta name="twitter:image" content="https://teddy-barfield.github.io/assets/img/og-[page].png">
+  <meta name="twitter:image:alt" content="[One sentence describing the preview image: the page title and which chart it shows.]">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
