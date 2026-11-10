@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!--
+  PROJECT PAGE TEMPLATE for NY data projects.
+  1. Copy to projects/<slug>.html (or projects/<slug>/index.html, then add one more ../ to every path).
+  2. Fill every [bracket]. Every figure in the text must come from data/<project>/*.json.
+  3. Add the page to the Projects menu on every page (see roadmap task 0.3).
+  The leading underscore keeps this file out of the published site (GitHub Pages' Jekyll skips it).
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>[Project title] — Teddy Barfield</title>
+  <meta name="description" content="[One sentence: what question this page answers and with what data.]">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../assets/css/projects.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" integrity="sha512-CQBWl4fJHWbryGE+Pc7UAxWMUMNMWzWxF4SQo9CgkJIN1kx6djDQZjh3Y8SZ1d+6I+1zze6Z7kHXO7q3UyZAWw==" crossorigin="anonymous"></script>
+  <script defer src="../assets/js/charts.js"></script>
+</head>
+<body>
+
+  <nav aria-label="Main">
+    <div class="wrap">
+      <a href="../index.html">Home</a>
+      <div class="menu">
+        <button class="menu-toggle" aria-expanded="false" aria-controls="projects-menu">Projects</button>
+        <ul class="menu-list" id="projects-menu" hidden>
+          <li class="group">Actuarial</li>
+          <li><a href="../projects/term-life-decoder.html">Life insurance policy decoder</a></li>
+          <li class="group">Data analysis</li>
+          <li><a href="../projects/nyc-causes-of-death.html">NYC leading causes of death</a></li>
+          <li class="group">Teaching</li>
+          <li><a href="../projects/math-practice-book.html">Math practice book</a></li>
+        </ul>
+      </div>
+      <a href="../index.html#exams">Exams</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <header>
+    <div class="wrap">
+      <a class="back" href="../index.html">Back to home</a>
+      <h1 style="margin-top:1.5rem">[Project title]</h1>
+      <p class="lede">[One-sentence headline finding.]</p>
+      <p class="meta">[Tools, e.g. Python, Chart.js] · Data last pulled [YYYY-MM-DD]</p>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="wrap">
+        <h2>The question</h2>
+        <div class="prose"><p>[What this page tries to answer, and why it matters.]</p></div>
+        <ul class="stats" aria-label="Key figures">
+          <li><span class="num">[figure]</span><span class="lbl">[what it is]</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap-wide">
+        <h2>Results</h2>
+        <figure class="chart">
+          <div class="chart-box">
+            <canvas id="chart-1" role="img" aria-label="[Short description of the chart]"></canvas>
+          </div>
+          <figcaption>[How to read this chart, in one or two sentences.]</figcaption>
+        </figure>
+        <!-- Draw the chart from a data file, e.g.:
+        <script>
+          window.addEventListener('load', function () {
+            fetch('../data/[project]/[file].json').then(function (r) { return r.json(); }).then(function (d) {
+              NYCharts.line(document.getElementById('chart-1'), d.labels, d.series, { yTitle: '[unit]' });
+            });
+          });
+        </script> -->
+
+        <div class="callout"><strong>[Callout title]</strong> [One-paragraph takeaway.]</div>
+
+        <div class="table-scroll" tabindex="0" role="region" aria-label="[Table name]">
+          <table class="data">
+            <caption>[Table caption]</caption>
+            <thead><tr><th scope="col">[Name]</th><th scope="col" class="num">[Value]</th></tr></thead>
+            <tbody><tr><td>[row]</td><td class="num">[value]</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>Approach and caveats</h2>
+        <div class="prose"><p>[Method in plain language, then limitations.]</p></div>
+        <aside class="data-source" aria-label="Data source">
+          <dl>
+            <dt>Dataset</dt><dd>[Dataset name]</dd>
+            <dt>Agency</dt><dd>[Agency]</dd>
+            <dt>Link</dt><dd><a href="https://data.ny.gov/d/[id]">https://data.ny.gov/d/[id]</a></dd>
+            <dt>Data pulled</dt><dd>[YYYY-MM-DD]</dd>
+          </dl>
+        </aside>
+        <div class="links">
+          <a href="https://github.com/teddy-barfield/teddy-barfield.github.io/tree/main/scripts">View the code</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Teddy Barfield, 2026</div>
+  </footer>
+
+  <script src="../menu.js"></script>
+</body>
+</html>

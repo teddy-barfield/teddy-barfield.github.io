@@ -1,0 +1,76 @@
+/* Shared kit for data-project pages. Load AFTER ../../style.css (it reuses those tokens).
+   Rules of thumb: every grid column is minmax(0, 1fr); every table sits in .table-scroll. */
+
+:root {
+  /* Chart palette: same blues/colours already used on the older project pages */
+  --c1: #376092; --c2: #C08A2B; --c3: #4C7A3D; --c4: #6A4C93; --c5: #2E86AB;
+  --c6: #B0607A; --c7: #7A6A55; --c8: #3D9970; --c9: #8E8E3E;
+  --neg: #9B2C2C;           /* the one "bad / negative" red */
+  --tint: #F4F7FB;          /* very light panel fill */
+}
+
+.wrap-wide { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
+.prose { max-width: 46rem; }
+.prose p { margin-top: 1rem; }
+.prose p:first-child { margin-top: 0; }
+
+/* Grid helpers */
+.grid { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 640px) {
+  .grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* Cards (used by the hub page) */
+.cards { list-style: none; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); }
+.card { background: var(--tint); border: 1px solid var(--rule); border-top: 4px solid var(--accent); padding: 1.1rem 1.25rem; min-width: 0; }
+.card h3 { font: 600 1.25rem/1.25 var(--serif); }
+.card p { margin-top: .5rem; font-size: .95rem; color: var(--muted); }
+.card .tag { display: inline-block; font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--mark); }
+.card a.card-link { display: inline-block; margin-top: .75rem; font-weight: 600; }
+
+/* Stat tiles */
+.stats { list-style: none; display: grid; gap: .75rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 10rem), 1fr)); }
+.stats li { background: var(--sheet); border-left: 4px solid var(--mark); padding: .8rem 1rem; min-width: 0; }
+.stats .num { display: block; font: 600 1.75rem/1.1 var(--serif); overflow-wrap: anywhere; }
+.stats .lbl { display: block; margin-top: .25rem; font-size: .85rem; color: var(--muted); }
+
+/* Charts */
+figure.chart { margin: 1.5rem 0; min-width: 0; }
+.chart-box { position: relative; width: 100%; height: 22rem; }
+.chart-box.short { height: 16rem; }
+.chart-box.tall { height: 30rem; }
+@media (max-width: 600px) {
+  .chart-box { height: 18rem; }
+  .chart-box.tall { height: 24rem; }
+}
+figcaption { margin-top: .6rem; font-size: .875rem; color: var(--muted); }
+.chart-fallback { padding: 1rem; background: var(--tint); border: 1px dashed var(--rule); color: var(--muted); font-size: .9rem; }
+
+/* Callout */
+.callout { margin: 1.5rem 0; padding: 1rem 1.25rem; background: var(--sheet); border-left: 4px solid var(--accent); }
+.callout strong:first-child { display: block; font: 600 1.1rem var(--serif); margin-bottom: .25rem; }
+.callout.warn { border-left-color: var(--neg); background: #F7ECEA; }
+
+/* Tables */
+.table-scroll { overflow-x: auto; max-width: 100%; margin: 1.25rem 0; -webkit-overflow-scrolling: touch; }
+.table-scroll:focus-visible { outline: 3px solid var(--accent); }
+table.data { border-collapse: collapse; width: 100%; font-size: .92rem; }
+table.data caption { text-align: left; font-size: .875rem; color: var(--muted); padding-bottom: .5rem; }
+table.data th, table.data td { padding: .5rem .75rem; border-bottom: 1px solid var(--rule); text-align: left; white-space: nowrap; }
+table.data th { background: var(--sheet); font-weight: 600; position: sticky; top: 0; }
+table.data td.num, table.data th.num { text-align: right; font-variant-numeric: tabular-nums; }
+table.data th button { all: unset; cursor: pointer; font-weight: 600; }
+table.data th button:focus-visible { outline: 3px solid var(--accent); }
+table.data th[aria-sort="ascending"] button::after { content: " \25B2"; font-size: .7em; }
+table.data th[aria-sort="descending"] button::after { content: " \25BC"; font-size: .7em; }
+
+/* Data source block: the roadmap requires dataset, link, agency and pull date on every project page */
+.data-source { margin-top: 1.5rem; padding: 1rem 1.25rem; border: 1px solid var(--rule); background: var(--tint); font-size: .92rem; }
+.data-source dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: .3rem 1rem; }
+.data-source dt { font-weight: 600; }
+.data-source dd { overflow-wrap: anywhere; }
+@media (max-width: 480px) {
+  .data-source dl { grid-template-columns: minmax(0, 1fr); }
+  .data-source dd { margin-bottom: .5rem; }
+}
