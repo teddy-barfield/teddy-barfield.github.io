@@ -75,7 +75,7 @@
       <div class="wrap-wide">
         <h2>Crashes per resident, by county</h2>
         <figure class="chart">
-          <div class="chart-box tall"><canvas id="c-county" role="img" aria-label="Horizontal bar chart of the 15 New York counties with the most reported crashes per 1,000 residents per year."></canvas></div>
+          <div class="chart-box tall"><canvas id="c-county" data-has-table role="img" aria-label="Horizontal bar chart of the 15 New York counties with the most reported crashes per 1,000 residents per year."></canvas></div>
           <figcaption id="cap-county"></figcaption>
         </figure>
         <div class="callout warn"><strong>Do not read this as a driving-risk ranking.</strong> <span id="callout"></span></div>
@@ -122,7 +122,7 @@
           </select>
         </div>
         <figure class="chart">
-          <div class="chart-box"><canvas id="c-cond" role="img" aria-label="Bar chart of the share of crashes that involved injury or death, for each condition in the selected group."></canvas></div>
+          <div class="chart-box"><canvas id="c-cond" data-has-table role="img" aria-label="Bar chart of the share of crashes that involved injury or death, for each condition in the selected group."></canvas></div>
           <figcaption id="cap-cond"></figcaption>
         </figure>
         <div class="table-scroll" tabindex="0" role="region" aria-label="Conditions table">
@@ -257,7 +257,10 @@
       function shade(t) { // t in 0..1, light to dark blue
         var a = [238, 243, 250], b = [37, 64, 97];
         var rgb = a.map(function (v, i) { return Math.round(v + (b[i] - v) * t); });
-        return { bg: 'rgb(' + rgb.join(',') + ')', fg: t > 0.45 ? '#fff' : '#111' };
+        var lin = rgb.map(function (c) { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); });
+        var L = 0.2126 * lin[0] + 0.7152 * lin[1] + 0.0722 * lin[2];
+        // pick the text colour (white or near-black) with the higher WCAG contrast ratio
+        return { bg: 'rgb(' + rgb.join(',') + ')', fg: (1.05 / (L + 0.05)) >= ((L + 0.05) / 0.05) ? '#fff' : '#000' };
       }
       function drawHeat() {
         var m = document.getElementById('heat-metric').value;

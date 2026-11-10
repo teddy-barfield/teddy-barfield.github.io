@@ -74,3 +74,9 @@ table.data th[aria-sort="descending"] button::after { content: " \25BC"; font-si
   .data-source dl { grid-template-columns: minmax(0, 1fr); }
   .data-source dd { margin-bottom: .5rem; }
 }
+
+/* Collapsed data table under charts that have no table of their own (added by charts.js) */
+.chart-data { margin: .5rem 0 1rem; font-size: .9rem; }
+.chart-data summary { cursor: pointer; color: var(--accent); padding: .25rem 0; }
+.chart-data-scroll { max-height: 22rem; overflow: auto; }
+.chart-data-scroll table.data th[scope=row] { position: static; background: none; font-weight: 400; }
