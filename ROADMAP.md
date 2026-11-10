@@ -58,7 +58,7 @@ Dataset: Motor Vehicle Crashes – Case / Individual / Vehicle Information (DMV)
 Dataset: Local Area Unemployment Statistics: Beginning 1976 (DOL)
 
 - [x] 4.1 Fetch the data and build county and metro-area series.
-- [ ] 4.2 Build the page: a county small-multiples chart, the 2020 shock and recovery, and a regional comparison.
+- [x] 4.2 Build the page: a county small-multiples chart, the 2020 shock and recovery, and a regional comparison.
 - [ ] 4.3 Write up a "recovery" storyline: which regions bounced back fastest.
 
 ## Milestone 5 — Optimistic: The Subway Comeback (nights 17–19)

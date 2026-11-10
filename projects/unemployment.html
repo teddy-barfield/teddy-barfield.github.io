@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unemployment across New York — Teddy Barfield</title>
+  <meta name="description" content="How the 2020 shock hit unemployment in every New York county, metro area and region, and how fast each recovered, from NYS Department of Labor data.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../assets/css/projects.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" integrity="sha512-CQBWl4fJHWbryGE+Pc7UAxWMUMNMWzWxF4SQo9CgkJIN1kx6djDQZjh3Y8SZ1d+6I+1zze6Z7kHXO7q3UyZAWw==" crossorigin="anonymous"></script>
+  <script defer src="../assets/js/charts.js"></script>
+  <style>
+    .note{font-size:.875rem;color:var(--muted);margin-top:.5rem}
+    .ctl{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin:1rem 0}
+    .ctl label{font-weight:600}
+    .ctl select{font:inherit;padding:.5rem .75rem;border:1px solid var(--rule);border-radius:6px;background:#fff;color:inherit;max-width:100%}
+    .sm{list-style:none;display:grid;gap:.6rem;grid-template-columns:repeat(auto-fill,minmax(min(100%,9rem),1fr))}
+    .sm li{border:1px solid var(--rule);background:#fff;padding:.4rem .5rem;min-width:0}
+    .sm .nm{display:block;font-size:.8rem;font-weight:600;overflow-wrap:anywhere;line-height:1.2}
+    .sm .st{display:block;font-size:.75rem;color:var(--muted)}
+    .sm svg{display:block;width:100%;height:auto;margin-top:.25rem}
+    .sm .band{fill:#F1E3E0}
+    .sm .ln{fill:none;stroke:var(--c1,#376092);stroke-width:1.5}
+    .sm .ref{stroke:var(--rule);stroke-width:1}
+  </style>
+</head>
+<body>
+
+  <nav aria-label="Main">
+    <div class="wrap">
+      <a href="../index.html">Home</a>
+      <div class="menu">
+        <button class="menu-toggle" aria-expanded="false" aria-controls="projects-menu">Projects</button>
+        <ul class="menu-list" id="projects-menu" hidden>
+          <li class="group">Actuarial</li>
+          <li><a href="../projects/term-life-decoder.html">Life insurance policy decoder</a></li>
+          <li class="group">Data analysis</li>
+          <li><a href="../projects/nyc-causes-of-death.html">NYC leading causes of death</a></li>
+          <li class="group">New York data</li>
+          <li><a href="../projects/ny-data/index.html">New York by the Numbers</a></li>
+          <li class="group">Teaching</li>
+          <li><a href="../projects/math-practice-book.html">Math practice book</a></li>
+        </ul>
+      </div>
+      <a href="../index.html#exams">Exams</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <header>
+    <div class="wrap">
+      <a class="back" href="../index.html">Back to home</a>
+      <h1 style="margin-top:1.5rem">Unemployment across New York</h1>
+      <p class="lede" id="lede">Loading the latest figures from the data files.</p>
+      <p class="meta">Python, Chart.js · Data last pulled <span id="pulled">2026-11-10</span></p>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="wrap">
+        <h2>The question</h2>
+        <div class="prose"><p>In spring 2020 unemployment jumped almost everywhere. How big was the jump in each part of New York, and how long did it take each county, metro area and region to get back to where it was before? Every figure below is computed in your browser from the processed data files, so none is typed in by hand.</p></div>
+        <ul class="stats" id="stats" aria-label="Key figures"></ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap-wide">
+        <h2>The 2020 shock, statewide</h2>
+        <figure class="chart">
+          <div class="chart-box"><canvas id="c-state" role="img" aria-label="Line chart of the monthly unemployment rate for New York State from 2018 to the latest month, with a sharp spike in spring 2020."></canvas></div>
+          <figcaption id="cap-state"></figcaption>
+        </figure>
+        <p class="note">A line chart suits a rate that moves month to month: the spike and the slow descent are the story. The series is not seasonally adjusted, so small seasonal wiggles are normal.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap-wide">
+        <h2>Regional comparison</h2>
+        <p>New York State's Department of Labor groups counties into ten labor market regions. Pick a region to compare its monthly rate with the state.</p>
+        <div class="ctl"><label for="reg">Region</label><select id="reg"></select></div>
+        <figure class="chart">
+          <div class="chart-box"><canvas id="c-reg" role="img" aria-label="Line chart comparing the monthly unemployment rate of the selected region with the state, from 2018."></canvas></div>
+          <figcaption id="cap-reg" aria-live="polite"></figcaption>
+        </figure>
+        <figure class="chart">
+          <div class="chart-box short"><canvas id="c-rec" role="img" aria-label="Horizontal bar chart of months from the 2020 peak until each region's rate was back within one point of the same month in 2019."></canvas></div>
+          <figcaption id="cap-rec"></figcaption>
+        </figure>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Regions table">
+          <table class="data"><caption id="cap-regt"></caption>
+            <thead><tr><th scope="col">Region</th><th scope="col" class="num">Feb 2020</th><th scope="col" class="num">Peak</th><th scope="col" class="num">Jump (pts)</th><th scope="col" class="num">Months to recover</th><th scope="col" class="num" id="th-lat"></th></tr></thead>
+            <tbody id="tb-reg"></tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap-wide">
+        <h2>Every county at a glance</h2>
+        <p>One small chart per county, all on the same vertical scale (0% to <span id="ymax"></span>%) so they can be compared by eye. The shaded band marks the spring 2020 peak window. Sort to see who was hit hardest or recovered last.</p>
+        <div class="ctl"><label for="sort">Sort counties by</label>
+          <select id="sort">
+            <option value="jump">Size of the jump (largest first)</option>
+            <option value="months">Months to recover (longest first)</option>
+            <option value="latest">Latest rate vs. same month of 2019 (highest first)</option>
+            <option value="name">Name (A to Z)</option>
+          </select></div>
+        <ul class="sm" id="sm" aria-label="County small multiples"></ul>
+        <p class="note">Small multiples repeat one simple chart so the eye compares shapes rather than decoding a legend. Each chart shows January 2018 to the latest month; the gap near late 2025 is the month missing from the source.</p>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="County table">
+          <table class="data"><caption id="cap-cty"></caption>
+            <thead><tr>
+              <th scope="col" aria-sort="none"><button type="button" data-k="area">County</button></th>
+              <th scope="col" class="num" aria-sort="none"><button type="button" data-k="feb">Feb 2020</button></th>
+              <th scope="col" class="num" aria-sort="none"><button type="button" data-k="peak">Peak</button></th>
+              <th scope="col" class="num" aria-sort="none"><button type="button" data-k="jump">Jump (pts)</button></th>
+              <th scope="col" class="num" aria-sort="none"><button type="button" data-k="months">Months to recover</button></th>
+              <th scope="col" class="num" aria-sort="none"><button type="button" data-k="vs" id="th-vs"></button></th>
+            </tr></thead>
+            <tbody id="tb-cty"></tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>How to read this, and what it leaves out</h2>
+        <div class="prose">
+          <p id="method"></p>
+          <p>The unemployment rate is the share of the labor force (people working or actively looking for work) who are looking and have no job. It does not count people who stopped looking, so a falling rate can partly reflect people leaving the labor force. County figures are model-based estimates, and small counties are noisier than large ones. A fuller write-up of the recovery storyline is planned as the next step for this project.</p>
+        </div>
+        <aside class="data-source" aria-label="Data source">
+          <dl>
+            <dt>Dataset</dt><dd>Local Area Unemployment Statistics: Beginning 1976</dd>
+            <dt>Agency</dt><dd>New York State Department of Labor</dd>
+            <dt>Link</dt><dd><a href="https://data.ny.gov/d/5hyu-bdh8">https://data.ny.gov/d/5hyu-bdh8</a></dd>
+            <dt>Data pulled</dt><dd id="pulled2">2026-11-10</dd>
+          </dl>
+        </aside>
+        <div class="links">
+          <a href="https://github.com/teddy-barfield/teddy-barfield.github.io/blob/main/scripts/fetch_unemployment.py">View the code</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Teddy Barfield, 2026</div>
+  </footer>
+
+  <script src="../menu.js"></script>
+  <script>
+  window.addEventListener('load', function () {
+    var BASE = '../data/unemployment/';
+    function csv(text) {
+      var rows = [], row = [], f = '', q = false;
+      for (var i = 0; i < text.length; i++) {
+        var c = text[i];
+        if (q) { if (c === '"') { if (text[i+1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+        else if (c === '"') q = true;
+        else if (c === ',') { row.push(f); f = ''; }
+        else if (c === '\n') { row.push(f); rows.push(row); row = []; f = ''; }
+        else if (c !== '\r') f += c;
+      }
+      if (f || row.length) { row.push(f); rows.push(row); }
+      var h = rows.shift();
+      return rows.filter(function (r) { return r.length === h.length; }).map(function (r) { var o = {}; h.forEach(function (k, i) { o[k] = r[i]; }); return o; });
+    }
+    function get(u) { return fetch(BASE + u).then(function (r) { if (!r.ok) throw new Error(u); return r; }); }
+    Promise.all([get('monthly.csv').then(function (r) { return r.text(); }), get('recovery_summary.csv').then(function (r) { return r.text(); }), get('meta.json').then(function (r) { return r.json(); })])
+    .then(function (res) { init(csv(res[0]), csv(res[1]), res[2]); })
+    .catch(function (e) { document.getElementById('lede').textContent = 'The data files could not be loaded (' + e.message + ').'; });
+
+    var MN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function li(p, h) { var e = document.createElement('li'); e.innerHTML = h; p.appendChild(e); }
+    function ym(s) { var p = s.split('-'); return MN[+p[1] - 1] + ' ' + p[0]; }
+    function sgn(x) { return (x > 0 ? '+' : '') + x.toFixed(1); }
+    function rowsInto(id, items) { document.getElementById(id).innerHTML = items.map(function (cells) { return '<tr>' + cells.map(function (c, i) { return '<' + (i === 0 ? 'th scope="row"' : 'td') + (c.n ? ' class="num"' : '') + '>' + c.t + '</' + (i === 0 ? 'th' : 'td') + '>'; }).join('') + '</tr>'; }).join(''); }
+    function T(t) { return { t: esc(t) }; }
+    function N(t) { return { t: String(t), n: 1 }; }
+
+    function init(mon, rec, meta) {
+      document.getElementById('pulled').textContent = meta.pulled;
+      document.getElementById('pulled2').textContent = meta.pulled;
+      // series[area] = {'YYYY-MM': rate}
+      var series = {};
+      mon.forEach(function (r) { var k = r.year + '-' + (+r.month < 10 ? '0' : '') + r.month; (series[r.area] = series[r.area] || {})[k] = +r.rate; });
+      var months = [];
+      for (var y = 2018; ; y++) { for (var m = 1; m <= 12; m++) { var k = y + '-' + (m < 10 ? '0' : '') + m; if (k > meta.latest_month) break; months.push(k); } if (months[months.length - 1] === meta.latest_month) break; }
+      var latestLbl = ym(meta.latest_month), latestMon = MN[+meta.latest_month.slice(5) - 1];
+      var R = {}; rec.forEach(function (r) { R[r.area] = r; });
+      function num(r, k) { return r[k] === '' ? null : +r[k]; }
+      var S = R['New York State'];
+      var vsHdr = latestLbl + ' vs. ' + latestMon + ' 2019 (pts)';
+      document.getElementById('th-lat').textContent = vsHdr;
+      document.getElementById('th-vs').textContent = vsHdr;
+
+      var recoveredBy = S.recovered_month ? ym(S.recovered_month) : null;
+      document.getElementById('lede').textContent = 'New York State unemployment went from ' + S.feb2020_rate + '% in February 2020 to ' + S.peak_rate + '% in ' + ym(S.peak_month) + ', a jump of ' + S.jump_pts + ' points. By ' + latestLbl + ' it was ' + S.latest_rate + '%, ' + sgn(+S.latest_vs_same_month_2019) + ' points ' + (+S.latest_vs_same_month_2019 > 0 ? 'above' : 'below or level with') + ' the same month of 2019.';
+
+      var regs = rec.filter(function (r) { return r.kind === 'region'; });
+      var ctys = rec.filter(function (r) { return r.kind === 'county'; });
+      var fast = ctys.slice().sort(function (a, b) { return +a.months_peak_to_recovery - +b.months_peak_to_recovery; });
+      var slow = ctys.slice().sort(function (a, b) { return +b.months_peak_to_recovery - +a.months_peak_to_recovery; });
+      var jumpMax = ctys.slice().sort(function (a, b) { return +b.jump_pts - +a.jump_pts; })[0];
+      var st = document.getElementById('stats');
+      li(st, '<span class="num">' + S.feb2020_rate + '%</span><span class="lbl">statewide rate, February 2020</span>');
+      li(st, '<span class="num">' + S.peak_rate + '%</span><span class="lbl">statewide peak, ' + ym(S.peak_month) + '</span>');
+      li(st, '<span class="num">' + S.months_peak_to_recovery + ' mo</span><span class="lbl">from peak to within 1 point of 2019, statewide (' + ym(S.recovered_month) + ')</span>');
+      li(st, '<span class="num">' + S.latest_rate + '%</span><span class="lbl">statewide, ' + latestLbl + ' (' + sgn(+S.latest_vs_same_month_2019) + ' pts vs. ' + latestMon + ' 2019)</span>');
+      li(st, '<span class="num">' + jumpMax.jump_pts + ' pts</span><span class="lbl">largest county jump: ' + esc(jumpMax.area) + '</span>');
+      li(st, '<span class="num">' + fast[0].months_peak_to_recovery + '–' + slow[0].months_peak_to_recovery + ' mo</span><span class="lbl">range of county recovery times</span>');
+
+      function vals(a) { return months.map(function (k) { var v = series[a][k]; return v === undefined ? null : v; }); }
+      var labels = months.map(ym);
+      // chart 1
+      NYCharts.line(document.getElementById('c-state'), labels, [{ label: 'New York State', data: vals('New York State'), pointRadius: 0, spanGaps: false }], { yTitle: 'Unemployment rate (%)' });
+      document.getElementById('cap-state').textContent = 'Monthly statewide rate, January 2018 to ' + latestLbl + '. It rose from ' + S.feb2020_rate + '% in February 2020 to ' + S.peak_rate + '% in ' + ym(S.peak_month) + '.' + (meta.missing_months_statewide.length ? ' ' + meta.missing_months_statewide.map(ym).join(', ') + ' is missing from the source, so the line has a gap there.' : '');
+
+      // chart 2: region vs state
+      var sel = document.getElementById('reg');
+      regs.sort(function (a, b) { return a.area < b.area ? -1 : 1; });
+      sel.innerHTML = regs.map(function (r) { return '<option value="' + esc(r.area) + '">' + esc(r.area) + '</option>'; }).join('');
+      var rc = NYCharts.line(document.getElementById('c-reg'), labels, [{ label: 'x', data: [] }, { label: 'New York State', data: vals('New York State'), pointRadius: 0, borderDash: [5, 4], color: '#7A6A55' }], { yTitle: 'Unemployment rate (%)' });
+      function drawReg() {
+        var a = sel.value, r = R[a];
+        rc.data.datasets[0].label = a; rc.data.datasets[0].data = vals(a); rc.data.datasets[0].pointRadius = 0;
+        rc.data.datasets[0].borderColor = rc.data.datasets[0].backgroundColor = NYCharts.palette[0];
+        rc.update();
+        document.getElementById('cap-reg').textContent = a + ': ' + r.feb2020_rate + '% in February 2020, peak ' + r.peak_rate + '% in ' + ym(r.peak_month) + ', ' + r.latest_rate + '% in ' + latestLbl + '. Statewide: ' + S.feb2020_rate + '%, ' + S.peak_rate + '%, ' + S.latest_rate + '%.';
+      }
+      sel.addEventListener('change', drawReg);
+      sel.value = 'New York City'; if (sel.value !== 'New York City') sel.selectedIndex = 0;
+      drawReg();
+
+      // chart 3: months to recover by region
+      var rr = regs.slice().sort(function (a, b) { return +b.months_peak_to_recovery - +a.months_peak_to_recovery; });
+      NYCharts.bar(document.getElementById('c-rec'), rr.map(function (r) { return r.area; }), [{ label: 'Months from peak to recovery', data: rr.map(function (r) { return +r.months_peak_to_recovery; }) }], { horizontal: true, xTitle: 'Months from peak until within 1 point of the same month in 2019' });
+      document.getElementById('cap-rec').textContent = 'Longer bars mean a slower return. ' + rr[0].area + ' took ' + rr[0].months_peak_to_recovery + ' months; ' + rr[rr.length - 1].area + ' took ' + rr[rr.length - 1].months_peak_to_recovery + '.';
+      document.getElementById('cap-regt').textContent = 'Ten labor market regions, ordered by months to recover';
+      rowsInto('tb-reg', rr.map(function (r) { return [T(r.area), N(r.feb2020_rate + '%'), N(r.peak_rate + '%'), N(r.jump_pts), N(r.months_peak_to_recovery), N(sgn(+r.latest_vs_same_month_2019))]; }));
+
+      // small multiples
+      var ymax = Math.ceil(Math.max.apply(null, ctys.map(function (r) { return +r.peak_rate; })) / 5) * 5;
+      document.getElementById('ymax').textContent = ymax;
+      var W = 120, H = 60, n = months.length;
+      var iPeakA = months.indexOf('2020-03'), iPeakB = months.indexOf('2020-06');
+      function spark(a) {
+        var d = '', pen = false;
+        months.forEach(function (k, i) { var v = series[a][k]; if (v === undefined) { pen = false; return; } d += (pen ? 'L' : 'M') + (i / (n - 1) * W).toFixed(1) + ' ' + (H - v / ymax * H).toFixed(1); pen = true; });
+        var bx = iPeakA / (n - 1) * W, bw = (iPeakB - iPeakA) / (n - 1) * W;
+        return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(a) + ' monthly unemployment rate, 2018 to ' + latestLbl + '"><rect class="band" x="' + bx.toFixed(1) + '" y="0" width="' + bw.toFixed(1) + '" height="' + H + '"/><line class="ref" x1="0" y1="' + H + '" x2="' + W + '" y2="' + H + '"/><path class="ln" d="' + d + '"/></svg>';
+      }
+      var FLD = { jump: 'jump_pts', months: 'months_peak_to_recovery', latest: 'latest_vs_same_month_2019' };
+      function drawSm() {
+        var k = document.getElementById('sort').value, list = ctys.slice();
+        if (k === 'name') list.sort(function (a, b) { return a.area < b.area ? -1 : 1; });
+        else list.sort(function (a, b) { return (+b[FLD[k]]) - (+a[FLD[k]]) || (a.area < b.area ? -1 : 1); });
+        document.getElementById('sm').innerHTML = list.map(function (r) {
+          return '<li><span class="nm">' + esc(r.area.replace(' County', '')) + '</span><span class="st">peak ' + r.peak_rate + '% · ' + r.months_peak_to_recovery + ' mo</span>' + spark(r.area) + '</li>';
+        }).join('');
+      }
+      document.getElementById('sort').addEventListener('change', drawSm);
+      drawSm();
+
+      // county table, sortable
+      var rows = ctys.map(function (r) { return { area: r.area, feb: +r.feb2020_rate, peak: +r.peak_rate, jump: +r.jump_pts, months: +r.months_peak_to_recovery, vs: +r.latest_vs_same_month_2019 }; });
+      var cur = { k: 'jump', dir: -1 };
+      function drawT() {
+        rows.sort(function (a, b) { var x = a[cur.k], y = b[cur.k]; return (x < y ? -1 : x > y ? 1 : 0) * cur.dir; });
+        rowsInto('tb-cty', rows.map(function (r) { return [T(r.area), N(r.feb + '%'), N(r.peak + '%'), N(r.jump.toFixed(1)), N(r.months), N(sgn(r.vs))]; }));
+        document.querySelectorAll('th[aria-sort]').forEach(function (th) { var b = th.querySelector('button'); th.setAttribute('aria-sort', b && b.dataset.k === cur.k ? (cur.dir > 0 ? 'ascending' : 'descending') : 'none'); });
+        document.getElementById('cap-cty').textContent = 'All ' + rows.length + ' counties. Click a column heading to sort.';
+      }
+      document.querySelectorAll('button[data-k]').forEach(function (b) { b.addEventListener('click', function () { var k = b.dataset.k; cur = { k: k, dir: cur.k === k ? -cur.dir : (k === 'area' ? 1 : -1) }; drawT(); }); });
+      drawT();
+
+      document.getElementById('method').textContent = 'The data are monthly estimates for the state, ' + ctys.length + ' counties and ' + regs.length + ' labor market regions from the Local Area Unemployment Statistics program. Because the series is not seasonally adjusted, each month is compared with the same calendar month of 2019 rather than with the month before. "Recovered" means the first month after the 2020 peak when the rate was within ' + meta.recovery_tolerance_pts.toFixed(1) + ' point of that same month in 2019. That one-point tolerance is a choice made for this page; a stricter or looser line would change the recovery times. "Months to recover" counts from the peak month, not from the start of the shock. The region called New York City is separate from the New York City Metro Area, which is a different grouping and is not shown here.';
+    }
+  });
+  </script>
+</body>
+</html>
