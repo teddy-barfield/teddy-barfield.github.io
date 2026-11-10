@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>New York by the Numbers — Teddy Barfield</title>
+  <meta name="description" content="A hub for data projects built on New York State open data: insurance complaints, state parks, traffic crashes, unemployment and subway ridership.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../../assets/css/projects.css">
+</head>
+<body>
+
+  <nav aria-label="Main">
+    <div class="wrap">
+      <a href="../../index.html">Home</a>
+      <div class="menu">
+        <button class="menu-toggle" aria-expanded="false" aria-controls="projects-menu">Projects</button>
+        <ul class="menu-list" id="projects-menu" hidden>
+          <li class="group">Actuarial</li>
+          <li><a href="../../projects/term-life-decoder.html">Life insurance policy decoder</a></li>
+          <li class="group">Data analysis</li>
+          <li><a href="../../projects/nyc-causes-of-death.html">NYC leading causes of death</a></li>
+          <li class="group">New York data</li>
+          <li><a href="../../projects/ny-data/index.html">New York by the Numbers</a></li>
+          <li class="group">Teaching</li>
+          <li><a href="../../projects/math-practice-book.html">Math practice book</a></li>
+        </ul>
+      </div>
+      <a href="../../index.html#exams">Exams</a>
+      <a href="../../index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <header>
+    <div class="wrap">
+      <a class="back" href="../../index.html">Back to home</a>
+      <h1 style="margin-top:1.5rem">New York by the Numbers</h1>
+      <p class="lede">Projects that look at New York State open data with an actuarial eye: what is measured, how it is normalized, and what the numbers can and cannot say.</p>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="wrap-wide">
+        <h2>Projects</h2>
+        <ul class="cards">
+          <li class="card">
+            <span class="tag">Available now · Public health</span>
+            <h3>NYC leading causes of death</h3>
+            <p>An interactive dashboard of death counts and rates by cause, sex and race/ethnicity, from NYC Department of Health and Mental Hygiene data.</p>
+            <a class="card-link" href="../nyc-causes-of-death.html">Open the project</a>
+          </li>
+          <li class="card">
+            <span class="tag">Coming soon · Insurance</span>
+            <h3>Auto insurer complaint rankings</h3>
+            <p>Which auto insurers draw the most complaints relative to their size? Based on the NY Department of Financial Services complaint rankings.</p>
+          </li>
+          <li class="card">
+            <span class="tag">Coming soon · Fun</span>
+            <h3>State parks attendance</h3>
+            <p>How many visits do New York State parks get, which parks are growing, and which are worth discovering? Based on NYS Parks (OPRHP) attendance figures.</p>
+          </li>
+          <li class="card">
+            <span class="tag">Coming soon · Transportation and safety</span>
+            <h3>Motor vehicle crashes</h3>
+            <p>Crash frequency versus severity by county, hour and conditions. Based on NYS DMV crash records.</p>
+          </li>
+          <li class="card">
+            <span class="tag">Coming soon · Labor and economy</span>
+            <h3>Unemployment across New York</h3>
+            <p>County and metro-area unemployment, the 2020 shock and which regions recovered fastest. Based on NYS Department of Labor data.</p>
+          </li>
+          <li class="card">
+            <span class="tag">Coming soon · Transit</span>
+            <h3>The subway comeback</h3>
+            <p>Ridership recovery by mode compared with pre-pandemic levels. Based on MTA daily ridership data.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>How these projects are built</h2>
+        <div class="prose">
+          <p>Each project pulls a public dataset from <a href="https://data.ny.gov">data.ny.gov</a>, summarizes it with a reproducible Python script, and draws the charts from small processed data files. Every project page states the dataset, the agency that publishes it, a link and the date the data was pulled.</p>
+          <p>Write-ups stay analytical: they explain what a measure means, how it was normalized, and where it can mislead.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Teddy Barfield, 2026</div>
+  </footer>
+
+  <script src="../../menu.js"></script>
+</body>
+</html>

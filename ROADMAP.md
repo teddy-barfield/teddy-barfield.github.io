@@ -26,7 +26,7 @@ For the scheduled agent: this file is the source of truth. Each night, do the fi
 
 - [x] 0.1 Audit: Inventory the existing site (pages, styles, nav, projects). Write `docs/site-audit.md`. Create `LOG.md`. Don't restyle anything yet.
 - [x] 0.2 Shared kit: Create `assets/css/projects.css`, a project-page template (`projects/_template.html`) and a chart setup (Chart.js from cdnjs, one consistent palette). Keep the existing site's look.
-- [ ] 0.3 Hub page: Create `projects/ny-data/index.html`, a "New York by the Numbers" hub with project cards. Link it from the homepage nav. The nav is duplicated in every page, so this task may also edit the nav block (and only the nav block) of the existing project pages to keep it consistent.
+- [x] 0.3 Hub page: Create `projects/ny-data/index.html`, a "New York by the Numbers" hub with project cards. Link it from the homepage nav. The nav is duplicated in every page, so this task may also edit the nav block (and only the nav block) of the existing project pages to keep it consistent.
 
 ## Milestone 1 — Insurance: Auto Insurer Complaint Rankings (nights 4–6)
 
