@@ -1,0 +1,995 @@
+year,county,severity,crashes
+2021,ALBANY,Fatal Accident,19
+2022,ALBANY,Fatal Accident,22
+2023,ALBANY,Fatal Accident,25
+2024,ALBANY,Fatal Accident,16
+2021,ALBANY,Injury Accident,237
+2022,ALBANY,Injury Accident,261
+2023,ALBANY,Injury Accident,273
+2024,ALBANY,Injury Accident,257
+2021,ALBANY,Property Damage & Injury Accident,1541
+2022,ALBANY,Property Damage & Injury Accident,1604
+2023,ALBANY,Property Damage & Injury Accident,1590
+2024,ALBANY,Property Damage & Injury Accident,1691
+2021,ALBANY,Property Damage Accident,7035
+2022,ALBANY,Property Damage Accident,7813
+2023,ALBANY,Property Damage Accident,7420
+2024,ALBANY,Property Damage Accident,7599
+2021,ALLEGANY,Fatal Accident,7
+2022,ALLEGANY,Fatal Accident,3
+2023,ALLEGANY,Fatal Accident,6
+2024,ALLEGANY,Fatal Accident,5
+2021,ALLEGANY,Injury Accident,17
+2022,ALLEGANY,Injury Accident,6
+2023,ALLEGANY,Injury Accident,6
+2024,ALLEGANY,Injury Accident,9
+2021,ALLEGANY,Property Damage & Injury Accident,123
+2022,ALLEGANY,Property Damage & Injury Accident,144
+2023,ALLEGANY,Property Damage & Injury Accident,146
+2024,ALLEGANY,Property Damage & Injury Accident,145
+2021,ALLEGANY,Property Damage Accident,948
+2022,ALLEGANY,Property Damage Accident,999
+2023,ALLEGANY,Property Damage Accident,903
+2024,ALLEGANY,Property Damage Accident,899
+2021,BRONX,Fatal Accident,45
+2022,BRONX,Fatal Accident,50
+2023,BRONX,Fatal Accident,44
+2024,BRONX,Fatal Accident,47
+2021,BRONX,Injury Accident,4628
+2022,BRONX,Injury Accident,4789
+2023,BRONX,Injury Accident,5103
+2024,BRONX,Injury Accident,5509
+2021,BRONX,Property Damage & Injury Accident,4296
+2022,BRONX,Property Damage & Injury Accident,4264
+2023,BRONX,Property Damage & Injury Accident,3986
+2024,BRONX,Property Damage & Injury Accident,3720
+2021,BRONX,Property Damage Accident,8378
+2022,BRONX,Property Damage Accident,7715
+2023,BRONX,Property Damage Accident,6493
+2024,BRONX,Property Damage Accident,5457
+2021,BROOME,Fatal Accident,20
+2022,BROOME,Fatal Accident,12
+2023,BROOME,Fatal Accident,6
+2024,BROOME,Fatal Accident,8
+2021,BROOME,Injury Accident,99
+2022,BROOME,Injury Accident,92
+2023,BROOME,Injury Accident,92
+2024,BROOME,Injury Accident,97
+2021,BROOME,Property Damage & Injury Accident,654
+2022,BROOME,Property Damage & Injury Accident,757
+2023,BROOME,Property Damage & Injury Accident,728
+2024,BROOME,Property Damage & Injury Accident,775
+2021,BROOME,Property Damage Accident,4038
+2022,BROOME,Property Damage Accident,4550
+2023,BROOME,Property Damage Accident,4181
+2024,BROOME,Property Damage Accident,4368
+2021,CATTARAUGUS,Fatal Accident,3
+2022,CATTARAUGUS,Fatal Accident,11
+2023,CATTARAUGUS,Fatal Accident,7
+2024,CATTARAUGUS,Fatal Accident,7
+2021,CATTARAUGUS,Injury Accident,27
+2022,CATTARAUGUS,Injury Accident,23
+2023,CATTARAUGUS,Injury Accident,13
+2024,CATTARAUGUS,Injury Accident,24
+2021,CATTARAUGUS,Property Damage & Injury Accident,279
+2022,CATTARAUGUS,Property Damage & Injury Accident,290
+2023,CATTARAUGUS,Property Damage & Injury Accident,282
+2024,CATTARAUGUS,Property Damage & Injury Accident,296
+2021,CATTARAUGUS,Property Damage Accident,1541
+2022,CATTARAUGUS,Property Damage Accident,1577
+2023,CATTARAUGUS,Property Damage Accident,1335
+2024,CATTARAUGUS,Property Damage Accident,1521
+2021,CAYUGA,Fatal Accident,6
+2022,CAYUGA,Fatal Accident,6
+2023,CAYUGA,Fatal Accident,1
+2024,CAYUGA,Fatal Accident,8
+2021,CAYUGA,Injury Accident,28
+2022,CAYUGA,Injury Accident,27
+2023,CAYUGA,Injury Accident,38
+2024,CAYUGA,Injury Accident,20
+2021,CAYUGA,Property Damage & Injury Accident,288
+2022,CAYUGA,Property Damage & Injury Accident,284
+2023,CAYUGA,Property Damage & Injury Accident,238
+2024,CAYUGA,Property Damage & Injury Accident,285
+2021,CAYUGA,Property Damage Accident,1580
+2022,CAYUGA,Property Damage Accident,1737
+2023,CAYUGA,Property Damage Accident,1598
+2024,CAYUGA,Property Damage Accident,1611
+2021,CHAUTAUQUA,Fatal Accident,11
+2022,CHAUTAUQUA,Fatal Accident,9
+2023,CHAUTAUQUA,Fatal Accident,15
+2024,CHAUTAUQUA,Fatal Accident,11
+2021,CHAUTAUQUA,Injury Accident,42
+2022,CHAUTAUQUA,Injury Accident,56
+2023,CHAUTAUQUA,Injury Accident,48
+2024,CHAUTAUQUA,Injury Accident,40
+2021,CHAUTAUQUA,Property Damage & Injury Accident,491
+2022,CHAUTAUQUA,Property Damage & Injury Accident,507
+2023,CHAUTAUQUA,Property Damage & Injury Accident,499
+2024,CHAUTAUQUA,Property Damage & Injury Accident,499
+2021,CHAUTAUQUA,Property Damage Accident,2242
+2022,CHAUTAUQUA,Property Damage Accident,2462
+2023,CHAUTAUQUA,Property Damage Accident,2221
+2024,CHAUTAUQUA,Property Damage Accident,2186
+2021,CHEMUNG,Fatal Accident,12
+2022,CHEMUNG,Fatal Accident,3
+2023,CHEMUNG,Fatal Accident,8
+2024,CHEMUNG,Fatal Accident,7
+2021,CHEMUNG,Injury Accident,28
+2022,CHEMUNG,Injury Accident,25
+2023,CHEMUNG,Injury Accident,25
+2024,CHEMUNG,Injury Accident,25
+2021,CHEMUNG,Property Damage & Injury Accident,243
+2022,CHEMUNG,Property Damage & Injury Accident,277
+2023,CHEMUNG,Property Damage & Injury Accident,253
+2024,CHEMUNG,Property Damage & Injury Accident,265
+2021,CHEMUNG,Property Damage Accident,1619
+2022,CHEMUNG,Property Damage Accident,1854
+2023,CHEMUNG,Property Damage Accident,1646
+2024,CHEMUNG,Property Damage Accident,1761
+2021,CHENANGO,Fatal Accident,3
+2022,CHENANGO,Fatal Accident,8
+2023,CHENANGO,Fatal Accident,4
+2024,CHENANGO,Fatal Accident,5
+2021,CHENANGO,Injury Accident,6
+2022,CHENANGO,Injury Accident,6
+2023,CHENANGO,Injury Accident,14
+2024,CHENANGO,Injury Accident,5
+2021,CHENANGO,Property Damage & Injury Accident,152
+2022,CHENANGO,Property Damage & Injury Accident,153
+2023,CHENANGO,Property Damage & Injury Accident,130
+2024,CHENANGO,Property Damage & Injury Accident,192
+2021,CHENANGO,Property Damage Accident,1047
+2022,CHENANGO,Property Damage Accident,1224
+2023,CHENANGO,Property Damage Accident,1099
+2024,CHENANGO,Property Damage Accident,1229
+2021,CLINTON,Fatal Accident,6
+2022,CLINTON,Fatal Accident,5
+2023,CLINTON,Fatal Accident,5
+2024,CLINTON,Fatal Accident,5
+2021,CLINTON,Injury Accident,16
+2022,CLINTON,Injury Accident,13
+2023,CLINTON,Injury Accident,21
+2024,CLINTON,Injury Accident,17
+2021,CLINTON,Property Damage & Injury Accident,217
+2022,CLINTON,Property Damage & Injury Accident,213
+2023,CLINTON,Property Damage & Injury Accident,222
+2024,CLINTON,Property Damage & Injury Accident,218
+2021,CLINTON,Property Damage Accident,1558
+2022,CLINTON,Property Damage Accident,1736
+2023,CLINTON,Property Damage Accident,1710
+2024,CLINTON,Property Damage Accident,1734
+2021,COLUMBIA,Fatal Accident,6
+2022,COLUMBIA,Fatal Accident,6
+2023,COLUMBIA,Fatal Accident,14
+2024,COLUMBIA,Fatal Accident,5
+2021,COLUMBIA,Injury Accident,15
+2022,COLUMBIA,Injury Accident,18
+2023,COLUMBIA,Injury Accident,19
+2024,COLUMBIA,Injury Accident,11
+2021,COLUMBIA,Property Damage & Injury Accident,251
+2022,COLUMBIA,Property Damage & Injury Accident,255
+2023,COLUMBIA,Property Damage & Injury Accident,241
+2024,COLUMBIA,Property Damage & Injury Accident,270
+2021,COLUMBIA,Property Damage Accident,1561
+2022,COLUMBIA,Property Damage Accident,1716
+2023,COLUMBIA,Property Damage Accident,1443
+2024,COLUMBIA,Property Damage Accident,1439
+2021,CORTLAND,Fatal Accident,5
+2022,CORTLAND,Fatal Accident,7
+2023,CORTLAND,Fatal Accident,5
+2024,CORTLAND,Fatal Accident,4
+2021,CORTLAND,Injury Accident,16
+2022,CORTLAND,Injury Accident,17
+2023,CORTLAND,Injury Accident,13
+2024,CORTLAND,Injury Accident,14
+2021,CORTLAND,Property Damage & Injury Accident,212
+2022,CORTLAND,Property Damage & Injury Accident,201
+2023,CORTLAND,Property Damage & Injury Accident,198
+2024,CORTLAND,Property Damage & Injury Accident,194
+2021,CORTLAND,Property Damage Accident,1292
+2022,CORTLAND,Property Damage Accident,1387
+2023,CORTLAND,Property Damage Accident,1149
+2024,CORTLAND,Property Damage Accident,1231
+2021,DELAWARE,Fatal Accident,2
+2022,DELAWARE,Fatal Accident,10
+2023,DELAWARE,Fatal Accident,5
+2024,DELAWARE,Fatal Accident,11
+2021,DELAWARE,Injury Accident,13
+2022,DELAWARE,Injury Accident,14
+2023,DELAWARE,Injury Accident,3
+2024,DELAWARE,Injury Accident,9
+2021,DELAWARE,Property Damage & Injury Accident,167
+2022,DELAWARE,Property Damage & Injury Accident,208
+2023,DELAWARE,Property Damage & Injury Accident,184
+2024,DELAWARE,Property Damage & Injury Accident,185
+2021,DELAWARE,Property Damage Accident,1008
+2022,DELAWARE,Property Damage Accident,1095
+2023,DELAWARE,Property Damage Accident,1081
+2024,DELAWARE,Property Damage Accident,1166
+2021,DUTCHESS,Fatal Accident,20
+2022,DUTCHESS,Fatal Accident,24
+2023,DUTCHESS,Fatal Accident,26
+2024,DUTCHESS,Fatal Accident,33
+2021,DUTCHESS,Injury Accident,159
+2022,DUTCHESS,Injury Accident,112
+2023,DUTCHESS,Injury Accident,120
+2024,DUTCHESS,Injury Accident,152
+2021,DUTCHESS,Property Damage & Injury Accident,1357
+2022,DUTCHESS,Property Damage & Injury Accident,1478
+2023,DUTCHESS,Property Damage & Injury Accident,1442
+2024,DUTCHESS,Property Damage & Injury Accident,1499
+2021,DUTCHESS,Property Damage Accident,5347
+2022,DUTCHESS,Property Damage Accident,6074
+2023,DUTCHESS,Property Damage Accident,5710
+2024,DUTCHESS,Property Damage Accident,5940
+2021,ERIE,Fatal Accident,61
+2022,ERIE,Fatal Accident,52
+2023,ERIE,Fatal Accident,55
+2024,ERIE,Fatal Accident,55
+2021,ERIE,Injury Accident,741
+2022,ERIE,Injury Accident,808
+2023,ERIE,Injury Accident,846
+2024,ERIE,Injury Accident,767
+2021,ERIE,Property Damage & Injury Accident,5207
+2022,ERIE,Property Damage & Injury Accident,4899
+2023,ERIE,Property Damage & Injury Accident,4914
+2024,ERIE,Property Damage & Injury Accident,4869
+2021,ERIE,Property Damage Accident,14100
+2022,ERIE,Property Damage Accident,14227
+2023,ERIE,Property Damage Accident,13335
+2024,ERIE,Property Damage Accident,14044
+2021,ESSEX,Fatal Accident,2
+2022,ESSEX,Fatal Accident,2
+2023,ESSEX,Fatal Accident,6
+2024,ESSEX,Fatal Accident,6
+2021,ESSEX,Injury Accident,5
+2022,ESSEX,Injury Accident,10
+2023,ESSEX,Injury Accident,10
+2024,ESSEX,Injury Accident,11
+2021,ESSEX,Property Damage & Injury Accident,136
+2022,ESSEX,Property Damage & Injury Accident,138
+2023,ESSEX,Property Damage & Injury Accident,130
+2024,ESSEX,Property Damage & Injury Accident,139
+2021,ESSEX,Property Damage Accident,812
+2022,ESSEX,Property Damage Accident,1035
+2023,ESSEX,Property Damage Accident,971
+2024,ESSEX,Property Damage Accident,875
+2021,FRANKLIN,Fatal Accident,9
+2022,FRANKLIN,Fatal Accident,7
+2023,FRANKLIN,Fatal Accident,2
+2024,FRANKLIN,Fatal Accident,3
+2021,FRANKLIN,Injury Accident,9
+2022,FRANKLIN,Injury Accident,4
+2023,FRANKLIN,Injury Accident,9
+2024,FRANKLIN,Injury Accident,5
+2021,FRANKLIN,Property Damage & Injury Accident,138
+2022,FRANKLIN,Property Damage & Injury Accident,155
+2023,FRANKLIN,Property Damage & Injury Accident,140
+2024,FRANKLIN,Property Damage & Injury Accident,158
+2021,FRANKLIN,Property Damage Accident,1107
+2022,FRANKLIN,Property Damage Accident,1325
+2023,FRANKLIN,Property Damage Accident,1321
+2024,FRANKLIN,Property Damage Accident,1234
+2021,FULTON,Fatal Accident,3
+2022,FULTON,Fatal Accident,2
+2023,FULTON,Fatal Accident,5
+2024,FULTON,Fatal Accident,8
+2021,FULTON,Injury Accident,11
+2022,FULTON,Injury Accident,19
+2023,FULTON,Injury Accident,28
+2024,FULTON,Injury Accident,20
+2021,FULTON,Property Damage & Injury Accident,189
+2022,FULTON,Property Damage & Injury Accident,150
+2023,FULTON,Property Damage & Injury Accident,189
+2024,FULTON,Property Damage & Injury Accident,195
+2021,FULTON,Property Damage Accident,1073
+2022,FULTON,Property Damage Accident,1165
+2023,FULTON,Property Damage Accident,1143
+2024,FULTON,Property Damage Accident,1147
+2021,GENESEE,Fatal Accident,5
+2022,GENESEE,Fatal Accident,10
+2023,GENESEE,Fatal Accident,8
+2024,GENESEE,Fatal Accident,3
+2021,GENESEE,Injury Accident,37
+2022,GENESEE,Injury Accident,28
+2023,GENESEE,Injury Accident,30
+2024,GENESEE,Injury Accident,27
+2021,GENESEE,Property Damage & Injury Accident,255
+2022,GENESEE,Property Damage & Injury Accident,306
+2023,GENESEE,Property Damage & Injury Accident,316
+2024,GENESEE,Property Damage & Injury Accident,275
+2021,GENESEE,Property Damage Accident,1686
+2022,GENESEE,Property Damage Accident,1829
+2023,GENESEE,Property Damage Accident,1781
+2024,GENESEE,Property Damage Accident,1759
+2021,GREENE,Fatal Accident,8
+2022,GREENE,Fatal Accident,9
+2023,GREENE,Fatal Accident,3
+2024,GREENE,Fatal Accident,8
+2021,GREENE,Injury Accident,11
+2022,GREENE,Injury Accident,11
+2023,GREENE,Injury Accident,9
+2024,GREENE,Injury Accident,11
+2021,GREENE,Property Damage & Injury Accident,196
+2022,GREENE,Property Damage & Injury Accident,225
+2023,GREENE,Property Damage & Injury Accident,220
+2024,GREENE,Property Damage & Injury Accident,237
+2021,GREENE,Property Damage Accident,1310
+2022,GREENE,Property Damage Accident,1480
+2023,GREENE,Property Damage Accident,1187
+2024,GREENE,Property Damage Accident,1305
+2021,HAMILTON,Fatal Accident,2
+2022,HAMILTON,Fatal Accident,2
+2024,HAMILTON,Fatal Accident,1
+2022,HAMILTON,Injury Accident,1
+2023,HAMILTON,Injury Accident,1
+2024,HAMILTON,Injury Accident,1
+2021,HAMILTON,Property Damage & Injury Accident,24
+2022,HAMILTON,Property Damage & Injury Accident,22
+2023,HAMILTON,Property Damage & Injury Accident,22
+2024,HAMILTON,Property Damage & Injury Accident,24
+2021,HAMILTON,Property Damage Accident,202
+2022,HAMILTON,Property Damage Accident,202
+2023,HAMILTON,Property Damage Accident,193
+2024,HAMILTON,Property Damage Accident,190
+2021,HERKIMER,Fatal Accident,1
+2022,HERKIMER,Fatal Accident,5
+2023,HERKIMER,Fatal Accident,4
+2024,HERKIMER,Fatal Accident,9
+2021,HERKIMER,Injury Accident,13
+2022,HERKIMER,Injury Accident,11
+2023,HERKIMER,Injury Accident,15
+2024,HERKIMER,Injury Accident,12
+2021,HERKIMER,Property Damage & Injury Accident,148
+2022,HERKIMER,Property Damage & Injury Accident,181
+2023,HERKIMER,Property Damage & Injury Accident,172
+2024,HERKIMER,Property Damage & Injury Accident,198
+2021,HERKIMER,Property Damage Accident,1183
+2022,HERKIMER,Property Damage Accident,1263
+2023,HERKIMER,Property Damage Accident,1109
+2024,HERKIMER,Property Damage Accident,1322
+2021,JEFFERSON,Fatal Accident,8
+2022,JEFFERSON,Fatal Accident,16
+2023,JEFFERSON,Fatal Accident,10
+2024,JEFFERSON,Fatal Accident,7
+2021,JEFFERSON,Injury Accident,24
+2022,JEFFERSON,Injury Accident,25
+2023,JEFFERSON,Injury Accident,19
+2024,JEFFERSON,Injury Accident,24
+2021,JEFFERSON,Property Damage & Injury Accident,342
+2022,JEFFERSON,Property Damage & Injury Accident,370
+2023,JEFFERSON,Property Damage & Injury Accident,387
+2024,JEFFERSON,Property Damage & Injury Accident,345
+2021,JEFFERSON,Property Damage Accident,2986
+2022,JEFFERSON,Property Damage Accident,3071
+2023,JEFFERSON,Property Damage Accident,2879
+2024,JEFFERSON,Property Damage Accident,3054
+2021,KINGS,Fatal Accident,79
+2022,KINGS,Fatal Accident,69
+2023,KINGS,Fatal Accident,58
+2024,KINGS,Fatal Accident,64
+2021,KINGS,Injury Accident,8244
+2022,KINGS,Injury Accident,9144
+2023,KINGS,Injury Accident,9982
+2024,KINGS,Injury Accident,10174
+2021,KINGS,Property Damage & Injury Accident,7024
+2022,KINGS,Property Damage & Injury Accident,6668
+2023,KINGS,Property Damage & Injury Accident,6611
+2024,KINGS,Property Damage & Injury Accident,6246
+2021,KINGS,Property Damage Accident,14945
+2022,KINGS,Property Damage Accident,13653
+2023,KINGS,Property Damage Accident,12328
+2024,KINGS,Property Damage Accident,10631
+2021,LEWIS,Fatal Accident,3
+2022,LEWIS,Fatal Accident,5
+2023,LEWIS,Fatal Accident,1
+2024,LEWIS,Fatal Accident,2
+2021,LEWIS,Injury Accident,3
+2022,LEWIS,Injury Accident,5
+2023,LEWIS,Injury Accident,4
+2024,LEWIS,Injury Accident,2
+2021,LEWIS,Property Damage & Injury Accident,75
+2022,LEWIS,Property Damage & Injury Accident,79
+2023,LEWIS,Property Damage & Injury Accident,70
+2024,LEWIS,Property Damage & Injury Accident,91
+2021,LEWIS,Property Damage Accident,703
+2022,LEWIS,Property Damage Accident,893
+2023,LEWIS,Property Damage Accident,842
+2024,LEWIS,Property Damage Accident,809
+2021,LIVINGSTON,Fatal Accident,5
+2022,LIVINGSTON,Fatal Accident,4
+2023,LIVINGSTON,Fatal Accident,7
+2024,LIVINGSTON,Fatal Accident,6
+2021,LIVINGSTON,Injury Accident,8
+2022,LIVINGSTON,Injury Accident,14
+2023,LIVINGSTON,Injury Accident,12
+2024,LIVINGSTON,Injury Accident,5
+2021,LIVINGSTON,Property Damage & Injury Accident,208
+2022,LIVINGSTON,Property Damage & Injury Accident,211
+2023,LIVINGSTON,Property Damage & Injury Accident,195
+2024,LIVINGSTON,Property Damage & Injury Accident,218
+2021,LIVINGSTON,Property Damage Accident,1600
+2022,LIVINGSTON,Property Damage Accident,1639
+2023,LIVINGSTON,Property Damage Accident,1575
+2024,LIVINGSTON,Property Damage Accident,1616
+2021,MADISON,Fatal Accident,7
+2022,MADISON,Fatal Accident,10
+2023,MADISON,Fatal Accident,6
+2024,MADISON,Fatal Accident,9
+2021,MADISON,Injury Accident,15
+2022,MADISON,Injury Accident,23
+2023,MADISON,Injury Accident,24
+2024,MADISON,Injury Accident,9
+2021,MADISON,Property Damage & Injury Accident,195
+2022,MADISON,Property Damage & Injury Accident,211
+2023,MADISON,Property Damage & Injury Accident,254
+2024,MADISON,Property Damage & Injury Accident,260
+2021,MADISON,Property Damage Accident,1243
+2022,MADISON,Property Damage Accident,1444
+2023,MADISON,Property Damage Accident,1408
+2024,MADISON,Property Damage Accident,1408
+2021,MONROE,Fatal Accident,55
+2022,MONROE,Fatal Accident,45
+2023,MONROE,Fatal Accident,47
+2024,MONROE,Fatal Accident,45
+2021,MONROE,Injury Accident,435
+2022,MONROE,Injury Accident,413
+2023,MONROE,Injury Accident,436
+2024,MONROE,Injury Accident,453
+2021,MONROE,Property Damage & Injury Accident,3352
+2022,MONROE,Property Damage & Injury Accident,3302
+2023,MONROE,Property Damage & Injury Accident,3300
+2024,MONROE,Property Damage & Injury Accident,3163
+2021,MONROE,Property Damage Accident,13944
+2022,MONROE,Property Damage Accident,14455
+2023,MONROE,Property Damage Accident,14565
+2024,MONROE,Property Damage Accident,14506
+2021,MONTGOMERY,Fatal Accident,3
+2022,MONTGOMERY,Fatal Accident,5
+2023,MONTGOMERY,Fatal Accident,5
+2024,MONTGOMERY,Fatal Accident,1
+2021,MONTGOMERY,Injury Accident,11
+2022,MONTGOMERY,Injury Accident,15
+2023,MONTGOMERY,Injury Accident,11
+2024,MONTGOMERY,Injury Accident,22
+2021,MONTGOMERY,Property Damage & Injury Accident,215
+2022,MONTGOMERY,Property Damage & Injury Accident,233
+2023,MONTGOMERY,Property Damage & Injury Accident,202
+2024,MONTGOMERY,Property Damage & Injury Accident,254
+2021,MONTGOMERY,Property Damage Accident,1278
+2022,MONTGOMERY,Property Damage Accident,1348
+2023,MONTGOMERY,Property Damage Accident,1304
+2024,MONTGOMERY,Property Damage Accident,1365
+2021,NASSAU,Fatal Accident,78
+2022,NASSAU,Fatal Accident,76
+2023,NASSAU,Fatal Accident,61
+2024,NASSAU,Fatal Accident,65
+2021,NASSAU,Injury Accident,1519
+2022,NASSAU,Injury Accident,1580
+2023,NASSAU,Injury Accident,1666
+2024,NASSAU,Injury Accident,1611
+2021,NASSAU,Property Damage & Injury Accident,7991
+2022,NASSAU,Property Damage & Injury Accident,8997
+2023,NASSAU,Property Damage & Injury Accident,8873
+2024,NASSAU,Property Damage & Injury Accident,9164
+2021,NASSAU,Property Damage Accident,27077
+2022,NASSAU,Property Damage Accident,29894
+2023,NASSAU,Property Damage Accident,28503
+2024,NASSAU,Property Damage Accident,28337
+2021,NEW YORK,Fatal Accident,45
+2022,NEW YORK,Fatal Accident,30
+2023,NEW YORK,Fatal Accident,32
+2024,NEW YORK,Fatal Accident,36
+2021,NEW YORK,Injury Accident,4207
+2022,NEW YORK,Injury Accident,4719
+2023,NEW YORK,Injury Accident,5162
+2024,NEW YORK,Injury Accident,5162
+2021,NEW YORK,Property Damage & Injury Accident,2802
+2022,NEW YORK,Property Damage & Injury Accident,2674
+2023,NEW YORK,Property Damage & Injury Accident,2583
+2024,NEW YORK,Property Damage & Injury Accident,2646
+2021,NEW YORK,Property Damage Accident,7710
+2022,NEW YORK,Property Damage Accident,7537
+2023,NEW YORK,Property Damage Accident,6622
+2024,NEW YORK,Property Damage Accident,6178
+2021,NIAGARA,Fatal Accident,23
+2022,NIAGARA,Fatal Accident,26
+2023,NIAGARA,Fatal Accident,7
+2024,NIAGARA,Fatal Accident,14
+2021,NIAGARA,Injury Accident,203
+2022,NIAGARA,Injury Accident,89
+2023,NIAGARA,Injury Accident,98
+2024,NIAGARA,Injury Accident,97
+2021,NIAGARA,Property Damage & Injury Accident,810
+2022,NIAGARA,Property Damage & Injury Accident,793
+2023,NIAGARA,Property Damage & Injury Accident,874
+2024,NIAGARA,Property Damage & Injury Accident,877
+2021,NIAGARA,Property Damage Accident,2650
+2022,NIAGARA,Property Damage Accident,3372
+2023,NIAGARA,Property Damage Accident,3327
+2024,NIAGARA,Property Damage Accident,3267
+2021,ONEIDA,Fatal Accident,23
+2022,ONEIDA,Fatal Accident,22
+2023,ONEIDA,Fatal Accident,21
+2024,ONEIDA,Fatal Accident,14
+2021,ONEIDA,Injury Accident,80
+2022,ONEIDA,Injury Accident,60
+2023,ONEIDA,Injury Accident,76
+2024,ONEIDA,Injury Accident,74
+2021,ONEIDA,Property Damage & Injury Accident,807
+2022,ONEIDA,Property Damage & Injury Accident,807
+2023,ONEIDA,Property Damage & Injury Accident,856
+2024,ONEIDA,Property Damage & Injury Accident,883
+2021,ONEIDA,Property Damage Accident,4917
+2022,ONEIDA,Property Damage Accident,5509
+2023,ONEIDA,Property Damage Accident,5141
+2024,ONEIDA,Property Damage Accident,5262
+2021,ONONDAGA,Fatal Accident,30
+2022,ONONDAGA,Fatal Accident,20
+2023,ONONDAGA,Fatal Accident,26
+2024,ONONDAGA,Fatal Accident,32
+2021,ONONDAGA,Injury Accident,251
+2022,ONONDAGA,Injury Accident,255
+2023,ONONDAGA,Injury Accident,261
+2024,ONONDAGA,Injury Accident,256
+2021,ONONDAGA,Property Damage & Injury Accident,2014
+2022,ONONDAGA,Property Damage & Injury Accident,2057
+2023,ONONDAGA,Property Damage & Injury Accident,2003
+2024,ONONDAGA,Property Damage & Injury Accident,1988
+2021,ONONDAGA,Property Damage Accident,9607
+2022,ONONDAGA,Property Damage Accident,10404
+2023,ONONDAGA,Property Damage Accident,8823
+2024,ONONDAGA,Property Damage Accident,8569
+2021,ONTARIO,Fatal Accident,10
+2022,ONTARIO,Fatal Accident,13
+2023,ONTARIO,Fatal Accident,20
+2024,ONTARIO,Fatal Accident,9
+2021,ONTARIO,Injury Accident,23
+2022,ONTARIO,Injury Accident,27
+2023,ONTARIO,Injury Accident,48
+2024,ONTARIO,Injury Accident,35
+2021,ONTARIO,Property Damage & Injury Accident,480
+2022,ONTARIO,Property Damage & Injury Accident,479
+2023,ONTARIO,Property Damage & Injury Accident,469
+2024,ONTARIO,Property Damage & Injury Accident,473
+2021,ONTARIO,Property Damage Accident,2923
+2022,ONTARIO,Property Damage Accident,3168
+2023,ONTARIO,Property Damage Accident,3030
+2024,ONTARIO,Property Damage Accident,3181
+2021,ORANGE,Fatal Accident,29
+2022,ORANGE,Fatal Accident,38
+2023,ORANGE,Fatal Accident,27
+2024,ORANGE,Fatal Accident,38
+2021,ORANGE,Injury Accident,496
+2022,ORANGE,Injury Accident,274
+2023,ORANGE,Injury Accident,202
+2024,ORANGE,Injury Accident,221
+2021,ORANGE,Property Damage & Injury Accident,1748
+2022,ORANGE,Property Damage & Injury Accident,2165
+2023,ORANGE,Property Damage & Injury Accident,2307
+2024,ORANGE,Property Damage & Injury Accident,2371
+2021,ORANGE,Property Damage Accident,7250
+2022,ORANGE,Property Damage Accident,9210
+2023,ORANGE,Property Damage Accident,9061
+2024,ORANGE,Property Damage Accident,9347
+2021,ORLEANS,Fatal Accident,4
+2022,ORLEANS,Fatal Accident,1
+2023,ORLEANS,Fatal Accident,7
+2024,ORLEANS,Fatal Accident,3
+2021,ORLEANS,Injury Accident,15
+2022,ORLEANS,Injury Accident,8
+2023,ORLEANS,Injury Accident,8
+2024,ORLEANS,Injury Accident,5
+2021,ORLEANS,Property Damage & Injury Accident,123
+2022,ORLEANS,Property Damage & Injury Accident,120
+2023,ORLEANS,Property Damage & Injury Accident,135
+2024,ORLEANS,Property Damage & Injury Accident,121
+2021,ORLEANS,Property Damage Accident,511
+2022,ORLEANS,Property Damage Accident,507
+2023,ORLEANS,Property Damage Accident,553
+2024,ORLEANS,Property Damage Accident,538
+2021,OSWEGO,Fatal Accident,17
+2022,OSWEGO,Fatal Accident,9
+2023,OSWEGO,Fatal Accident,14
+2024,OSWEGO,Fatal Accident,11
+2021,OSWEGO,Injury Accident,33
+2022,OSWEGO,Injury Accident,26
+2023,OSWEGO,Injury Accident,32
+2024,OSWEGO,Injury Accident,21
+2021,OSWEGO,Property Damage & Injury Accident,350
+2022,OSWEGO,Property Damage & Injury Accident,370
+2023,OSWEGO,Property Damage & Injury Accident,344
+2024,OSWEGO,Property Damage & Injury Accident,369
+2021,OSWEGO,Property Damage Accident,2162
+2022,OSWEGO,Property Damage Accident,2393
+2023,OSWEGO,Property Damage Accident,2219
+2024,OSWEGO,Property Damage Accident,2399
+2021,OTSEGO,Fatal Accident,4
+2022,OTSEGO,Fatal Accident,5
+2023,OTSEGO,Fatal Accident,2
+2024,OTSEGO,Fatal Accident,7
+2021,OTSEGO,Injury Accident,7
+2022,OTSEGO,Injury Accident,7
+2023,OTSEGO,Injury Accident,14
+2024,OTSEGO,Injury Accident,11
+2021,OTSEGO,Property Damage & Injury Accident,197
+2022,OTSEGO,Property Damage & Injury Accident,220
+2023,OTSEGO,Property Damage & Injury Accident,224
+2024,OTSEGO,Property Damage & Injury Accident,238
+2021,OTSEGO,Property Damage Accident,1283
+2022,OTSEGO,Property Damage Accident,1402
+2023,OTSEGO,Property Damage Accident,1401
+2024,OTSEGO,Property Damage Accident,1315
+2021,PUTNAM,Fatal Accident,5
+2022,PUTNAM,Fatal Accident,11
+2023,PUTNAM,Fatal Accident,4
+2024,PUTNAM,Fatal Accident,9
+2021,PUTNAM,Injury Accident,25
+2022,PUTNAM,Injury Accident,26
+2023,PUTNAM,Injury Accident,20
+2024,PUTNAM,Injury Accident,16
+2021,PUTNAM,Property Damage & Injury Accident,444
+2022,PUTNAM,Property Damage & Injury Accident,516
+2023,PUTNAM,Property Damage & Injury Accident,515
+2024,PUTNAM,Property Damage & Injury Accident,522
+2021,PUTNAM,Property Damage Accident,1767
+2022,PUTNAM,Property Damage Accident,1929
+2023,PUTNAM,Property Damage Accident,2027
+2024,PUTNAM,Property Damage Accident,1936
+2021,QUEENS,Fatal Accident,57
+2022,QUEENS,Fatal Accident,65
+2023,QUEENS,Fatal Accident,74
+2024,QUEENS,Fatal Accident,65
+2021,QUEENS,Injury Accident,6118
+2022,QUEENS,Injury Accident,7228
+2023,QUEENS,Injury Accident,8449
+2024,QUEENS,Injury Accident,9196
+2021,QUEENS,Property Damage & Injury Accident,7614
+2022,QUEENS,Property Damage & Injury Accident,7271
+2023,QUEENS,Property Damage & Injury Accident,7430
+2024,QUEENS,Property Damage & Injury Accident,7355
+2021,QUEENS,Property Damage Accident,15702
+2022,QUEENS,Property Damage Accident,14645
+2023,QUEENS,Property Damage Accident,12420
+2024,QUEENS,Property Damage Accident,11366
+2021,RENSSELAER,Fatal Accident,8
+2022,RENSSELAER,Fatal Accident,11
+2023,RENSSELAER,Fatal Accident,11
+2024,RENSSELAER,Fatal Accident,12
+2021,RENSSELAER,Injury Accident,53
+2022,RENSSELAER,Injury Accident,68
+2023,RENSSELAER,Injury Accident,64
+2024,RENSSELAER,Injury Accident,44
+2021,RENSSELAER,Property Damage & Injury Accident,538
+2022,RENSSELAER,Property Damage & Injury Accident,617
+2023,RENSSELAER,Property Damage & Injury Accident,565
+2024,RENSSELAER,Property Damage & Injury Accident,595
+2021,RENSSELAER,Property Damage Accident,3152
+2022,RENSSELAER,Property Damage Accident,3437
+2023,RENSSELAER,Property Damage Accident,3191
+2024,RENSSELAER,Property Damage Accident,3252
+2021,RICHMOND,Fatal Accident,10
+2022,RICHMOND,Fatal Accident,12
+2023,RICHMOND,Fatal Accident,11
+2024,RICHMOND,Fatal Accident,13
+2021,RICHMOND,Injury Accident,762
+2022,RICHMOND,Injury Accident,994
+2023,RICHMOND,Injury Accident,1082
+2024,RICHMOND,Injury Accident,1097
+2021,RICHMOND,Property Damage & Injury Accident,1299
+2022,RICHMOND,Property Damage & Injury Accident,1395
+2023,RICHMOND,Property Damage & Injury Accident,1417
+2024,RICHMOND,Property Damage & Injury Accident,1386
+2021,RICHMOND,Property Damage Accident,3094
+2022,RICHMOND,Property Damage Accident,3039
+2023,RICHMOND,Property Damage Accident,2864
+2024,RICHMOND,Property Damage Accident,2576
+2021,ROCKLAND,Fatal Accident,16
+2022,ROCKLAND,Fatal Accident,19
+2023,ROCKLAND,Fatal Accident,18
+2024,ROCKLAND,Fatal Accident,17
+2021,ROCKLAND,Injury Accident,282
+2022,ROCKLAND,Injury Accident,284
+2023,ROCKLAND,Injury Accident,269
+2024,ROCKLAND,Injury Accident,278
+2021,ROCKLAND,Property Damage & Injury Accident,1441
+2022,ROCKLAND,Property Damage & Injury Accident,1710
+2023,ROCKLAND,Property Damage & Injury Accident,1820
+2024,ROCKLAND,Property Damage & Injury Accident,1777
+2021,ROCKLAND,Property Damage Accident,6441
+2022,ROCKLAND,Property Damage Accident,7683
+2023,ROCKLAND,Property Damage Accident,7603
+2024,ROCKLAND,Property Damage Accident,7521
+2021,SARATOGA,Fatal Accident,7
+2022,SARATOGA,Fatal Accident,20
+2023,SARATOGA,Fatal Accident,15
+2024,SARATOGA,Fatal Accident,15
+2021,SARATOGA,Injury Accident,65
+2022,SARATOGA,Injury Accident,59
+2023,SARATOGA,Injury Accident,45
+2024,SARATOGA,Injury Accident,46
+2021,SARATOGA,Property Damage & Injury Accident,774
+2022,SARATOGA,Property Damage & Injury Accident,882
+2023,SARATOGA,Property Damage & Injury Accident,837
+2024,SARATOGA,Property Damage & Injury Accident,887
+2021,SARATOGA,Property Damage Accident,4340
+2022,SARATOGA,Property Damage Accident,4881
+2023,SARATOGA,Property Damage Accident,4589
+2024,SARATOGA,Property Damage Accident,4825
+2021,SCHENECTADY,Fatal Accident,10
+2022,SCHENECTADY,Fatal Accident,9
+2023,SCHENECTADY,Fatal Accident,7
+2024,SCHENECTADY,Fatal Accident,15
+2021,SCHENECTADY,Injury Accident,84
+2022,SCHENECTADY,Injury Accident,83
+2023,SCHENECTADY,Injury Accident,71
+2024,SCHENECTADY,Injury Accident,79
+2021,SCHENECTADY,Property Damage & Injury Accident,682
+2022,SCHENECTADY,Property Damage & Injury Accident,650
+2023,SCHENECTADY,Property Damage & Injury Accident,604
+2024,SCHENECTADY,Property Damage & Injury Accident,651
+2021,SCHENECTADY,Property Damage Accident,3163
+2022,SCHENECTADY,Property Damage Accident,3323
+2023,SCHENECTADY,Property Damage Accident,3256
+2024,SCHENECTADY,Property Damage Accident,3392
+2021,SCHOHARIE,Fatal Accident,4
+2022,SCHOHARIE,Fatal Accident,3
+2023,SCHOHARIE,Fatal Accident,4
+2024,SCHOHARIE,Fatal Accident,2
+2021,SCHOHARIE,Injury Accident,8
+2022,SCHOHARIE,Injury Accident,5
+2023,SCHOHARIE,Injury Accident,8
+2024,SCHOHARIE,Injury Accident,3
+2021,SCHOHARIE,Property Damage & Injury Accident,121
+2022,SCHOHARIE,Property Damage & Injury Accident,111
+2023,SCHOHARIE,Property Damage & Injury Accident,95
+2024,SCHOHARIE,Property Damage & Injury Accident,128
+2021,SCHOHARIE,Property Damage Accident,623
+2022,SCHOHARIE,Property Damage Accident,684
+2023,SCHOHARIE,Property Damage Accident,661
+2024,SCHOHARIE,Property Damage Accident,764
+2021,SCHUYLER,Fatal Accident,4
+2022,SCHUYLER,Fatal Accident,2
+2023,SCHUYLER,Fatal Accident,2
+2024,SCHUYLER,Fatal Accident,2
+2021,SCHUYLER,Injury Accident,3
+2022,SCHUYLER,Injury Accident,4
+2023,SCHUYLER,Injury Accident,5
+2024,SCHUYLER,Injury Accident,4
+2021,SCHUYLER,Property Damage & Injury Accident,61
+2022,SCHUYLER,Property Damage & Injury Accident,57
+2023,SCHUYLER,Property Damage & Injury Accident,60
+2024,SCHUYLER,Property Damage & Injury Accident,64
+2021,SCHUYLER,Property Damage Accident,428
+2022,SCHUYLER,Property Damage Accident,443
+2023,SCHUYLER,Property Damage Accident,498
+2024,SCHUYLER,Property Damage Accident,556
+2021,SENECA,Fatal Accident,5
+2022,SENECA,Fatal Accident,2
+2023,SENECA,Fatal Accident,5
+2024,SENECA,Fatal Accident,4
+2021,SENECA,Injury Accident,6
+2022,SENECA,Injury Accident,8
+2023,SENECA,Injury Accident,2
+2024,SENECA,Injury Accident,5
+2021,SENECA,Property Damage & Injury Accident,149
+2022,SENECA,Property Damage & Injury Accident,175
+2023,SENECA,Property Damage & Injury Accident,131
+2024,SENECA,Property Damage & Injury Accident,148
+2021,SENECA,Property Damage Accident,785
+2022,SENECA,Property Damage Accident,891
+2023,SENECA,Property Damage Accident,833
+2024,SENECA,Property Damage Accident,864
+2021,ST. LAWRENCE,Fatal Accident,13
+2022,ST. LAWRENCE,Fatal Accident,12
+2023,ST. LAWRENCE,Fatal Accident,9
+2024,ST. LAWRENCE,Fatal Accident,13
+2021,ST. LAWRENCE,Injury Accident,28
+2022,ST. LAWRENCE,Injury Accident,21
+2023,ST. LAWRENCE,Injury Accident,20
+2024,ST. LAWRENCE,Injury Accident,10
+2021,ST. LAWRENCE,Property Damage & Injury Accident,327
+2022,ST. LAWRENCE,Property Damage & Injury Accident,307
+2023,ST. LAWRENCE,Property Damage & Injury Accident,321
+2024,ST. LAWRENCE,Property Damage & Injury Accident,315
+2021,ST. LAWRENCE,Property Damage Accident,2544
+2022,ST. LAWRENCE,Property Damage Accident,2961
+2023,ST. LAWRENCE,Property Damage Accident,2709
+2024,ST. LAWRENCE,Property Damage Accident,2598
+2021,STEUBEN,Fatal Accident,4
+2022,STEUBEN,Fatal Accident,8
+2023,STEUBEN,Fatal Accident,10
+2024,STEUBEN,Fatal Accident,4
+2021,STEUBEN,Injury Accident,15
+2022,STEUBEN,Injury Accident,22
+2023,STEUBEN,Injury Accident,17
+2024,STEUBEN,Injury Accident,13
+2021,STEUBEN,Property Damage & Injury Accident,296
+2022,STEUBEN,Property Damage & Injury Accident,329
+2023,STEUBEN,Property Damage & Injury Accident,294
+2024,STEUBEN,Property Damage & Injury Accident,310
+2021,STEUBEN,Property Damage Accident,2014
+2022,STEUBEN,Property Damage Accident,2170
+2023,STEUBEN,Property Damage Accident,2030
+2024,STEUBEN,Property Damage Accident,2100
+2021,SUFFOLK,Fatal Accident,140
+2022,SUFFOLK,Fatal Accident,152
+2023,SUFFOLK,Fatal Accident,143
+2024,SUFFOLK,Fatal Accident,109
+2021,SUFFOLK,Injury Accident,1086
+2022,SUFFOLK,Injury Accident,1196
+2023,SUFFOLK,Injury Accident,987
+2024,SUFFOLK,Injury Accident,1031
+2021,SUFFOLK,Property Damage & Injury Accident,9163
+2022,SUFFOLK,Property Damage & Injury Accident,8614
+2023,SUFFOLK,Property Damage & Injury Accident,9638
+2024,SUFFOLK,Property Damage & Injury Accident,9871
+2021,SUFFOLK,Property Damage Accident,28648
+2022,SUFFOLK,Property Damage Accident,27506
+2023,SUFFOLK,Property Damage Accident,30136
+2024,SUFFOLK,Property Damage Accident,29788
+2021,SULLIVAN,Fatal Accident,14
+2022,SULLIVAN,Fatal Accident,15
+2023,SULLIVAN,Fatal Accident,8
+2024,SULLIVAN,Fatal Accident,16
+2021,SULLIVAN,Injury Accident,28
+2022,SULLIVAN,Injury Accident,25
+2023,SULLIVAN,Injury Accident,25
+2024,SULLIVAN,Injury Accident,21
+2021,SULLIVAN,Property Damage & Injury Accident,334
+2022,SULLIVAN,Property Damage & Injury Accident,412
+2023,SULLIVAN,Property Damage & Injury Accident,378
+2024,SULLIVAN,Property Damage & Injury Accident,442
+2021,SULLIVAN,Property Damage Accident,1723
+2022,SULLIVAN,Property Damage Accident,1937
+2023,SULLIVAN,Property Damage Accident,1878
+2024,SULLIVAN,Property Damage Accident,1925
+2021,TIOGA,Fatal Accident,4
+2022,TIOGA,Fatal Accident,4
+2023,TIOGA,Fatal Accident,4
+2024,TIOGA,Fatal Accident,8
+2021,TIOGA,Injury Accident,9
+2022,TIOGA,Injury Accident,11
+2023,TIOGA,Injury Accident,5
+2024,TIOGA,Injury Accident,5
+2021,TIOGA,Property Damage & Injury Accident,165
+2022,TIOGA,Property Damage & Injury Accident,169
+2023,TIOGA,Property Damage & Injury Accident,138
+2024,TIOGA,Property Damage & Injury Accident,184
+2021,TIOGA,Property Damage Accident,916
+2022,TIOGA,Property Damage Accident,927
+2023,TIOGA,Property Damage Accident,928
+2024,TIOGA,Property Damage Accident,1006
+2021,TOMPKINS,Fatal Accident,9
+2022,TOMPKINS,Fatal Accident,5
+2023,TOMPKINS,Fatal Accident,8
+2024,TOMPKINS,Fatal Accident,4
+2021,TOMPKINS,Injury Accident,31
+2022,TOMPKINS,Injury Accident,36
+2023,TOMPKINS,Injury Accident,25
+2024,TOMPKINS,Injury Accident,38
+2021,TOMPKINS,Property Damage & Injury Accident,274
+2022,TOMPKINS,Property Damage & Injury Accident,314
+2023,TOMPKINS,Property Damage & Injury Accident,295
+2024,TOMPKINS,Property Damage & Injury Accident,325
+2021,TOMPKINS,Property Damage Accident,2073
+2022,TOMPKINS,Property Damage Accident,2220
+2023,TOMPKINS,Property Damage Accident,2163
+2024,TOMPKINS,Property Damage Accident,2211
+2021,ULSTER,Fatal Accident,14
+2022,ULSTER,Fatal Accident,14
+2023,ULSTER,Fatal Accident,14
+2024,ULSTER,Fatal Accident,20
+2021,ULSTER,Injury Accident,58
+2022,ULSTER,Injury Accident,70
+2023,ULSTER,Injury Accident,54
+2024,ULSTER,Injury Accident,54
+2021,ULSTER,Property Damage & Injury Accident,753
+2022,ULSTER,Property Damage & Injury Accident,882
+2023,ULSTER,Property Damage & Injury Accident,852
+2024,ULSTER,Property Damage & Injury Accident,855
+2021,ULSTER,Property Damage Accident,3821
+2022,ULSTER,Property Damage Accident,4238
+2023,ULSTER,Property Damage Accident,4079
+2024,ULSTER,Property Damage Accident,4251
+2023,UNKNOWN,Property Damage & Injury Accident,1
+2021,UNKNOWN,Property Damage Accident,5
+2022,UNKNOWN,Property Damage Accident,4
+2023,UNKNOWN,Property Damage Accident,6
+2021,WARREN,Fatal Accident,6
+2022,WARREN,Fatal Accident,11
+2023,WARREN,Fatal Accident,7
+2024,WARREN,Fatal Accident,8
+2021,WARREN,Injury Accident,20
+2022,WARREN,Injury Accident,25
+2023,WARREN,Injury Accident,25
+2024,WARREN,Injury Accident,12
+2021,WARREN,Property Damage & Injury Accident,278
+2022,WARREN,Property Damage & Injury Accident,291
+2023,WARREN,Property Damage & Injury Accident,301
+2024,WARREN,Property Damage & Injury Accident,288
+2021,WARREN,Property Damage Accident,1660
+2022,WARREN,Property Damage Accident,1774
+2023,WARREN,Property Damage Accident,1716
+2024,WARREN,Property Damage Accident,1705
+2021,WASHINGTON,Fatal Accident,7
+2022,WASHINGTON,Fatal Accident,11
+2023,WASHINGTON,Fatal Accident,8
+2024,WASHINGTON,Fatal Accident,7
+2021,WASHINGTON,Injury Accident,15
+2022,WASHINGTON,Injury Accident,15
+2023,WASHINGTON,Injury Accident,12
+2024,WASHINGTON,Injury Accident,6
+2021,WASHINGTON,Property Damage & Injury Accident,204
+2022,WASHINGTON,Property Damage & Injury Accident,236
+2023,WASHINGTON,Property Damage & Injury Accident,231
+2024,WASHINGTON,Property Damage & Injury Accident,238
+2021,WASHINGTON,Property Damage Accident,994
+2022,WASHINGTON,Property Damage Accident,1073
+2023,WASHINGTON,Property Damage Accident,1014
+2024,WASHINGTON,Property Damage Accident,1043
+2021,WAYNE,Fatal Accident,7
+2022,WAYNE,Fatal Accident,7
+2023,WAYNE,Fatal Accident,11
+2024,WAYNE,Fatal Accident,9
+2021,WAYNE,Injury Accident,26
+2022,WAYNE,Injury Accident,33
+2023,WAYNE,Injury Accident,37
+2024,WAYNE,Injury Accident,22
+2021,WAYNE,Property Damage & Injury Accident,268
+2022,WAYNE,Property Damage & Injury Accident,271
+2023,WAYNE,Property Damage & Injury Accident,277
+2024,WAYNE,Property Damage & Injury Accident,254
+2021,WAYNE,Property Damage Accident,1514
+2022,WAYNE,Property Damage Accident,1676
+2023,WAYNE,Property Damage Accident,1736
+2024,WAYNE,Property Damage Accident,1780
+2021,WESTCHESTER,Fatal Accident,38
+2022,WESTCHESTER,Fatal Accident,34
+2023,WESTCHESTER,Fatal Accident,35
+2024,WESTCHESTER,Fatal Accident,40
+2021,WESTCHESTER,Injury Accident,842
+2022,WESTCHESTER,Injury Accident,968
+2023,WESTCHESTER,Injury Accident,912
+2024,WESTCHESTER,Injury Accident,900
+2021,WESTCHESTER,Property Damage & Injury Accident,3879
+2022,WESTCHESTER,Property Damage & Injury Accident,4113
+2023,WESTCHESTER,Property Damage & Injury Accident,4292
+2024,WESTCHESTER,Property Damage & Injury Accident,4259
+2021,WESTCHESTER,Property Damage Accident,14945
+2022,WESTCHESTER,Property Damage Accident,16137
+2023,WESTCHESTER,Property Damage Accident,16247
+2024,WESTCHESTER,Property Damage Accident,15698
+2021,WYOMING,Fatal Accident,3
+2022,WYOMING,Fatal Accident,1
+2023,WYOMING,Fatal Accident,5
+2024,WYOMING,Fatal Accident,1
+2021,WYOMING,Injury Accident,7
+2022,WYOMING,Injury Accident,8
+2023,WYOMING,Injury Accident,7
+2024,WYOMING,Injury Accident,3
+2021,WYOMING,Property Damage & Injury Accident,137
+2022,WYOMING,Property Damage & Injury Accident,167
+2023,WYOMING,Property Damage & Injury Accident,137
+2024,WYOMING,Property Damage & Injury Accident,167
+2021,WYOMING,Property Damage Accident,802
+2022,WYOMING,Property Damage Accident,954
+2023,WYOMING,Property Damage Accident,919
+2024,WYOMING,Property Damage Accident,1014
+2021,YATES,Fatal Accident,4
+2022,YATES,Fatal Accident,5
+2023,YATES,Fatal Accident,4
+2024,YATES,Fatal Accident,5
+2021,YATES,Injury Accident,5
+2022,YATES,Injury Accident,7
+2023,YATES,Injury Accident,4
+2024,YATES,Injury Accident,6
+2021,YATES,Property Damage & Injury Accident,76
+2022,YATES,Property Damage & Injury Accident,87
+2023,YATES,Property Damage & Injury Accident,78
+2024,YATES,Property Damage & Injury Accident,65
+2021,YATES,Property Damage Accident,599
+2022,YATES,Property Damage Accident,593
+2023,YATES,Property Damage Accident,583
+2024,YATES,Property Damage Accident,587

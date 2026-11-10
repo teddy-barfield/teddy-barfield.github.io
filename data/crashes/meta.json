@@ -1,0 +1,31 @@
+{
+  "dataset": "Motor Vehicle Crashes - Case Information: Four Year Window",
+  "agency": "NYS Department of Motor Vehicles",
+  "dataset_id": "e8ky-4vqe",
+  "link": "https://data.ny.gov/d/e8ky-4vqe",
+  "pulled": "2026-11-10",
+  "years": [
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "total_crashes": 1525123,
+  "file_totals": {
+    "county_severity.csv": 1525123,
+    "month_severity.csv": 1525123,
+    "hour_dow_severity.csv": 1525123,
+    "weather_severity.csv": 1525123,
+    "road_surface_severity.csv": 1525123,
+    "lighting_severity.csv": 1525123,
+    "year_severity.csv": 1525123
+  },
+  "files_not_matching_total": {},
+  "severity_levels": [
+    "Fatal Accident",
+    "Injury Accident",
+    "Property Damage & Injury Accident",
+    "Property Damage Accident"
+  ],
+  "method": "server-side SoQL $group aggregation; counts of crash cases, no row-level download"
+}

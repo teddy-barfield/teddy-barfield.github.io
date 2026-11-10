@@ -1,0 +1,673 @@
+day,hour,severity,crashes
+Monday,0,Fatal Accident,16
+Monday,0,Injury Accident,810
+Monday,0,Property Damage & Injury Accident,1119
+Monday,0,Property Damage Accident,4787
+Monday,1,Fatal Accident,29
+Monday,1,Injury Accident,238
+Monday,1,Property Damage & Injury Accident,601
+Monday,1,Property Damage Accident,1867
+Monday,2,Fatal Accident,16
+Monday,2,Injury Accident,128
+Monday,2,Property Damage & Injury Accident,470
+Monday,2,Property Damage Accident,1510
+Monday,3,Fatal Accident,9
+Monday,3,Injury Accident,118
+Monday,3,Property Damage & Injury Accident,389
+Monday,3,Property Damage Accident,1497
+Monday,4,Fatal Accident,10
+Monday,4,Injury Accident,143
+Monday,4,Property Damage & Injury Accident,475
+Monday,4,Property Damage Accident,1784
+Monday,5,Fatal Accident,17
+Monday,5,Injury Accident,226
+Monday,5,Property Damage & Injury Accident,675
+Monday,5,Property Damage Accident,3297
+Monday,6,Fatal Accident,20
+Monday,6,Injury Accident,487
+Monday,6,Property Damage & Injury Accident,1279
+Monday,6,Property Damage Accident,5748
+Monday,7,Fatal Accident,19
+Monday,7,Injury Accident,818
+Monday,7,Property Damage & Injury Accident,2245
+Monday,7,Property Damage Accident,8550
+Monday,8,Fatal Accident,17
+Monday,8,Injury Accident,1151
+Monday,8,Property Damage & Injury Accident,2349
+Monday,8,Property Damage Accident,9019
+Monday,9,Fatal Accident,21
+Monday,9,Injury Accident,939
+Monday,9,Property Damage & Injury Accident,1978
+Monday,9,Property Damage Accident,7213
+Monday,10,Fatal Accident,23
+Monday,10,Injury Accident,814
+Monday,10,Property Damage & Injury Accident,1802
+Monday,10,Property Damage Accident,6787
+Monday,11,Fatal Accident,20
+Monday,11,Injury Accident,965
+Monday,11,Property Damage & Injury Accident,1961
+Monday,11,Property Damage Accident,7617
+Monday,12,Fatal Accident,21
+Monday,12,Injury Accident,1058
+Monday,12,Property Damage & Injury Accident,2398
+Monday,12,Property Damage Accident,8481
+Monday,13,Fatal Accident,24
+Monday,13,Injury Accident,1056
+Monday,13,Property Damage & Injury Accident,2557
+Monday,13,Property Damage Accident,8384
+Monday,14,Fatal Accident,27
+Monday,14,Injury Accident,1352
+Monday,14,Property Damage & Injury Accident,2989
+Monday,14,Property Damage Accident,9707
+Monday,15,Fatal Accident,27
+Monday,15,Injury Accident,1557
+Monday,15,Property Damage & Injury Accident,3246
+Monday,15,Property Damage Accident,11023
+Monday,16,Fatal Accident,34
+Monday,16,Injury Accident,1570
+Monday,16,Property Damage & Injury Accident,3436
+Monday,16,Property Damage Accident,11353
+Monday,17,Fatal Accident,31
+Monday,17,Injury Accident,1619
+Monday,17,Property Damage & Injury Accident,3461
+Monday,17,Property Damage Accident,12406
+Monday,18,Fatal Accident,28
+Monday,18,Injury Accident,1398
+Monday,18,Property Damage & Injury Accident,2459
+Monday,18,Property Damage Accident,8788
+Monday,19,Fatal Accident,29
+Monday,19,Injury Accident,1088
+Monday,19,Property Damage & Injury Accident,1789
+Monday,19,Property Damage Accident,6262
+Monday,20,Fatal Accident,26
+Monday,20,Injury Accident,843
+Monday,20,Property Damage & Injury Accident,1542
+Monday,20,Property Damage Accident,5310
+Monday,21,Fatal Accident,39
+Monday,21,Injury Accident,726
+Monday,21,Property Damage & Injury Accident,1323
+Monday,21,Property Damage Accident,4452
+Monday,22,Fatal Accident,27
+Monday,22,Injury Accident,543
+Monday,22,Property Damage & Injury Accident,1116
+Monday,22,Property Damage Accident,3385
+Monday,23,Fatal Accident,22
+Monday,23,Injury Accident,372
+Monday,23,Property Damage & Injury Accident,925
+Monday,23,Property Damage Accident,2812
+Tuesday,0,Fatal Accident,19
+Tuesday,0,Injury Accident,775
+Tuesday,0,Property Damage & Injury Accident,931
+Tuesday,0,Property Damage Accident,4284
+Tuesday,1,Fatal Accident,15
+Tuesday,1,Injury Accident,128
+Tuesday,1,Property Damage & Injury Accident,410
+Tuesday,1,Property Damage Accident,1570
+Tuesday,2,Fatal Accident,15
+Tuesday,2,Injury Accident,97
+Tuesday,2,Property Damage & Injury Accident,289
+Tuesday,2,Property Damage Accident,1139
+Tuesday,3,Fatal Accident,10
+Tuesday,3,Injury Accident,95
+Tuesday,3,Property Damage & Injury Accident,297
+Tuesday,3,Property Damage Accident,1138
+Tuesday,4,Fatal Accident,7
+Tuesday,4,Injury Accident,107
+Tuesday,4,Property Damage & Injury Accident,319
+Tuesday,4,Property Damage Accident,1560
+Tuesday,5,Fatal Accident,19
+Tuesday,5,Injury Accident,190
+Tuesday,5,Property Damage & Injury Accident,628
+Tuesday,5,Property Damage Accident,3253
+Tuesday,6,Fatal Accident,23
+Tuesday,6,Injury Accident,458
+Tuesday,6,Property Damage & Injury Accident,1311
+Tuesday,6,Property Damage Accident,6217
+Tuesday,7,Fatal Accident,25
+Tuesday,7,Injury Accident,938
+Tuesday,7,Property Damage & Injury Accident,2435
+Tuesday,7,Property Damage Accident,9609
+Tuesday,8,Fatal Accident,15
+Tuesday,8,Injury Accident,1310
+Tuesday,8,Property Damage & Injury Accident,2716
+Tuesday,8,Property Damage Accident,9763
+Tuesday,9,Fatal Accident,13
+Tuesday,9,Injury Accident,986
+Tuesday,9,Property Damage & Injury Accident,2188
+Tuesday,9,Property Damage Accident,7832
+Tuesday,10,Fatal Accident,15
+Tuesday,10,Injury Accident,883
+Tuesday,10,Property Damage & Injury Accident,1944
+Tuesday,10,Property Damage Accident,7322
+Tuesday,11,Fatal Accident,15
+Tuesday,11,Injury Accident,1012
+Tuesday,11,Property Damage & Injury Accident,2183
+Tuesday,11,Property Damage Accident,7735
+Tuesday,12,Fatal Accident,18
+Tuesday,12,Injury Accident,1132
+Tuesday,12,Property Damage & Injury Accident,2392
+Tuesday,12,Property Damage Accident,8830
+Tuesday,13,Fatal Accident,30
+Tuesday,13,Injury Accident,1201
+Tuesday,13,Property Damage & Injury Accident,2593
+Tuesday,13,Property Damage Accident,8804
+Tuesday,14,Fatal Accident,34
+Tuesday,14,Injury Accident,1421
+Tuesday,14,Property Damage & Injury Accident,2914
+Tuesday,14,Property Damage Accident,10003
+Tuesday,15,Fatal Accident,25
+Tuesday,15,Injury Accident,1634
+Tuesday,15,Property Damage & Injury Accident,3596
+Tuesday,15,Property Damage Accident,11841
+Tuesday,16,Fatal Accident,27
+Tuesday,16,Injury Accident,1626
+Tuesday,16,Property Damage & Injury Accident,3680
+Tuesday,16,Property Damage Accident,12347
+Tuesday,17,Fatal Accident,33
+Tuesday,17,Injury Accident,1838
+Tuesday,17,Property Damage & Injury Accident,3742
+Tuesday,17,Property Damage Accident,13527
+Tuesday,18,Fatal Accident,40
+Tuesday,18,Injury Accident,1507
+Tuesday,18,Property Damage & Injury Accident,2680
+Tuesday,18,Property Damage Accident,9661
+Tuesday,19,Fatal Accident,33
+Tuesday,19,Injury Accident,1252
+Tuesday,19,Property Damage & Injury Accident,1905
+Tuesday,19,Property Damage Accident,6817
+Tuesday,20,Fatal Accident,33
+Tuesday,20,Injury Accident,999
+Tuesday,20,Property Damage & Injury Accident,1540
+Tuesday,20,Property Damage Accident,5747
+Tuesday,21,Fatal Accident,24
+Tuesday,21,Injury Accident,805
+Tuesday,21,Property Damage & Injury Accident,1337
+Tuesday,21,Property Damage Accident,4653
+Tuesday,22,Fatal Accident,26
+Tuesday,22,Injury Accident,623
+Tuesday,22,Property Damage & Injury Accident,1117
+Tuesday,22,Property Damage Accident,3451
+Tuesday,23,Fatal Accident,17
+Tuesday,23,Injury Accident,448
+Tuesday,23,Property Damage & Injury Accident,927
+Tuesday,23,Property Damage Accident,2834
+Wednesday,0,Fatal Accident,16
+Wednesday,0,Injury Accident,766
+Wednesday,0,Property Damage & Injury Accident,989
+Wednesday,0,Property Damage Accident,4304
+Wednesday,1,Fatal Accident,15
+Wednesday,1,Injury Accident,166
+Wednesday,1,Property Damage & Injury Accident,480
+Wednesday,1,Property Damage Accident,1482
+Wednesday,2,Fatal Accident,6
+Wednesday,2,Injury Accident,110
+Wednesday,2,Property Damage & Injury Accident,331
+Wednesday,2,Property Damage Accident,1263
+Wednesday,3,Fatal Accident,9
+Wednesday,3,Injury Accident,76
+Wednesday,3,Property Damage & Injury Accident,311
+Wednesday,3,Property Damage Accident,1104
+Wednesday,4,Fatal Accident,10
+Wednesday,4,Injury Accident,108
+Wednesday,4,Property Damage & Injury Accident,384
+Wednesday,4,Property Damage Accident,1477
+Wednesday,5,Fatal Accident,15
+Wednesday,5,Injury Accident,192
+Wednesday,5,Property Damage & Injury Accident,640
+Wednesday,5,Property Damage Accident,3124
+Wednesday,6,Fatal Accident,18
+Wednesday,6,Injury Accident,503
+Wednesday,6,Property Damage & Injury Accident,1418
+Wednesday,6,Property Damage Accident,6037
+Wednesday,7,Fatal Accident,10
+Wednesday,7,Injury Accident,926
+Wednesday,7,Property Damage & Injury Accident,2462
+Wednesday,7,Property Damage Accident,9403
+Wednesday,8,Fatal Accident,13
+Wednesday,8,Injury Accident,1293
+Wednesday,8,Property Damage & Injury Accident,2686
+Wednesday,8,Property Damage Accident,9397
+Wednesday,9,Fatal Accident,13
+Wednesday,9,Injury Accident,961
+Wednesday,9,Property Damage & Injury Accident,2151
+Wednesday,9,Property Damage Accident,7438
+Wednesday,10,Fatal Accident,19
+Wednesday,10,Injury Accident,928
+Wednesday,10,Property Damage & Injury Accident,1921
+Wednesday,10,Property Damage Accident,6733
+Wednesday,11,Fatal Accident,27
+Wednesday,11,Injury Accident,994
+Wednesday,11,Property Damage & Injury Accident,2135
+Wednesday,11,Property Damage Accident,7792
+Wednesday,12,Fatal Accident,20
+Wednesday,12,Injury Accident,1169
+Wednesday,12,Property Damage & Injury Accident,2463
+Wednesday,12,Property Damage Accident,8837
+Wednesday,13,Fatal Accident,29
+Wednesday,13,Injury Accident,1198
+Wednesday,13,Property Damage & Injury Accident,2548
+Wednesday,13,Property Damage Accident,8756
+Wednesday,14,Fatal Accident,31
+Wednesday,14,Injury Accident,1457
+Wednesday,14,Property Damage & Injury Accident,2916
+Wednesday,14,Property Damage Accident,10164
+Wednesday,15,Fatal Accident,25
+Wednesday,15,Injury Accident,1665
+Wednesday,15,Property Damage & Injury Accident,3489
+Wednesday,15,Property Damage Accident,11820
+Wednesday,16,Fatal Accident,40
+Wednesday,16,Injury Accident,1706
+Wednesday,16,Property Damage & Injury Accident,3637
+Wednesday,16,Property Damage Accident,12567
+Wednesday,17,Fatal Accident,38
+Wednesday,17,Injury Accident,1778
+Wednesday,17,Property Damage & Injury Accident,3677
+Wednesday,17,Property Damage Accident,13571
+Wednesday,18,Fatal Accident,37
+Wednesday,18,Injury Accident,1565
+Wednesday,18,Property Damage & Injury Accident,2641
+Wednesday,18,Property Damage Accident,9897
+Wednesday,19,Fatal Accident,34
+Wednesday,19,Injury Accident,1229
+Wednesday,19,Property Damage & Injury Accident,1991
+Wednesday,19,Property Damage Accident,7169
+Wednesday,20,Fatal Accident,24
+Wednesday,20,Injury Accident,900
+Wednesday,20,Property Damage & Injury Accident,1664
+Wednesday,20,Property Damage Accident,5780
+Wednesday,21,Fatal Accident,30
+Wednesday,21,Injury Accident,813
+Wednesday,21,Property Damage & Injury Accident,1493
+Wednesday,21,Property Damage Accident,4840
+Wednesday,22,Fatal Accident,34
+Wednesday,22,Injury Accident,631
+Wednesday,22,Property Damage & Injury Accident,1234
+Wednesday,22,Property Damage Accident,3746
+Wednesday,23,Fatal Accident,26
+Wednesday,23,Injury Accident,471
+Wednesday,23,Property Damage & Injury Accident,990
+Wednesday,23,Property Damage Accident,2976
+Thursday,0,Fatal Accident,23
+Thursday,0,Injury Accident,809
+Thursday,0,Property Damage & Injury Accident,1066
+Thursday,0,Property Damage Accident,4438
+Thursday,1,Fatal Accident,10
+Thursday,1,Injury Accident,174
+Thursday,1,Property Damage & Injury Accident,493
+Thursday,1,Property Damage Accident,1650
+Thursday,2,Fatal Accident,13
+Thursday,2,Injury Accident,114
+Thursday,2,Property Damage & Injury Accident,373
+Thursday,2,Property Damage Accident,1325
+Thursday,3,Fatal Accident,12
+Thursday,3,Injury Accident,95
+Thursday,3,Property Damage & Injury Accident,345
+Thursday,3,Property Damage Accident,1219
+Thursday,4,Fatal Accident,12
+Thursday,4,Injury Accident,119
+Thursday,4,Property Damage & Injury Accident,388
+Thursday,4,Property Damage Accident,1653
+Thursday,5,Fatal Accident,25
+Thursday,5,Injury Accident,214
+Thursday,5,Property Damage & Injury Accident,668
+Thursday,5,Property Damage Accident,3128
+Thursday,6,Fatal Accident,20
+Thursday,6,Injury Accident,474
+Thursday,6,Property Damage & Injury Accident,1297
+Thursday,6,Property Damage Accident,5863
+Thursday,7,Fatal Accident,21
+Thursday,7,Injury Accident,848
+Thursday,7,Property Damage & Injury Accident,2257
+Thursday,7,Property Damage Accident,8925
+Thursday,8,Fatal Accident,17
+Thursday,8,Injury Accident,1208
+Thursday,8,Property Damage & Injury Accident,2537
+Thursday,8,Property Damage Accident,9348
+Thursday,9,Fatal Accident,26
+Thursday,9,Injury Accident,1011
+Thursday,9,Property Damage & Injury Accident,2045
+Thursday,9,Property Damage Accident,7542
+Thursday,10,Fatal Accident,22
+Thursday,10,Injury Accident,913
+Thursday,10,Property Damage & Injury Accident,1881
+Thursday,10,Property Damage Accident,6957
+Thursday,11,Fatal Accident,20
+Thursday,11,Injury Accident,994
+Thursday,11,Property Damage & Injury Accident,2091
+Thursday,11,Property Damage Accident,7659
+Thursday,12,Fatal Accident,25
+Thursday,12,Injury Accident,1149
+Thursday,12,Property Damage & Injury Accident,2458
+Thursday,12,Property Damage Accident,8853
+Thursday,13,Fatal Accident,20
+Thursday,13,Injury Accident,1147
+Thursday,13,Property Damage & Injury Accident,2564
+Thursday,13,Property Damage Accident,8706
+Thursday,14,Fatal Accident,30
+Thursday,14,Injury Accident,1442
+Thursday,14,Property Damage & Injury Accident,2990
+Thursday,14,Property Damage Accident,10077
+Thursday,15,Fatal Accident,36
+Thursday,15,Injury Accident,1631
+Thursday,15,Property Damage & Injury Accident,3553
+Thursday,15,Property Damage Accident,11919
+Thursday,16,Fatal Accident,27
+Thursday,16,Injury Accident,1713
+Thursday,16,Property Damage & Injury Accident,3720
+Thursday,16,Property Damage Accident,12542
+Thursday,17,Fatal Accident,39
+Thursday,17,Injury Accident,1769
+Thursday,17,Property Damage & Injury Accident,3796
+Thursday,17,Property Damage Accident,13600
+Thursday,18,Fatal Accident,44
+Thursday,18,Injury Accident,1636
+Thursday,18,Property Damage & Injury Accident,2707
+Thursday,18,Property Damage Accident,9957
+Thursday,19,Fatal Accident,37
+Thursday,19,Injury Accident,1208
+Thursday,19,Property Damage & Injury Accident,2103
+Thursday,19,Property Damage Accident,7210
+Thursday,20,Fatal Accident,34
+Thursday,20,Injury Accident,1013
+Thursday,20,Property Damage & Injury Accident,1787
+Thursday,20,Property Damage Accident,6018
+Thursday,21,Fatal Accident,31
+Thursday,21,Injury Accident,795
+Thursday,21,Property Damage & Injury Accident,1490
+Thursday,21,Property Damage Accident,5151
+Thursday,22,Fatal Accident,37
+Thursday,22,Injury Accident,641
+Thursday,22,Property Damage & Injury Accident,1319
+Thursday,22,Property Damage Accident,4018
+Thursday,23,Fatal Accident,20
+Thursday,23,Injury Accident,453
+Thursday,23,Property Damage & Injury Accident,1086
+Thursday,23,Property Damage Accident,3272
+Friday,0,Fatal Accident,26
+Friday,0,Injury Accident,900
+Friday,0,Property Damage & Injury Accident,1226
+Friday,0,Property Damage Accident,5153
+Friday,1,Fatal Accident,14
+Friday,1,Injury Accident,222
+Friday,1,Property Damage & Injury Accident,579
+Friday,1,Property Damage Accident,1995
+Friday,2,Fatal Accident,20
+Friday,2,Injury Accident,148
+Friday,2,Property Damage & Injury Accident,493
+Friday,2,Property Damage Accident,1744
+Friday,3,Fatal Accident,9
+Friday,3,Injury Accident,126
+Friday,3,Property Damage & Injury Accident,404
+Friday,3,Property Damage Accident,1509
+Friday,4,Fatal Accident,15
+Friday,4,Injury Accident,131
+Friday,4,Property Damage & Injury Accident,504
+Friday,4,Property Damage Accident,1821
+Friday,5,Fatal Accident,19
+Friday,5,Injury Accident,189
+Friday,5,Property Damage & Injury Accident,654
+Friday,5,Property Damage Accident,3169
+Friday,6,Fatal Accident,28
+Friday,6,Injury Accident,472
+Friday,6,Property Damage & Injury Accident,1234
+Friday,6,Property Damage Accident,5604
+Friday,7,Fatal Accident,17
+Friday,7,Injury Accident,827
+Friday,7,Property Damage & Injury Accident,2089
+Friday,7,Property Damage Accident,8280
+Friday,8,Fatal Accident,18
+Friday,8,Injury Accident,1190
+Friday,8,Property Damage & Injury Accident,2352
+Friday,8,Property Damage Accident,8465
+Friday,9,Fatal Accident,17
+Friday,9,Injury Accident,873
+Friday,9,Property Damage & Injury Accident,1966
+Friday,9,Property Damage Accident,7439
+Friday,10,Fatal Accident,24
+Friday,10,Injury Accident,889
+Friday,10,Property Damage & Injury Accident,1933
+Friday,10,Property Damage Accident,7532
+Friday,11,Fatal Accident,22
+Friday,11,Injury Accident,1012
+Friday,11,Property Damage & Injury Accident,2306
+Friday,11,Property Damage Accident,8593
+Friday,12,Fatal Accident,26
+Friday,12,Injury Accident,1265
+Friday,12,Property Damage & Injury Accident,2707
+Friday,12,Property Damage Accident,10177
+Friday,13,Fatal Accident,29
+Friday,13,Injury Accident,1307
+Friday,13,Property Damage & Injury Accident,2948
+Friday,13,Property Damage Accident,10225
+Friday,14,Fatal Accident,34
+Friday,14,Injury Accident,1638
+Friday,14,Property Damage & Injury Accident,3447
+Friday,14,Property Damage Accident,11754
+Friday,15,Fatal Accident,30
+Friday,15,Injury Accident,1838
+Friday,15,Property Damage & Injury Accident,3884
+Friday,15,Property Damage Accident,13533
+Friday,16,Fatal Accident,30
+Friday,16,Injury Accident,1750
+Friday,16,Property Damage & Injury Accident,3843
+Friday,16,Property Damage Accident,13584
+Friday,17,Fatal Accident,40
+Friday,17,Injury Accident,1834
+Friday,17,Property Damage & Injury Accident,3730
+Friday,17,Property Damage Accident,14018
+Friday,18,Fatal Accident,36
+Friday,18,Injury Accident,1600
+Friday,18,Property Damage & Injury Accident,2924
+Friday,18,Property Damage Accident,10952
+Friday,19,Fatal Accident,38
+Friday,19,Injury Accident,1308
+Friday,19,Property Damage & Injury Accident,2157
+Friday,19,Property Damage Accident,8205
+Friday,20,Fatal Accident,33
+Friday,20,Injury Accident,1119
+Friday,20,Property Damage & Injury Accident,1883
+Friday,20,Property Damage Accident,6859
+Friday,21,Fatal Accident,42
+Friday,21,Injury Accident,966
+Friday,21,Property Damage & Injury Accident,1800
+Friday,21,Property Damage Accident,6194
+Friday,22,Fatal Accident,38
+Friday,22,Injury Accident,814
+Friday,22,Property Damage & Injury Accident,1705
+Friday,22,Property Damage Accident,5217
+Friday,23,Fatal Accident,40
+Friday,23,Injury Accident,614
+Friday,23,Property Damage & Injury Accident,1517
+Friday,23,Property Damage Accident,4559
+Saturday,0,Fatal Accident,38
+Saturday,0,Injury Accident,864
+Saturday,0,Property Damage & Injury Accident,1622
+Saturday,0,Property Damage Accident,6157
+Saturday,1,Fatal Accident,39
+Saturday,1,Injury Accident,345
+Saturday,1,Property Damage & Injury Accident,1135
+Saturday,1,Property Damage Accident,3190
+Saturday,2,Fatal Accident,42
+Saturday,2,Injury Accident,304
+Saturday,2,Property Damage & Injury Accident,1030
+Saturday,2,Property Damage Accident,3009
+Saturday,3,Fatal Accident,31
+Saturday,3,Injury Accident,250
+Saturday,3,Property Damage & Injury Accident,891
+Saturday,3,Property Damage Accident,2734
+Saturday,4,Fatal Accident,33
+Saturday,4,Injury Accident,245
+Saturday,4,Property Damage & Injury Accident,900
+Saturday,4,Property Damage Accident,2714
+Saturday,5,Fatal Accident,21
+Saturday,5,Injury Accident,226
+Saturday,5,Property Damage & Injury Accident,774
+Saturday,5,Property Damage Accident,2908
+Saturday,6,Fatal Accident,18
+Saturday,6,Injury Accident,235
+Saturday,6,Property Damage & Injury Accident,826
+Saturday,6,Property Damage Accident,3374
+Saturday,7,Fatal Accident,24
+Saturday,7,Injury Accident,263
+Saturday,7,Property Damage & Injury Accident,971
+Saturday,7,Property Damage Accident,3705
+Saturday,8,Fatal Accident,13
+Saturday,8,Injury Accident,420
+Saturday,8,Property Damage & Injury Accident,1287
+Saturday,8,Property Damage Accident,4469
+Saturday,9,Fatal Accident,13
+Saturday,9,Injury Accident,555
+Saturday,9,Property Damage & Injury Accident,1517
+Saturday,9,Property Damage Accident,5342
+Saturday,10,Fatal Accident,29
+Saturday,10,Injury Accident,706
+Saturday,10,Property Damage & Injury Accident,1871
+Saturday,10,Property Damage Accident,6871
+Saturday,11,Fatal Accident,17
+Saturday,11,Injury Accident,910
+Saturday,11,Property Damage & Injury Accident,2347
+Saturday,11,Property Damage Accident,8315
+Saturday,12,Fatal Accident,17
+Saturday,12,Injury Accident,1016
+Saturday,12,Property Damage & Injury Accident,2703
+Saturday,12,Property Damage Accident,9318
+Saturday,13,Fatal Accident,23
+Saturday,13,Injury Accident,1074
+Saturday,13,Property Damage & Injury Accident,2623
+Saturday,13,Property Damage Accident,8962
+Saturday,14,Fatal Accident,30
+Saturday,14,Injury Accident,1115
+Saturday,14,Property Damage & Injury Accident,2715
+Saturday,14,Property Damage Accident,8721
+Saturday,15,Fatal Accident,32
+Saturday,15,Injury Accident,1188
+Saturday,15,Property Damage & Injury Accident,2711
+Saturday,15,Property Damage Accident,8546
+Saturday,16,Fatal Accident,18
+Saturday,16,Injury Accident,1199
+Saturday,16,Property Damage & Injury Accident,2474
+Saturday,16,Property Damage Accident,8171
+Saturday,17,Fatal Accident,20
+Saturday,17,Injury Accident,1198
+Saturday,17,Property Damage & Injury Accident,2490
+Saturday,17,Property Damage Accident,9017
+Saturday,18,Fatal Accident,45
+Saturday,18,Injury Accident,1198
+Saturday,18,Property Damage & Injury Accident,2377
+Saturday,18,Property Damage Accident,8146
+Saturday,19,Fatal Accident,30
+Saturday,19,Injury Accident,1055
+Saturday,19,Property Damage & Injury Accident,2044
+Saturday,19,Property Damage Accident,7173
+Saturday,20,Fatal Accident,52
+Saturday,20,Injury Accident,1094
+Saturday,20,Property Damage & Injury Accident,1866
+Saturday,20,Property Damage Accident,6528
+Saturday,21,Fatal Accident,48
+Saturday,21,Injury Accident,903
+Saturday,21,Property Damage & Injury Accident,1782
+Saturday,21,Property Damage Accident,6014
+Saturday,22,Fatal Accident,39
+Saturday,22,Injury Accident,801
+Saturday,22,Property Damage & Injury Accident,1699
+Saturday,22,Property Damage Accident,5289
+Saturday,23,Fatal Accident,40
+Saturday,23,Injury Accident,657
+Saturday,23,Property Damage & Injury Accident,1588
+Saturday,23,Property Damage Accident,4715
+Sunday,0,Fatal Accident,41
+Sunday,0,Injury Accident,852
+Sunday,0,Property Damage & Injury Accident,1726
+Sunday,0,Property Damage Accident,6021
+Sunday,1,Fatal Accident,31
+Sunday,1,Injury Accident,424
+Sunday,1,Property Damage & Injury Accident,1238
+Sunday,1,Property Damage Accident,3722
+Sunday,2,Fatal Accident,32
+Sunday,2,Injury Accident,298
+Sunday,2,Property Damage & Injury Accident,1149
+Sunday,2,Property Damage Accident,3216
+Sunday,3,Fatal Accident,39
+Sunday,3,Injury Accident,295
+Sunday,3,Property Damage & Injury Accident,1071
+Sunday,3,Property Damage Accident,2932
+Sunday,4,Fatal Accident,38
+Sunday,4,Injury Accident,313
+Sunday,4,Property Damage & Injury Accident,1075
+Sunday,4,Property Damage Accident,2977
+Sunday,5,Fatal Accident,25
+Sunday,5,Injury Accident,191
+Sunday,5,Property Damage & Injury Accident,824
+Sunday,5,Property Damage Accident,2779
+Sunday,6,Fatal Accident,14
+Sunday,6,Injury Accident,188
+Sunday,6,Property Damage & Injury Accident,724
+Sunday,6,Property Damage Accident,2973
+Sunday,7,Fatal Accident,12
+Sunday,7,Injury Accident,201
+Sunday,7,Property Damage & Injury Accident,841
+Sunday,7,Property Damage Accident,2902
+Sunday,8,Fatal Accident,15
+Sunday,8,Injury Accident,294
+Sunday,8,Property Damage & Injury Accident,901
+Sunday,8,Property Damage Accident,3232
+Sunday,9,Fatal Accident,14
+Sunday,9,Injury Accident,345
+Sunday,9,Property Damage & Injury Accident,1089
+Sunday,9,Property Damage Accident,4063
+Sunday,10,Fatal Accident,15
+Sunday,10,Injury Accident,502
+Sunday,10,Property Damage & Injury Accident,1463
+Sunday,10,Property Damage Accident,5335
+Sunday,11,Fatal Accident,19
+Sunday,11,Injury Accident,635
+Sunday,11,Property Damage & Injury Accident,1821
+Sunday,11,Property Damage Accident,6291
+Sunday,12,Fatal Accident,23
+Sunday,12,Injury Accident,786
+Sunday,12,Property Damage & Injury Accident,2091
+Sunday,12,Property Damage Accident,7380
+Sunday,13,Fatal Accident,28
+Sunday,13,Injury Accident,802
+Sunday,13,Property Damage & Injury Accident,2310
+Sunday,13,Property Damage Accident,7497
+Sunday,14,Fatal Accident,25
+Sunday,14,Injury Accident,976
+Sunday,14,Property Damage & Injury Accident,2367
+Sunday,14,Property Damage Accident,7628
+Sunday,15,Fatal Accident,28
+Sunday,15,Injury Accident,1055
+Sunday,15,Property Damage & Injury Accident,2406
+Sunday,15,Property Damage Accident,7205
+Sunday,16,Fatal Accident,17
+Sunday,16,Injury Accident,955
+Sunday,16,Property Damage & Injury Accident,2293
+Sunday,16,Property Damage Accident,7204
+Sunday,17,Fatal Accident,32
+Sunday,17,Injury Accident,1105
+Sunday,17,Property Damage & Injury Accident,2310
+Sunday,17,Property Damage Accident,7810
+Sunday,18,Fatal Accident,43
+Sunday,18,Injury Accident,1054
+Sunday,18,Property Damage & Injury Accident,2193
+Sunday,18,Property Damage Accident,7313
+Sunday,19,Fatal Accident,34
+Sunday,19,Injury Accident,1006
+Sunday,19,Property Damage & Injury Accident,1837
+Sunday,19,Property Damage Accident,6255
+Sunday,20,Fatal Accident,21
+Sunday,20,Injury Accident,862
+Sunday,20,Property Damage & Injury Accident,1715
+Sunday,20,Property Damage Accident,5812
+Sunday,21,Fatal Accident,37
+Sunday,21,Injury Accident,791
+Sunday,21,Property Damage & Injury Accident,1568
+Sunday,21,Property Damage Accident,5209
+Sunday,22,Fatal Accident,20
+Sunday,22,Injury Accident,643
+Sunday,22,Property Damage & Injury Accident,1348
+Sunday,22,Property Damage Accident,4103
+Sunday,23,Fatal Accident,25
+Sunday,23,Injury Accident,504
+Sunday,23,Property Damage & Injury Accident,1164
+Sunday,23,Property Damage Accident,3440

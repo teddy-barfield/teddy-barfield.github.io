@@ -1,0 +1,96 @@
+year,lighting,severity,crashes
+2021,Dark-Road Lighted,Fatal Accident,350
+2022,Dark-Road Lighted,Fatal Accident,339
+2023,Dark-Road Lighted,Fatal Accident,331
+2024,Dark-Road Lighted,Fatal Accident,307
+2021,Dark-Road Lighted,Injury Accident,7188
+2022,Dark-Road Lighted,Injury Accident,7414
+2023,Dark-Road Lighted,Injury Accident,7975
+2024,Dark-Road Lighted,Injury Accident,7547
+2021,Dark-Road Lighted,Property Damage & Injury Accident,17072
+2022,Dark-Road Lighted,Property Damage & Injury Accident,16404
+2023,Dark-Road Lighted,Property Damage & Injury Accident,16800
+2024,Dark-Road Lighted,Property Damage & Injury Accident,16114
+2021,Dark-Road Lighted,Property Damage Accident,46400
+2022,Dark-Road Lighted,Property Damage Accident,46618
+2023,Dark-Road Lighted,Property Damage Accident,45052
+2024,Dark-Road Lighted,Property Damage Accident,43071
+2021,Dark-Road Unlighted,Fatal Accident,170
+2022,Dark-Road Unlighted,Fatal Accident,195
+2023,Dark-Road Unlighted,Fatal Accident,184
+2024,Dark-Road Unlighted,Fatal Accident,154
+2021,Dark-Road Unlighted,Injury Accident,379
+2022,Dark-Road Unlighted,Injury Accident,360
+2023,Dark-Road Unlighted,Injury Accident,379
+2024,Dark-Road Unlighted,Injury Accident,386
+2021,Dark-Road Unlighted,Property Damage & Injury Accident,4348
+2022,Dark-Road Unlighted,Property Damage & Injury Accident,4530
+2023,Dark-Road Unlighted,Property Damage & Injury Accident,4742
+2024,Dark-Road Unlighted,Property Damage & Injury Accident,4800
+2021,Dark-Road Unlighted,Property Damage Accident,30576
+2022,Dark-Road Unlighted,Property Damage Accident,32644
+2023,Dark-Road Unlighted,Property Damage Accident,31480
+2024,Dark-Road Unlighted,Property Damage Accident,33308
+2021,Dawn,Fatal Accident,21
+2022,Dawn,Fatal Accident,23
+2023,Dawn,Fatal Accident,18
+2024,Dawn,Fatal Accident,24
+2021,Dawn,Injury Accident,618
+2022,Dawn,Injury Accident,721
+2023,Dawn,Injury Accident,812
+2024,Dawn,Injury Accident,850
+2021,Dawn,Property Damage & Injury Accident,1411
+2022,Dawn,Property Damage & Injury Accident,1600
+2023,Dawn,Property Damage & Injury Accident,1597
+2024,Dawn,Property Damage & Injury Accident,1614
+2021,Dawn,Property Damage Accident,6476
+2022,Dawn,Property Damage Accident,7304
+2023,Dawn,Property Damage Accident,7358
+2024,Dawn,Property Damage Accident,7401
+2021,Daylight,Fatal Accident,493
+2022,Daylight,Fatal Accident,509
+2023,Daylight,Fatal Accident,445
+2024,Daylight,Fatal Accident,505
+2021,Daylight,Injury Accident,17732
+2022,Daylight,Injury Accident,18681
+2023,Daylight,Injury Accident,19174
+2024,Daylight,Injury Accident,19647
+2021,Daylight,Property Damage & Injury Accident,47587
+2022,Daylight,Property Damage & Injury Accident,49128
+2023,Daylight,Property Damage & Injury Accident,48753
+2024,Daylight,Property Damage & Injury Accident,50018
+2021,Daylight,Property Damage Accident,162115
+2022,Daylight,Property Damage Accident,172449
+2023,Daylight,Property Damage Accident,163214
+2024,Daylight,Property Damage Accident,162760
+2021,Dusk,Fatal Accident,31
+2022,Dusk,Fatal Accident,25
+2023,Dusk,Fatal Accident,44
+2024,Dusk,Fatal Accident,33
+2021,Dusk,Injury Accident,1257
+2022,Dusk,Injury Accident,1269
+2023,Dusk,Injury Accident,1509
+2024,Dusk,Injury Accident,1724
+2021,Dusk,Property Damage & Injury Accident,2224
+2022,Dusk,Property Damage & Injury Accident,2310
+2023,Dusk,Property Damage & Injury Accident,2469
+2024,Dusk,Property Damage & Injury Accident,2482
+2021,Dusk,Property Damage Accident,8038
+2022,Dusk,Property Damage Accident,8503
+2023,Dusk,Property Damage Accident,8388
+2024,Dusk,Property Damage Accident,8434
+2021,Unknown,Fatal Accident,3
+2022,Unknown,Fatal Accident,1
+2024,Unknown,Fatal Accident,3
+2021,Unknown,Injury Accident,4134
+2022,Unknown,Injury Accident,5786
+2023,Unknown,Injury Accident,7087
+2024,Unknown,Injury Accident,7960
+2021,Unknown,Property Damage & Injury Accident,1932
+2022,Unknown,Property Damage & Injury Accident,2071
+2023,Unknown,Property Damage & Injury Accident,2275
+2024,Unknown,Property Damage & Injury Accident,2094
+2021,Unknown,Property Damage Accident,11604
+2022,Unknown,Property Damage Accident,11971
+2023,Unknown,Property Damage Accident,11204
+2024,Unknown,Property Damage Accident,9583

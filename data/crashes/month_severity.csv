@@ -1,0 +1,193 @@
+year,month,severity,crashes
+2021,1,Fatal Accident,58
+2021,1,Injury Accident,1793
+2021,1,Property Damage & Injury Accident,4818
+2021,1,Property Damage Accident,20343
+2021,2,Fatal Accident,42
+2021,2,Injury Accident,1564
+2021,2,Property Damage & Injury Accident,4384
+2021,2,Property Damage Accident,20065
+2021,3,Fatal Accident,56
+2021,3,Injury Accident,2117
+2021,3,Property Damage & Injury Accident,5151
+2021,3,Property Damage Accident,18941
+2021,4,Fatal Accident,90
+2021,4,Injury Accident,2391
+2021,4,Property Damage & Injury Accident,5587
+2021,4,Property Damage Accident,18550
+2021,5,Fatal Accident,107
+2021,5,Injury Accident,2902
+2021,5,Property Damage & Injury Accident,6625
+2021,5,Property Damage Accident,21084
+2021,6,Fatal Accident,91
+2021,6,Injury Accident,2957
+2021,6,Property Damage & Injury Accident,7172
+2021,6,Property Damage Accident,23237
+2021,7,Fatal Accident,109
+2021,7,Injury Accident,2793
+2021,7,Property Damage & Injury Accident,6934
+2021,7,Property Damage Accident,22048
+2021,8,Fatal Accident,108
+2021,8,Injury Accident,2917
+2021,8,Property Damage & Injury Accident,6760
+2021,8,Property Damage Accident,21400
+2021,9,Fatal Accident,100
+2021,9,Injury Accident,3042
+2021,9,Property Damage & Injury Accident,6949
+2021,9,Property Damage Accident,22360
+2021,10,Fatal Accident,117
+2021,10,Injury Accident,3230
+2021,10,Property Damage & Injury Accident,7159
+2021,10,Property Damage Accident,25794
+2021,11,Fatal Accident,93
+2021,11,Injury Accident,2998
+2021,11,Property Damage & Injury Accident,6588
+2021,11,Property Damage Accident,26923
+2021,12,Fatal Accident,97
+2021,12,Injury Accident,2604
+2021,12,Property Damage & Injury Accident,6447
+2021,12,Property Damage Accident,24464
+2022,1,Fatal Accident,63
+2022,1,Injury Accident,2113
+2022,1,Property Damage & Injury Accident,5626
+2022,1,Property Damage Accident,24114
+2022,2,Fatal Accident,86
+2022,2,Injury Accident,2262
+2022,2,Property Damage & Injury Accident,5205
+2022,2,Property Damage Accident,22142
+2022,3,Fatal Accident,73
+2022,3,Injury Accident,2626
+2022,3,Property Damage & Injury Accident,5839
+2022,3,Property Damage Accident,21324
+2022,4,Fatal Accident,64
+2022,4,Injury Accident,2573
+2022,4,Property Damage & Injury Accident,5548
+2022,4,Property Damage Accident,19392
+2022,5,Fatal Accident,102
+2022,5,Injury Accident,2938
+2022,5,Property Damage & Injury Accident,6713
+2022,5,Property Damage Accident,22270
+2022,6,Fatal Accident,96
+2022,6,Injury Accident,3149
+2022,6,Property Damage & Injury Accident,7221
+2022,6,Property Damage Accident,24332
+2022,7,Fatal Accident,123
+2022,7,Injury Accident,3128
+2022,7,Property Damage & Injury Accident,6919
+2022,7,Property Damage Accident,22758
+2022,8,Fatal Accident,110
+2022,8,Injury Accident,3126
+2022,8,Property Damage & Injury Accident,7045
+2022,8,Property Damage Accident,22664
+2022,9,Fatal Accident,105
+2022,9,Injury Accident,3219
+2022,9,Property Damage & Injury Accident,6307
+2022,9,Property Damage Accident,21764
+2022,10,Fatal Accident,86
+2022,10,Injury Accident,3222
+2022,10,Property Damage & Injury Accident,6439
+2022,10,Property Damage Accident,23678
+2022,11,Fatal Accident,91
+2022,11,Injury Accident,2934
+2022,11,Property Damage & Injury Accident,6417
+2022,11,Property Damage Accident,26969
+2022,12,Fatal Accident,93
+2022,12,Injury Accident,2941
+2022,12,Property Damage & Injury Accident,6764
+2022,12,Property Damage Accident,28082
+2023,1,Fatal Accident,61
+2023,1,Injury Accident,2582
+2023,1,Property Damage & Injury Accident,5684
+2023,1,Property Damage Accident,22220
+2023,2,Fatal Accident,68
+2023,2,Injury Accident,2316
+2023,2,Property Damage & Injury Accident,5388
+2023,2,Property Damage Accident,19906
+2023,3,Fatal Accident,65
+2023,3,Injury Accident,2795
+2023,3,Property Damage & Injury Accident,5890
+2023,3,Property Damage Accident,21989
+2023,4,Fatal Accident,77
+2023,4,Injury Accident,2796
+2023,4,Property Damage & Injury Accident,5798
+2023,4,Property Damage Accident,18890
+2023,5,Fatal Accident,79
+2023,5,Injury Accident,3437
+2023,5,Property Damage & Injury Accident,6876
+2023,5,Property Damage Accident,22649
+2023,6,Fatal Accident,101
+2023,6,Injury Accident,3148
+2023,6,Property Damage & Injury Accident,6571
+2023,6,Property Damage Accident,22185
+2023,7,Fatal Accident,100
+2023,7,Injury Accident,3177
+2023,7,Property Damage & Injury Accident,7037
+2023,7,Property Damage Accident,21800
+2023,8,Fatal Accident,111
+2023,8,Injury Accident,3201
+2023,8,Property Damage & Injury Accident,6595
+2023,8,Property Damage Accident,20761
+2023,9,Fatal Accident,95
+2023,9,Injury Accident,3469
+2023,9,Property Damage & Injury Accident,6784
+2023,9,Property Damage Accident,21514
+2023,10,Fatal Accident,98
+2023,10,Injury Accident,3548
+2023,10,Property Damage & Injury Accident,6900
+2023,10,Property Damage Accident,24506
+2023,11,Fatal Accident,87
+2023,11,Injury Accident,3257
+2023,11,Property Damage & Injury Accident,6531
+2023,11,Property Damage Accident,26312
+2023,12,Fatal Accident,80
+2023,12,Injury Accident,3210
+2023,12,Property Damage & Injury Accident,6582
+2023,12,Property Damage Accident,23964
+2024,1,Fatal Accident,73
+2024,1,Injury Accident,2890
+2024,1,Property Damage & Injury Accident,6004
+2024,1,Property Damage Accident,24545
+2024,2,Fatal Accident,71
+2024,2,Injury Accident,2671
+2024,2,Property Damage & Injury Accident,5378
+2024,2,Property Damage Accident,19140
+2024,3,Fatal Accident,67
+2024,3,Injury Accident,3102
+2024,3,Property Damage & Injury Accident,5967
+2024,3,Property Damage Accident,20492
+2024,4,Fatal Accident,53
+2024,4,Injury Accident,2876
+2024,4,Property Damage & Injury Accident,5664
+2024,4,Property Damage Accident,18409
+2024,5,Fatal Accident,98
+2024,5,Injury Accident,3455
+2024,5,Property Damage & Injury Accident,7212
+2024,5,Property Damage Accident,22148
+2024,6,Fatal Accident,100
+2024,6,Injury Accident,3378
+2024,6,Property Damage & Injury Accident,7050
+2024,6,Property Damage Accident,22385
+2024,7,Fatal Accident,83
+2024,7,Injury Accident,3124
+2024,7,Property Damage & Injury Accident,6776
+2024,7,Property Damage Accident,20418
+2024,8,Fatal Accident,117
+2024,8,Injury Accident,3195
+2024,8,Property Damage & Injury Accident,6653
+2024,8,Property Damage Accident,19755
+2024,9,Fatal Accident,97
+2024,9,Injury Accident,3385
+2024,9,Property Damage & Injury Accident,6559
+2024,9,Property Damage Accident,20613
+2024,10,Fatal Accident,99
+2024,10,Injury Accident,3588
+2024,10,Property Damage & Injury Accident,6833
+2024,10,Property Damage Accident,24699
+2024,11,Fatal Accident,98
+2024,11,Injury Accident,3269
+2024,11,Property Damage & Injury Accident,6305
+2024,11,Property Damage Accident,25293
+2024,12,Fatal Accident,70
+2024,12,Injury Accident,3181
+2024,12,Property Damage & Injury Accident,6721
+2024,12,Property Damage Accident,26660

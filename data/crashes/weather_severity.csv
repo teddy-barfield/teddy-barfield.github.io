@@ -1,0 +1,126 @@
+year,weather,severity,crashes
+2021,Clear,Fatal Accident,664
+2022,Clear,Fatal Accident,722
+2023,Clear,Fatal Accident,610
+2024,Clear,Fatal Accident,668
+2021,Clear,Injury Accident,21323
+2022,Clear,Injury Accident,22235
+2023,Clear,Injury Accident,23273
+2024,Clear,Injury Accident,23884
+2021,Clear,Property Damage & Injury Accident,48373
+2022,Clear,Property Damage & Injury Accident,50291
+2023,Clear,Property Damage & Injury Accident,48883
+2024,Clear,Property Damage & Injury Accident,51041
+2021,Clear,Property Damage Accident,157084
+2022,Clear,Property Damage Accident,169996
+2023,Clear,Property Damage Accident,156252
+2024,Clear,Property Damage Accident,160598
+2021,Cloudy,Fatal Accident,282
+2022,Cloudy,Fatal Accident,245
+2023,Cloudy,Fatal Accident,271
+2024,Cloudy,Fatal Accident,229
+2021,Cloudy,Injury Accident,2973
+2022,Cloudy,Injury Accident,2508
+2023,Cloudy,Injury Accident,2768
+2024,Cloudy,Injury Accident,2482
+2021,Cloudy,Property Damage & Injury Accident,14849
+2022,Cloudy,Property Damage & Injury Accident,13419
+2023,Cloudy,Property Damage & Injury Accident,14634
+2024,Cloudy,Property Damage & Injury Accident,13266
+2021,Cloudy,Property Damage Accident,59807
+2022,Cloudy,Property Damage Accident,56375
+2023,Cloudy,Property Damage Accident,58532
+2024,Cloudy,Property Damage Accident,53092
+2021,Fog/Smog/Smoke,Fatal Accident,11
+2022,Fog/Smog/Smoke,Fatal Accident,5
+2023,Fog/Smog/Smoke,Fatal Accident,10
+2024,Fog/Smog/Smoke,Fatal Accident,8
+2021,Fog/Smog/Smoke,Injury Accident,21
+2022,Fog/Smog/Smoke,Injury Accident,44
+2023,Fog/Smog/Smoke,Injury Accident,58
+2024,Fog/Smog/Smoke,Injury Accident,23
+2021,Fog/Smog/Smoke,Property Damage & Injury Accident,150
+2022,Fog/Smog/Smoke,Property Damage & Injury Accident,210
+2023,Fog/Smog/Smoke,Property Damage & Injury Accident,273
+2024,Fog/Smog/Smoke,Property Damage & Injury Accident,182
+2021,Fog/Smog/Smoke,Property Damage Accident,720
+2022,Fog/Smog/Smoke,Property Damage Accident,917
+2023,Fog/Smog/Smoke,Property Damage Accident,1183
+2024,Fog/Smog/Smoke,Property Damage Accident,977
+2021,Other*,Fatal Accident,1
+2021,Other*,Injury Accident,22
+2022,Other*,Injury Accident,16
+2023,Other*,Injury Accident,4
+2024,Other*,Injury Accident,4
+2021,Other*,Property Damage & Injury Accident,32
+2022,Other*,Property Damage & Injury Accident,32
+2023,Other*,Property Damage & Injury Accident,21
+2024,Other*,Property Damage & Injury Accident,21
+2021,Other*,Property Damage Accident,136
+2022,Other*,Property Damage Accident,118
+2023,Other*,Property Damage Accident,80
+2024,Other*,Property Damage Accident,96
+2021,Rain,Fatal Accident,87
+2022,Rain,Fatal Accident,94
+2023,Rain,Fatal Accident,112
+2024,Rain,Fatal Accident,89
+2021,Rain,Injury Accident,2263
+2022,Rain,Injury Accident,2974
+2023,Rain,Injury Accident,3358
+2024,Rain,Injury Accident,3229
+2021,Rain,Property Damage & Injury Accident,6747
+2022,Rain,Property Damage & Injury Accident,7002
+2023,Rain,Property Damage & Injury Accident,8467
+2024,Rain,Property Damage & Injury Accident,7791
+2021,Rain,Property Damage Accident,22209
+2022,Rain,Property Damage Accident,23064
+2023,Rain,Property Damage Accident,27635
+2024,Rain,Property Damage Accident,24438
+2021,Sleet/Hail/Freezing Rain,Fatal Accident,9
+2022,Sleet/Hail/Freezing Rain,Fatal Accident,4
+2023,Sleet/Hail/Freezing Rain,Fatal Accident,4
+2024,Sleet/Hail/Freezing Rain,Fatal Accident,4
+2021,Sleet/Hail/Freezing Rain,Injury Accident,27
+2022,Sleet/Hail/Freezing Rain,Injury Accident,81
+2023,Sleet/Hail/Freezing Rain,Injury Accident,36
+2024,Sleet/Hail/Freezing Rain,Injury Accident,42
+2021,Sleet/Hail/Freezing Rain,Property Damage & Injury Accident,288
+2022,Sleet/Hail/Freezing Rain,Property Damage & Injury Accident,530
+2023,Sleet/Hail/Freezing Rain,Property Damage & Injury Accident,469
+2024,Sleet/Hail/Freezing Rain,Property Damage & Injury Accident,298
+2021,Sleet/Hail/Freezing Rain,Property Damage Accident,1476
+2022,Sleet/Hail/Freezing Rain,Property Damage Accident,2603
+2023,Sleet/Hail/Freezing Rain,Property Damage Accident,2130
+2024,Sleet/Hail/Freezing Rain,Property Damage Accident,1482
+2021,Snow,Fatal Accident,11
+2022,Snow,Fatal Accident,20
+2023,Snow,Fatal Accident,12
+2024,Snow,Fatal Accident,27
+2021,Snow,Injury Accident,325
+2022,Snow,Injury Accident,298
+2023,Snow,Injury Accident,138
+2024,Snow,Injury Accident,290
+2021,Snow,Property Damage & Injury Accident,2033
+2022,Snow,Property Damage & Injury Accident,2309
+2023,Snow,Property Damage & Injury Accident,1533
+2024,Snow,Property Damage & Injury Accident,2313
+2021,Snow,Property Damage Accident,11878
+2022,Snow,Property Damage Accident,14001
+2023,Snow,Property Damage Accident,9456
+2024,Snow,Property Damage Accident,14119
+2021,Unknown,Fatal Accident,3
+2022,Unknown,Fatal Accident,2
+2023,Unknown,Fatal Accident,3
+2024,Unknown,Fatal Accident,1
+2021,Unknown,Injury Accident,4354
+2022,Unknown,Injury Accident,6075
+2023,Unknown,Injury Accident,7301
+2024,Unknown,Injury Accident,8160
+2021,Unknown,Property Damage & Injury Accident,2102
+2022,Unknown,Property Damage & Injury Accident,2250
+2023,Unknown,Property Damage & Injury Accident,2356
+2024,Unknown,Property Damage & Injury Accident,2210
+2021,Unknown,Property Damage Accident,11899
+2022,Unknown,Property Damage Accident,12415
+2023,Unknown,Property Damage Accident,11428
+2024,Unknown,Property Damage Accident,9755

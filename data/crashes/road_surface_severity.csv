@@ -1,0 +1,119 @@
+year,road_surface,severity,crashes
+2021,Dry,Fatal Accident,885
+2022,Dry,Fatal Accident,876
+2023,Dry,Fatal Accident,805
+2024,Dry,Fatal Accident,843
+2021,Dry,Injury Accident,23107
+2022,Dry,Injury Accident,23484
+2023,Dry,Injury Accident,24993
+2024,Dry,Injury Accident,25213
+2021,Dry,Property Damage & Injury Accident,58453
+2022,Dry,Property Damage & Injury Accident,58465
+2023,Dry,Property Damage & Injury Accident,58985
+2024,Dry,Property Damage & Injury Accident,59730
+2021,Dry,Property Damage Accident,197151
+2022,Dry,Property Damage Accident,204353
+2023,Dry,Property Damage Accident,196971
+2024,Dry,Property Damage Accident,195897
+2023,Flooded Water,Fatal Accident,1
+2021,Flooded Water,Injury Accident,8
+2022,Flooded Water,Injury Accident,3
+2023,Flooded Water,Injury Accident,2
+2024,Flooded Water,Injury Accident,5
+2021,Flooded Water,Property Damage & Injury Accident,29
+2022,Flooded Water,Property Damage & Injury Accident,15
+2023,Flooded Water,Property Damage & Injury Accident,24
+2024,Flooded Water,Property Damage & Injury Accident,34
+2021,Flooded Water,Property Damage Accident,109
+2022,Flooded Water,Property Damage Accident,65
+2023,Flooded Water,Property Damage Accident,95
+2024,Flooded Water,Property Damage Accident,118
+2021,Muddy,Injury Accident,7
+2022,Muddy,Injury Accident,10
+2023,Muddy,Injury Accident,11
+2024,Muddy,Injury Accident,8
+2021,Muddy,Property Damage & Injury Accident,17
+2022,Muddy,Property Damage & Injury Accident,31
+2023,Muddy,Property Damage & Injury Accident,22
+2024,Muddy,Property Damage & Injury Accident,31
+2021,Muddy,Property Damage Accident,136
+2022,Muddy,Property Damage Accident,112
+2023,Muddy,Property Damage Accident,157
+2024,Muddy,Property Damage Accident,106
+2021,Other,Fatal Accident,1
+2024,Other,Fatal Accident,1
+2021,Other,Injury Accident,31
+2022,Other,Injury Accident,20
+2023,Other,Injury Accident,8
+2024,Other,Injury Accident,8
+2021,Other,Property Damage & Injury Accident,63
+2022,Other,Property Damage & Injury Accident,64
+2023,Other,Property Damage & Injury Accident,41
+2024,Other,Property Damage & Injury Accident,51
+2021,Other,Property Damage Accident,242
+2022,Other,Property Damage Accident,192
+2023,Other,Property Damage Accident,202
+2024,Other,Property Damage Accident,212
+2021,Slush,Fatal Accident,3
+2022,Slush,Fatal Accident,2
+2024,Slush,Fatal Accident,2
+2021,Slush,Injury Accident,43
+2022,Slush,Injury Accident,46
+2023,Slush,Injury Accident,15
+2024,Slush,Injury Accident,29
+2021,Slush,Property Damage & Injury Accident,215
+2022,Slush,Property Damage & Injury Accident,273
+2023,Slush,Property Damage & Injury Accident,177
+2024,Slush,Property Damage & Injury Accident,271
+2021,Slush,Property Damage Accident,972
+2022,Slush,Property Damage Accident,1425
+2023,Slush,Property Damage Accident,884
+2024,Slush,Property Damage Accident,1400
+2021,Snow/Ice,Fatal Accident,18
+2022,Snow/Ice,Fatal Accident,32
+2023,Snow/Ice,Fatal Accident,11
+2024,Snow/Ice,Fatal Accident,28
+2021,Snow/Ice,Injury Accident,343
+2022,Snow/Ice,Injury Accident,307
+2023,Snow/Ice,Injury Accident,109
+2024,Snow/Ice,Injury Accident,267
+2021,Snow/Ice,Property Damage & Injury Accident,2306
+2022,Snow/Ice,Property Damage & Injury Accident,3281
+2023,Snow/Ice,Property Damage & Injury Accident,1828
+2024,Snow/Ice,Property Damage & Injury Accident,2685
+2021,Snow/Ice,Property Damage Accident,14413
+2022,Snow/Ice,Property Damage Accident,19710
+2023,Snow/Ice,Property Damage Accident,11244
+2024,Snow/Ice,Property Damage Accident,16094
+2021,Unknown,Fatal Accident,4
+2022,Unknown,Fatal Accident,2
+2023,Unknown,Fatal Accident,4
+2024,Unknown,Fatal Accident,1
+2021,Unknown,Injury Accident,4369
+2022,Unknown,Injury Accident,6105
+2023,Unknown,Injury Accident,7312
+2024,Unknown,Injury Accident,8233
+2021,Unknown,Property Damage & Injury Accident,2098
+2022,Unknown,Property Damage & Injury Accident,2270
+2023,Unknown,Property Damage & Injury Accident,2370
+2024,Unknown,Property Damage & Injury Accident,2216
+2021,Unknown,Property Damage Accident,11635
+2022,Unknown,Property Damage Accident,12193
+2023,Unknown,Property Damage Accident,11266
+2024,Unknown,Property Damage Accident,9506
+2021,Wet,Fatal Accident,157
+2022,Wet,Fatal Accident,180
+2023,Wet,Fatal Accident,201
+2024,Wet,Fatal Accident,151
+2021,Wet,Injury Accident,3400
+2022,Wet,Injury Accident,4256
+2023,Wet,Injury Accident,4486
+2024,Wet,Injury Accident,4351
+2021,Wet,Property Damage & Injury Accident,11393
+2022,Wet,Property Damage & Injury Accident,11644
+2023,Wet,Property Damage & Injury Accident,13189
+2024,Wet,Property Damage & Injury Accident,12104
+2021,Wet,Property Damage Accident,40551
+2022,Wet,Property Damage Accident,41439
+2023,Wet,Property Damage Accident,45877
+2024,Wet,Property Damage Accident,41224
