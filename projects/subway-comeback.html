@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The subway comeback — Teddy Barfield</title>
+  <meta name="description" content="How far New York City subway, bus and commuter rail ridership has come back since March 2020, by mode and by weekday versus weekend, from MTA daily ridership data.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../assets/css/projects.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" integrity="sha512-CQBWl4fJHWbryGE+Pc7UAxWMUMNMWzWxF4SQo9CgkJIN1kx6djDQZjh3Y8SZ1d+6I+1zze6Z7kHXO7q3UyZAWw==" crossorigin="anonymous"></script>
+  <script defer src="../assets/js/charts.js"></script>
+  <style>
+    .note{font-size:.875rem;color:var(--muted);margin-top:.5rem}
+    .ctl{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin:1rem 0}
+    .ctl label{font-weight:600}
+    .ctl select{font:inherit;padding:.5rem .75rem;border:1px solid var(--rule);border-radius:6px;background:#fff;color:inherit;max-width:100%}
+  </style>
+</head>
+<body>
+
+  <nav aria-label="Main">
+    <div class="wrap">
+      <a href="../index.html">Home</a>
+      <div class="menu">
+        <button class="menu-toggle" aria-expanded="false" aria-controls="projects-menu">Projects</button>
+        <ul class="menu-list" id="projects-menu" hidden>
+          <li class="group">Actuarial</li>
+          <li><a href="../projects/term-life-decoder.html">Life insurance policy decoder</a></li>
+          <li class="group">Data analysis</li>
+          <li><a href="../projects/nyc-causes-of-death.html">NYC leading causes of death</a></li>
+          <li class="group">New York data</li>
+          <li><a href="../projects/ny-data/index.html">New York by the Numbers</a></li>
+          <li class="group">Teaching</li>
+          <li><a href="../projects/math-practice-book.html">Math practice book</a></li>
+        </ul>
+      </div>
+      <a href="../index.html#exams">Exams</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <header>
+    <div class="wrap">
+      <a class="back" href="../index.html">Back to home</a>
+      <h1 style="margin-top:1.5rem">The subway comeback</h1>
+      <p class="lede" id="lede">Loading the latest figures from the data files.</p>
+      <p class="meta">Python, Chart.js · Data last pulled <span id="pulled">2026-11-10</span></p>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="wrap">
+        <h2>The question</h2>
+        <div class="prose"><p>In March 2020 New York's transit ridership collapsed. How much of it has come back, and has it come back equally for the subway, buses and commuter rail, on weekdays and on weekends? Every figure below is computed in your browser from the processed data files, so none is typed in by hand.</p>
+        <p>One thing to know first: ridership is shown as a share of a baseline, and the baseline is the first week of March 2020 (<span id="bwin"></span>), the last normal week in this dataset. It is not the MTA's own comparison with 2019. Details are under "How to read this".</p></div>
+        <ul class="stats" id="stats" aria-label="Key figures"></ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap-wide">
+        <h2>Recovery curves by mode</h2>
+        <p>Each line is the average daily ridership in a month, as a share of that mode's baseline. 100% means the same as the baseline week. Click a name in the legend to show or hide a line; the table underneath lists the same modes with their latest figures.</p>
+        <figure class="chart">
+          <div class="chart-box"><canvas id="c-mode" role="img" aria-label="Line chart of monthly average ridership as a share of the March 2020 baseline for subway, bus, Long Island Rail Road and Metro-North, from March 2020 to the latest month. All fall to a low in April 2020 and climb back at different speeds."></canvas></div>
+          <figcaption id="cap-mode"></figcaption>
+        </figure>
+        <p class="note">A line chart fits a quantity followed over time, and putting the modes on one share-of-baseline scale lets a small system and a huge one be compared fairly. The most recent month is partial.</p>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Latest ridership by mode">
+          <table class="data"><caption id="cap-modet"></caption>
+            <thead><tr><th scope="col">Mode</th><th scope="col" class="num">Last 28 days</th><th scope="col" class="num">Weekdays</th><th scope="col" class="num">Weekends</th><th scope="col" class="num">Low point</th><th scope="col">Low date</th></tr></thead>
+            <tbody id="tb-mode"></tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap-wide">
+        <h2>Weekday versus weekend</h2>
+        <p>Pick a mode to compare its weekday and weekend recovery.</p>
+        <div class="ctl"><label for="m2">Mode</label><select id="m2"></select></div>
+        <figure class="chart">
+          <div class="chart-box"><canvas id="c-wk" role="img" aria-label="Line chart comparing monthly weekday and weekend ridership as a share of the baseline for the selected mode."></canvas></div>
+          <figcaption id="cap-wk" aria-live="polite"></figcaption>
+        </figure>
+        <p class="note">Take the weekend line with care. The baseline for each weekend day is a single day (one Saturday and one Sunday in early March 2020), so a share above 100% can partly reflect an unusually quiet baseline day, not only strong weekend travel. The weekday baseline averages five days and is steadier.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap-wide">
+        <h2>The biggest days</h2>
+        <p>The ten days with the most riders for a mode since January 1, 2021. Days are ranked by the raw count of riders, not by share of baseline, because the weekend baselines are single days and would put weekend days on top. Days before 2021 are left out because the busiest days in the whole dataset are simply the baseline week and the days just before the shutdown.</p>
+        <div class="ctl"><label for="m3">Mode</label><select id="m3"></select></div>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Biggest days">
+          <table class="data"><caption id="cap-top"></caption>
+            <thead><tr><th scope="col">Rank</th><th scope="col">Date</th><th scope="col">Day</th><th scope="col" class="num">Riders</th><th scope="col" class="num">Share of baseline</th></tr></thead>
+            <tbody id="tb-top"></tbody></table>
+        </div>
+        <p class="note" id="note-top"></p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>How to read this, and what it leaves out</h2>
+        <div class="prose">
+          <p id="method"></p>
+          <p>The MTA's published daily counts are estimates of trips: subway and bus counts come from fare-payment data (swipes and taps), the railroads from ticket and onboard counts, and Access-A-Ride (AAR) is trips by the paratransit service. They count trips, not people, and the methods can change over time. Bridges and Tunnels (BT) counts vehicle crossings, not riders. Modes with no baseline (the central business district congestion-pricing entries, which only begin in 2025) are not shown.</p>
+          <p>Some single days look like data glitches, such as a bus count near zero in May 2020, and a few days are missing for some modes. Rows with a missing or zero count were dropped. A write-up of what the comeback means, with fuller caveats, is planned as the next step.</p>
+        </div>
+        <aside class="data-source" aria-label="Data source">
+          <dl>
+            <dt>Dataset</dt><dd>MTA Daily Ridership and Traffic: Beginning 2020</dd>
+            <dt>Agency</dt><dd>Metropolitan Transportation Authority (MTA)</dd>
+            <dt>Link</dt><dd><a href="https://data.ny.gov/d/sayj-mze2">https://data.ny.gov/d/sayj-mze2</a></dd>
+            <dt>Data pulled</dt><dd id="pulled2">2026-11-10</dd>
+          </dl>
+        </aside>
+        <div class="links">
+          <a href="https://github.com/teddy-barfield/teddy-barfield.github.io/blob/main/scripts/fetch_mta_ridership.py">View the code</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Teddy Barfield, 2026</div>
+  </footer>
+
+  <script src="../menu.js"></script>
+  <script>
+  window.addEventListener('load', function () {
+    var BASE = '../data/mta-ridership/';
+    function csv(text) {
+      var lines = text.split(/\r?\n/).filter(Boolean), h = lines.shift().split(',');
+      return lines.map(function (l) { var p = l.split(','), o = {}; h.forEach(function (k, i) { o[k] = p[i]; }); return o; });
+    }
+    function get(u) { return fetch(BASE + u).then(function (r) { if (!r.ok) throw new Error(u); return r; }); }
+    Promise.all([get('monthly_share.csv').then(function (r) { return r.text(); }), get('latest_summary.csv').then(function (r) { return r.text(); }), get('daily_share.csv').then(function (r) { return r.text(); }), get('meta.json').then(function (r) { return r.json(); })])
+    .then(function (res) { init(csv(res[0]), csv(res[1]), csv(res[2]), res[3]); })
+    .catch(function (e) { document.getElementById('lede').textContent = 'The data files could not be loaded (' + e.message + ').'; });
+
+    var MN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var NAMES = { Subway: 'Subway', Bus: 'Bus', LIRR: 'Long Island Rail Road', MNR: 'Metro-North Railroad', SIR: 'Staten Island Railway', AAR: 'Access-A-Ride', BT: 'Bridges and Tunnels (vehicles)' };
+    var DEFAULT_ON = { Subway: 1, Bus: 1, LIRR: 1, MNR: 1 };
+    function pct(x) { return Math.round(x * 100) + '%'; }
+    function ym(s) { var p = s.split('-'); return MN[+p[1] - 1] + ' ' + p[0]; }
+    function ymd(s) { var p = s.split('-'); return MN[+p[1] - 1] + ' ' + (+p[2]) + ', ' + p[0]; }
+    function nf(n) { return Number(n).toLocaleString('en-US'); }
+    function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+    function init(mon, sum, daily, meta) {
+      document.getElementById('pulled').textContent = meta.pulled;
+      document.getElementById('pulled2').textContent = meta.pulled;
+      document.getElementById('bwin').textContent = ymd(meta.baseline_window[0]) + ' to ' + ymd(meta.baseline_window[1]);
+      var modes = meta.modes_with_baseline;
+      var S = {}; sum.forEach(function (r) { S[r.mode] = r; });
+      var months = [], M = {};
+      mon.forEach(function (r) { (M[r.mode] = M[r.mode] || {})[r.month] = r; if (months.indexOf(r.month) < 0) months.push(r.month); });
+      months.sort();
+      var lastMonth = months[months.length - 1];
+      var sub = S.Subway, bus = S.Bus;
+      var first28 = ymd(daily.filter(function (r) { return r.mode === 'Subway'; }).slice(-28)[0].date);
+      var last = meta.last_date;
+
+      document.getElementById('lede').textContent = 'Over the 28 days to ' + ymd(last) + ', the subway carried on average ' + pct(+sub.last28_mean_share) + ' of its early-March 2020 ridership, up from a low of ' + pct(+sub.low_share) + ' on ' + ymd(sub.low_date) + '.';
+
+      var stats = document.getElementById('stats');
+      [[pct(+sub.last28_mean_share), 'Subway, last 28 days vs. baseline'], [pct(+sub.last28_weekday_share), 'Subway, weekdays only'], [pct(+sub.low_share), 'Subway low point (' + ymd(sub.low_date) + ')'], [pct(+bus.last28_mean_share), 'Bus, last 28 days vs. baseline'], [pct(+bus.last28_weekday_share), 'Bus, weekdays only']].forEach(function (a) {
+        var l = document.createElement('li'); l.innerHTML = '<span class="num">' + a[0] + '</span><span class="lbl">' + a[1] + '</span>'; stats.appendChild(l);
+      });
+
+      // Chart 1
+      var ds = modes.filter(function (m) { return M[m]; }).map(function (m) {
+        return { label: NAMES[m], hidden: !DEFAULT_ON[m], data: months.map(function (k) { return M[m][k] ? +M[m][k].mean_share_all * 100 : null; }), spanGaps: false, pointRadius: 0 };
+      });
+      var c1 = NYCharts.line(document.getElementById('c-mode'), months.map(ym), ds, { yTitle: 'Share of baseline (%)' });
+      c1.options.scales.x.ticks = { maxTicksLimit: 8, autoSkip: true, maxRotation: 0 };
+      c1.options.plugins.tooltip = { callbacks: { label: function (c) { return c.dataset.label + ': ' + Math.round(c.parsed.y) + '%'; } } };
+      c1.update();
+      document.getElementById('cap-mode').textContent = 'Monthly average daily ridership as a share of the baseline week, ' + ym(months[0]) + ' to ' + ym(lastMonth) + '. Shown: subway, bus, Long Island Rail Road and Metro-North; other modes are in the legend.';
+
+      document.getElementById('cap-modet').textContent = 'Ridership as a share of the baseline, last 28 days to ' + ymd(last) + ' (from ' + first28 + ' for the subway)';
+      document.getElementById('tb-mode').innerHTML = modes.map(function (m) {
+        var s = S[m]; return '<tr><th scope="row">' + NAMES[m] + '</th><td class="num">' + pct(+s.last28_mean_share) + '</td><td class="num">' + pct(+s.last28_weekday_share) + '</td><td class="num">' + pct(+s.last28_weekend_share) + '</td><td class="num">' + pct(+s.low_share) + '</td><td>' + ymd(s.low_date) + '</td></tr>';
+      }).join('');
+
+      // Chart 2
+      var sel2 = document.getElementById('m2'), sel3 = document.getElementById('m3');
+      modes.forEach(function (m) { [sel2, sel3].forEach(function (s) { var o = document.createElement('option'); o.value = m; o.textContent = NAMES[m]; s.appendChild(o); }); });
+      var c2;
+      function drawWk() {
+        var m = sel2.value;
+        var wd = months.map(function (k) { return M[m][k] ? +M[m][k].mean_share_weekday * 100 : null; });
+        var we = months.map(function (k) { return M[m][k] ? +M[m][k].mean_share_weekend * 100 : null; });
+        if (c2) c2.destroy();
+        c2 = NYCharts.line(document.getElementById('c-wk'), months.map(ym), [{ label: 'Weekdays', data: wd, pointRadius: 0 }, { label: 'Weekends', data: we, pointRadius: 0 }], { yTitle: 'Share of baseline (%)' });
+        c2.options.scales.x.ticks = { maxTicksLimit: 8, autoSkip: true, maxRotation: 0 };
+        c2.options.plugins.tooltip = { callbacks: { label: function (c) { return c.dataset.label + ': ' + Math.round(c.parsed.y) + '%'; } } };
+        c2.update();
+        var s = S[m];
+        document.getElementById('cap-wk').textContent = NAMES[m] + ', last 28 days: weekdays ' + pct(+s.last28_weekday_share) + ' of baseline, weekends ' + pct(+s.last28_weekend_share) + '.';
+      }
+      sel2.addEventListener('change', drawWk); drawWk();
+
+      // Biggest days
+      var CUT = '2021-01-01';
+      function drawTop() {
+        var m = sel3.value;
+        var rows = daily.filter(function (r) { return r.mode === m && r.date >= CUT; }).sort(function (a, b) { return +b.count - +a.count; }).slice(0, 10);
+        document.getElementById('cap-top').textContent = NAMES[m] + ': ten days with the most riders since January 1, 2021';
+        document.getElementById('tb-top').innerHTML = rows.map(function (r, i) {
+          return '<tr><th scope="row">' + (i + 1) + '</th><td>' + ymd(r.date) + '</td><td>' + cap(r.day_type) + '</td><td class="num">' + nf(r.count) + '</td><td class="num">' + pct(+r.share_of_baseline) + '</td></tr>';
+        }).join('');
+        var wk = rows.filter(function (r) { return r.day_type !== 'weekday'; }).length;
+        document.getElementById('note-top').textContent = wk + ' of these ten days fall on a weekend. Ranking is by raw riders; the share column is shown for context.';
+      }
+      sel3.addEventListener('change', drawTop); drawTop();
+
+      document.getElementById('method').textContent = 'The share of baseline for a day is that day\'s count divided by the baseline for the same type of day (weekday, Saturday or Sunday) in the week of ' + ymd(meta.baseline_window[0]) + '. Comparing like with like keeps the weekly rhythm from distorting the picture. Monthly figures are the simple average of the daily shares in that month; the latest month (' + ym(lastMonth) + ') has only the days available so far. Data run from ' + ymd(meta.first_date) + ' to ' + ymd(last) + '. A comparison with a single early-March week also ignores long-run trends that began before the pandemic.';
+    }
+  });
+  </script>
+</body>
+</html>
