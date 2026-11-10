@@ -1,0 +1,3 @@
+# Run Log
+
+- 2026-11-10 · 0.1 Audit · Added `ROADMAP.md`, `LOG.md` and `docs/site-audit.md` (inventory of all 5 pages, shared CSS/JS, nav, projects, Chart.js usage, plus recommendations for 0.2 and 0.3). No existing page changed. · Review: (1) the run sandbox blocks `data.ny.gov` and `cdnjs.cloudflare.com`, so data pulls and the chart quality gate can't run until both hosts are allowed; (2) the nav is copy-pasted into every page, including off-limits ones, so 0.3 needs a ruling on nav-only edits; (3) the NYC causes-of-death page scrolls sideways at 390px; (4) `files/resume.pdf` and `files/sample-chapter.pdf` are linked but missing. Details in `docs/site-audit.md` §8–§10.
