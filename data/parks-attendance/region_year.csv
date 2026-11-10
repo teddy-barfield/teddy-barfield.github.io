@@ -1,0 +1,254 @@
+year,region,attendance
+2003,Allegany,1759375
+2003,Central,2308535
+2003,Finger Lakes,2623340
+2003,Genesee,1112445
+2003,Long Island,18099340
+2003,New York City,2988114
+2003,Niagara,9661058
+2003,Palisades,6564964
+2003,Saratoga/Capital,2321285
+2003,Taconic,2903396
+2003,Thousand Islands,1600248
+2004,Allegany,1804064
+2004,Central,2271061
+2004,Finger Lakes,2523107
+2004,Genesee,1096160
+2004,Long Island,18239364
+2004,New York City,3010763
+2004,Niagara,9924038
+2004,Palisades,6660602
+2004,Saratoga/Capital,2263622
+2004,Taconic,3369832
+2004,Thousand Islands,1608327
+2005,Allegany,1746245
+2005,Central,2372367
+2005,Finger Lakes,2700128
+2005,Genesee,1206379
+2005,Long Island,19264996
+2005,New York City,3825780
+2005,Niagara,10054181
+2005,Palisades,7083780
+2005,Saratoga/Capital,2307856
+2005,Taconic,3346615
+2005,Thousand Islands,1651367
+2006,Allegany,1760493
+2006,Central,2305863
+2006,Finger Lakes,2676004
+2006,Genesee,1153031
+2006,Long Island,19334637
+2006,New York City,3743385
+2006,Niagara,9956788
+2006,Palisades,5729895
+2006,Saratoga/Capital,2954796
+2006,Taconic,3207133
+2006,Thousand Islands,1553839
+2007,Allegany,1979440
+2007,Central,2398685
+2007,Finger Lakes,2966589
+2007,Genesee,1257942
+2007,Long Island,19858285
+2007,New York City,4478367
+2007,Niagara,10252680
+2007,Palisades,5216457
+2007,Saratoga/Capital,3424273
+2007,Taconic,3179430
+2007,Thousand Islands,1734428
+2008,Allegany,1983772
+2008,Central,2253429
+2008,Finger Lakes,2867426
+2008,Genesee,1217312
+2008,Long Island,18944914
+2008,New York City,5150843
+2008,Niagara,10162767
+2008,Palisades,4227175
+2008,Saratoga/Capital,2998744
+2008,Taconic,3270885
+2008,Thousand Islands,1621704
+2009,Allegany,1899800
+2009,Central,2341725
+2009,Finger Lakes,2962126
+2009,Genesee,1204916
+2009,Long Island,19442411
+2009,New York City,5739272
+2009,Niagara,10140727
+2009,Palisades,4630668
+2009,Saratoga/Capital,3137564
+2009,Taconic,3495353
+2009,Thousand Islands,1669880
+2010,Allegany,1776813
+2010,Central,2367535
+2010,Finger Lakes,3081090
+2010,Genesee,1255227
+2010,Long Island,19387955
+2010,New York City,5694216
+2010,Niagara,10154559
+2010,Palisades,5177180
+2010,Saratoga/Capital,3652799
+2010,Taconic,3604750
+2010,Thousand Islands,1546227
+2011,Allegany,1626895
+2011,Central,2332180
+2011,Finger Lakes,3018917
+2011,Genesee,1270584
+2011,Long Island,18061050
+2011,New York City,6086626
+2011,Niagara,10869739
+2011,Palisades,5037197
+2011,Saratoga/Capital,3600095
+2011,Taconic,3761480
+2011,Thousand Islands,1557046
+2012,Allegany,1725878
+2012,Central,2464896
+2012,Finger Lakes,3238770
+2012,Genesee,1286431
+2012,Long Island,18844077
+2012,New York City,6650360
+2012,Niagara,10963196
+2012,Palisades,5289280
+2012,Saratoga/Capital,3938349
+2012,Taconic,4147408
+2012,Thousand Islands,1761854
+2013,Allegany,1780147
+2013,Central,2607027
+2013,Finger Lakes,3227657
+2013,Genesee,1270883
+2013,Long Island,16581295
+2013,New York City,7510820
+2013,Niagara,11725733
+2013,Palisades,4816103
+2013,Saratoga/Capital,4677359
+2013,Taconic,4234176
+2013,Thousand Islands,1706698
+2014,Allegany,1646722
+2014,Central,2618880
+2014,Finger Lakes,3360582
+2014,Genesee,1272363
+2014,Long Island,19168871
+2014,New York City,7115713
+2014,Niagara,11609412
+2014,Palisades,4765288
+2014,Saratoga/Capital,4811799
+2014,Taconic,4037599
+2014,Thousand Islands,1735891
+2015,Allegany,1798127
+2015,Central,2736143
+2015,Finger Lakes,3839306
+2015,Genesee,1550206
+2015,Long Island,20883339
+2015,New York City,6653344
+2015,Niagara,12251419
+2015,Palisades,5315831
+2015,Saratoga/Capital,4255848
+2015,Taconic,4427485
+2015,Thousand Islands,1753969
+2016,Allegany,1828351
+2016,Central,2582932
+2016,Finger Lakes,4070239
+2016,Genesee,1514113
+2016,Long Island,23152535
+2016,New York City,7317506
+2016,Niagara,12775202
+2016,Palisades,5609723
+2016,Saratoga/Capital,4398989
+2016,Taconic,4454918
+2016,Thousand Islands,1647217
+2017,Allegany,1856813
+2017,Central,3769387
+2017,Finger Lakes,4079559
+2017,Genesee,1459623
+2017,Long Island,23952784
+2017,New York City,7104198
+2017,Niagara,12782470
+2017,Palisades,5372471
+2017,Saratoga/Capital,5101623
+2017,Taconic,4555468
+2017,Thousand Islands,1537172
+2018,Allegany,1871476
+2018,Central,4517850
+2018,Finger Lakes,4103733
+2018,Genesee,1471587
+2018,Long Island,25622088
+2018,New York City,7386928
+2018,Niagara,12983512
+2018,Palisades,5301655
+2018,Saratoga/Capital,4900395
+2018,Taconic,4289530
+2018,Thousand Islands,1736899
+2019,Allegany,1852749
+2019,Central,4505792
+2019,Finger Lakes,4325466
+2019,Genesee,1561922
+2019,Long Island,26884995
+2019,New York City,7764255
+2019,Niagara,12770623
+2019,Palisades,5635736
+2019,Saratoga/Capital,5315412
+2019,Taconic,4927398
+2019,Thousand Islands,1565721
+2020,Allegany,1658619
+2020,Central,4456288
+2020,Finger Lakes,4369970
+2020,Genesee,1743537
+2020,Long Island,32160148
+2020,New York City,5997758
+2020,Niagara,8898644
+2020,Palisades,6244427
+2020,Saratoga/Capital,5138379
+2020,Taconic,5526363
+2020,Thousand Islands,1825567
+2021,Allegany,1907937
+2021,Central,5017472
+2021,Finger Lakes,4361638
+2021,Genesee,1690972
+2021,Long Island,29682798
+2021,New York City,4364413
+2021,Niagara,12701123
+2021,Palisades,6044094
+2021,Saratoga/Capital,5644610
+2021,Taconic,5134159
+2021,Thousand Islands,1897977
+2022,Allegany,1876916
+2022,Central,5099321
+2022,Finger Lakes,4427762
+2022,Genesee,1632162
+2022,Long Island,28185830
+2022,New York City,5755688
+2022,Niagara,13429118
+2022,Palisades,6349490
+2022,Saratoga/Capital,5663398
+2022,Taconic,4439844
+2022,Thousand Islands,2588722
+2023,Allegany,1909523
+2023,Central,5393959
+2023,Finger Lakes,4448674
+2023,Genesee,1801541
+2023,Long Island,28951194
+2023,New York City,8253158
+2023,Niagara,13538884
+2023,Palisades,6703743
+2023,Saratoga/Capital,5971237
+2023,Taconic,5194843
+2023,Thousand Islands,1942200
+2024,Allegany,1927855
+2024,Central,4719270
+2024,Finger Lakes,5312043
+2024,Genesee,1919228
+2024,Long Island,30345995
+2024,New York City,9520736
+2024,Niagara,13731581
+2024,Palisades,7310719
+2024,Saratoga/Capital,6477235
+2024,Taconic,5151644
+2024,Thousand Islands,1962431
+2025,Allegany,1999478
+2025,Central,5349254
+2025,Finger Lakes,5348104
+2025,Genesee,2196012
+2025,Long Island,28706873
+2025,New York City,10108307
+2025,Niagara,13203071
+2025,Palisades,6263815
+2025,Saratoga/Capital,6371741
+2025,Taconic,4585285
+2025,Thousand Islands,1900680

@@ -1,0 +1,35 @@
+{
+  "dataset": "State Park Annual Attendance Figures by Facility: Beginning 2003",
+  "agency": "New York State Office of Parks, Recreation and Historic Preservation (OPRHP)",
+  "resource_id": "8f3n-xj78",
+  "url": "https://data.ny.gov/d/8f3n-xj78",
+  "api": "https://data.ny.gov/resource/8f3n-xj78.json",
+  "pulled": "2026-11-10",
+  "rows_fetched": 5499,
+  "rows_kept": 5499,
+  "dropped": {
+    "missing_field": 0,
+    "duplicate": 0
+  },
+  "years": [
+    2003,
+    2025
+  ],
+  "facilities": 264,
+  "regions": [
+    "Allegany",
+    "Central",
+    "Finger Lakes",
+    "Genesee",
+    "Long Island",
+    "New York City",
+    "Niagara",
+    "Palisades",
+    "Saratoga/Capital",
+    "Taconic",
+    "Thousand Islands"
+  ],
+  "facilities_continuous": 170,
+  "growth_rule": "reported above zero in every year, average of 2003-2005 at least 50000, growth = avg 2023-2025 / avg 2003-2005 - 1",
+  "zero_attendance_rows": 291
+}

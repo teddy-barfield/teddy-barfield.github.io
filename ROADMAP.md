@@ -40,7 +40,7 @@ Dataset: Automobile Insurance Company Complaint Rankings: Beginning 2009 (DFS)
 
 Dataset: State Park Annual Attendance Figures by Facility: Beginning 2003 (OPRHP)
 
-- [ ] 2.1 Write the fetch and clean script. Total attendance by year, region and facility.
+- [x] 2.1 Write the fetch and clean script. Total attendance by year, region and facility.
 - [ ] 2.2 Build the page: the record-attendance trend, the top 15 parks, the fastest-growing parks and a "hidden gems" list.
 - [ ] 2.3 Write it up with an optimistic headline ("New Yorkers keep going outside"). Add a small "find a park near you" filter by region.
 
