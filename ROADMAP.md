@@ -51,7 +51,7 @@ Dataset: Motor Vehicle Crashes – Case / Individual / Vehicle Information (DMV)
 - [x] 3.1 Aggregate crash counts and severity by county, month, hour, weather and road condition, using server-side aggregation.
 - [x] 3.2 Add a frequency and severity analysis (the actuarial angle): crash frequency vs. severity mix by county and time of day.
 - [x] 3.3 Build the page: a county map or ranked bars, an hour-by-day heatmap and condition breakdowns.
-- [ ] 3.4 Write up the methodology and caveats (reporting thresholds, exposure not normalized → add county population or VMT if feasible).
+- [x] 3.4 Write up the methodology and caveats (reporting thresholds, exposure not normalized → add county population or VMT if feasible).
 
 ## Milestone 4 — Labor & Economy: Unemployment Across NY (nights 14–16)
 
