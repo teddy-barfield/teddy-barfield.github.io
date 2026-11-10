@@ -1,0 +1,2323 @@
+kind,area,year,months,avg_labor_force,rate
+county,Albany County,2000,12,154342,3.32
+county,Albany County,2001,12,154800,3.34
+county,Albany County,2002,12,157775,3.97
+county,Albany County,2003,12,157808,4.29
+county,Albany County,2004,12,158392,4.25
+county,Albany County,2005,12,159225,3.93
+county,Albany County,2006,12,159533,3.82
+county,Albany County,2007,12,158408,3.79
+county,Albany County,2008,12,159408,4.82
+county,Albany County,2009,12,159142,6.91
+county,Albany County,2010,12,161742,7.14
+county,Albany County,2011,12,158958,6.98
+county,Albany County,2012,12,161283,7.21
+county,Albany County,2013,12,161883,6.22
+county,Albany County,2014,12,158650,4.92
+county,Albany County,2015,12,160250,4.36
+county,Albany County,2016,12,161600,4.1
+county,Albany County,2017,12,161800,4.19
+county,Albany County,2018,12,161875,3.65
+county,Albany County,2019,12,162225,3.48
+county,Albany County,2020,12,160633,6.89
+county,Albany County,2021,12,159375,4.42
+county,Albany County,2022,12,160283,3.08
+county,Albany County,2023,12,163175,3.15
+county,Albany County,2024,12,162758,3.33
+county,Albany County,2025,11,164382,3.37
+county,Albany County,2026,9,166033,3.75
+county,Allegany County,2000,12,22692,4.85
+county,Allegany County,2001,12,23017,4.74
+county,Allegany County,2002,12,23467,5.47
+county,Allegany County,2003,12,23392,6.59
+county,Allegany County,2004,12,23558,6.54
+county,Allegany County,2005,12,23542,5.81
+county,Allegany County,2006,12,23525,5.1
+county,Allegany County,2007,12,23350,5.35
+county,Allegany County,2008,12,23950,6.37
+county,Allegany County,2009,12,23933,8.88
+county,Allegany County,2010,12,24292,9.37
+county,Allegany County,2011,12,23758,9.01
+county,Allegany County,2012,12,23783,8.55
+county,Allegany County,2013,12,23967,7.72
+county,Allegany County,2014,12,23542,6.16
+county,Allegany County,2015,12,20583,6.52
+county,Allegany County,2016,12,20933,6.29
+county,Allegany County,2017,12,20575,6.32
+county,Allegany County,2018,12,20358,5.36
+county,Allegany County,2019,12,20142,5.17
+county,Allegany County,2020,12,19933,7.65
+county,Allegany County,2021,12,19667,4.92
+county,Allegany County,2022,12,19542,4.01
+county,Allegany County,2023,12,19242,4.24
+county,Allegany County,2024,12,19200,4.38
+county,Allegany County,2025,11,19282,4.48
+county,Allegany County,2026,9,19267,5.07
+county,Bronx County,2000,12,485483,7.09
+county,Bronx County,2001,12,484258,7.41
+county,Bronx County,2002,12,498267,9.76
+county,Bronx County,2003,12,498750,10.51
+county,Bronx County,2004,12,501825,9.11
+county,Bronx County,2005,12,503367,7.38
+county,Bronx County,2006,12,502767,6.48
+county,Bronx County,2007,12,507883,6.55
+county,Bronx County,2008,12,522042,7.46
+county,Bronx County,2009,12,532917,12.03
+county,Bronx County,2010,12,586667,12.08
+county,Bronx County,2011,12,590133,12.0
+county,Bronx County,2012,12,602600,12.57
+county,Bronx County,2013,12,612658,11.8
+county,Bronx County,2014,12,618825,9.57
+county,Bronx County,2015,12,622050,7.6
+county,Bronx County,2016,12,620150,7.12
+county,Bronx County,2017,12,626083,6.21
+county,Bronx County,2018,12,620508,5.73
+county,Bronx County,2019,12,617908,5.45
+county,Bronx County,2020,12,605317,16.24
+county,Bronx County,2021,12,616208,13.95
+county,Bronx County,2022,12,599592,7.9
+county,Bronx County,2023,12,602292,6.63
+county,Bronx County,2024,12,612025,6.6
+county,Bronx County,2025,11,620527,7.02
+county,Bronx County,2026,9,621367,6.98
+county,Broome County,2000,12,97950,3.62
+county,Broome County,2001,12,98108,4.26
+county,Broome County,2002,12,98858,5.87
+county,Broome County,2003,12,96708,5.86
+county,Broome County,2004,12,96117,5.51
+county,Broome County,2005,12,96275,4.89
+county,Broome County,2006,12,97033,4.58
+county,Broome County,2007,12,96667,4.34
+county,Broome County,2008,12,97442,5.52
+county,Broome County,2009,12,97650,8.33
+county,Broome County,2010,12,98000,8.91
+county,Broome County,2011,12,95125,8.66
+county,Broome County,2012,12,94417,8.83
+county,Broome County,2013,12,92567,7.97
+county,Broome County,2014,12,88758,6.65
+county,Broome County,2015,12,87775,6.0
+county,Broome County,2016,12,89142,5.39
+county,Broome County,2017,12,88717,5.42
+county,Broome County,2018,12,88767,4.72
+county,Broome County,2019,12,88317,4.43
+county,Broome County,2020,12,86317,8.14
+county,Broome County,2021,12,84992,5.16
+county,Broome County,2022,12,84708,3.74
+county,Broome County,2023,12,85733,3.7
+county,Broome County,2024,12,85383,3.97
+county,Broome County,2025,11,85845,4.17
+county,Broome County,2026,9,86867,4.55
+county,Cattaraugus County,2000,12,40958,4.5
+county,Cattaraugus County,2001,12,41050,5.01
+county,Cattaraugus County,2002,12,41783,5.72
+county,Cattaraugus County,2003,12,42167,5.85
+county,Cattaraugus County,2004,12,42217,6.08
+county,Cattaraugus County,2005,12,42125,5.42
+county,Cattaraugus County,2006,12,41933,5.11
+county,Cattaraugus County,2007,12,41183,4.98
+county,Cattaraugus County,2008,12,41458,6.01
+county,Cattaraugus County,2009,12,41742,8.76
+county,Cattaraugus County,2010,12,39742,9.77
+county,Cattaraugus County,2011,12,38725,9.45
+county,Cattaraugus County,2012,12,38483,9.53
+county,Cattaraugus County,2013,12,38367,8.75
+county,Cattaraugus County,2014,12,36950,6.99
+county,Cattaraugus County,2015,12,35617,6.32
+county,Cattaraugus County,2016,12,35442,6.04
+county,Cattaraugus County,2017,12,34892,6.11
+county,Cattaraugus County,2018,12,34700,5.28
+county,Cattaraugus County,2019,12,34375,4.85
+county,Cattaraugus County,2020,12,33650,9.16
+county,Cattaraugus County,2021,12,33075,5.29
+county,Cattaraugus County,2022,12,32567,4.04
+county,Cattaraugus County,2023,12,32942,4.05
+county,Cattaraugus County,2024,12,32767,4.07
+county,Cattaraugus County,2025,11,33018,4.21
+county,Cattaraugus County,2026,9,33400,4.59
+county,Cayuga County,2000,12,40275,3.89
+county,Cayuga County,2001,12,39925,4.26
+county,Cayuga County,2002,12,41250,4.87
+county,Cayuga County,2003,12,41383,5.3
+county,Cayuga County,2004,12,41700,5.2
+county,Cayuga County,2005,12,41858,4.86
+county,Cayuga County,2006,12,41517,4.64
+county,Cayuga County,2007,12,41050,4.36
+county,Cayuga County,2008,12,41500,5.52
+county,Cayuga County,2009,12,41650,8.42
+county,Cayuga County,2010,12,39958,8.7
+county,Cayuga County,2011,12,39233,8.18
+county,Cayuga County,2012,12,39283,8.42
+county,Cayuga County,2013,12,39117,7.56
+county,Cayuga County,2014,12,37958,6.04
+county,Cayuga County,2015,12,37492,5.33
+county,Cayuga County,2016,12,36792,5.19
+county,Cayuga County,2017,12,36025,5.07
+county,Cayuga County,2018,12,36167,4.49
+county,Cayuga County,2019,12,36125,4.11
+county,Cayuga County,2020,12,35508,7.77
+county,Cayuga County,2021,12,34800,4.81
+county,Cayuga County,2022,12,34608,3.52
+county,Cayuga County,2023,12,35092,3.44
+county,Cayuga County,2024,12,34883,3.68
+county,Cayuga County,2025,11,34918,3.75
+county,Cayuga County,2026,9,35433,3.98
+county,Chautauqua County,2000,12,67867,4.02
+county,Chautauqua County,2001,12,66950,4.66
+county,Chautauqua County,2002,12,67467,5.63
+county,Chautauqua County,2003,12,66742,5.83
+county,Chautauqua County,2004,12,66833,5.55
+county,Chautauqua County,2005,12,67125,4.82
+county,Chautauqua County,2006,12,67167,4.48
+county,Chautauqua County,2007,12,66633,4.39
+county,Chautauqua County,2008,12,66842,5.51
+county,Chautauqua County,2009,12,66050,8.45
+county,Chautauqua County,2010,12,64033,9.02
+county,Chautauqua County,2011,12,61925,8.25
+county,Chautauqua County,2012,12,61542,8.68
+county,Chautauqua County,2013,12,60650,8.24
+county,Chautauqua County,2014,12,58300,6.82
+county,Chautauqua County,2015,12,58242,6.04
+county,Chautauqua County,2016,12,58292,5.73
+county,Chautauqua County,2017,12,57700,5.79
+county,Chautauqua County,2018,12,57083,4.83
+county,Chautauqua County,2019,12,56642,4.4
+county,Chautauqua County,2020,12,54992,8.36
+county,Chautauqua County,2021,12,54342,5.43
+county,Chautauqua County,2022,12,53800,3.79
+county,Chautauqua County,2023,12,53617,3.98
+county,Chautauqua County,2024,12,53233,4.09
+county,Chautauqua County,2025,11,52973,4.32
+county,Chautauqua County,2026,9,53333,4.79
+county,Chemung County,2000,12,42625,4.28
+county,Chemung County,2001,12,42392,4.93
+county,Chemung County,2002,12,42317,6.46
+county,Chemung County,2003,12,41183,6.5
+county,Chemung County,2004,12,40458,6.08
+county,Chemung County,2005,12,40583,5.38
+county,Chemung County,2006,12,40867,4.85
+county,Chemung County,2007,12,40875,4.51
+county,Chemung County,2008,12,41183,5.52
+county,Chemung County,2009,12,41083,9.09
+county,Chemung County,2010,12,41667,8.58
+county,Chemung County,2011,12,40975,7.89
+county,Chemung County,2012,12,40725,8.57
+county,Chemung County,2013,12,39892,8.13
+county,Chemung County,2014,12,38492,6.28
+county,Chemung County,2015,12,37892,5.92
+county,Chemung County,2016,12,38417,5.51
+county,Chemung County,2017,12,37842,5.22
+county,Chemung County,2018,12,37617,4.41
+county,Chemung County,2019,12,37492,3.82
+county,Chemung County,2020,12,37408,8.15
+county,Chemung County,2021,12,36192,5.04
+county,Chemung County,2022,12,35867,3.53
+county,Chemung County,2023,12,35825,3.65
+county,Chemung County,2024,12,35342,3.73
+county,Chemung County,2025,11,35055,3.86
+county,Chemung County,2026,9,35389,4.14
+county,Chenango County,2000,12,24417,3.99
+county,Chenango County,2001,12,24517,4.49
+county,Chenango County,2002,12,24642,5.58
+county,Chenango County,2003,12,24208,5.85
+county,Chenango County,2004,12,24050,5.65
+county,Chenango County,2005,12,24275,4.98
+county,Chenango County,2006,12,24733,4.82
+county,Chenango County,2007,12,24350,4.89
+county,Chenango County,2008,12,24475,6.37
+county,Chenango County,2009,12,24433,9.11
+county,Chenango County,2010,12,23733,9.41
+county,Chenango County,2011,12,23958,8.77
+county,Chenango County,2012,12,24233,8.77
+county,Chenango County,2013,12,24267,7.49
+county,Chenango County,2014,12,23392,6.27
+county,Chenango County,2015,12,23333,5.39
+county,Chenango County,2016,12,22383,5.21
+county,Chenango County,2017,12,21958,5.5
+county,Chenango County,2018,12,21950,4.78
+county,Chenango County,2019,12,21542,4.41
+county,Chenango County,2020,12,21333,6.99
+county,Chenango County,2021,12,21092,4.58
+county,Chenango County,2022,12,20942,3.38
+county,Chenango County,2023,12,21033,3.45
+county,Chenango County,2024,12,21075,3.44
+county,Chenango County,2025,11,21473,3.6
+county,Chenango County,2026,9,21711,3.84
+county,Clinton County,2000,12,38467,4.68
+county,Clinton County,2001,12,38783,4.43
+county,Clinton County,2002,12,39692,5.42
+county,Clinton County,2003,12,39875,6.06
+county,Clinton County,2004,12,39833,6.17
+county,Clinton County,2005,12,40017,5.27
+county,Clinton County,2006,12,40075,5.32
+county,Clinton County,2007,12,39692,5.48
+county,Clinton County,2008,12,39692,6.49
+county,Clinton County,2009,12,39858,9.49
+county,Clinton County,2010,12,39783,10.01
+county,Clinton County,2011,12,38575,9.63
+county,Clinton County,2012,12,38158,9.61
+county,Clinton County,2013,12,37450,8.52
+county,Clinton County,2014,12,36300,6.63
+county,Clinton County,2015,12,36333,5.85
+county,Clinton County,2016,12,36142,5.37
+county,Clinton County,2017,12,36592,5.24
+county,Clinton County,2018,12,36725,4.31
+county,Clinton County,2019,12,36600,4.17
+county,Clinton County,2020,12,35717,7.77
+county,Clinton County,2021,12,34983,4.72
+county,Clinton County,2022,12,34875,3.37
+county,Clinton County,2023,12,34883,3.39
+county,Clinton County,2024,12,33917,3.76
+county,Clinton County,2025,11,33609,4.06
+county,Clinton County,2026,9,33711,4.35
+county,Columbia County,2000,12,31408,3.45
+county,Columbia County,2001,12,31125,3.51
+county,Columbia County,2002,12,31317,4.34
+county,Columbia County,2003,12,31333,4.44
+county,Columbia County,2004,12,31867,4.42
+county,Columbia County,2005,12,32000,3.88
+county,Columbia County,2006,12,32342,3.66
+county,Columbia County,2007,12,31692,3.81
+county,Columbia County,2008,12,31658,4.79
+county,Columbia County,2009,12,31475,7.49
+county,Columbia County,2010,12,32183,7.46
+county,Columbia County,2011,12,31583,7.2
+county,Columbia County,2012,12,31792,7.16
+county,Columbia County,2013,12,32067,6.16
+county,Columbia County,2014,12,31583,4.75
+county,Columbia County,2015,12,31758,4.01
+county,Columbia County,2016,12,30692,3.94
+county,Columbia County,2017,12,30408,3.97
+county,Columbia County,2018,12,30550,3.52
+county,Columbia County,2019,12,30417,3.29
+county,Columbia County,2020,12,29583,6.28
+county,Columbia County,2021,12,29208,4.11
+county,Columbia County,2022,12,29067,2.98
+county,Columbia County,2023,12,29275,3.05
+county,Columbia County,2024,12,29192,3.08
+county,Columbia County,2025,11,29191,3.27
+county,Columbia County,2026,9,29622,3.6
+county,Cortland County,2000,12,24092,4.29
+county,Cortland County,2001,12,24692,4.69
+county,Cortland County,2002,12,24650,6.02
+county,Cortland County,2003,12,24375,5.98
+county,Cortland County,2004,12,24042,6.38
+county,Cortland County,2005,12,23942,5.4
+county,Cortland County,2006,12,23783,5.26
+county,Cortland County,2007,12,23683,5.03
+county,Cortland County,2008,12,24000,6.28
+county,Cortland County,2009,12,24333,9.35
+county,Cortland County,2010,12,24525,9.07
+county,Cortland County,2011,12,24458,8.52
+county,Cortland County,2012,12,24575,8.82
+county,Cortland County,2013,12,24483,7.93
+county,Cortland County,2014,12,23883,6.56
+county,Cortland County,2015,12,23542,5.84
+county,Cortland County,2016,12,24050,5.51
+county,Cortland County,2017,12,24067,5.47
+county,Cortland County,2018,12,23925,4.81
+county,Cortland County,2019,12,23942,4.46
+county,Cortland County,2020,12,23233,7.5
+county,Cortland County,2021,12,22875,4.92
+county,Cortland County,2022,12,22917,3.78
+county,Cortland County,2023,12,21983,4.09
+county,Cortland County,2024,12,21475,4.19
+county,Cortland County,2025,11,21791,4.3
+county,Cortland County,2026,9,22211,4.8
+county,Delaware County,2000,12,22125,4.18
+county,Delaware County,2001,12,22208,4.17
+county,Delaware County,2002,12,23075,4.77
+county,Delaware County,2003,12,23008,4.85
+county,Delaware County,2004,12,23117,4.61
+county,Delaware County,2005,12,23508,4.43
+county,Delaware County,2006,12,23508,4.25
+county,Delaware County,2007,12,23083,4.26
+county,Delaware County,2008,12,22758,6.01
+county,Delaware County,2009,12,22300,8.74
+county,Delaware County,2010,12,22492,8.89
+county,Delaware County,2011,12,21808,8.79
+county,Delaware County,2012,12,21675,8.92
+county,Delaware County,2013,12,21192,8.02
+county,Delaware County,2014,12,20225,6.59
+county,Delaware County,2015,12,19725,6.04
+county,Delaware County,2016,12,19783,5.56
+county,Delaware County,2017,12,19617,5.31
+county,Delaware County,2018,12,19733,4.65
+county,Delaware County,2019,12,19675,4.45
+county,Delaware County,2020,12,19200,6.94
+county,Delaware County,2021,12,18967,4.7
+county,Delaware County,2022,12,18642,3.71
+county,Delaware County,2023,12,18692,3.97
+county,Delaware County,2024,12,18625,3.98
+county,Delaware County,2025,11,18609,4.15
+county,Delaware County,2026,9,18833,4.72
+county,Dutchess County,2000,12,138742,3.18
+county,Dutchess County,2001,12,140100,3.44
+county,Dutchess County,2002,12,143350,4.23
+county,Dutchess County,2003,12,143675,4.16
+county,Dutchess County,2004,12,145092,4.32
+county,Dutchess County,2005,12,146967,3.92
+county,Dutchess County,2006,12,147633,3.79
+county,Dutchess County,2007,12,145225,3.82
+county,Dutchess County,2008,12,145633,5.08
+county,Dutchess County,2009,12,145058,7.81
+county,Dutchess County,2010,12,149408,7.88
+county,Dutchess County,2011,12,146925,7.57
+county,Dutchess County,2012,12,146975,7.92
+county,Dutchess County,2013,12,146592,6.84
+county,Dutchess County,2014,12,143508,5.36
+county,Dutchess County,2015,12,144850,4.5
+county,Dutchess County,2016,12,148300,4.12
+county,Dutchess County,2017,12,149017,4.15
+county,Dutchess County,2018,12,149958,3.55
+county,Dutchess County,2019,12,151492,3.37
+county,Dutchess County,2020,12,147408,7.22
+county,Dutchess County,2021,12,146608,4.38
+county,Dutchess County,2022,12,149142,2.99
+county,Dutchess County,2023,12,152125,3.01
+county,Dutchess County,2024,12,152600,3.17
+county,Dutchess County,2025,11,153509,3.33
+county,Dutchess County,2026,9,154144,3.65
+county,Erie County,2000,12,466575,4.17
+county,Erie County,2001,12,460417,4.67
+county,Erie County,2002,12,470500,5.46
+county,Erie County,2003,12,470075,5.79
+county,Erie County,2004,12,471375,5.8
+county,Erie County,2005,12,472175,5.2
+county,Erie County,2006,12,471317,4.89
+county,Erie County,2007,12,464350,4.6
+county,Erie County,2008,12,470100,5.65
+county,Erie County,2009,12,471375,8.26
+county,Erie County,2010,12,466367,8.49
+county,Erie County,2011,12,460700,8.06
+county,Erie County,2012,12,463650,8.44
+county,Erie County,2013,12,463517,7.62
+county,Erie County,2014,12,452433,6.14
+county,Erie County,2015,12,453700,5.35
+county,Erie County,2016,12,467067,4.85
+county,Erie County,2017,12,467892,4.99
+county,Erie County,2018,12,467642,4.25
+county,Erie County,2019,12,469042,3.97
+county,Erie County,2020,12,462892,8.88
+county,Erie County,2021,12,457000,5.28
+county,Erie County,2022,12,458658,3.51
+county,Erie County,2023,12,465033,3.53
+county,Erie County,2024,12,461425,3.82
+county,Erie County,2025,11,463491,3.99
+county,Erie County,2026,9,467144,4.34
+county,Essex County,2000,12,18467,4.78
+county,Essex County,2001,12,18567,4.58
+county,Essex County,2002,12,18775,5.15
+county,Essex County,2003,12,18350,5.31
+county,Essex County,2004,12,18608,5.55
+county,Essex County,2005,12,18742,5.38
+county,Essex County,2006,12,18733,5.6
+county,Essex County,2007,12,18517,5.58
+county,Essex County,2008,12,18483,6.63
+county,Essex County,2009,12,18358,9.31
+county,Essex County,2010,12,18750,9.38
+county,Essex County,2011,12,18275,9.12
+county,Essex County,2012,12,18242,9.68
+county,Essex County,2013,12,18233,8.5
+county,Essex County,2014,12,17708,6.87
+county,Essex County,2015,12,17517,5.99
+county,Essex County,2016,12,17708,5.32
+county,Essex County,2017,12,17775,5.25
+county,Essex County,2018,12,17725,4.7
+county,Essex County,2019,12,17742,4.37
+county,Essex County,2020,12,17242,7.78
+county,Essex County,2021,12,17250,4.73
+county,Essex County,2022,12,17008,3.53
+county,Essex County,2023,12,17617,3.5
+county,Essex County,2024,12,17700,3.44
+county,Essex County,2025,11,17855,3.62
+county,Essex County,2026,9,18111,3.93
+county,Franklin County,2000,12,22142,5.68
+county,Franklin County,2001,12,21850,6.03
+county,Franklin County,2002,12,22283,6.13
+county,Franklin County,2003,12,22400,6.77
+county,Franklin County,2004,12,22358,6.56
+county,Franklin County,2005,12,22542,5.8
+county,Franklin County,2006,12,22658,5.44
+county,Franklin County,2007,12,22583,5.46
+county,Franklin County,2008,12,22883,6.85
+county,Franklin County,2009,12,23083,8.66
+county,Franklin County,2010,12,22267,9.09
+county,Franklin County,2011,12,21817,9.17
+county,Franklin County,2012,12,21892,9.74
+county,Franklin County,2013,12,21700,9.06
+county,Franklin County,2014,12,20692,7.33
+county,Franklin County,2015,12,20200,6.52
+county,Franklin County,2016,12,19458,5.87
+county,Franklin County,2017,12,19400,6.06
+county,Franklin County,2018,12,19300,5.14
+county,Franklin County,2019,12,19242,4.81
+county,Franklin County,2020,12,18767,8.17
+county,Franklin County,2021,12,18467,4.96
+county,Franklin County,2022,12,18033,3.74
+county,Franklin County,2023,12,18225,3.75
+county,Franklin County,2024,12,18300,3.78
+county,Franklin County,2025,11,18473,4.18
+county,Franklin County,2026,9,18600,4.42
+county,Fulton County,2000,12,26250,4.63
+county,Fulton County,2001,12,26267,4.44
+county,Fulton County,2002,12,26933,5.04
+county,Fulton County,2003,12,26492,5.76
+county,Fulton County,2004,12,26700,5.74
+county,Fulton County,2005,12,26975,5.59
+county,Fulton County,2006,12,27425,5.2
+county,Fulton County,2007,12,27283,5.25
+county,Fulton County,2008,12,27467,6.67
+county,Fulton County,2009,12,27300,9.77
+county,Fulton County,2010,12,26175,10.82
+county,Fulton County,2011,12,25667,10.68
+county,Fulton County,2012,12,25517,11.27
+county,Fulton County,2013,12,24917,9.73
+county,Fulton County,2014,12,23642,7.65
+county,Fulton County,2015,12,23708,6.5
+county,Fulton County,2016,12,25608,5.3
+county,Fulton County,2017,12,25583,5.28
+county,Fulton County,2018,12,25267,4.62
+county,Fulton County,2019,12,25000,4.43
+county,Fulton County,2020,12,24817,7.69
+county,Fulton County,2021,12,24333,5.03
+county,Fulton County,2022,12,24217,3.68
+county,Fulton County,2023,12,24500,3.78
+county,Fulton County,2024,12,24325,3.94
+county,Fulton County,2025,11,24482,4.08
+county,Fulton County,2026,9,24611,4.56
+county,Genesee County,2000,12,32492,3.95
+county,Genesee County,2001,12,32208,4.29
+county,Genesee County,2002,12,33117,5.39
+county,Genesee County,2003,12,33142,5.56
+county,Genesee County,2004,12,33025,5.63
+county,Genesee County,2005,12,33100,4.88
+county,Genesee County,2006,12,33133,4.5
+county,Genesee County,2007,12,32792,4.47
+county,Genesee County,2008,12,33292,5.56
+county,Genesee County,2009,12,33167,7.79
+county,Genesee County,2010,12,31783,8.18
+county,Genesee County,2011,12,31058,7.86
+county,Genesee County,2012,12,31008,8.06
+county,Genesee County,2013,12,30758,7.04
+county,Genesee County,2014,12,30292,5.5
+county,Genesee County,2015,12,30442,4.93
+county,Genesee County,2016,12,29983,4.64
+county,Genesee County,2017,12,29850,4.8
+county,Genesee County,2018,12,30075,4.18
+county,Genesee County,2019,12,30050,3.85
+county,Genesee County,2020,12,29275,7.17
+county,Genesee County,2021,12,29225,4.31
+county,Genesee County,2022,12,29292,3.19
+county,Genesee County,2023,12,29592,3.21
+county,Genesee County,2024,12,29458,3.42
+county,Genesee County,2025,11,29627,3.44
+county,Genesee County,2026,9,30000,3.7
+county,Greene County,2000,12,22542,4.55
+county,Greene County,2001,12,22492,4.52
+county,Greene County,2002,12,23750,4.95
+county,Greene County,2003,12,23733,5.16
+county,Greene County,2004,12,23275,5.41
+county,Greene County,2005,12,23742,4.88
+county,Greene County,2006,12,24117,4.7
+county,Greene County,2007,12,24067,4.64
+county,Greene County,2008,12,24183,5.86
+county,Greene County,2009,12,24100,8.47
+county,Greene County,2010,12,22142,9.3
+county,Greene County,2011,12,21675,9.46
+county,Greene County,2012,12,21650,10.08
+county,Greene County,2013,12,21517,8.99
+county,Greene County,2014,12,20900,6.86
+county,Greene County,2015,12,20942,5.65
+county,Greene County,2016,12,21592,5.02
+county,Greene County,2017,12,21617,5.05
+county,Greene County,2018,12,21783,4.36
+county,Greene County,2019,12,21400,4.17
+county,Greene County,2020,12,21325,7.78
+county,Greene County,2021,12,21150,4.85
+county,Greene County,2022,12,20975,3.42
+county,Greene County,2023,12,21400,3.5
+county,Greene County,2024,12,21258,3.68
+county,Greene County,2025,11,21373,3.66
+county,Greene County,2026,9,21722,4.19
+county,Hamilton County,2000,12,2858,5.25
+county,Hamilton County,2001,12,2733,5.49
+county,Hamilton County,2002,12,2908,5.16
+county,Hamilton County,2003,12,2942,5.1
+county,Hamilton County,2004,12,3042,5.21
+county,Hamilton County,2005,12,3175,5.25
+county,Hamilton County,2006,12,3117,5.08
+county,Hamilton County,2007,12,3200,4.69
+county,Hamilton County,2008,12,3058,5.72
+county,Hamilton County,2009,12,3008,8.31
+county,Hamilton County,2010,12,2508,9.97
+county,Hamilton County,2011,12,2450,10.2
+county,Hamilton County,2012,12,2475,10.77
+county,Hamilton County,2013,12,2433,9.93
+county,Hamilton County,2014,12,2425,7.56
+county,Hamilton County,2015,12,2458,6.44
+county,Hamilton County,2016,12,2483,6.04
+county,Hamilton County,2017,12,2458,6.78
+county,Hamilton County,2018,12,2417,7.24
+county,Hamilton County,2019,12,2383,6.29
+county,Hamilton County,2020,12,2300,7.25
+county,Hamilton County,2021,12,2325,4.3
+county,Hamilton County,2022,12,2283,4.38
+county,Hamilton County,2023,12,2233,4.85
+county,Hamilton County,2024,12,2100,5.95
+county,Hamilton County,2025,11,2082,4.8
+county,Hamilton County,2026,9,2100,5.29
+county,Herkimer County,2000,12,31600,4.25
+county,Herkimer County,2001,12,31108,4.47
+county,Herkimer County,2002,12,31458,5.43
+county,Herkimer County,2003,12,31358,5.71
+county,Herkimer County,2004,12,31367,5.74
+county,Herkimer County,2005,12,31667,5.32
+county,Herkimer County,2006,12,31417,4.99
+county,Herkimer County,2007,12,30900,4.8
+county,Herkimer County,2008,12,31083,6.03
+county,Herkimer County,2009,12,31208,8.14
+county,Herkimer County,2010,12,31600,8.83
+county,Herkimer County,2011,12,30858,8.8
+county,Herkimer County,2012,12,30675,8.86
+county,Herkimer County,2013,12,30225,8.05
+county,Herkimer County,2014,12,29108,6.81
+county,Herkimer County,2015,12,28742,6.23
+county,Herkimer County,2016,12,29233,5.36
+county,Herkimer County,2017,12,29117,5.52
+county,Herkimer County,2018,12,28867,4.68
+county,Herkimer County,2019,12,29017,4.54
+county,Herkimer County,2020,12,28367,7.81
+county,Herkimer County,2021,12,27967,5.63
+county,Herkimer County,2022,12,27533,3.81
+county,Herkimer County,2023,12,27733,3.79
+county,Herkimer County,2024,12,27733,4.12
+county,Herkimer County,2025,11,27745,4.1
+county,Herkimer County,2026,9,27900,4.62
+county,Jefferson County,2000,12,44850,5.85
+county,Jefferson County,2001,12,44908,6.31
+county,Jefferson County,2002,12,45908,6.84
+county,Jefferson County,2003,12,45942,6.89
+county,Jefferson County,2004,12,46225,7.01
+county,Jefferson County,2005,12,47108,6.16
+county,Jefferson County,2006,12,48425,5.42
+county,Jefferson County,2007,12,48017,5.31
+county,Jefferson County,2008,12,48908,6.78
+county,Jefferson County,2009,12,49583,8.97
+county,Jefferson County,2010,12,50367,9.41
+county,Jefferson County,2011,12,49117,9.84
+county,Jefferson County,2012,12,48633,10.04
+county,Jefferson County,2013,12,48700,9.46
+county,Jefferson County,2014,12,47033,7.65
+county,Jefferson County,2015,12,47050,6.62
+county,Jefferson County,2016,12,47167,6.24
+county,Jefferson County,2017,12,46600,6.4
+county,Jefferson County,2018,12,46242,5.48
+county,Jefferson County,2019,12,45800,5.33
+county,Jefferson County,2020,12,44992,8.37
+county,Jefferson County,2021,12,44783,5.08
+county,Jefferson County,2022,12,45017,4.04
+county,Jefferson County,2023,12,45383,4.13
+county,Jefferson County,2024,12,44908,4.42
+county,Jefferson County,2025,11,45218,4.52
+county,Jefferson County,2026,9,45856,4.87
+county,Kings County,2000,12,1040292,6.33
+county,Kings County,2001,12,1030917,6.57
+county,Kings County,2002,12,1050042,8.67
+county,Kings County,2003,12,1044017,9.0
+county,Kings County,2004,12,1057383,7.55
+county,Kings County,2005,12,1062783,6.08
+county,Kings County,2006,12,1068608,5.21
+county,Kings County,2007,12,1077317,5.22
+county,Kings County,2008,12,1102875,5.94
+county,Kings County,2009,12,1117833,9.93
+county,Kings County,2010,12,1172125,10.01
+county,Kings County,2011,12,1182058,9.62
+county,Kings County,2012,12,1205033,9.9
+county,Kings County,2013,12,1230492,9.38
+county,Kings County,2014,12,1245092,7.47
+county,Kings County,2015,12,1247783,5.77
+county,Kings County,2016,12,1300608,5.11
+county,Kings County,2017,12,1316583,4.46
+county,Kings County,2018,12,1309525,4.09
+county,Kings County,2019,12,1312450,3.94
+county,Kings County,2020,12,1251750,12.0
+county,Kings County,2021,12,1274758,9.92
+county,Kings County,2022,12,1281100,5.63
+county,Kings County,2023,12,1303508,5.07
+county,Kings County,2024,12,1329925,5.14
+county,Kings County,2025,11,1344964,5.38
+county,Kings County,2026,9,1345044,5.23
+county,Lewis County,2000,12,12667,5.07
+county,Lewis County,2001,12,12500,6.13
+county,Lewis County,2002,12,12633,6.46
+county,Lewis County,2003,12,12433,6.57
+county,Lewis County,2004,12,12533,6.58
+county,Lewis County,2005,12,12708,6.1
+county,Lewis County,2006,12,13042,5.43
+county,Lewis County,2007,12,12442,5.36
+county,Lewis County,2008,12,12533,6.58
+county,Lewis County,2009,12,12783,8.93
+county,Lewis County,2010,12,12792,9.45
+county,Lewis County,2011,12,12450,9.71
+county,Lewis County,2012,12,12325,10.28
+county,Lewis County,2013,12,12333,9.73
+county,Lewis County,2014,12,11967,7.73
+county,Lewis County,2015,12,11908,7.0
+county,Lewis County,2016,12,12233,6.61
+county,Lewis County,2017,12,12108,6.4
+county,Lewis County,2018,12,12158,5.21
+county,Lewis County,2019,12,12117,5.23
+county,Lewis County,2020,12,11883,7.36
+county,Lewis County,2021,12,11917,4.9
+county,Lewis County,2022,12,12008,3.82
+county,Lewis County,2023,12,12250,4.01
+county,Lewis County,2024,12,12333,4.26
+county,Lewis County,2025,11,12427,4.39
+county,Lewis County,2026,9,12678,4.91
+county,Livingston County,2000,12,32858,3.98
+county,Livingston County,2001,12,32683,4.39
+county,Livingston County,2002,12,32842,5.71
+county,Livingston County,2003,12,32650,6.1
+county,Livingston County,2004,12,32692,5.96
+county,Livingston County,2005,12,32867,5.02
+county,Livingston County,2006,12,32892,4.81
+county,Livingston County,2007,12,32183,4.76
+county,Livingston County,2008,12,32300,5.86
+county,Livingston County,2009,12,32200,8.62
+county,Livingston County,2010,12,32808,8.26
+county,Livingston County,2011,12,32117,7.71
+county,Livingston County,2012,12,32275,7.98
+county,Livingston County,2013,12,32108,7.19
+county,Livingston County,2014,12,31225,5.82
+county,Livingston County,2015,12,31608,5.3
+county,Livingston County,2016,12,30425,5.12
+county,Livingston County,2017,12,30033,5.11
+county,Livingston County,2018,12,29983,4.39
+county,Livingston County,2019,12,29950,4.17
+county,Livingston County,2020,12,28842,7.17
+county,Livingston County,2021,12,28592,4.58
+county,Livingston County,2022,12,28717,3.42
+county,Livingston County,2023,12,29033,3.47
+county,Livingston County,2024,12,29117,3.78
+county,Livingston County,2025,11,29236,3.79
+county,Livingston County,2026,9,29444,4.3
+county,Madison County,2000,12,34933,3.84
+county,Madison County,2001,12,34983,4.5
+county,Madison County,2002,12,35450,5.31
+county,Madison County,2003,12,35517,5.63
+county,Madison County,2004,12,35650,5.66
+county,Madison County,2005,12,36083,5.15
+county,Madison County,2006,12,36100,4.57
+county,Madison County,2007,12,35875,4.6
+county,Madison County,2008,12,36225,5.68
+county,Madison County,2009,12,36150,8.23
+county,Madison County,2010,12,35633,8.44
+county,Madison County,2011,12,34867,8.22
+county,Madison County,2012,12,34758,8.68
+county,Madison County,2013,12,34667,7.84
+county,Madison County,2014,12,33725,6.4
+county,Madison County,2015,12,33267,5.69
+county,Madison County,2016,12,32625,5.36
+county,Madison County,2017,12,32217,5.56
+county,Madison County,2018,12,32283,4.83
+county,Madison County,2019,12,32175,4.38
+county,Madison County,2020,12,31517,7.83
+county,Madison County,2021,12,30683,4.75
+county,Madison County,2022,12,30708,3.5
+county,Madison County,2023,12,31075,3.67
+county,Madison County,2024,12,31167,3.8
+county,Madison County,2025,11,31636,3.94
+county,Madison County,2026,9,31911,4.28
+county,Monroe County,2000,12,375983,3.5
+county,Monroe County,2001,12,373642,4.11
+county,Monroe County,2002,12,376033,5.39
+county,Monroe County,2003,12,373975,5.54
+county,Monroe County,2004,12,373008,5.27
+county,Monroe County,2005,12,376258,4.55
+county,Monroe County,2006,12,375325,4.32
+county,Monroe County,2007,12,372250,4.33
+county,Monroe County,2008,12,375350,5.42
+county,Monroe County,2009,12,375950,8.0
+county,Monroe County,2010,12,378833,8.21
+county,Monroe County,2011,12,375350,7.74
+county,Monroe County,2012,12,377825,8.02
+county,Monroe County,2013,12,377258,7.16
+county,Monroe County,2014,12,367725,5.84
+county,Monroe County,2015,12,369558,5.08
+county,Monroe County,2016,12,377342,4.66
+county,Monroe County,2017,12,376442,4.8
+county,Monroe County,2018,12,377717,4.13
+county,Monroe County,2019,12,378325,3.92
+county,Monroe County,2020,12,373375,8.07
+county,Monroe County,2021,12,368417,5.11
+county,Monroe County,2022,12,368892,3.43
+county,Monroe County,2023,12,373158,3.43
+county,Monroe County,2024,12,370683,3.66
+county,Monroe County,2025,11,372555,3.79
+county,Monroe County,2026,9,374322,4.23
+county,Montgomery County,2000,12,23575,4.74
+county,Montgomery County,2001,12,23625,4.97
+county,Montgomery County,2002,12,24025,5.76
+county,Montgomery County,2003,12,24008,6.46
+county,Montgomery County,2004,12,24158,6.04
+county,Montgomery County,2005,12,24700,5.33
+county,Montgomery County,2006,12,24983,5.7
+county,Montgomery County,2007,12,24408,5.77
+county,Montgomery County,2008,12,24625,6.94
+county,Montgomery County,2009,12,24475,9.64
+county,Montgomery County,2010,12,23983,10.28
+county,Montgomery County,2011,12,23542,10.34
+county,Montgomery County,2012,12,23542,10.65
+county,Montgomery County,2013,12,23358,9.42
+county,Montgomery County,2014,12,22467,7.57
+county,Montgomery County,2015,12,22525,6.62
+county,Montgomery County,2016,12,22900,5.79
+county,Montgomery County,2017,12,23192,5.61
+county,Montgomery County,2018,12,23125,4.97
+county,Montgomery County,2019,12,22983,4.79
+county,Montgomery County,2020,12,22683,8.34
+county,Montgomery County,2021,12,22250,5.58
+county,Montgomery County,2022,12,22358,3.99
+county,Montgomery County,2023,12,22525,4.33
+county,Montgomery County,2024,12,22583,4.24
+county,Montgomery County,2025,11,22782,4.19
+county,Montgomery County,2026,9,23044,4.63
+county,Nassau County,2000,12,675267,3.3
+county,Nassau County,2001,12,671200,3.7
+county,Nassau County,2002,12,682100,4.67
+county,Nassau County,2003,12,681217,4.69
+county,Nassau County,2004,12,683225,4.58
+county,Nassau County,2005,12,689483,4.05
+county,Nassau County,2006,12,696758,3.72
+county,Nassau County,2007,12,693583,3.61
+county,Nassau County,2008,12,695692,4.7
+county,Nassau County,2009,12,693817,7.04
+county,Nassau County,2010,12,692467,7.31
+county,Nassau County,2011,12,686267,6.91
+county,Nassau County,2012,12,696367,7.17
+county,Nassau County,2013,12,701708,6.07
+county,Nassau County,2014,12,691792,4.81
+county,Nassau County,2015,12,705450,4.24
+county,Nassau County,2016,12,691367,4.08
+county,Nassau County,2017,12,696467,4.18
+county,Nassau County,2018,12,698500,3.61
+county,Nassau County,2019,12,703142,3.41
+county,Nassau County,2020,12,691125,8.32
+county,Nassau County,2021,12,689217,4.71
+county,Nassau County,2022,12,699575,3.04
+county,Nassau County,2023,12,709758,3.11
+county,Nassau County,2024,12,707875,3.25
+county,Nassau County,2025,11,712545,3.3
+county,Nassau County,2026,9,718578,3.6
+county,New York County,2000,12,853417,5.03
+county,New York County,2001,12,858567,5.74
+county,New York County,2002,12,873425,7.64
+county,New York County,2003,12,869458,7.45
+county,New York County,2004,12,883783,6.12
+county,New York County,2005,12,896492,4.92
+county,New York County,2006,12,905000,4.19
+county,New York County,2007,12,910300,4.16
+county,New York County,2008,12,928925,4.84
+county,New York County,2009,12,929917,8.44
+county,New York County,2010,12,887542,8.65
+county,New York County,2011,12,890742,7.87
+county,New York County,2012,12,906000,8.13
+county,New York County,2013,12,918550,7.53
+county,New York County,2014,12,928608,5.98
+county,New York County,2015,12,934892,4.76
+county,New York County,2016,12,917433,4.63
+county,New York County,2017,12,929817,4.12
+county,New York County,2018,12,927642,3.78
+county,New York County,2019,12,933208,3.62
+county,New York County,2020,12,866442,9.83
+county,New York County,2021,12,858342,8.14
+county,New York County,2022,12,895100,4.72
+county,New York County,2023,12,935917,4.49
+county,New York County,2024,12,962083,4.57
+county,New York County,2025,11,971700,4.71
+county,New York County,2026,9,972411,4.63
+county,Niagara County,2000,12,109642,4.66
+county,Niagara County,2001,12,108508,5.5
+county,Niagara County,2002,12,111267,6.39
+county,Niagara County,2003,12,111325,6.67
+county,Niagara County,2004,12,111425,6.26
+county,Niagara County,2005,12,111692,5.58
+county,Niagara County,2006,12,112250,5.32
+county,Niagara County,2007,12,111117,5.22
+county,Niagara County,2008,12,113167,6.66
+county,Niagara County,2009,12,113875,9.45
+county,Niagara County,2010,12,108075,9.85
+county,Niagara County,2011,12,106067,9.22
+county,Niagara County,2012,12,106208,9.48
+county,Niagara County,2013,12,105817,8.69
+county,Niagara County,2014,12,102442,7.07
+county,Niagara County,2015,12,102258,6.17
+county,Niagara County,2016,12,103675,5.77
+county,Niagara County,2017,12,103358,6.01
+county,Niagara County,2018,12,102717,5.09
+county,Niagara County,2019,12,102442,4.67
+county,Niagara County,2020,12,100983,9.95
+county,Niagara County,2021,12,98458,5.56
+county,Niagara County,2022,12,98608,3.8
+county,Niagara County,2023,12,99692,3.82
+county,Niagara County,2024,12,98742,4.19
+county,Niagara County,2025,11,99282,4.41
+county,Niagara County,2026,9,100156,4.81
+county,Oneida County,2000,12,110642,3.86
+county,Oneida County,2001,12,109350,4.56
+county,Oneida County,2002,12,111067,5.36
+county,Oneida County,2003,12,110650,5.48
+county,Oneida County,2004,12,110383,5.26
+county,Oneida County,2005,12,111200,4.8
+county,Oneida County,2006,12,110908,4.31
+county,Oneida County,2007,12,109692,4.2
+county,Oneida County,2008,12,110492,5.34
+county,Oneida County,2009,12,110775,7.51
+county,Oneida County,2010,12,112417,7.81
+county,Oneida County,2011,12,109433,8.07
+county,Oneida County,2012,12,109008,8.4
+county,Oneida County,2013,12,108000,7.63
+county,Oneida County,2014,12,104083,6.15
+county,Oneida County,2015,12,103267,5.35
+county,Oneida County,2016,12,104283,4.87
+county,Oneida County,2017,12,104392,4.94
+county,Oneida County,2018,12,104358,4.35
+county,Oneida County,2019,12,105308,4.03
+county,Oneida County,2020,12,103917,7.74
+county,Oneida County,2021,12,101383,5.06
+county,Oneida County,2022,12,100517,3.52
+county,Oneida County,2023,12,101042,3.52
+county,Oneida County,2024,12,100733,3.71
+county,Oneida County,2025,11,100945,3.88
+county,Oneida County,2026,9,101256,4.2
+county,Onondaga County,2000,12,229992,3.49
+county,Onondaga County,2001,12,229067,4.02
+county,Onondaga County,2002,12,232000,4.94
+county,Onondaga County,2003,12,231133,5.13
+county,Onondaga County,2004,12,231233,5.15
+county,Onondaga County,2005,12,233633,4.51
+county,Onondaga County,2006,12,234317,4.25
+county,Onondaga County,2007,12,232075,3.99
+county,Onondaga County,2008,12,233908,5.14
+county,Onondaga County,2009,12,233967,7.79
+county,Onondaga County,2010,12,237333,8.2
+county,Onondaga County,2011,12,233567,7.79
+county,Onondaga County,2012,12,233900,8.01
+county,Onondaga County,2013,12,233300,7.03
+county,Onondaga County,2014,12,226642,5.59
+county,Onondaga County,2015,12,224967,4.94
+county,Onondaga County,2016,12,229617,4.5
+county,Onondaga County,2017,12,228725,4.57
+county,Onondaga County,2018,12,230000,3.89
+county,Onondaga County,2019,12,231108,3.71
+county,Onondaga County,2020,12,229933,7.88
+county,Onondaga County,2021,12,225700,4.84
+county,Onondaga County,2022,12,226275,3.29
+county,Onondaga County,2023,12,227667,3.29
+county,Onondaga County,2024,12,227492,3.45
+county,Onondaga County,2025,11,231091,3.56
+county,Onondaga County,2026,9,232678,3.98
+county,Ontario County,2000,12,54400,3.54
+county,Ontario County,2001,12,54375,3.98
+county,Ontario County,2002,12,55058,5.21
+county,Ontario County,2003,12,55108,5.22
+county,Ontario County,2004,12,55475,5.06
+county,Ontario County,2005,12,56817,4.5
+county,Ontario County,2006,12,56850,4.34
+county,Ontario County,2007,12,56100,4.11
+county,Ontario County,2008,12,56558,5.1
+county,Ontario County,2009,12,57017,7.37
+county,Ontario County,2010,12,56450,7.62
+county,Ontario County,2011,12,55992,7.13
+county,Ontario County,2012,12,56267,7.42
+county,Ontario County,2013,12,56292,6.45
+county,Ontario County,2014,12,55242,5.29
+county,Ontario County,2015,12,55683,4.73
+county,Ontario County,2016,12,54458,4.48
+county,Ontario County,2017,12,54400,4.6
+county,Ontario County,2018,12,54883,4.02
+county,Ontario County,2019,12,55175,3.87
+county,Ontario County,2020,12,54092,7.21
+county,Ontario County,2021,12,53617,4.45
+county,Ontario County,2022,12,54058,3.18
+county,Ontario County,2023,12,54833,3.21
+county,Ontario County,2024,12,54725,3.33
+county,Ontario County,2025,11,54991,3.46
+county,Ontario County,2026,9,55244,3.76
+county,Orange County,2000,12,161642,3.36
+county,Orange County,2001,12,163925,3.67
+county,Orange County,2002,12,169117,4.38
+county,Orange County,2003,12,172217,4.75
+county,Orange County,2004,12,174875,4.77
+county,Orange County,2005,12,177550,4.24
+county,Orange County,2006,12,179975,4.19
+county,Orange County,2007,12,178875,4.21
+county,Orange County,2008,12,180233,5.33
+county,Orange County,2009,12,180767,7.98
+county,Orange County,2010,12,181558,8.16
+county,Orange County,2011,12,179633,7.78
+county,Orange County,2012,12,180350,8.04
+county,Orange County,2013,12,180183,7.01
+county,Orange County,2014,12,176983,5.53
+county,Orange County,2015,12,179958,4.67
+county,Orange County,2016,12,177050,4.58
+county,Orange County,2017,12,179342,4.73
+county,Orange County,2018,12,181708,4.06
+county,Orange County,2019,12,185100,3.85
+county,Orange County,2020,12,182600,8.28
+county,Orange County,2021,12,180775,4.95
+county,Orange County,2022,12,184825,3.43
+county,Orange County,2023,12,189383,3.47
+county,Orange County,2024,12,190225,3.69
+county,Orange County,2025,11,191509,3.87
+county,Orange County,2026,9,192067,4.11
+county,Orleans County,2000,12,20267,4.61
+county,Orleans County,2001,12,19933,5.23
+county,Orleans County,2002,12,19950,6.39
+county,Orleans County,2003,12,19925,7.03
+county,Orleans County,2004,12,19817,6.48
+county,Orleans County,2005,12,19950,5.68
+county,Orleans County,2006,12,19925,5.6
+county,Orleans County,2007,12,19425,5.71
+county,Orleans County,2008,12,19433,6.95
+county,Orleans County,2009,12,19408,9.45
+county,Orleans County,2010,12,19175,9.82
+county,Orleans County,2011,12,18900,9.35
+county,Orleans County,2012,12,18950,9.89
+county,Orleans County,2013,12,18858,9.37
+county,Orleans County,2014,12,18208,7.69
+county,Orleans County,2015,12,18075,6.41
+county,Orleans County,2016,12,19050,5.42
+county,Orleans County,2017,12,18792,5.59
+county,Orleans County,2018,12,18850,4.64
+county,Orleans County,2019,12,18867,4.33
+county,Orleans County,2020,12,18158,7.76
+county,Orleans County,2021,12,17617,5.11
+county,Orleans County,2022,12,17600,3.6
+county,Orleans County,2023,12,17850,3.64
+county,Orleans County,2024,12,18033,3.74
+county,Orleans County,2025,11,18155,4.11
+county,Orleans County,2026,9,18289,4.37
+county,Oswego County,2000,12,58542,4.74
+county,Oswego County,2001,12,58375,5.31
+county,Oswego County,2002,12,59350,6.46
+county,Oswego County,2003,12,59908,7.4
+county,Oswego County,2004,12,59842,6.99
+county,Oswego County,2005,12,60233,6.24
+county,Oswego County,2006,12,60300,5.75
+county,Oswego County,2007,12,59275,5.5
+county,Oswego County,2008,12,60083,6.88
+county,Oswego County,2009,12,60133,10.02
+county,Oswego County,2010,12,59025,10.91
+county,Oswego County,2011,12,58258,10.87
+county,Oswego County,2012,12,58208,11.15
+county,Oswego County,2013,12,57658,10.13
+county,Oswego County,2014,12,55533,8.12
+county,Oswego County,2015,12,54633,7.21
+county,Oswego County,2016,12,55483,6.32
+county,Oswego County,2017,12,55042,6.24
+county,Oswego County,2018,12,54783,5.29
+county,Oswego County,2019,12,54867,5.09
+county,Oswego County,2020,12,54125,8.48
+county,Oswego County,2021,12,53558,5.38
+county,Oswego County,2022,12,53917,4.0
+county,Oswego County,2023,12,54325,4.0
+county,Oswego County,2024,12,54533,4.1
+county,Oswego County,2025,11,55355,4.25
+county,Oswego County,2026,9,55733,4.65
+county,Otsego County,2000,12,29650,4.19
+county,Otsego County,2001,12,30167,4.23
+county,Otsego County,2002,12,31292,4.77
+county,Otsego County,2003,12,31008,4.92
+county,Otsego County,2004,12,31350,4.92
+county,Otsego County,2005,12,31925,4.54
+county,Otsego County,2006,12,31992,4.4
+county,Otsego County,2007,12,31567,4.44
+county,Otsego County,2008,12,31475,5.61
+county,Otsego County,2009,12,31675,7.68
+county,Otsego County,2010,12,31933,7.75
+county,Otsego County,2011,12,31517,7.77
+county,Otsego County,2012,12,31592,7.97
+county,Otsego County,2013,12,31350,7.04
+county,Otsego County,2014,12,30267,5.75
+county,Otsego County,2015,12,29042,5.39
+county,Otsego County,2016,12,28300,5.06
+county,Otsego County,2017,12,28208,4.99
+county,Otsego County,2018,12,28283,4.3
+county,Otsego County,2019,12,28258,4.1
+county,Otsego County,2020,12,26683,7.06
+county,Otsego County,2021,12,26617,4.63
+county,Otsego County,2022,12,26542,3.67
+county,Otsego County,2023,12,26233,3.97
+county,Otsego County,2024,12,26558,4.17
+county,Otsego County,2025,11,26918,4.26
+county,Otsego County,2026,9,27078,4.64
+county,Putnam County,2000,12,52133,2.88
+county,Putnam County,2001,12,52533,3.19
+county,Putnam County,2002,12,53817,4.0
+county,Putnam County,2003,12,54358,4.06
+county,Putnam County,2004,12,55217,4.01
+county,Putnam County,2005,12,56042,3.75
+county,Putnam County,2006,12,56217,3.48
+county,Putnam County,2007,12,55558,3.31
+county,Putnam County,2008,12,55650,4.37
+county,Putnam County,2009,12,55092,6.85
+county,Putnam County,2010,12,52675,7.4
+county,Putnam County,2011,12,51833,7.12
+county,Putnam County,2012,12,51817,7.32
+county,Putnam County,2013,12,51717,6.24
+county,Putnam County,2014,12,50717,4.93
+county,Putnam County,2015,12,51175,4.27
+county,Putnam County,2016,12,49867,4.11
+county,Putnam County,2017,12,50208,4.28
+county,Putnam County,2018,12,50675,3.7
+county,Putnam County,2019,12,51333,3.56
+county,Putnam County,2020,12,50017,7.38
+county,Putnam County,2021,12,51058,4.15
+county,Putnam County,2022,12,53517,2.82
+county,Putnam County,2023,12,54183,2.8
+county,Putnam County,2024,12,54058,3.01
+county,Putnam County,2025,11,54100,3.09
+county,Putnam County,2026,9,54489,3.34
+county,Queens County,2000,12,1061983,5.27
+county,Queens County,2001,12,1053750,5.38
+county,Queens County,2002,12,1068800,7.14
+county,Queens County,2003,12,1057608,7.34
+county,Queens County,2004,12,1072375,6.25
+county,Queens County,2005,12,1082450,5.11
+county,Queens County,2006,12,1086600,4.36
+county,Queens County,2007,12,1093558,4.3
+county,Queens County,2008,12,1117250,4.96
+county,Queens County,2009,12,1127342,8.41
+county,Queens County,2010,12,1114467,8.69
+county,Queens County,2011,12,1119600,8.13
+county,Queens County,2012,12,1137992,8.38
+county,Queens County,2013,12,1160492,7.76
+county,Queens County,2014,12,1178967,6.22
+county,Queens County,2015,12,1188758,4.9
+county,Queens County,2016,12,1176675,4.59
+county,Queens County,2017,12,1192708,4.02
+county,Queens County,2018,12,1183225,3.68
+county,Queens County,2019,12,1183133,3.55
+county,Queens County,2020,12,1138517,12.52
+county,Queens County,2021,12,1156492,9.8
+county,Queens County,2022,12,1154250,5.25
+county,Queens County,2023,12,1177400,4.42
+county,Queens County,2024,12,1201233,4.46
+county,Queens County,2025,11,1214464,4.69
+county,Queens County,2026,9,1215511,4.62
+county,Rensselaer County,2000,12,80600,3.57
+county,Rensselaer County,2001,12,80833,3.79
+county,Rensselaer County,2002,12,82258,4.62
+county,Rensselaer County,2003,12,82092,4.68
+county,Rensselaer County,2004,12,82917,4.67
+county,Rensselaer County,2005,12,83800,4.2
+county,Rensselaer County,2006,12,83908,4.06
+county,Rensselaer County,2007,12,82975,4.18
+county,Rensselaer County,2008,12,83733,5.11
+county,Rensselaer County,2009,12,84008,7.57
+county,Rensselaer County,2010,12,84733,7.93
+county,Rensselaer County,2011,12,83125,7.67
+county,Rensselaer County,2012,12,83942,7.85
+county,Rensselaer County,2013,12,84083,6.84
+county,Rensselaer County,2014,12,81875,5.41
+county,Rensselaer County,2015,12,82492,4.68
+county,Rensselaer County,2016,12,81833,4.38
+county,Rensselaer County,2017,12,81717,4.44
+county,Rensselaer County,2018,12,81983,3.9
+county,Rensselaer County,2019,12,82183,3.65
+county,Rensselaer County,2020,12,81033,6.84
+county,Rensselaer County,2021,12,79642,4.5
+county,Rensselaer County,2022,12,79650,3.15
+county,Rensselaer County,2023,12,80817,3.24
+county,Rensselaer County,2024,12,80650,3.44
+county,Rensselaer County,2025,11,81445,3.49
+county,Rensselaer County,2026,9,82300,3.92
+county,Richmond County,2000,12,216733,5.06
+county,Richmond County,2001,12,216300,5.18
+county,Richmond County,2002,12,221500,6.97
+county,Richmond County,2003,12,222425,7.42
+county,Richmond County,2004,12,226067,6.34
+county,Richmond County,2005,12,229842,5.12
+county,Richmond County,2006,12,235558,4.33
+county,Richmond County,2007,12,237875,4.39
+county,Richmond County,2008,12,243442,5.03
+county,Richmond County,2009,12,245642,8.21
+county,Richmond County,2010,12,218575,9.51
+county,Richmond County,2011,12,218908,9.24
+county,Richmond County,2012,12,220983,9.59
+county,Richmond County,2013,12,224425,9.0
+county,Richmond County,2014,12,225358,7.27
+county,Richmond County,2015,12,225475,5.7
+county,Richmond County,2016,12,226367,5.23
+county,Richmond County,2017,12,230675,4.57
+county,Richmond County,2018,12,230167,4.15
+county,Richmond County,2019,12,231375,3.91
+county,Richmond County,2020,12,218733,10.63
+county,Richmond County,2021,12,229950,8.87
+county,Richmond County,2022,12,236233,5.39
+county,Richmond County,2023,12,241042,4.57
+county,Richmond County,2024,12,244675,4.48
+county,Richmond County,2025,11,247573,4.68
+county,Richmond County,2026,9,247689,4.53
+county,Rockland County,2000,12,144333,3.26
+county,Rockland County,2001,12,144417,3.53
+county,Rockland County,2002,12,147267,4.41
+county,Rockland County,2003,12,148367,4.72
+county,Rockland County,2004,12,149542,4.52
+county,Rockland County,2005,12,151183,4.0
+county,Rockland County,2006,12,152433,3.71
+county,Rockland County,2007,12,153592,3.77
+county,Rockland County,2008,12,155083,4.71
+county,Rockland County,2009,12,154042,7.03
+county,Rockland County,2010,12,150192,7.64
+county,Rockland County,2011,12,149525,7.22
+county,Rockland County,2012,12,151050,7.44
+county,Rockland County,2013,12,151792,6.44
+county,Rockland County,2014,12,150683,5.19
+county,Rockland County,2015,12,153900,4.54
+county,Rockland County,2016,12,144283,4.55
+county,Rockland County,2017,12,146333,4.62
+county,Rockland County,2018,12,148617,3.93
+county,Rockland County,2019,12,151775,3.61
+county,Rockland County,2020,12,149083,8.13
+county,Rockland County,2021,12,151833,4.59
+county,Rockland County,2022,12,158975,2.91
+county,Rockland County,2023,12,162775,3.0
+county,Rockland County,2024,12,163900,3.18
+county,Rockland County,2025,11,164036,3.24
+county,Rockland County,2026,9,165322,3.58
+county,Saratoga County,2000,12,110358,3.3
+county,Saratoga County,2001,12,112200,3.35
+county,Saratoga County,2002,12,115267,3.88
+county,Saratoga County,2003,12,116250,4.01
+county,Saratoga County,2004,12,117808,3.95
+county,Saratoga County,2005,12,119950,3.66
+county,Saratoga County,2006,12,120392,3.5
+county,Saratoga County,2007,12,119200,3.59
+county,Saratoga County,2008,12,121033,4.51
+county,Saratoga County,2009,12,122192,6.47
+county,Saratoga County,2010,12,118200,7.06
+county,Saratoga County,2011,12,116142,6.72
+county,Saratoga County,2012,12,117975,6.94
+county,Saratoga County,2013,12,118883,5.97
+county,Saratoga County,2014,12,116658,4.68
+county,Saratoga County,2015,12,118192,4.16
+county,Saratoga County,2016,12,121633,3.82
+county,Saratoga County,2017,12,122717,3.89
+county,Saratoga County,2018,12,123567,3.45
+county,Saratoga County,2019,12,123850,3.2
+county,Saratoga County,2020,12,123233,6.38
+county,Saratoga County,2021,12,122133,3.78
+county,Saratoga County,2022,12,123600,2.65
+county,Saratoga County,2023,12,125325,2.71
+county,Saratoga County,2024,12,125192,2.92
+county,Saratoga County,2025,11,126355,2.97
+county,Saratoga County,2026,9,127456,3.23
+county,Schenectady County,2000,12,72383,3.45
+county,Schenectady County,2001,12,72333,3.39
+county,Schenectady County,2002,12,73883,4.2
+county,Schenectady County,2003,12,73758,4.55
+county,Schenectady County,2004,12,74400,4.55
+county,Schenectady County,2005,12,75375,4.19
+county,Schenectady County,2006,12,76167,4.06
+county,Schenectady County,2007,12,75392,4.08
+county,Schenectady County,2008,12,76442,5.06
+county,Schenectady County,2009,12,76908,7.43
+county,Schenectady County,2010,12,79150,7.82
+county,Schenectady County,2011,12,77400,7.55
+county,Schenectady County,2012,12,78367,7.83
+county,Schenectady County,2013,12,78600,6.88
+county,Schenectady County,2014,12,76775,5.41
+county,Schenectady County,2015,12,76592,4.73
+county,Schenectady County,2016,12,75533,4.48
+county,Schenectady County,2017,12,75625,4.55
+county,Schenectady County,2018,12,76108,4.06
+county,Schenectady County,2019,12,76542,3.75
+county,Schenectady County,2020,12,77192,7.86
+county,Schenectady County,2021,12,75900,5.06
+county,Schenectady County,2022,12,76142,3.44
+county,Schenectady County,2023,12,77267,3.45
+county,Schenectady County,2024,12,77600,3.68
+county,Schenectady County,2025,11,78382,3.73
+county,Schenectady County,2026,9,79189,4.11
+county,Schoharie County,2000,12,15158,4.18
+county,Schoharie County,2001,12,15242,4.26
+county,Schoharie County,2002,12,15583,5.78
+county,Schoharie County,2003,12,15467,5.44
+county,Schoharie County,2004,12,15617,5.55
+county,Schoharie County,2005,12,15858,5.15
+county,Schoharie County,2006,12,15858,5.2
+county,Schoharie County,2007,12,15667,5.59
+county,Schoharie County,2008,12,15783,6.81
+county,Schoharie County,2009,12,15600,9.03
+county,Schoharie County,2010,12,15942,9.15
+county,Schoharie County,2011,12,15617,9.07
+county,Schoharie County,2012,12,15517,9.4
+county,Schoharie County,2013,12,15417,8.38
+county,Schoharie County,2014,12,14875,6.67
+county,Schoharie County,2015,12,14842,5.78
+county,Schoharie County,2016,12,14375,5.62
+county,Schoharie County,2017,12,14225,5.51
+county,Schoharie County,2018,12,14125,4.84
+county,Schoharie County,2019,12,14058,4.62
+county,Schoharie County,2020,12,13783,7.19
+county,Schoharie County,2021,12,13725,4.8
+county,Schoharie County,2022,12,13792,3.81
+county,Schoharie County,2023,12,14050,4.21
+county,Schoharie County,2024,12,13983,4.23
+county,Schoharie County,2025,11,14091,4.0
+county,Schoharie County,2026,9,14267,4.75
+county,Schuyler County,2000,12,9383,4.44
+county,Schuyler County,2001,12,9425,5.31
+county,Schuyler County,2002,12,9650,6.91
+county,Schuyler County,2003,12,9783,6.47
+county,Schuyler County,2004,12,9800,6.04
+county,Schuyler County,2005,12,9875,5.4
+county,Schuyler County,2006,12,9967,4.85
+county,Schuyler County,2007,12,9950,4.86
+county,Schuyler County,2008,12,10092,5.7
+county,Schuyler County,2009,12,10067,8.61
+county,Schuyler County,2010,12,9050,9.39
+county,Schuyler County,2011,12,9050,8.93
+county,Schuyler County,2012,12,9075,9.55
+county,Schuyler County,2013,12,8942,9.04
+county,Schuyler County,2014,12,8692,7.0
+county,Schuyler County,2015,12,8442,6.71
+county,Schuyler County,2016,12,8492,5.79
+county,Schuyler County,2017,12,8425,5.84
+county,Schuyler County,2018,12,8458,5.02
+county,Schuyler County,2019,12,8258,4.34
+county,Schuyler County,2020,12,8158,8.27
+county,Schuyler County,2021,12,8083,5.15
+county,Schuyler County,2022,12,7967,3.87
+county,Schuyler County,2023,12,8050,3.83
+county,Schuyler County,2024,12,7975,4.08
+county,Schuyler County,2025,11,8027,4.42
+county,Schuyler County,2026,9,8144,4.5
+county,Seneca County,2000,12,16375,4.12
+county,Seneca County,2001,12,16525,4.24
+county,Seneca County,2002,12,17075,5.51
+county,Seneca County,2003,12,17175,5.39
+county,Seneca County,2004,12,17192,5.28
+county,Seneca County,2005,12,17350,4.61
+county,Seneca County,2006,12,17342,4.42
+county,Seneca County,2007,12,16958,4.28
+county,Seneca County,2008,12,17067,5.47
+county,Seneca County,2009,12,17225,7.84
+county,Seneca County,2010,12,16442,8.41
+county,Seneca County,2011,12,16167,7.94
+county,Seneca County,2012,12,16317,8.12
+county,Seneca County,2013,12,16033,7.17
+county,Seneca County,2014,12,15658,5.69
+county,Seneca County,2015,12,15908,5.08
+county,Seneca County,2016,12,15192,4.99
+county,Seneca County,2017,12,15892,4.61
+county,Seneca County,2018,12,15983,3.91
+county,Seneca County,2019,12,15883,3.73
+county,Seneca County,2020,12,14992,8.17
+county,Seneca County,2021,12,14517,4.99
+county,Seneca County,2022,12,14033,3.44
+county,Seneca County,2023,12,13933,3.41
+county,Seneca County,2024,12,13925,3.71
+county,Seneca County,2025,11,13936,3.78
+county,Seneca County,2026,9,14022,3.88
+county,St. Lawrence County,2000,12,48792,5.67
+county,St. Lawrence County,2001,12,48742,6.05
+county,St. Lawrence County,2002,12,49875,6.67
+county,St. Lawrence County,2003,12,49333,7.08
+county,St. Lawrence County,2004,12,48983,7.09
+county,St. Lawrence County,2005,12,49150,6.07
+county,St. Lawrence County,2006,12,49658,5.71
+county,St. Lawrence County,2007,12,49217,5.69
+county,St. Lawrence County,2008,12,49917,7.03
+county,St. Lawrence County,2009,12,49850,10.0
+county,St. Lawrence County,2010,12,50075,10.53
+county,St. Lawrence County,2011,12,49108,10.45
+county,St. Lawrence County,2012,12,48808,10.38
+county,St. Lawrence County,2013,12,48867,9.4
+county,St. Lawrence County,2014,12,47483,7.79
+county,St. Lawrence County,2015,12,44375,7.34
+county,St. Lawrence County,2016,12,44917,6.47
+county,St. Lawrence County,2017,12,44950,6.45
+county,St. Lawrence County,2018,12,45167,5.42
+county,St. Lawrence County,2019,12,44933,5.25
+county,St. Lawrence County,2020,12,44600,7.74
+county,St. Lawrence County,2021,12,44042,5.07
+county,St. Lawrence County,2022,12,43425,4.09
+county,St. Lawrence County,2023,12,42242,4.18
+county,St. Lawrence County,2024,12,43317,4.39
+county,St. Lawrence County,2025,11,43700,4.58
+county,St. Lawrence County,2026,9,43833,5.04
+county,Steuben County,2000,12,47900,4.05
+county,Steuben County,2001,12,48317,4.9
+county,Steuben County,2002,12,47150,7.19
+county,Steuben County,2003,12,44925,7.4
+county,Steuben County,2004,12,44058,6.49
+county,Steuben County,2005,12,44583,5.68
+county,Steuben County,2006,12,44700,5.2
+county,Steuben County,2007,12,44633,5.13
+county,Steuben County,2008,12,45583,6.0
+county,Steuben County,2009,12,46100,9.85
+county,Steuben County,2010,12,47392,9.79
+county,Steuben County,2011,12,46333,9.19
+county,Steuben County,2012,12,46008,9.49
+county,Steuben County,2013,12,46025,8.65
+county,Steuben County,2014,12,44483,6.91
+county,Steuben County,2015,12,44208,6.33
+county,Steuben County,2016,12,43917,5.83
+county,Steuben County,2017,12,43533,5.63
+county,Steuben County,2018,12,43475,4.79
+county,Steuben County,2019,12,43367,4.36
+county,Steuben County,2020,12,42625,7.86
+county,Steuben County,2021,12,41642,4.94
+county,Steuben County,2022,12,40992,3.64
+county,Steuben County,2023,12,40733,3.74
+county,Steuben County,2024,12,39808,3.89
+county,Steuben County,2025,11,39427,3.97
+county,Steuben County,2026,9,39500,4.39
+county,Suffolk County,2000,12,733017,3.4
+county,Suffolk County,2001,12,737275,3.81
+county,Suffolk County,2002,12,754475,4.73
+county,Suffolk County,2003,12,760750,4.85
+county,Suffolk County,2004,12,767650,4.74
+county,Suffolk County,2005,12,777492,4.21
+county,Suffolk County,2006,12,787375,3.89
+county,Suffolk County,2007,12,786408,3.78
+county,Suffolk County,2008,12,794258,4.97
+county,Suffolk County,2009,12,792967,7.42
+county,Suffolk County,2010,12,779117,7.93
+county,Suffolk County,2011,12,773792,7.68
+county,Suffolk County,2012,12,782533,7.92
+county,Suffolk County,2013,12,786867,6.77
+county,Suffolk County,2014,12,772858,5.41
+county,Suffolk County,2015,12,784908,4.72
+county,Suffolk County,2016,12,778817,4.47
+county,Suffolk County,2017,12,781958,4.51
+county,Suffolk County,2018,12,782992,3.87
+county,Suffolk County,2019,12,786583,3.62
+county,Suffolk County,2020,12,772125,8.25
+county,Suffolk County,2021,12,775092,4.67
+county,Suffolk County,2022,12,789050,3.22
+county,Suffolk County,2023,12,800833,3.3
+county,Suffolk County,2024,12,798867,3.44
+county,Suffolk County,2025,11,804436,3.52
+county,Suffolk County,2026,9,811844,3.87
+county,Sullivan County,2000,12,33033,4.34
+county,Sullivan County,2001,12,33292,4.58
+county,Sullivan County,2002,12,34342,5.02
+county,Sullivan County,2003,12,34383,5.33
+county,Sullivan County,2004,12,34867,5.35
+county,Sullivan County,2005,12,35150,4.86
+county,Sullivan County,2006,12,35392,5.02
+county,Sullivan County,2007,12,35158,5.12
+county,Sullivan County,2008,12,35400,6.47
+county,Sullivan County,2009,12,35442,8.89
+county,Sullivan County,2010,12,36533,9.06
+county,Sullivan County,2011,12,35633,8.96
+county,Sullivan County,2012,12,35467,9.21
+county,Sullivan County,2013,12,34850,8.35
+county,Sullivan County,2014,12,33558,6.63
+county,Sullivan County,2015,12,34100,5.4
+county,Sullivan County,2016,12,33183,5.05
+county,Sullivan County,2017,12,33500,5.1
+county,Sullivan County,2018,12,35108,4.25
+county,Sullivan County,2019,12,35808,3.98
+county,Sullivan County,2020,12,35108,8.76
+county,Sullivan County,2021,12,34983,5.22
+county,Sullivan County,2022,12,35767,3.49
+county,Sullivan County,2023,12,37442,3.36
+county,Sullivan County,2024,12,37383,3.52
+county,Sullivan County,2025,11,37600,3.65
+county,Sullivan County,2026,9,38889,3.91
+county,Tioga County,2000,12,26450,3.4
+county,Tioga County,2001,12,26467,4.16
+county,Tioga County,2002,12,26758,5.54
+county,Tioga County,2003,12,26317,5.7
+county,Tioga County,2004,12,26108,5.3
+county,Tioga County,2005,12,26317,4.75
+county,Tioga County,2006,12,26467,4.25
+county,Tioga County,2007,12,26117,4.59
+county,Tioga County,2008,12,26192,5.25
+county,Tioga County,2009,12,26275,8.21
+county,Tioga County,2010,12,26608,8.17
+county,Tioga County,2011,12,25933,7.78
+county,Tioga County,2012,12,25575,8.02
+county,Tioga County,2013,12,25167,7.32
+county,Tioga County,2014,12,23975,6.15
+county,Tioga County,2015,12,23650,5.57
+county,Tioga County,2016,12,23108,5.27
+county,Tioga County,2017,12,22917,5.13
+county,Tioga County,2018,12,22942,4.4
+county,Tioga County,2019,12,22792,4.02
+county,Tioga County,2020,12,22142,7.64
+county,Tioga County,2021,12,21575,4.52
+county,Tioga County,2022,12,21475,3.34
+county,Tioga County,2023,12,21808,3.32
+county,Tioga County,2024,12,21767,3.52
+county,Tioga County,2025,11,21855,3.62
+county,Tioga County,2026,9,22122,3.97
+county,Tompkins County,2000,12,50650,3.26
+county,Tompkins County,2001,12,51267,3.4
+county,Tompkins County,2002,12,52617,4.1
+county,Tompkins County,2003,12,53267,3.97
+county,Tompkins County,2004,12,53933,4.09
+county,Tompkins County,2005,12,54592,3.59
+county,Tompkins County,2006,12,55400,3.38
+county,Tompkins County,2007,12,55250,3.29
+county,Tompkins County,2008,12,55825,4.12
+county,Tompkins County,2009,12,56725,5.96
+county,Tompkins County,2010,12,54833,6.31
+county,Tompkins County,2011,12,54417,6.13
+county,Tompkins County,2012,12,55275,6.23
+county,Tompkins County,2013,12,56292,5.34
+county,Tompkins County,2014,12,55242,4.44
+county,Tompkins County,2015,12,50983,4.4
+county,Tompkins County,2016,12,53333,4.06
+county,Tompkins County,2017,12,52633,4.23
+county,Tompkins County,2018,12,52600,3.53
+county,Tompkins County,2019,12,51375,3.52
+county,Tompkins County,2020,12,49200,5.72
+county,Tompkins County,2021,12,49175,3.86
+county,Tompkins County,2022,12,48592,2.97
+county,Tompkins County,2023,12,48792,3.14
+county,Tompkins County,2024,12,48767,3.35
+county,Tompkins County,2025,11,48482,3.54
+county,Tompkins County,2026,9,48800,3.94
+county,Ulster County,2000,12,88250,3.56
+county,Ulster County,2001,12,88225,3.81
+county,Ulster County,2002,12,90850,4.44
+county,Ulster County,2003,12,91367,4.62
+county,Ulster County,2004,12,91233,4.94
+county,Ulster County,2005,12,91792,4.35
+county,Ulster County,2006,12,92592,4.12
+county,Ulster County,2007,12,90308,4.24
+county,Ulster County,2008,12,90058,5.41
+county,Ulster County,2009,12,90083,7.85
+county,Ulster County,2010,12,93717,7.99
+county,Ulster County,2011,12,91692,7.91
+county,Ulster County,2012,12,91425,8.41
+county,Ulster County,2013,12,90967,7.34
+county,Ulster County,2014,12,88775,5.74
+county,Ulster County,2015,12,89342,4.81
+county,Ulster County,2016,12,88033,4.55
+county,Ulster County,2017,12,88125,4.61
+county,Ulster County,2018,12,88592,3.92
+county,Ulster County,2019,12,88192,3.68
+county,Ulster County,2020,12,86033,7.87
+county,Ulster County,2021,12,85533,4.83
+county,Ulster County,2022,12,86142,3.29
+county,Ulster County,2023,12,87917,3.36
+county,Ulster County,2024,12,87842,3.54
+county,Ulster County,2025,11,88691,3.63
+county,Ulster County,2026,9,89300,3.94
+county,Warren County,2000,12,33225,4.14
+county,Warren County,2001,12,33283,4.43
+county,Warren County,2002,12,33767,5.03
+county,Warren County,2003,12,34475,5.15
+county,Warren County,2004,12,34942,4.98
+county,Warren County,2005,12,35458,4.61
+county,Warren County,2006,12,36508,4.45
+county,Warren County,2007,12,36258,4.37
+county,Warren County,2008,12,36442,5.56
+county,Warren County,2009,12,36483,7.99
+county,Warren County,2010,12,34225,9.18
+county,Warren County,2011,12,33767,9.03
+county,Warren County,2012,12,33900,9.34
+county,Warren County,2013,12,33392,8.39
+county,Warren County,2014,12,32583,6.62
+county,Warren County,2015,12,32608,5.57
+county,Warren County,2016,12,32975,5.23
+county,Warren County,2017,12,32942,5.19
+county,Warren County,2018,12,32708,4.59
+county,Warren County,2019,12,32550,4.33
+county,Warren County,2020,12,32083,8.05
+county,Warren County,2021,12,31867,4.84
+county,Warren County,2022,12,31725,3.36
+county,Warren County,2023,12,32217,3.49
+county,Warren County,2024,12,31900,3.66
+county,Warren County,2025,11,31873,3.79
+county,Warren County,2026,9,31956,4.07
+county,Washington County,2000,12,30042,3.66
+county,Washington County,2001,12,30108,4.01
+county,Washington County,2002,12,30433,4.65
+county,Washington County,2003,12,30950,4.6
+county,Washington County,2004,12,31750,4.78
+county,Washington County,2005,12,32133,4.46
+county,Washington County,2006,12,32900,4.08
+county,Washington County,2007,12,32325,4.07
+county,Washington County,2008,12,32617,5.26
+county,Washington County,2009,12,32550,7.58
+county,Washington County,2010,12,30283,8.48
+county,Washington County,2011,12,29858,8.23
+county,Washington County,2012,12,30025,8.44
+county,Washington County,2013,12,29617,7.65
+county,Washington County,2014,12,28817,6.13
+county,Washington County,2015,12,28983,5.06
+county,Washington County,2016,12,29492,4.63
+county,Washington County,2017,12,29383,4.54
+county,Washington County,2018,12,29225,4.05
+county,Washington County,2019,12,29158,3.8
+county,Washington County,2020,12,28217,6.79
+county,Washington County,2021,12,28008,4.58
+county,Washington County,2022,12,27900,3.2
+county,Washington County,2023,12,27917,3.19
+county,Washington County,2024,12,27883,3.44
+county,Washington County,2025,11,27864,3.49
+county,Washington County,2026,9,27989,3.77
+county,Wayne County,2000,12,48817,3.76
+county,Wayne County,2001,12,48717,4.6
+county,Wayne County,2002,12,49150,6.32
+county,Wayne County,2003,12,48700,6.02
+county,Wayne County,2004,12,48450,5.61
+county,Wayne County,2005,12,48975,4.92
+county,Wayne County,2006,12,48608,4.66
+county,Wayne County,2007,12,47467,4.6
+county,Wayne County,2008,12,47842,5.82
+county,Wayne County,2009,12,47758,8.46
+county,Wayne County,2010,12,47483,9.02
+county,Wayne County,2011,12,46608,8.49
+county,Wayne County,2012,12,46725,8.72
+county,Wayne County,2013,12,46292,7.78
+county,Wayne County,2014,12,44808,6.21
+county,Wayne County,2015,12,44800,5.36
+county,Wayne County,2016,12,45150,4.95
+county,Wayne County,2017,12,44767,4.9
+county,Wayne County,2018,12,44842,4.09
+county,Wayne County,2019,12,45058,3.85
+county,Wayne County,2020,12,43775,7.1
+county,Wayne County,2021,12,43133,4.52
+county,Wayne County,2022,12,43283,3.23
+county,Wayne County,2023,12,43758,3.2
+county,Wayne County,2024,12,43833,3.5
+county,Wayne County,2025,11,44009,3.57
+county,Wayne County,2026,9,44344,3.91
+county,Westchester County,2000,12,462117,3.36
+county,Westchester County,2001,12,463867,3.78
+county,Westchester County,2002,12,471525,4.58
+county,Westchester County,2003,12,471892,4.54
+county,Westchester County,2004,12,477150,4.52
+county,Westchester County,2005,12,482358,4.01
+county,Westchester County,2006,12,487608,3.78
+county,Westchester County,2007,12,488650,3.63
+county,Westchester County,2008,12,492283,4.75
+county,Westchester County,2009,12,488300,7.23
+county,Westchester County,2010,12,479408,7.53
+county,Westchester County,2011,12,475475,7.14
+county,Westchester County,2012,12,479375,7.38
+county,Westchester County,2013,12,480883,6.42
+county,Westchester County,2014,12,474792,5.16
+county,Westchester County,2015,12,483808,4.55
+county,Westchester County,2016,12,490917,4.31
+county,Westchester County,2017,12,495767,4.44
+county,Westchester County,2018,12,501608,3.8
+county,Westchester County,2019,12,511483,3.54
+county,Westchester County,2020,12,500558,7.85
+county,Westchester County,2021,12,507250,4.65
+county,Westchester County,2022,12,526308,2.99
+county,Westchester County,2023,12,536575,3.04
+county,Westchester County,2024,12,537983,3.26
+county,Westchester County,2025,11,538709,3.37
+county,Westchester County,2026,9,543078,3.73
+county,Wyoming County,2000,12,20267,4.69
+county,Wyoming County,2001,12,20317,4.92
+county,Wyoming County,2002,12,21208,5.78
+county,Wyoming County,2003,12,21100,6.12
+county,Wyoming County,2004,12,20958,6.32
+county,Wyoming County,2005,12,21425,5.33
+county,Wyoming County,2006,12,21842,4.85
+county,Wyoming County,2007,12,21375,4.76
+county,Wyoming County,2008,12,21250,6.16
+county,Wyoming County,2009,12,21067,9.14
+county,Wyoming County,2010,12,19500,9.53
+county,Wyoming County,2011,12,18958,8.84
+county,Wyoming County,2012,12,18975,8.96
+county,Wyoming County,2013,12,18942,8.14
+county,Wyoming County,2014,12,18508,6.48
+county,Wyoming County,2015,12,18592,5.69
+county,Wyoming County,2016,12,19400,5.11
+county,Wyoming County,2017,12,19275,5.32
+county,Wyoming County,2018,12,19350,4.44
+county,Wyoming County,2019,12,19550,3.96
+county,Wyoming County,2020,12,19175,6.91
+county,Wyoming County,2021,12,18933,4.4
+county,Wyoming County,2022,12,18308,3.37
+county,Wyoming County,2023,12,18075,3.6
+county,Wyoming County,2024,12,18092,3.64
+county,Wyoming County,2025,11,18055,3.83
+county,Wyoming County,2026,9,18222,4.09
+county,Yates County,2000,12,12058,3.59
+county,Yates County,2001,12,12025,3.74
+county,Yates County,2002,12,12600,4.89
+county,Yates County,2003,12,12867,4.86
+county,Yates County,2004,12,13033,4.6
+county,Yates County,2005,12,13000,4.29
+county,Yates County,2006,12,13058,4.21
+county,Yates County,2007,12,13042,4.15
+county,Yates County,2008,12,13142,4.95
+county,Yates County,2009,12,13250,6.98
+county,Yates County,2010,12,12250,7.55
+county,Yates County,2011,12,12133,7.69
+county,Yates County,2012,12,12158,7.88
+county,Yates County,2013,12,12058,6.91
+county,Yates County,2014,12,11800,5.65
+county,Yates County,2015,12,11883,5.12
+county,Yates County,2016,12,11325,4.71
+county,Yates County,2017,12,11183,4.62
+county,Yates County,2018,12,11375,4.03
+county,Yates County,2019,12,11508,3.69
+county,Yates County,2020,12,10800,6.79
+county,Yates County,2021,12,10750,4.03
+county,Yates County,2022,12,10692,3.12
+county,Yates County,2023,12,10958,3.04
+county,Yates County,2024,12,11033,3.25
+county,Yates County,2025,11,11255,3.47
+county,Yates County,2026,9,11322,3.43
+metro,Albany-Schenectady-Troy Metro Area,2000,12,432808,3.42
+metro,Albany-Schenectady-Troy Metro Area,2001,12,435392,3.47
+metro,Albany-Schenectady-Troy Metro Area,2002,12,444742,4.16
+metro,Albany-Schenectady-Troy Metro Area,2003,12,445350,4.37
+metro,Albany-Schenectady-Troy Metro Area,2004,12,449117,4.35
+metro,Albany-Schenectady-Troy Metro Area,2005,12,454192,3.99
+metro,Albany-Schenectady-Troy Metro Area,2006,12,455850,3.86
+metro,Albany-Schenectady-Troy Metro Area,2007,12,451642,3.92
+metro,Albany-Schenectady-Troy Metro Area,2008,12,456400,4.9
+metro,Albany-Schenectady-Troy Metro Area,2009,12,457858,7.07
+metro,Albany-Schenectady-Troy Metro Area,2010,12,459792,7.45
+metro,Albany-Schenectady-Troy Metro Area,2011,12,451233,7.21
+metro,Albany-Schenectady-Troy Metro Area,2012,12,457083,7.44
+metro,Albany-Schenectady-Troy Metro Area,2013,12,458842,6.46
+metro,Albany-Schenectady-Troy Metro Area,2014,12,448833,5.09
+metro,Albany-Schenectady-Troy Metro Area,2015,12,452358,4.47
+metro,Albany-Schenectady-Troy Metro Area,2016,12,454983,4.19
+metro,Albany-Schenectady-Troy Metro Area,2017,12,456092,4.25
+metro,Albany-Schenectady-Troy Metro Area,2018,12,457667,3.74
+metro,Albany-Schenectady-Troy Metro Area,2019,12,458858,3.52
+metro,Albany-Schenectady-Troy Metro Area,2020,12,455858,6.92
+metro,Albany-Schenectady-Troy Metro Area,2021,12,450783,4.38
+metro,Albany-Schenectady-Troy Metro Area,2022,12,453450,3.06
+metro,Albany-Schenectady-Troy Metro Area,2023,12,460633,3.12
+metro,Albany-Schenectady-Troy Metro Area,2024,12,460183,3.32
+metro,Albany-Schenectady-Troy Metro Area,2025,11,464636,3.37
+metro,Albany-Schenectady-Troy Metro Area,2026,9,469244,3.72
+metro,Binghamton Metro Area,2000,12,124408,3.56
+metro,Binghamton Metro Area,2001,12,124617,4.22
+metro,Binghamton Metro Area,2002,12,125608,5.79
+metro,Binghamton Metro Area,2003,12,123042,5.83
+metro,Binghamton Metro Area,2004,12,122217,5.45
+metro,Binghamton Metro Area,2005,12,122558,4.88
+metro,Binghamton Metro Area,2006,12,123500,4.53
+metro,Binghamton Metro Area,2007,12,122767,4.41
+metro,Binghamton Metro Area,2008,12,123608,5.45
+metro,Binghamton Metro Area,2009,12,123925,8.29
+metro,Binghamton Metro Area,2010,12,124608,8.75
+metro,Binghamton Metro Area,2011,12,121050,8.47
+metro,Binghamton Metro Area,2012,12,119967,8.66
+metro,Binghamton Metro Area,2013,12,117733,7.83
+metro,Binghamton Metro Area,2014,12,112750,6.56
+metro,Binghamton Metro Area,2015,12,111408,5.89
+metro,Binghamton Metro Area,2016,12,112242,5.37
+metro,Binghamton Metro Area,2017,12,111633,5.34
+metro,Binghamton Metro Area,2018,12,111700,4.64
+metro,Binghamton Metro Area,2019,12,111092,4.34
+metro,Binghamton Metro Area,2020,12,108483,8.03
+metro,Binghamton Metro Area,2021,12,106567,5.02
+metro,Binghamton Metro Area,2022,12,106200,3.66
+metro,Binghamton Metro Area,2023,12,107525,3.59
+metro,Binghamton Metro Area,2024,12,107133,3.86
+metro,Binghamton Metro Area,2025,11,107718,4.07
+metro,Binghamton Metro Area,2026,9,108989,4.4
+metro,Buffalo-Cheektowaga Metro Area,2000,12,576200,4.26
+metro,Buffalo-Cheektowaga Metro Area,2001,12,568917,4.83
+metro,Buffalo-Cheektowaga Metro Area,2002,12,581758,5.63
+metro,Buffalo-Cheektowaga Metro Area,2003,12,581392,5.96
+metro,Buffalo-Cheektowaga Metro Area,2004,12,582783,5.89
+metro,Buffalo-Cheektowaga Metro Area,2005,12,583867,5.27
+metro,Buffalo-Cheektowaga Metro Area,2006,12,583550,4.97
+metro,Buffalo-Cheektowaga Metro Area,2007,12,575458,4.72
+metro,Buffalo-Cheektowaga Metro Area,2008,12,583258,5.85
+metro,Buffalo-Cheektowaga Metro Area,2009,12,585242,8.49
+metro,Buffalo-Cheektowaga Metro Area,2010,12,574433,8.74
+metro,Buffalo-Cheektowaga Metro Area,2011,12,566767,8.28
+metro,Buffalo-Cheektowaga Metro Area,2012,12,569875,8.64
+metro,Buffalo-Cheektowaga Metro Area,2013,12,569358,7.81
+metro,Buffalo-Cheektowaga Metro Area,2014,12,554883,6.31
+metro,Buffalo-Cheektowaga Metro Area,2015,12,555967,5.5
+metro,Buffalo-Cheektowaga Metro Area,2016,12,570725,5.02
+metro,Buffalo-Cheektowaga Metro Area,2017,12,571250,5.17
+metro,Buffalo-Cheektowaga Metro Area,2018,12,570342,4.4
+metro,Buffalo-Cheektowaga Metro Area,2019,12,571492,4.09
+metro,Buffalo-Cheektowaga Metro Area,2020,12,563883,9.07
+metro,Buffalo-Cheektowaga Metro Area,2021,12,555467,5.32
+metro,Buffalo-Cheektowaga Metro Area,2022,12,557283,3.56
+metro,Buffalo-Cheektowaga Metro Area,2023,12,564717,3.58
+metro,Buffalo-Cheektowaga Metro Area,2024,12,560167,3.88
+metro,Buffalo-Cheektowaga Metro Area,2025,11,562773,4.06
+metro,Buffalo-Cheektowaga Metro Area,2026,9,567311,4.43
+metro,Elmira Metro Area,2000,12,42625,4.28
+metro,Elmira Metro Area,2001,12,42392,4.93
+metro,Elmira Metro Area,2002,12,42317,6.46
+metro,Elmira Metro Area,2003,12,41183,6.5
+metro,Elmira Metro Area,2004,12,40458,6.08
+metro,Elmira Metro Area,2005,12,40583,5.38
+metro,Elmira Metro Area,2006,12,40867,4.85
+metro,Elmira Metro Area,2007,12,40875,4.51
+metro,Elmira Metro Area,2008,12,41183,5.52
+metro,Elmira Metro Area,2009,12,41083,9.09
+metro,Elmira Metro Area,2010,12,41667,8.58
+metro,Elmira Metro Area,2011,12,40975,7.89
+metro,Elmira Metro Area,2012,12,40725,8.57
+metro,Elmira Metro Area,2013,12,39892,8.13
+metro,Elmira Metro Area,2014,12,38492,6.28
+metro,Elmira Metro Area,2015,12,37892,5.92
+metro,Elmira Metro Area,2016,12,38417,5.51
+metro,Elmira Metro Area,2017,12,37842,5.22
+metro,Elmira Metro Area,2018,12,37617,4.41
+metro,Elmira Metro Area,2019,12,37492,3.82
+metro,Elmira Metro Area,2020,12,37408,8.15
+metro,Elmira Metro Area,2021,12,36192,5.04
+metro,Elmira Metro Area,2022,12,35867,3.53
+metro,Elmira Metro Area,2023,12,35825,3.65
+metro,Elmira Metro Area,2024,12,35342,3.73
+metro,Elmira Metro Area,2025,11,35055,3.86
+metro,Elmira Metro Area,2026,9,35389,4.14
+metro,Glens Falls Metro Area,2000,12,63267,3.93
+metro,Glens Falls Metro Area,2001,12,63400,4.26
+metro,Glens Falls Metro Area,2002,12,64217,4.85
+metro,Glens Falls Metro Area,2003,12,65433,4.9
+metro,Glens Falls Metro Area,2004,12,66683,4.89
+metro,Glens Falls Metro Area,2005,12,67608,4.51
+metro,Glens Falls Metro Area,2006,12,69408,4.29
+metro,Glens Falls Metro Area,2007,12,68583,4.22
+metro,Glens Falls Metro Area,2008,12,69033,5.44
+metro,Glens Falls Metro Area,2009,12,69033,7.8
+metro,Glens Falls Metro Area,2010,12,64500,8.86
+metro,Glens Falls Metro Area,2011,12,63600,8.62
+metro,Glens Falls Metro Area,2012,12,63933,8.89
+metro,Glens Falls Metro Area,2013,12,63000,8.03
+metro,Glens Falls Metro Area,2014,12,61408,6.38
+metro,Glens Falls Metro Area,2015,12,61592,5.28
+metro,Glens Falls Metro Area,2016,12,62475,4.94
+metro,Glens Falls Metro Area,2017,12,62317,4.87
+metro,Glens Falls Metro Area,2018,12,61942,4.28
+metro,Glens Falls Metro Area,2019,12,61700,4.09
+metro,Glens Falls Metro Area,2020,12,60292,7.45
+metro,Glens Falls Metro Area,2021,12,59892,4.7
+metro,Glens Falls Metro Area,2022,12,59633,3.35
+metro,Glens Falls Metro Area,2023,12,60133,3.33
+metro,Glens Falls Metro Area,2024,12,59783,3.54
+metro,Glens Falls Metro Area,2025,11,59718,3.62
+metro,Glens Falls Metro Area,2026,9,59944,3.95
+metro,Ithaca Metro Area,2000,12,50650,3.26
+metro,Ithaca Metro Area,2001,12,51267,3.4
+metro,Ithaca Metro Area,2002,12,52617,4.1
+metro,Ithaca Metro Area,2003,12,53267,3.97
+metro,Ithaca Metro Area,2004,12,53933,4.09
+metro,Ithaca Metro Area,2005,12,54592,3.59
+metro,Ithaca Metro Area,2006,12,55400,3.38
+metro,Ithaca Metro Area,2007,12,55250,3.29
+metro,Ithaca Metro Area,2008,12,55825,4.12
+metro,Ithaca Metro Area,2009,12,56725,5.96
+metro,Ithaca Metro Area,2010,12,54833,6.31
+metro,Ithaca Metro Area,2011,12,54417,6.13
+metro,Ithaca Metro Area,2012,12,55275,6.23
+metro,Ithaca Metro Area,2013,12,56292,5.34
+metro,Ithaca Metro Area,2014,12,55242,4.44
+metro,Ithaca Metro Area,2015,12,50983,4.4
+metro,Ithaca Metro Area,2016,12,53333,4.06
+metro,Ithaca Metro Area,2017,12,52633,4.23
+metro,Ithaca Metro Area,2018,12,52600,3.53
+metro,Ithaca Metro Area,2019,12,51375,3.52
+metro,Ithaca Metro Area,2020,12,49200,5.72
+metro,Ithaca Metro Area,2021,12,49175,3.86
+metro,Ithaca Metro Area,2022,12,48592,2.97
+metro,Ithaca Metro Area,2023,12,48792,3.14
+metro,Ithaca Metro Area,2024,12,48767,3.35
+metro,Ithaca Metro Area,2025,11,48482,3.54
+metro,Ithaca Metro Area,2026,9,48800,3.94
+metro,Kingston Metro Area,2000,12,88250,3.56
+metro,Kingston Metro Area,2001,12,88225,3.81
+metro,Kingston Metro Area,2002,12,90850,4.44
+metro,Kingston Metro Area,2003,12,91367,4.62
+metro,Kingston Metro Area,2004,12,91233,4.94
+metro,Kingston Metro Area,2005,12,91792,4.35
+metro,Kingston Metro Area,2006,12,92592,4.12
+metro,Kingston Metro Area,2007,12,90308,4.24
+metro,Kingston Metro Area,2008,12,90058,5.41
+metro,Kingston Metro Area,2009,12,90083,7.85
+metro,Kingston Metro Area,2010,12,93717,7.99
+metro,Kingston Metro Area,2011,12,91692,7.91
+metro,Kingston Metro Area,2012,12,91425,8.41
+metro,Kingston Metro Area,2013,12,90967,7.34
+metro,Kingston Metro Area,2014,12,88775,5.74
+metro,Kingston Metro Area,2015,12,89342,4.81
+metro,Kingston Metro Area,2016,12,88033,4.55
+metro,Kingston Metro Area,2017,12,88125,4.61
+metro,Kingston Metro Area,2018,12,88592,3.92
+metro,Kingston Metro Area,2019,12,88192,3.68
+metro,Kingston Metro Area,2020,12,86033,7.87
+metro,Kingston Metro Area,2021,12,85533,4.83
+metro,Kingston Metro Area,2022,12,86142,3.29
+metro,Kingston Metro Area,2023,12,87917,3.36
+metro,Kingston Metro Area,2024,12,87842,3.54
+metro,Kingston Metro Area,2025,11,88691,3.63
+metro,Kingston Metro Area,2026,9,89300,3.94
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2000,12,300392,3.27
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2001,12,304000,3.56
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2002,12,312458,4.32
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2003,12,315867,4.48
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2004,12,319975,4.57
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2005,12,324517,4.1
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2006,12,327600,4.0
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2007,12,324100,4.03
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2008,12,325858,5.22
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2009,12,325825,7.91
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2010,12,330967,8.03
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2011,12,326517,7.68
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2012,12,327333,7.98
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2013,12,326767,6.94
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2014,12,320492,5.45
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2015,12,324808,4.59
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2016,12,325342,4.36
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2017,12,328342,4.46
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2018,12,331667,3.83
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2019,12,336583,3.63
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2020,12,329992,7.81
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2021,12,327375,4.7
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2022,12,333983,3.23
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2023,12,341508,3.26
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2024,12,342825,3.46
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2025,11,345027,3.63
+metro,Kiryas Joel-Poughkeepsie-Newburgh NY,2026,9,346211,3.91
+metro,New York City Metro Area,2000,12,3657925,5.74
+metro,New York City Metro Area,2001,12,3643783,6.06
+metro,New York City Metro Area,2002,12,3712042,8.03
+metro,New York City Metro Area,2003,12,3692283,8.27
+metro,New York City Metro Area,2004,12,3741392,6.98
+metro,New York City Metro Area,2005,12,3774933,5.64
+metro,New York City Metro Area,2006,12,3798517,4.84
+metro,New York City Metro Area,2007,12,3826892,4.83
+metro,New York City Metro Area,2008,12,3914550,5.54
+metro,New York City Metro Area,2009,12,3953633,9.32
+metro,New York City Metro Area,2010,12,3979342,9.62
+metro,New York City Metro Area,2011,12,4001392,9.14
+metro,New York City Metro Area,2012,12,4072617,9.46
+metro,New York City Metro Area,2013,12,4146642,8.85
+metro,New York City Metro Area,2014,12,4196850,7.09
+metro,New York City Metro Area,2015,12,4218942,5.57
+metro,New York City Metro Area,2016,12,4241267,5.16
+metro,New York City Metro Area,2017,12,4295875,4.53
+metro,New York City Metro Area,2018,12,4271033,4.15
+metro,New York City Metro Area,2019,12,4278067,3.98
+metro,New York City Metro Area,2020,12,4080758,12.24
+metro,New York City Metro Area,2021,12,4135750,10.06
+metro,New York City Metro Area,2022,12,4166275,5.64
+metro,New York City Metro Area,2023,12,4260150,4.95
+metro,New York City Metro Area,2024,12,4349933,4.99
+metro,New York City Metro Area,2025,11,4399245,5.23
+metro,New York City Metro Area,2026,9,4402056,5.14
+metro,Rochester Metro Area,2000,12,532333,3.6
+metro,Rochester Metro Area,2001,12,529350,4.2
+metro,Rochester Metro Area,2002,12,533050,5.51
+metro,Rochester Metro Area,2003,12,530375,5.64
+metro,Rochester Metro Area,2004,12,529450,5.37
+metro,Rochester Metro Area,2005,12,534883,4.65
+metro,Rochester Metro Area,2006,12,533600,4.43
+metro,Rochester Metro Area,2007,12,527417,4.41
+metro,Rochester Metro Area,2008,12,531467,5.5
+metro,Rochester Metro Area,2009,12,532350,8.06
+metro,Rochester Metro Area,2010,12,534758,8.28
+metro,Rochester Metro Area,2011,12,528983,7.79
+metro,Rochester Metro Area,2012,12,532042,8.08
+metro,Rochester Metro Area,2013,12,530792,7.22
+metro,Rochester Metro Area,2014,12,517217,5.87
+metro,Rochester Metro Area,2015,12,519700,5.12
+metro,Rochester Metro Area,2016,12,526417,4.73
+metro,Rochester Metro Area,2017,12,524458,4.84
+metro,Rochester Metro Area,2018,12,526275,4.15
+metro,Rochester Metro Area,2019,12,527383,3.93
+metro,Rochester Metro Area,2020,12,518242,7.83
+metro,Rochester Metro Area,2021,12,511358,4.95
+metro,Rochester Metro Area,2022,12,512542,3.39
+metro,Rochester Metro Area,2023,12,518608,3.4
+metro,Rochester Metro Area,2024,12,516392,3.62
+metro,Rochester Metro Area,2025,11,518918,3.75
+metro,Rochester Metro Area,2026,9,521678,4.16
+metro,Syracuse Metro Area,2000,12,323458,3.75
+metro,Syracuse Metro Area,2001,12,322425,4.31
+metro,Syracuse Metro Area,2002,12,326808,5.26
+metro,Syracuse Metro Area,2003,12,326542,5.6
+metro,Syracuse Metro Area,2004,12,326725,5.54
+metro,Syracuse Metro Area,2005,12,329975,4.89
+metro,Syracuse Metro Area,2006,12,330708,4.56
+metro,Syracuse Metro Area,2007,12,327208,4.32
+metro,Syracuse Metro Area,2008,12,330225,5.51
+metro,Syracuse Metro Area,2009,12,330250,8.23
+metro,Syracuse Metro Area,2010,12,332017,8.71
+metro,Syracuse Metro Area,2011,12,326708,8.38
+metro,Syracuse Metro Area,2012,12,326875,8.63
+metro,Syracuse Metro Area,2013,12,325608,7.66
+metro,Syracuse Metro Area,2014,12,315908,6.13
+metro,Syracuse Metro Area,2015,12,312867,5.41
+metro,Syracuse Metro Area,2016,12,317700,4.91
+metro,Syracuse Metro Area,2017,12,315967,4.96
+metro,Syracuse Metro Area,2018,12,317058,4.23
+metro,Syracuse Metro Area,2019,12,318158,4.03
+metro,Syracuse Metro Area,2020,12,315592,7.97
+metro,Syracuse Metro Area,2021,12,309942,4.93
+metro,Syracuse Metro Area,2022,12,310900,3.43
+metro,Syracuse Metro Area,2023,12,313083,3.45
+metro,Syracuse Metro Area,2024,12,313158,3.6
+metro,Syracuse Metro Area,2025,11,318100,3.71
+metro,Syracuse Metro Area,2026,9,320333,4.12
+metro,Utica-Rome Metro Area,2000,12,142242,3.95
+metro,Utica-Rome Metro Area,2001,12,140450,4.54
+metro,Utica-Rome Metro Area,2002,12,142525,5.36
+metro,Utica-Rome Metro Area,2003,12,142017,5.53
+metro,Utica-Rome Metro Area,2004,12,141750,5.36
+metro,Utica-Rome Metro Area,2005,12,142867,4.88
+metro,Utica-Rome Metro Area,2006,12,142333,4.44
+metro,Utica-Rome Metro Area,2007,12,140592,4.32
+metro,Utica-Rome Metro Area,2008,12,141567,5.49
+metro,Utica-Rome Metro Area,2009,12,142008,7.64
+metro,Utica-Rome Metro Area,2010,12,144025,8.04
+metro,Utica-Rome Metro Area,2011,12,140300,8.22
+metro,Utica-Rome Metro Area,2012,12,139675,8.48
+metro,Utica-Rome Metro Area,2013,12,138233,7.72
+metro,Utica-Rome Metro Area,2014,12,133175,6.29
+metro,Utica-Rome Metro Area,2015,12,132008,5.54
+metro,Utica-Rome Metro Area,2016,12,133517,4.99
+metro,Utica-Rome Metro Area,2017,12,133525,5.06
+metro,Utica-Rome Metro Area,2018,12,133233,4.42
+metro,Utica-Rome Metro Area,2019,12,134308,4.15
+metro,Utica-Rome Metro Area,2020,12,132292,7.74
+metro,Utica-Rome Metro Area,2021,12,129325,5.18
+metro,Utica-Rome Metro Area,2022,12,128050,3.6
+metro,Utica-Rome Metro Area,2023,12,128742,3.56
+metro,Utica-Rome Metro Area,2024,12,128458,3.79
+metro,Utica-Rome Metro Area,2025,11,128700,3.93
+metro,Utica-Rome Metro Area,2026,9,129178,4.28
+metro,Watertown-Fort Drum Metro Area,2000,12,44850,5.85
+metro,Watertown-Fort Drum Metro Area,2001,12,44908,6.31
+metro,Watertown-Fort Drum Metro Area,2002,12,45908,6.84
+metro,Watertown-Fort Drum Metro Area,2003,12,45942,6.89
+metro,Watertown-Fort Drum Metro Area,2004,12,46225,7.01
+metro,Watertown-Fort Drum Metro Area,2005,12,47108,6.16
+metro,Watertown-Fort Drum Metro Area,2006,12,48425,5.42
+metro,Watertown-Fort Drum Metro Area,2007,12,48017,5.31
+metro,Watertown-Fort Drum Metro Area,2008,12,48908,6.78
+metro,Watertown-Fort Drum Metro Area,2009,12,49583,8.97
+metro,Watertown-Fort Drum Metro Area,2010,12,50367,9.41
+metro,Watertown-Fort Drum Metro Area,2011,12,49117,9.84
+metro,Watertown-Fort Drum Metro Area,2012,12,48633,10.04
+metro,Watertown-Fort Drum Metro Area,2013,12,48700,9.46
+metro,Watertown-Fort Drum Metro Area,2014,12,47033,7.65
+metro,Watertown-Fort Drum Metro Area,2015,12,47050,6.62
+metro,Watertown-Fort Drum Metro Area,2016,12,47167,6.24
+metro,Watertown-Fort Drum Metro Area,2017,12,46600,6.4
+metro,Watertown-Fort Drum Metro Area,2018,12,46242,5.48
+metro,Watertown-Fort Drum Metro Area,2019,12,45800,5.33
+metro,Watertown-Fort Drum Metro Area,2020,12,44992,8.37
+metro,Watertown-Fort Drum Metro Area,2021,12,44783,5.08
+metro,Watertown-Fort Drum Metro Area,2022,12,45017,4.04
+metro,Watertown-Fort Drum Metro Area,2023,12,45383,4.13
+metro,Watertown-Fort Drum Metro Area,2024,12,44908,4.42
+metro,Watertown-Fort Drum Metro Area,2025,11,45218,4.52
+metro,Watertown-Fort Drum Metro Area,2026,9,45856,4.87
+region,Capital Region,2000,12,534883,3.5
+region,Capital Region,2001,12,537175,3.58
+region,Capital Region,2002,12,548433,4.24
+region,Capital Region,2003,12,550358,4.44
+region,Capital Region,2004,12,555317,4.43
+region,Capital Region,2005,12,561683,4.05
+region,Capital Region,2006,12,565842,3.9
+region,Capital Region,2007,12,560317,3.93
+region,Capital Region,2008,12,565492,4.94
+region,Capital Region,2009,12,566892,7.19
+region,Capital Region,2010,12,562667,7.64
+region,Capital Region,2011,12,552475,7.41
+region,Capital Region,2012,12,558942,7.64
+region,Capital Region,2013,12,559983,6.67
+region,Capital Region,2014,12,547858,5.24
+region,Capital Region,2015,12,551825,4.55
+region,Capital Region,2016,12,555358,4.25
+region,Capital Region,2017,12,556225,4.3
+region,Capital Region,2018,12,557825,3.78
+region,Capital Region,2019,12,558333,3.56
+region,Capital Region,2020,12,553283,6.97
+region,Capital Region,2021,12,547300,4.41
+region,Capital Region,2022,12,549350,3.08
+region,Capital Region,2023,12,557383,3.13
+region,Capital Region,2024,12,556433,3.32
+region,Capital Region,2025,11,560845,3.39
+region,Capital Region,2026,9,566278,3.74
+region,Central New York,2000,12,387842,3.8
+region,Central New York,2001,12,387017,4.33
+region,Central New York,2002,12,392717,5.27
+region,Central New York,2003,12,392283,5.6
+region,Central New York,2004,12,392458,5.55
+region,Central New York,2005,12,395767,4.93
+region,Central New York,2006,12,395992,4.61
+region,Central New York,2007,12,391958,4.37
+region,Central New York,2008,12,395700,5.56
+region,Central New York,2009,12,396258,8.32
+region,Central New York,2010,12,396467,8.73
+region,Central New York,2011,12,390375,8.37
+region,Central New York,2012,12,390725,8.62
+region,Central New York,2013,12,389233,7.67
+region,Central New York,2014,12,377733,6.15
+region,Central New York,2015,12,373867,5.44
+region,Central New York,2016,12,378567,4.97
+region,Central New York,2017,12,376050,5.0
+region,Central New York,2018,12,377142,4.29
+region,Central New York,2019,12,378217,4.07
+region,Central New York,2020,12,374342,7.93
+region,Central New York,2021,12,367608,4.91
+region,Central New York,2022,12,368417,3.45
+region,Central New York,2023,12,370133,3.49
+region,Central New York,2024,12,369508,3.64
+region,Central New York,2025,11,374800,3.75
+region,Central New York,2026,9,377978,4.14
+region,Finger Lakes,2000,12,613550,3.67
+region,Finger Lakes,2001,12,610425,4.22
+region,Finger Lakes,2002,12,617067,5.5
+region,Finger Lakes,2003,12,614667,5.63
+region,Finger Lakes,2004,12,613675,5.39
+region,Finger Lakes,2005,12,619742,4.67
+region,Finger Lakes,2006,12,618958,4.45
+region,Finger Lakes,2007,12,611583,4.42
+region,Finger Lakes,2008,12,616208,5.51
+region,Finger Lakes,2009,12,617042,8.05
+region,Finger Lakes,2010,12,614733,8.31
+region,Finger Lakes,2011,12,607325,7.83
+region,Finger Lakes,2012,12,610467,8.1
+region,Finger Lakes,2013,12,608567,7.23
+region,Finger Lakes,2014,12,593483,5.87
+region,Finger Lakes,2015,12,596492,5.13
+region,Finger Lakes,2016,12,602308,4.74
+region,Finger Lakes,2017,12,600675,4.84
+region,Finger Lakes,2018,12,603075,4.15
+region,Finger Lakes,2019,12,604375,3.92
+region,Finger Lakes,2020,12,592467,7.76
+region,Finger Lakes,2021,12,584775,4.88
+region,Finger Lakes,2022,12,584892,3.38
+region,Finger Lakes,2023,12,591183,3.39
+region,Finger Lakes,2024,12,588917,3.61
+region,Finger Lakes,2025,11,591782,3.72
+region,Finger Lakes,2026,9,595222,4.12
+region,Hudson Valley,2000,12,1080283,3.34
+region,Hudson Valley,2001,12,1086325,3.68
+region,Hudson Valley,2002,12,1110300,4.46
+region,Hudson Valley,2003,12,1116225,4.55
+region,Hudson Valley,2004,12,1127975,4.57
+region,Hudson Valley,2005,12,1141067,4.08
+region,Hudson Valley,2006,12,1151842,3.88
+region,Hudson Valley,2007,12,1147325,3.84
+region,Hudson Valley,2008,12,1154350,4.96
+region,Hudson Valley,2009,12,1148767,7.47
+region,Hudson Valley,2010,12,1143533,7.77
+region,Hudson Valley,2011,12,1130650,7.42
+region,Hudson Valley,2012,12,1136433,7.71
+region,Hudson Valley,2013,12,1136975,6.7
+region,Hudson Valley,2014,12,1119042,5.33
+region,Hudson Valley,2015,12,1137158,4.6
+region,Hudson Valley,2016,12,1131600,4.39
+region,Hudson Valley,2017,12,1142275,4.49
+region,Hudson Valley,2018,12,1156233,3.84
+region,Hudson Valley,2019,12,1175200,3.6
+region,Hudson Valley,2020,12,1150750,7.89
+region,Hudson Valley,2021,12,1158033,4.66
+region,Hudson Valley,2022,12,1194683,3.07
+region,Hudson Valley,2023,12,1220392,3.12
+region,Hudson Valley,2024,12,1223975,3.32
+region,Hudson Valley,2025,11,1228164,3.44
+region,Hudson Valley,2026,9,1237289,3.76
+region,Long Island,2000,12,1408292,3.35
+region,Long Island,2001,12,1408475,3.76
+region,Long Island,2002,12,1436608,4.7
+region,Long Island,2003,12,1441958,4.77
+region,Long Island,2004,12,1450858,4.67
+region,Long Island,2005,12,1466975,4.13
+region,Long Island,2006,12,1484108,3.81
+region,Long Island,2007,12,1480000,3.7
+region,Long Island,2008,12,1489958,4.84
+region,Long Island,2009,12,1486800,7.24
+region,Long Island,2010,12,1471592,7.64
+region,Long Island,2011,12,1460067,7.32
+region,Long Island,2012,12,1478917,7.56
+region,Long Island,2013,12,1488583,6.44
+region,Long Island,2014,12,1464650,5.13
+region,Long Island,2015,12,1490358,4.49
+region,Long Island,2016,12,1470183,4.29
+region,Long Island,2017,12,1478417,4.36
+region,Long Island,2018,12,1481492,3.75
+region,Long Island,2019,12,1489733,3.52
+region,Long Island,2020,12,1463242,8.28
+region,Long Island,2021,12,1464300,4.69
+region,Long Island,2022,12,1488617,3.14
+region,Long Island,2023,12,1510608,3.21
+region,Long Island,2024,12,1506725,3.35
+region,Long Island,2025,11,1517000,3.41
+region,Long Island,2026,9,1530422,3.74
+region,Mohawk Valley,2000,12,236867,4.15
+region,Mohawk Valley,2001,12,235767,4.53
+region,Mohawk Valley,2002,12,240350,5.3
+region,Mohawk Valley,2003,12,239025,5.56
+region,Mohawk Valley,2004,12,239592,5.42
+region,Mohawk Valley,2005,12,242308,4.97
+region,Mohawk Valley,2006,12,242583,4.7
+region,Mohawk Valley,2007,12,239542,4.68
+region,Mohawk Valley,2008,12,240917,5.88
+region,Mohawk Valley,2009,12,241042,8.18
+region,Mohawk Valley,2010,12,242050,8.59
+region,Mohawk Valley,2011,12,236650,8.7
+region,Mohawk Valley,2012,12,235850,8.99
+region,Mohawk Valley,2013,12,233242,8.04
+region,Mohawk Valley,2014,12,224442,6.52
+region,Mohawk Valley,2015,12,222100,5.74
+region,Mohawk Valley,2016,12,224692,5.14
+region,Mohawk Valley,2017,12,224717,5.17
+region,Mohawk Valley,2018,12,224033,4.53
+region,Mohawk Valley,2019,12,224617,4.27
+region,Mohawk Valley,2020,12,220258,7.68
+region,Mohawk Valley,2021,12,216250,5.13
+region,Mohawk Valley,2022,12,214958,3.67
+region,Mohawk Valley,2023,12,216067,3.75
+region,Mohawk Valley,2024,12,215917,3.92
+region,Mohawk Valley,2025,11,216945,4.02
+region,Mohawk Valley,2026,9,218178,4.41
+region,New York City,2000,12,3657925,5.74
+region,New York City,2001,12,3643783,6.06
+region,New York City,2002,12,3712042,8.03
+region,New York City,2003,12,3692283,8.27
+region,New York City,2004,12,3741392,6.98
+region,New York City,2005,12,3774933,5.64
+region,New York City,2006,12,3798517,4.84
+region,New York City,2007,12,3826892,4.83
+region,New York City,2008,12,3914550,5.54
+region,New York City,2009,12,3953633,9.32
+region,New York City,2010,12,3979342,9.62
+region,New York City,2011,12,4001392,9.14
+region,New York City,2012,12,4072617,9.46
+region,New York City,2013,12,4146642,8.85
+region,New York City,2014,12,4196850,7.09
+region,New York City,2015,12,4218942,5.57
+region,New York City,2016,12,4241267,5.16
+region,New York City,2017,12,4295875,4.53
+region,New York City,2018,12,4271033,4.15
+region,New York City,2019,12,4278067,3.98
+region,New York City,2020,12,4080758,12.24
+region,New York City,2021,12,4135750,10.06
+region,New York City,2022,12,4166275,5.64
+region,New York City,2023,12,4260150,4.95
+region,New York City,2024,12,4349933,4.99
+region,New York City,2025,11,4399245,5.23
+region,New York City,2026,9,4402056,5.14
+region,North Country,2000,12,188242,5.37
+region,North Country,2001,12,188100,5.61
+region,North Country,2002,12,192117,6.19
+region,North Country,2003,12,191267,6.56
+region,North Country,2004,12,191600,6.62
+region,North Country,2005,12,193450,5.83
+region,North Country,2006,12,195725,5.48
+region,North Country,2007,12,193700,5.47
+region,North Country,2008,12,195458,6.74
+region,North Country,2009,12,196542,9.3
+region,North Country,2010,12,196550,9.8
+region,North Country,2011,12,191800,9.81
+region,North Country,2012,12,190517,9.97
+region,North Country,2013,12,189733,9.14
+region,North Country,2014,12,183650,7.39
+region,North Country,2015,12,179817,6.59
+region,North Country,2016,12,180108,6.03
+region,North Country,2017,12,179883,6.04
+region,North Country,2018,12,179800,5.13
+region,North Country,2019,12,178775,4.92
+region,North Country,2020,12,175508,7.92
+region,North Country,2021,12,173733,4.92
+region,North Country,2022,12,172642,3.83
+region,North Country,2023,12,172842,3.91
+region,North Country,2024,12,172583,4.09
+region,North Country,2025,11,173327,4.31
+region,North Country,2026,9,174900,4.65
+region,Southern Tier,2000,12,321483,3.78
+region,Southern Tier,2001,12,322692,4.34
+region,Southern Tier,2002,12,325050,5.76
+region,Southern Tier,2003,12,319433,5.78
+region,Southern Tier,2004,12,317600,5.42
+region,Southern Tier,2005,12,320008,4.82
+region,Southern Tier,2006,12,322692,4.49
+region,Southern Tier,2007,12,320908,4.37
+region,Southern Tier,2008,12,323508,5.41
+region,Southern Tier,2009,12,324675,8.3
+region,Southern Tier,2010,12,323775,8.54
+region,Southern Tier,2011,12,317550,8.15
+region,Southern Tier,2012,12,316967,8.4
+region,Southern Tier,2013,12,314333,7.57
+region,Southern Tier,2014,12,303283,6.18
+region,Southern Tier,2015,12,295983,5.69
+region,Southern Tier,2016,12,298558,5.24
+region,Southern Tier,2017,12,295658,5.19
+region,Southern Tier,2018,12,295492,4.46
+region,Southern Tier,2019,12,292875,4.15
+region,Southern Tier,2020,12,286392,7.47
+region,Southern Tier,2021,12,281700,4.76
+region,Southern Tier,2022,12,279183,3.5
+region,Southern Tier,2023,12,280633,3.56
+region,Southern Tier,2024,12,278758,3.74
+region,Southern Tier,2025,11,278791,3.91
+region,Southern Tier,2026,9,281389,4.26
+region,Western New York,2000,12,707733,4.27
+region,Western New York,2001,12,699925,4.82
+region,Western New York,2002,12,714508,5.63
+region,Western New York,2003,12,713683,5.96
+region,Western New York,2004,12,715358,5.89
+region,Western New York,2005,12,716658,5.25
+region,Western New York,2006,12,716183,4.94
+region,Western New York,2007,12,706625,4.73
+region,Western New York,2008,12,715508,5.84
+region,Western New York,2009,12,716975,8.52
+region,Western New York,2010,12,702500,8.85
+region,Western New York,2011,12,691150,8.37
+region,Western New York,2012,12,693667,8.68
+region,Western New York,2013,12,692358,7.9
+region,Western New York,2014,12,673642,6.39
+region,Western New York,2015,12,670400,5.62
+region,Western New York,2016,12,685383,5.17
+region,Western New York,2017,12,684400,5.31
+region,Western New York,2018,12,682458,4.51
+region,Western New York,2019,12,682617,4.18
+region,Western New York,2020,12,672450,8.98
+region,Western New York,2021,12,662558,5.32
+region,Western New York,2022,12,663150,3.62
+region,Western New York,2023,12,670517,3.66
+region,Western New York,2024,12,665325,3.92
+region,Western New York,2025,11,668045,4.11
+region,Western New York,2026,9,673300,4.48
+state,New York State,2000,12,9137050,4.5
+state,New York State,2001,12,9119692,4.87
+state,New York State,2002,12,9289150,6.21
+state,New York State,2003,12,9271175,6.39
+state,New York State,2004,12,9345808,5.83
+state,New York State,2005,12,9432575,4.96
+state,New York State,2006,12,9492458,4.48
+state,New York State,2007,12,9478800,4.42
+state,New York State,2008,12,9611642,5.38
+state,New York State,2009,12,9648575,8.41
+state,New York State,2010,12,9633200,8.75
+state,New York State,2011,12,9579467,8.36
+state,New York State,2012,12,9685083,8.65
+state,New York State,2013,12,9759683,7.84
+state,New York State,2014,12,9684592,6.29
+state,New York State,2015,12,9736975,5.23
+state,New York State,2016,12,9768033,4.87
+state,New York State,2017,12,9834175,4.64
+state,New York State,2018,12,9828608,4.1
+state,New York State,2019,12,9862817,3.88
+state,New York State,2020,12,9569492,9.8
+state,New York State,2021,12,9592008,7.07
+state,New York State,2022,12,9682183,4.3
+state,New York State,2023,12,9849917,4.03
+state,New York State,2024,12,9928108,4.17
+state,New York State,2025,11,10008982,4.33
+state,New York State,2026,9,10057000,4.49

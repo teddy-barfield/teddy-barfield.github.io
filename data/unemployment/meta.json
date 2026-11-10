@@ -1,0 +1,28 @@
+{
+  "dataset": "Local Area Unemployment Statistics: Beginning 1976",
+  "agency": "New York State Department of Labor",
+  "resource_id": "5hyu-bdh8",
+  "url": "https://data.ny.gov/d/5hyu-bdh8",
+  "api": "https://data.ny.gov/resource/5hyu-bdh8.json",
+  "pulled": "2026-11-10",
+  "rows_fetched": 27520,
+  "rows_kept": 27520,
+  "dropped": {
+    "missing_field": 0,
+    "duplicate": 0
+  },
+  "first_year_kept": 2000,
+  "latest_month": "2026-09",
+  "missing_months_statewide": [
+    "2025-10"
+  ],
+  "areas": {
+    "state": 1,
+    "county": 62,
+    "metro": 13,
+    "region": 10
+  },
+  "seasonally_adjusted": false,
+  "recovery_tolerance_pts": 1.0,
+  "recovery_definition": "first month after the 2020 peak whose rate is within 1.0 point of the same calendar month of 2019"
+}
