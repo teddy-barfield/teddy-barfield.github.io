@@ -21,6 +21,8 @@
     .note{font-size:.875rem;color:var(--muted);margin-top:.5rem}
     .lists{display:grid;gap:1rem;grid-template-columns:minmax(0,1fr)}
     @media(min-width:760px){.lists{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    .prose h3{font:600 1.15rem var(--serif);margin-top:1.75rem}
+    .prose ul{padding-left:1.25rem;margin-top:1rem}.prose li{margin:.5rem 0}
     .lists h3{font:600 1.1rem var(--serif);margin-bottom:.4rem}
     .lists ol{padding-left:1.25rem}.lists li{margin:.25rem 0}
   </style>
@@ -126,12 +128,38 @@
       </div>
     </section>
 
-    <section>
+    <section id="methodology">
       <div class="wrap">
-        <h2>Approach and caveats</h2>
+        <h2>Methodology and limitations</h2>
         <div class="prose">
-          <p>The ratio is DFS's own published figure; this page does not recompute it. It counts only complaints DFS upheld, not every complaint filed, and the denominator is premium rather than the number of policies. Insurers with very little premium can show huge ratios on one or two complaints, so the best and most improved lists require a minimum size, stated beside each list.</p>
-          <p>The source's 2016 table is identical to its 2015 table in all 158 rows, which looks like a publishing repeat, so 2016 is omitted from the chart. Year-to-year changes for an individual insurer can reflect a handful of complaints. A full methodology write-up is planned as the next step in this project.</p>
+          <h3>What the complaint ratio is</h3>
+          <p>Consumers can complain to DFS about their auto insurer. DFS reviews each complaint and classifies it as upheld (the insurer was wrong), not upheld, or a question of fact it cannot settle. The <em>complaint ratio</em> is the number of upheld complaints divided by the insurer's New York premium written, in millions of dollars. An insurer with 3 upheld complaints on $100 million of premium has a ratio of 0.03. DFS publishes the ratio, and the data files here carry both the published ratio and its ingredients.</p>
+
+          <h3>Why divide by premium</h3>
+          <p>Count the raw complaints and the biggest insurers always look worst, simply because they have the most customers. In 2024 the five largest insurers wrote about 52% of all premium in the table, so they would dominate any raw count. Premium is a stand-in for the insurer's <em>exposure</em>: the amount of business that could generate a complaint. Dividing by it turns a count into a rate, the same move an actuary makes when turning a claim count into claim <em>frequency</em> (claims per unit of exposure) so that books of different sizes can be compared.</p>
+          <p>Premium is an imperfect exposure base. Actuaries usually prefer a count of policies or car-years, because premium also moves with price. An insurer that raises rates lowers its ratio without treating anyone better, and an insurer that writes expensive coverage looks better than one that writes cheap coverage with the same number of customers. Policy counts are not in this dataset.</p>
+
+          <h3>Pooled ratio versus the typical insurer</h3>
+          <p>The market line on the trend chart is a <em>pooled</em> ratio: all upheld complaints divided by all premium, which weights each insurer by its size. In 2024 that was 0.034, while the median insurer's ratio was 0.023 and 47 of 128 insurers had no upheld complaints at all. The pooled figure answers "how many upheld complaints per dollar of premium in the market", and the median answers "what is the typical insurer like". Averaging the 128 individual ratios gives 0.54, which is not meaningful: a handful of tiny insurers with ratios above 1 dominate it.</p>
+
+          <h3>Frequency, not severity</h3>
+          <p>The ratio counts complaints, not how serious they were. A single upheld complaint about a slow letter and one about a wrongly denied total-loss claim count the same. In actuarial terms this is a frequency measure with no severity side. Also, the table shows that most complaints are not upheld: in 2024, 629 of 5,151 complaints (12%) were upheld. The ratio therefore reflects only the small fraction where DFS found the insurer at fault.</p>
+
+          <h3>Small numbers are noisy</h3>
+          <p>Upheld complaints are rare events, so the ratio of a small insurer is mostly chance. A simple model shows the size of the problem. If complaints arrive at random at the 2024 market rate of 0.034 per $1 million, an insurer with $100 million of premium would expect about 3.4 upheld complaints in a year, with a typical swing of about 1.8, or 54% of the expected value. At $1,000 million it would expect 34, with a swing of about 5.8, or 17%. At $10 million the expected count is 0.34, so the model gives a 71% chance of seeing none at all, which is why a zero is not proof of good service. This is the idea behind actuarial <em>credibility</em>: the less data a company has, the less its own experience should be trusted on its own. This page does not apply a credibility adjustment. It uses minimum sizes instead (see below).</p>
+          <p>The same effect produces absurd ratios at the other end. Six insurers in 2024 wrote under $1 million of premium (marked † in the table), and one upheld complaint on that little premium can produce a ratio above 40. Those rows are kept and flagged, not deleted.</p>
+
+          <h3>How the callouts were chosen</h3>
+          <p>"Lowest ratios among large insurers" ranks only insurers with at least $100 million of premium in 2024 (31 insurers), so the ranking is less affected by chance. "Most improved" compares each insurer's pooled ratio for 2017–2019 with 2022–2024, using three years on each side to damp the noise. It requires the insurer to be ranked in all six years, to average at least $10 million of premium a year, and to have had at least 10 upheld complaints in the earlier period. These thresholds are judgment calls: a different cut-off would give a different list.</p>
+
+          <h3>Other limits of the data</h3>
+          <ul>
+            <li><strong>Complaints are self-selected.</strong> Only customers who know to complain, and choose to, are counted. An insurer with an easier complaint process, or with more customers who are likely to complain, can look worse for reasons unrelated to quality.</li>
+            <li><strong>Premium is New York premium written in the filing year,</strong> and the complaints may relate to policies written earlier, so the match between the two is approximate.</li>
+            <li><strong>Some years are repeated or rounded in the source.</strong> The 2016 table is identical to 2015 in all 158 rows, so 2016 is left off the chart. In 2017–2019 the published ratio is rounded to two decimal places (all but one of the 449 values in those three years have at most two decimals), so for example a published 0.03 can hide a true value anywhere from 0.025 to 0.035. The "most improved" list does not use the published ratio; it recomputes upheld complaints divided by premium from the underlying counts.</li>
+            <li><strong>Insurers appear, merge and exit.</strong> 229 insurers appear over 2009–2024 but only 128 in 2024, so trends for an individual insurer may reflect a corporate change rather than its behaviour.</li>
+            <li><strong>This is not a recommendation.</strong> The ratio is one lagging indicator. It says nothing about price, coverage or claim payment speed, and a low ratio does not mean an insurer is the right choice for a given driver.</li>
+          </ul>
         </div>
         <aside class="data-source" aria-label="Data source">
           <dl>
