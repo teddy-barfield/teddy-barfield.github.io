@@ -71,7 +71,7 @@ Dataset: MTA Daily Ridership and Traffic: Beginning 2020
 
 ## Milestone 6 — Polish (nights 20–22)
 
-- [ ] 6.1 Refresh the homepage so the NY Data hub is featured. Make cards and nav consistent.
+- [x] 6.1 Refresh the homepage so the NY Data hub is featured. Make cards and nav consistent.
 - [ ] 6.2 Accessibility and performance pass: alt text, contrast, keyboard navigation, chart text alternatives, Lighthouse-style checks.
 - [ ] 6.3 Add Open Graph and meta tags to every project page, and update the repo README with a project list.
 
