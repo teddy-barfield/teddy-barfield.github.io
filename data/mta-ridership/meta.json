@@ -1,0 +1,81 @@
+{
+ "dataset": "MTA Daily Ridership and Traffic: Beginning 2020",
+ "agency": "Metropolitan Transportation Authority (MTA)",
+ "id": "sayj-mze2",
+ "link": "https://data.ny.gov/d/sayj-mze2",
+ "api": "https://data.ny.gov/resource/sayj-mze2.json",
+ "pulled": "2026-11-10",
+ "raw_rows": 18446,
+ "clean_rows": 18398,
+ "dropped": {
+  "missing_or_bad_count": 44,
+  "duplicate": 0,
+  "negative_or_zero": 4
+ },
+ "first_date": "2020-03-01",
+ "last_date": "2026-11-08",
+ "modes_in_source": [
+  "AAR",
+  "BT",
+  "Bus",
+  "CBD Entries",
+  "CRZ Entries",
+  "LIRR",
+  "MNR",
+  "SIR",
+  "Subway"
+ ],
+ "modes_with_baseline": [
+  "Subway",
+  "Bus",
+  "LIRR",
+  "MNR",
+  "SIR",
+  "AAR",
+  "BT"
+ ],
+ "modes_raw_only": [
+  "CBD Entries",
+  "CRZ Entries"
+ ],
+ "baseline_window": [
+  "2020-03-01",
+  "2020-03-07"
+ ],
+ "baseline_note": "Own baseline: Sun 2020-03-01 to Sat 2020-03-07, by day type. Saturday and Sunday are single days. Not the MTA's own 2019-based comparison.",
+ "missing_dates": {
+  "Subway": [],
+  "Bus": [],
+  "LIRR": [
+   "2026-02-23",
+   "2026-05-16",
+   "2026-05-17",
+   "2026-05-18"
+  ],
+  "MNR": [],
+  "SIR": [
+   "2020-06-21",
+   "2020-10-24",
+   "2020-10-25",
+   "2021-03-13",
+   "2021-03-14",
+   "2021-03-20",
+   "2021-03-21",
+   "2021-03-27",
+   "2021-03-28",
+   "2021-04-17",
+   "2021-04-18",
+   "2021-04-24",
+   "2021-04-25",
+   "2021-05-01",
+   "2021-05-02",
+   "2021-05-08",
+   "2021-06-05",
+   "2021-06-06",
+   "2021-06-12",
+   "2021-06-13"
+  ],
+  "AAR": [],
+  "BT": []
+ }
+}
