@@ -34,6 +34,7 @@
     .ctl label{font-weight:600}
     @media(max-width:600px){table.data #tb-top th{min-width:0}}   /* the rank column holds a number, not a name */
     .ctl select{font:inherit;padding:.5rem .75rem;border:1px solid var(--rule);border-radius:6px;background:#fff;color:inherit;max-width:100%}
+    .yoy-say{max-width:46rem;padding:.8rem 1rem;background:var(--tint);border-left:4px solid var(--accent)}
   </style>
 </head>
 <body>
@@ -116,6 +117,23 @@
           <figcaption id="cap-wk" aria-live="polite"></figcaption>
         </figure>
         <p class="note">Take the weekend line with care. The baseline for each weekend day is a single day (one Saturday and one Sunday in early March 2020), so a share above 100% can partly reflect an unusually quiet baseline day, not only strong weekend travel. The weekday baseline averages five days and is steadier.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap-wide">
+        <h2 id="yoy">Each year against the last</h2>
+        <p>The charts above measure everything against one week in March 2020. This one needs no baseline. It puts every calendar year on the same January-to-December axis and plots the plain average number of riders per day, so a month can be compared with the same month in earlier years and a seasonal swing is not mistaken for growth or decline. Pick a mode and the kind of day.</p>
+        <div class="ctl">
+          <label for="m4">Mode</label><select id="m4"></select>
+          <label for="d4">Days</label><select id="d4"><option value="weekday">Weekdays</option><option value="weekend">Weekend days</option><option value="all">All days</option></select>
+        </div>
+        <p id="yoy-say" class="yoy-say" aria-live="polite"></p>
+        <figure class="chart">
+          <div class="chart-box"><canvas id="c-yoy" role="img" aria-label="Line chart of average daily ridership in each month, one line per calendar year from 2020 to the latest year, for the selected mode and kind of day."></canvas></div>
+          <figcaption id="cap-yoy"></figcaption>
+        </figure>
+        <p class="note">One line per year on a shared month axis is the usual way to separate a trend from a seasonal pattern: if each year's line sits above the one before it, ridership is growing whatever the time of year. Older years are drawn lighter and the latest year darkest and thickest. Weekdays are shown first because a count for all days depends on how many weekends a month happens to contain; public holidays that fall on a weekday are still counted as weekdays here.</p>
       </div>
     </section>
 
@@ -242,6 +260,7 @@
         var wd = months.map(function (k) { return M[m][k] ? +M[m][k].mean_share_weekday * 100 : null; });
         var we = months.map(function (k) { return M[m][k] ? +M[m][k].mean_share_weekend * 100 : null; });
         if (c2) c2.destroy();
+        var oldWk = document.getElementById('c-wk').closest('figure').querySelector('details.chart-data'); if (oldWk) oldWk.remove();   // one data table per chart, not one per redraw
         c2 = NYCharts.line(document.getElementById('c-wk'), months.map(ym), [{ label: 'Weekdays', data: wd, pointRadius: 0 }, { label: 'Weekends', data: we, pointRadius: 0 }], { yTitle: 'Share of baseline (%)' });
         c2.options.scales.x.ticks = { maxTicksLimit: c2.width < 500 ? 4 : 8, autoSkip: true, autoSkipPadding: 12, maxRotation: 0 };
         c2.options.plugins.tooltip = { callbacks: { label: function (c) { return c.dataset.label + ': ' + Math.round(c.parsed.y) + '%'; } } };
@@ -250,6 +269,68 @@
         document.getElementById('cap-wk').textContent = NAMES[m] + ', last 28 days: weekdays ' + pct(+s.last28_weekday_share) + ' of baseline, weekends ' + pct(+s.last28_weekend_share) + '.';
       }
       sel2.addEventListener('change', drawWk); drawWk();
+
+      // Each year against the last: plain riders per day, no baseline (computed from daily_share.csv)
+      var sel4 = document.getElementById('m4'), day4 = document.getElementById('d4');
+      modes.forEach(function (m) { var o = document.createElement('option'); o.value = m; o.textContent = NAMES[m]; sel4.appendChild(o); });
+      var UNIT = { AAR: 'trips', BT: 'vehicles' };
+      var DAYS = { weekday: 'weekdays', weekend: 'weekend days', all: 'all days' };
+      var Y = {};   // Y[mode][yyyy-mm][kind] = [sum of daily counts, number of days]
+      daily.forEach(function (r) {
+        var k = r.date.slice(0, 7), c = +r.count, mm = (Y[r.mode] = Y[r.mode] || {});
+        var o = (mm[k] = mm[k] || { weekday: [0, 0], weekend: [0, 0], all: [0, 0] });
+        var t = r.day_type === 'weekday' ? 'weekday' : 'weekend';
+        o[t][0] += c; o[t][1]++; o.all[0] += c; o.all[1]++;
+      });
+      // The latest month is left out unless the data run to its last day.
+      var lp = last.split('-'), lastComplete = +lp[2] === new Date(+lp[0], +lp[1], 0).getDate();
+      var full = lastComplete ? months.slice() : months.filter(function (k) { return k < lastMonth; });
+      var years = []; full.forEach(function (k) { var y = k.slice(0, 4); if (years.indexOf(y) < 0) years.push(y); });
+      function pad(n) { return (n < 10 ? '0' : '') + n; }
+      function cell(m, k, t) { var o = Y[m] && Y[m][k]; return o && o[t][1] && full.indexOf(k) >= 0 ? o[t] : null; }
+      function avg(m, k, t) { var c = cell(m, k, t); return c ? c[0] / c[1] : null; }
+      function hex(c) { c = c.replace('#', ''); return [0, 2, 4].map(function (i) { return parseInt(c.substr(i, 2), 16); }); }
+      var cs = getComputedStyle(document.documentElement);
+      var LO = hex((cs.getPropertyValue('--band-3') || '').trim() || '#95B3D7'), HI = hex((cs.getPropertyValue('--mark') || '').trim() || '#254061');
+      function shade(i, n) { var f = n > 1 ? i / (n - 1) : 1; return 'rgb(' + LO.map(function (v, j) { return Math.round(v + (HI[j] - v) * f); }).join(',') + ')'; }
+      function change(a, b) { var d = (a / b - 1) * 100, x = Math.abs(d).toFixed(1); return x === '0.0' ? 'the same as' : x + '% ' + (d > 0 ? 'more than' : 'less than'); }
+      function compact(v) { return v >= 1e6 ? (v / 1e6).toFixed(v % 1e6 ? 1 : 0) + 'M' : v >= 1e3 ? (v / 1e3).toFixed(v % 1e3 ? 1 : 0) + 'k' : String(v); }
+      var c4;
+      function drawYoY() {
+        var m = sel4.value, t = day4.value, unit = UNIT[m] || 'riders';
+        var ds = years.map(function (y, i) {
+          var newest = i === years.length - 1;
+          return { label: y, color: shade(i, years.length), borderWidth: newest ? 3.5 : 2, pointRadius: 0, pointHoverRadius: 4, spanGaps: false,
+            data: MN.map(function (_, j) { var a = avg(m, y + '-' + pad(j + 1), t); return a == null ? null : Math.round(a); }) };
+        });
+        if (c4) c4.destroy();
+        var old = document.getElementById('c-yoy').closest('figure').querySelector('details.chart-data'); if (old) old.remove();
+        c4 = NYCharts.line(document.getElementById('c-yoy'), MN, ds, { yTitle: cap(unit) + ' per day (average)' });
+        c4.options.scales.y.ticks = { callback: function (v) { return compact(v); } };
+        c4.options.scales.x.ticks = { autoSkip: true, autoSkipPadding: 8, maxRotation: 0 };
+        c4.options.plugins.tooltip = { callbacks: { label: function (c) { return c.dataset.label + ': ' + nf(c.parsed.y); } } };
+        c4.update();
+
+        // Sentence: latest full month with a year-earlier figure, the year so far, and the last 12 full months
+        var cur = null, i;
+        for (i = full.length - 1; i >= 0 && !cur; i--) if (avg(m, full[i], t) != null && avg(m, (full[i].slice(0, 4) - 1) + full[i].slice(4), t) != null) cur = full[i];
+        var say = NAMES[m] + ', ' + DAYS[t] + '. ';
+        if (!cur) say += 'There is no month with a figure for the year before to compare it with.';
+        else {
+          var cy = cur.slice(0, 4), py = String(cy - 1), mo = +cur.slice(5), a = avg(m, cur, t), b = avg(m, py + cur.slice(4), t);
+          say += 'In ' + ym(cur) + ', the last full month in the data, the average was ' + nf(Math.round(a)) + ' ' + unit + ' a day, ' + change(a, b) + ' in ' + ym(py + cur.slice(4)) + ' (' + nf(Math.round(b)) + '). ';
+          var sa = 0, na = 0, sb = 0, nb = 0, both = true;
+          for (i = 1; i <= mo; i++) { var ca = cell(m, cy + '-' + pad(i), t), cb = cell(m, py + '-' + pad(i), t); if (!ca || !cb) { both = false; break; } sa += ca[0]; na += ca[1]; sb += cb[0]; nb += cb[1]; }
+          if (both && mo > 1) say += 'Over Jan to ' + MN[mo - 1] + ', ' + cy + ' averages ' + nf(Math.round(sa / na)) + ' a day against ' + nf(Math.round(sb / nb)) + ' in the same months of ' + py + ', which is ' + change(sa / na, sb / nb) + ' the year before. ';
+          var up = 0, cmp = 0, at = full.indexOf(cur);
+          for (i = at; i > at - 12 && i >= 0; i--) { var x = avg(m, full[i], t), w = avg(m, (full[i].slice(0, 4) - 1) + full[i].slice(4), t); if (x != null && w != null) { cmp++; if (x > w) up++; } }
+          say += 'In ' + up + ' of the ' + cmp + ' most recent full months, the average was higher than in the same month a year earlier.';
+        }
+        document.getElementById('yoy-say').textContent = say;
+        var miss = (meta.missing_dates[m] || []).length;
+        document.getElementById('cap-yoy').textContent = 'Average ' + unit + ' per day in each month, ' + DAYS[t] + ', ' + NAMES[m] + ', one line per year. ' + years[0] + ' starts in ' + ym(full[0]) + ', when this data begins.' + (lastComplete ? '' : ' ' + ym(lastMonth) + ' is left out because the data stop on ' + ymd(last) + '.') + (miss ? ' The source has no count for this mode on ' + miss + ' day' + (miss > 1 ? 's' : '') + '; those months are averaged over the days available.' : '');
+      }
+      sel4.addEventListener('change', drawYoY); day4.addEventListener('change', drawYoY); drawYoY();
 
       // Biggest days
       var CUT = '2021-01-01';
