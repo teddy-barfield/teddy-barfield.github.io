@@ -38,6 +38,20 @@
     .finder label{font-weight:600}
     .finder select{font:inherit;padding:.5rem .75rem;border:1px solid var(--rule);border-radius:6px;background:#fff;color:inherit;max-width:100%}
     .finder-scroll{max-height:420px;overflow:auto}
+    /* in the scrolling box only the column headings stay put; park names scroll with their rows */
+    .finder-scroll tbody th{position:static}
+    /* One park, year by year: park names in the tables are buttons that open that park's history */
+    table.data th .park-link{all:unset;font-weight:600;cursor:pointer;color:var(--accent);text-decoration:underline;text-underline-offset:2px}
+    table.data th .park-link:hover{color:var(--mark)}
+    table.data th .park-link:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+    #park-h:focus{outline:none}
+    #park-sum{font-size:1rem;color:var(--ink);max-width:46rem}
+    .park-back{font:inherit;font-size:.9rem;font-weight:600;padding:.45rem .8rem;border:1px solid var(--accent);border-radius:6px;background:#fff;color:var(--accent);cursor:pointer}
+    .park-back:hover{background:var(--sheet);color:var(--mark)}
+    .park-back:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+    .park-key{display:flex;flex-wrap:wrap;gap:.35rem 1.25rem;font-size:.875rem;color:var(--muted);margin-top:.5rem}
+    .park-key span::before{content:"";display:inline-block;width:.8rem;height:.8rem;margin-right:.4rem;vertical-align:-.08rem;background:var(--band-3)}
+    .park-key .k-win::before{background:var(--c1)}
   </style>
 </head>
 <body>
@@ -143,6 +157,24 @@
       </div>
     </section>
 
+    <section id="one-park">
+      <div class="wrap-wide">
+        <h2 id="park-h" tabindex="-1">One park, year by year</h2>
+        <p>Pick a park here, or select any park name in the tables on this page, to see every year it reported. This is the quickest way to check a growth figure: a steady climb and a sudden jump can produce the same percentage.</p>
+        <div class="finder">
+          <label for="park">Park</label>
+          <select id="park"></select>
+          <button type="button" class="park-back" id="park-back" hidden>Back to the table</button>
+        </div>
+        <p class="note" id="park-sum" aria-live="polite"></p>
+        <figure class="chart">
+          <div class="chart-box"><canvas id="c-park" role="img" aria-label="Bar chart of yearly visits for the selected park."></canvas></div>
+          <div class="park-key" id="park-key"></div>
+          <figcaption id="cap-park"></figcaption>
+        </figure>
+      </div>
+    </section>
+
     <section>
       <div class="wrap">
         <h2>What the numbers say</h2>
@@ -227,12 +259,14 @@
 
     function int(x) { return x.toLocaleString('en-US'); }
     function mil(x) { return (x / 1e6).toFixed(1); }
-    function pct(x) { return (x >= 0 ? '+' : '') + int(Math.round(x)) + '%'; }
+    function pct(x) { var r = Math.round(x) || 0; return (r > 0 ? '+' : '') + int(r) + '%'; }   // a change that rounds to zero reads "0%", not "-0%"
     function esc(s) { return s.replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
     function li(p, h) { var e = document.createElement('li'); e.innerHTML = h; p.appendChild(e); }
     function rowsInto(id, items) { document.getElementById(id).innerHTML = items.map(function (cells) { return '<tr>' + cells.map(function (c, i) { return '<' + (i === 0 ? 'th scope="row"' : 'td') + (c.n ? ' class="num"' : '') + '>' + c.t + '</' + (i === 0 ? 'th' : 'td') + '>'; }).join('') + '</tr>'; }).join(''); }
     function T(t) { return { t: esc(String(t)) }; }
     function N(t) { return { t: t, n: 1 }; }
+    // A park name that opens that park's history in the "One park, year by year" section.
+    function P(t) { return { t: '<button type="button" class="park-link" data-park="' + esc(String(t)) + '">' + esc(String(t)) + '</button>' }; }
 
     function init(yt, fs, meta, ry) {
       document.getElementById('pulled').textContent = meta.pulled;
@@ -262,7 +296,7 @@
       NYCharts.bar(document.getElementById('c-top'), top.map(function (r) { return r.f; }),
         [{ label: 'Visits (millions)', data: top.map(function (r) { return +(r.a / 1e6).toFixed(2); }) }], { horizontal: true, xTitle: 'Visits (millions)' });
       document.getElementById('cap-top-t').textContent = 'Top 15 facilities by visits in ' + last.year;
-      rowsInto('tb-top', top.map(function (r) { return [T(r.f), T(r.reg), N(int(r.a))]; }));
+      rowsInto('tb-top', top.map(function (r) { return [P(r.f), T(r.reg), N(int(r.a))]; }));
       var topShare = top.reduce(function (s, r) { return s + r.a; }, 0) / last.att * 100;
       document.getElementById('cap-top').textContent = 'Visits in ' + last.year + ', in millions. These 15 facilities account for ' + Math.round(topShare) + '% of all visits in the system.';
 
@@ -270,14 +304,14 @@
       var elig = cur.filter(function (r) { return r.g !== null && r.latest === last.year; });
       var grow = elig.slice().sort(function (a, b) { return b.g - a.g; }).slice(0, 10);
       document.getElementById('cap-grow').textContent = 'Top 10 of ' + elig.length + ' qualifying facilities, 2003-05 average vs. 2023-25 average';
-      rowsInto('tb-grow', grow.map(function (r) { return [T(r.f), N(int(Math.round(r.e))), N(int(Math.round(r.n))), N(pct(r.g))]; }));
+      rowsInto('tb-grow', grow.map(function (r) { return [P(r.f), N(int(Math.round(r.e))), N(int(Math.round(r.n))), N(pct(r.g))]; }));
 
       var sorted = cur.filter(function (r) { return r.a > 0; }).map(function (r) { return r.a; }).sort(function (a, b) { return a - b; });
       var mid = sorted.length % 2 ? sorted[(sorted.length - 1) / 2] : (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2;
       var cap = 2 * mid;
       var gems = elig.filter(function (r) { return r.a <= cap; }).sort(function (a, b) { return b.g - a.g; }).slice(0, 8);
       document.getElementById('cap-gem').textContent = 'Smaller qualifying facilities (at most ' + int(Math.round(cap)) + ' visits in ' + last.year + '), by growth';
-      rowsInto('tb-gem', gems.map(function (r) { return [T(r.f), T(r.reg), N(int(r.a)), N(pct(r.g))]; }));
+      rowsInto('tb-gem', gems.map(function (r) { return [P(r.f), T(r.reg), N(int(r.a)), N(pct(r.g))]; }));
 
       var g1 = grow[0];
       document.getElementById('callout').textContent = g1.f + ' shows ' + pct(g1.g) + ', which is far larger than any other park. A jump that size usually means the site opened, expanded or changed how it counts visits, not that the same park became that much more popular. The dataset cannot tell which.';
@@ -309,10 +343,93 @@
         var tot = items.reduce(function (s, r) { return s + r.a; }, 0);
         document.getElementById('finder-sum').textContent = rg + ': ' + items.length + ' facilities reported visits in ' + last.year + ', ' + mil(tot) + ' million in total. Change since 2003-05 is shown only for facilities that qualify under the growth rule below.';
         document.getElementById('cap-find').textContent = 'Facilities in the ' + rg + ' region by visits in ' + last.year;
-        rowsInto('tb-find', items.map(function (r) { return [T(r.f), T(county[r.f] || ''), N(int(r.a)), N(r.g === null ? 'n/a' : pct(r.g))]; }));
+        rowsInto('tb-find', items.map(function (r) { return [P(r.f), T(county[r.f] || ''), N(int(r.a)), N(r.g === null ? 'n/a' : pct(r.g))]; }));
       }
       sel.addEventListener('change', render);
       render();
+
+      // One park, year by year. Every facility in the file can be picked, including ones no longer listed.
+      // The year columns (y2003, y2004, ...) are read from the file's own header, so a refresh that adds a year needs no edit here.
+      var ycols = Object.keys(fs[0]).filter(function (k) { return /^y\d{4}$/.test(k); }).sort();
+      var years = ycols.map(function (k) { return +k.slice(1); });
+      var earlyKey = Object.keys(fs[0]).filter(function (k) { return /^avg_/.test(k); })[0], lateKey = Object.keys(fs[0]).filter(function (k) { return /^avg_/.test(k); })[1];
+      function span(key) { var m = key.match(/(\d{4})_(\d{4})/); return [+m[1], +m[2]]; }
+      var eW = span(earlyKey), lW = span(lateKey);
+      function win(w) { return w[0] + '-' + String(w[1]).slice(2); }
+      var minBase = (String(meta.growth_rule || '').match(/at least (\d+)/) || [])[1];
+      var byName = {};
+      fs.forEach(function (r) { byName[r.facility] = r; });
+      var psel = document.getElementById('park');
+      var groups = {};
+      fs.forEach(function (r) { (groups[r.region] = groups[r.region] || []).push(r.facility); });
+      psel.innerHTML = Object.keys(groups).sort().map(function (g) {
+        return '<optgroup label="' + esc(g) + '">' + groups[g].sort().map(function (n) { return '<option value="' + esc(n) + '">' + esc(n) + '</option>'; }).join('') + '</optgroup>';
+      }).join('');
+      var css = getComputedStyle(document.documentElement);
+      var cWin = NYCharts.palette[0], cOther = (css.getPropertyValue('--band-3') || '').trim() || '#95B3D7';
+      function inWin(y) { return (y >= eW[0] && y <= eW[1]) || (y >= lW[0] && y <= lW[1]); }
+      function short(v) { return v >= 1e6 ? +(v / 1e6).toFixed(2) + 'M' : v >= 1e3 ? +(v / 1e3).toFixed(1) + 'K' : String(v); }
+      var pchart = NYCharts.bar(document.getElementById('c-park'), years.map(String),
+        [{ label: 'Visits', data: years.map(function () { return null; }), backgroundColor: years.map(function (y) { return inWin(y) ? cWin : cOther; }), borderColor: 'transparent' }], { yTitle: 'Visits' });
+      if (pchart) {
+        pchart.options.scales.y.ticks = { callback: function (v) { return short(v); } };
+        pchart.options.plugins.tooltip = { callbacks: { label: function (c) { return int(c.parsed.y) + ' visits'; } } };
+      }
+      document.getElementById('park-key').innerHTML = '<span class="k-win">' + win(eW) + ' and ' + win(lW) + ', the years the growth figure compares</span><span>Other years</span>';
+      function renderPark() {
+        var r = byName[psel.value];
+        if (!r) return;
+        var vals = ycols.map(function (k) { return r[k] === '' ? null : +r[k]; });
+        var listed = [], zero = 0, missing = 0;
+        vals.forEach(function (v, i) { if (v === null) missing++; else { if (v === 0) zero++; else listed.push({ y: years[i], v: v }); } });
+        var hi = listed.reduce(function (a, b) { return b.v > a.v ? b : a; }, listed[0]);
+        var lo = listed.reduce(function (a, b) { return b.v < a.v ? b : a; }, listed[0]);
+        var latest = +r.latest_year, lv = vals[years.indexOf(latest)];
+        var t = r.facility + ' (' + r.region + ' region; county: ' + r.county + ')';
+        if (!listed.length) t += ' reported no visits in any year it was listed.';
+        else {
+          t += latest === last.year ? ' reported ' + int(lv) + ' visits in ' + latest + '.' : ' was last listed in ' + latest + ', with ' + int(lv) + ' visits.';
+          if (listed.length > 1) t += ' Its busiest year in the data was ' + hi.y + ' (' + int(hi.v) + ') and its quietest year with any visits was ' + lo.y + ' (' + int(lo.v) + ').';
+        }
+        if (r.growth_pct !== '' && latest === last.year) {
+          t += ' Its ' + win(eW) + ' average was ' + int(Math.round(+r[earlyKey])) + ' visits a year and its ' + win(lW) + ' average was ' + int(Math.round(+r[lateKey])) + ', a change of ' + pct(+r.growth_pct) + '.';
+        } else {
+          var why = [];
+          if (zero) why.push('reported zero visits in ' + zero + ' year' + (zero > 1 ? 's' : ''));
+          if (missing) why.push('is not listed in ' + missing + ' year' + (missing > 1 ? 's' : ''));
+          if (why.length) t += ' No growth figure is given because it ' + why.join(' and ') + ', and the growth rule needs visits in every year.';
+          else if (r.continuous === '1') t += ' No growth figure is given because its ' + win(eW) + ' average (' + int(Math.round(+r[earlyKey])) + ' visits a year) is below the ' + (minBase ? int(+minBase) + '-visit ' : '') + 'minimum in the growth rule.';
+        }
+        document.getElementById('park-sum').textContent = t;
+        document.getElementById('cap-park').textContent = 'Visits to ' + r.facility + ' in each year from ' + years[0] + ' to ' + years[years.length - 1] + ', as reported. A year with no bar is a year with zero visits reported or a year the facility is not in the dataset' + (zero || missing ? ' (' + zero + ' zero, ' + missing + ' not listed for this park)' : '') + '. The scale changes with the park, so compare heights within one park, not between parks.';
+        document.getElementById('c-park').setAttribute('aria-label', 'Bar chart of yearly visits to ' + r.facility + ', ' + years[0] + ' to ' + years[years.length - 1] + '.');
+        if (pchart) { pchart.data.datasets[0].data = vals; pchart.update(); }
+      }
+      psel.addEventListener('change', function () { renderPark(); });
+      psel.value = g1.f;
+      renderPark();
+      // A park name pressed in any table: show that park, move to the chart, and offer a way back to the same row.
+      var back = document.getElementById('park-back'), cameFrom = null;
+      var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function go(el) { el.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'start' }); el.focus({ preventScroll: true }); }
+      document.querySelector('main').addEventListener('click', function (ev) {
+        var b = ev.target.closest ? ev.target.closest('.park-link') : null;
+        if (!b || !byName[b.getAttribute('data-park')]) return;
+        cameFrom = b.getAttribute('data-park');
+        cameFromTable = b.closest('tbody').id;
+        psel.value = cameFrom;
+        renderPark();
+        back.hidden = false;
+        go(document.getElementById('park-h'));
+      });
+      var cameFromTable = null;
+      back.addEventListener('click', function () {
+        // The row is looked up again by name, because the region table is redrawn when the region changes.
+        var tb = document.getElementById(cameFromTable), target = null;
+        if (tb) tb.querySelectorAll('.park-link').forEach(function (x) { if (x.getAttribute('data-park') === cameFrom) target = x; });
+        back.hidden = true;
+        if (target) { target.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'center' }); target.focus({ preventScroll: true }); }
+      });
 
       document.getElementById('method').textContent = 'Fastest-growing: only facilities that reported more than zero visits in every year and averaged at least 50,000 visits in 2003-05 qualify (' + elig.length + ' facilities), so tiny sites with unstable counts are left out. Growth compares the 2023-25 average with the 2003-05 average; three-year averages smooth out weather and one-off events. Hidden gems: among those qualifying facilities, parks whose latest-year attendance is at most twice the median facility (' + int(Math.round(mid)) + ' visits, so at most ' + int(Math.round(cap)) + '), ranked by the same growth measure. This is my own definition of "hidden", chosen to be simple and reproducible.';
     }
