@@ -35,6 +35,13 @@
     .controls input[type=search]:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
     #tbl-status{color:var(--ink);margin-top:0}
     #tbl td.none{white-space:normal;color:var(--muted)}
+    #chart-status{color:var(--ink);margin-top:.25rem}
+    .tc{font:inherit;font-size:.8rem;line-height:1.3;margin:.1rem 0 .1rem .5rem;padding:.1rem .45rem;border:1px solid var(--accent);border-radius:0;background:#fff;color:var(--accent);cursor:pointer;white-space:nowrap}
+    .tc:hover{background:var(--sheet)}
+    .tc[aria-pressed=true]{background:var(--mark);border-color:var(--mark);color:#fff}
+    .tc:disabled{border-color:var(--rule);color:var(--muted);background:none;cursor:default}
+    .tc .sw{display:inline-block;width:.65rem;height:.65rem;margin-right:.35rem;border:1px solid #fff;vertical-align:-.05rem}
+    #tbl tr.on-chart td{background:var(--tint)}
     .chips{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0}
     .chips li{background:var(--sheet);padding:.2rem .3rem .2rem .6rem;font-size:.85rem;border-left:4px solid var(--mark)}
     .chips button{font:inherit;border:0;background:none;cursor:pointer;padding:0 .3rem}
@@ -123,6 +130,7 @@
           <label><input type="checkbox" id="hide-small"> Hide insurers with under $<span data-fig="small_m">…</span> million of premium (marked †)</label>
         </div>
         <p class="note" id="tbl-status" role="status" aria-live="polite"></p>
+        <p class="note" id="chart-status" role="status" aria-live="polite"></p>
         <div class="table-scroll" id="tbl-box" tabindex="0" role="region" aria-label="Insurer table, sortable">
           <table class="data" id="tbl">
             <caption id="tbl-cap"></caption>
@@ -138,14 +146,14 @@
           </table>
         </div>
         <div class="controls"><button type="button" id="more" aria-controls="tbl" hidden></button></div>
-        <p class="note">Rank 1 is the lowest ratio. Click a column heading to sort; the search and the short view follow the sort, so sorting by premium shows the largest insurers first. A † marks an insurer with under $<span data-fig="small_m">…</span> million of premium, where one or two complaints can produce an extreme ratio.</p>
+        <p class="note">Rank 1 is the lowest ratio. Click a column heading to sort; the search and the short view follow the sort, so sorting by premium shows the largest insurers first. The button beside each name adds that insurer to the trend chart below, or takes it off. A † marks an insurer with under $<span data-fig="small_m">…</span> million of premium, where one or two complaints can produce an extreme ratio.</p>
       </div>
     </section>
 
     <section id="sec-trend">
       <div class="wrap-wide">
         <h2>Trend by insurer</h2>
-        <p class="note">The thick line is the whole market: all upheld complaints divided by all premium that year. Pick insurers to compare (up to six). Lines are drawn only for years the insurer was ranked.</p>
+        <p class="note">The thick line is the whole market: all upheld complaints divided by all premium that year. Pick insurers to compare (up to <span data-fig="max_sel">…</span>), here or with the button beside each name in the table above. Lines are drawn only for years the insurer was ranked.</p>
         <div class="controls">
           <label for="pick">Add an insurer</label>
           <select id="pick"></select>
@@ -296,6 +304,34 @@
       li(st, '<span class="num">' + f3(F.ratio) + '</span><span class="lbl">market complaint ratio, ' + first + '</span>');
       li(st, '<span class="num">$' + int(Math.round(L.prem)) + 'M</span><span class="lbl">premium covered, ' + last + '</span>');
 
+      // Every insurer's rows by year, and the insurers on the trend chart (it opens with the four largest by premium).
+      // The table and the chart share this list: the button beside a name in the table adds or removes that insurer's line.
+      var byN = {}; rows.forEach(function (r) { (byN[r.naic] = byN[r.naic] || { name: r.name, y: {} }).y[r.year] = r; byN[r.naic].name = r.name; });
+      var cy = years.filter(function (y) { return y !== SKIP; });
+      var MAXSEL = 6, lastAct = '';
+      var sel = cur.slice().sort(function (a, b) { return b.prem - a.prem; }).slice(0, 4).map(function (r) { return r.naic; });
+      function toggle(k) {
+        var i = sel.indexOf(k);
+        if (i >= 0) { sel.splice(i, 1); lastAct = 'Removed ' + byN[k].name + ' from the trend chart. '; }
+        else if (sel.length < MAXSEL) { sel.push(k); lastAct = 'Added ' + byN[k].name + ' to the trend chart. '; }
+        else return;
+        trend();
+      }
+      // Set every table button, row shade and the count line from the list, without redrawing the table (so keyboard focus stays put).
+      function sync() {
+        var full = sel.length >= MAXSEL;
+        document.querySelectorAll('#tbl tbody button.tc').forEach(function (b) {
+          var k = b.dataset.naic, i = sel.indexOf(k), on = i >= 0;
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+          b.disabled = !on && full;
+          b.innerHTML = on ? '<span class="sw" style="background:' + NYCharts.palette[i % 9] + '"></span>On chart' : (full ? 'Chart full' : '+ Add to chart');
+          b.closest('tr').classList.toggle('on-chart', on);
+        });
+        var cs = document.getElementById('chart-status');
+        cs.textContent = lastAct + 'The trend chart now shows ' + sel.length + ' of up to ' + MAXSEL + ' insurers' + (full ? ', so it is full: take one off to add another. ' : '. ');
+        var a = document.createElement('a'); a.href = '#sec-trend'; a.textContent = 'Go to the chart'; cs.appendChild(a);
+      }
+
       /* ---- sortable table ---- */
       document.getElementById('table-intro').textContent = 'Filing year ' + last + ', ' + cur.length + ' insurers.';
       document.getElementById('tbl-cap').textContent = 'Insurers ranked by DFS, filing year ' + last;
@@ -322,7 +358,7 @@
         var tb = document.querySelector('#tbl tbody'); tb.innerHTML = '';
         shown.forEach(function (r) {
           var tr = document.createElement('tr');
-          tr.innerHTML = '<td>' + esc(r.name) + (r.small ? ' †' : '') + '</td><td class="num">' + r.rank + '</td><td class="num">' + r.ratio.toFixed(4) + '</td><td class="num">' + r.upheld + '</td><td class="num">' + r.total + '</td><td class="num">' + money(r.prem) + '</td>';
+          tr.innerHTML = '<td>' + esc(r.name) + (r.small ? ' †' : '') + '<button type="button" class="tc" data-naic="' + esc(r.naic) + '" aria-label="' + esc(r.name) + ', on the trend chart"></button></td><td class="num">' + r.rank + '</td><td class="num">' + r.ratio.toFixed(4) + '</td><td class="num">' + r.upheld + '</td><td class="num">' + r.total + '</td><td class="num">' + money(r.prem) + '</td>';
           tb.appendChild(tr);
         });
         var noun = hide.checked ? 'insurers with at least $' + int(SMALL) + ' million of premium' : 'insurers';
@@ -348,7 +384,10 @@
         more.hidden = d.length <= PAGE;
         more.textContent = showAll ? 'Show only the first ' + PAGE : 'Show all ' + d.length + (q ? ' matches' : ' insurers');
         more.setAttribute('aria-expanded', showAll ? 'true' : 'false');
+        lastAct = '';   // the table was redrawn (search, sort, short view), so the last add/remove message is stale
+        sync();
       }
+      document.querySelector('#tbl tbody').addEventListener('click', function (e) { var b = e.target.closest('button.tc'); if (b) toggle(b.dataset.naic); });
       find.addEventListener('input', draw);
       more.addEventListener('click', function () {
         showAll = !showAll; draw();
@@ -358,9 +397,6 @@
       hide.addEventListener('change', draw); draw();
 
       /* ---- trend chart ---- */
-      var byN = {}; rows.forEach(function (r) { (byN[r.naic] = byN[r.naic] || { name: r.name, y: {} }).y[r.year] = r; byN[r.naic].name = r.name; });
-      var cy = years.filter(function (y) { return y !== SKIP; });
-      var sel = cur.slice().sort(function (a, b) { return b.prem - a.prem; }).slice(0, 4).map(function (r) { return r.naic; });
       var pick = document.getElementById('pick');
       Object.keys(byN).sort(function (a, b) { return byN[a].name.localeCompare(byN[b].name); }).forEach(function (k) {
         var o = document.createElement('option'); o.value = k; o.textContent = byN[k].name; pick.appendChild(o); });
@@ -377,9 +413,10 @@
         var ch = document.getElementById('chips'); ch.innerHTML = '';
         sel.forEach(function (k) { var e = document.createElement('li'); e.appendChild(document.createTextNode(byN[k].name));
           var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Remove ' + byN[k].name); b.textContent = '×';
-          b.addEventListener('click', function () { sel = sel.filter(function (s) { return s !== k; }); trend(); }); e.appendChild(b); ch.appendChild(e); });
+          b.addEventListener('click', function () { toggle(k); }); e.appendChild(b); ch.appendChild(e); });
+        sync();
       }
-      document.getElementById('add').addEventListener('click', function () { if (sel.indexOf(pick.value) < 0 && sel.length < 6) { sel.push(pick.value); trend(); } });
+      document.getElementById('add').addEventListener('click', function () { if (sel.indexOf(pick.value) < 0) toggle(pick.value); });
       trend();
 
       /* ---- best and most improved ---- */
@@ -416,7 +453,7 @@
       var ex = SIZES.map(function (p) { return rate * p; });
       var rr = rows.filter(function (r) { return ROUNDED.indexOf(r.year) >= 0; });
       var figs = {
-        first: first, last: last, pulled: meta.pulled, small_m: int(SMALL), n: L.n, zero: L.zero,
+        first: first, last: last, max_sel: word(MAXSEL), pulled: meta.pulled, small_m: int(SMALL), n: L.n, zero: L.zero,
         top5_pct: pct0(byPrem.slice(0, 5).reduce(function (s, r) { return s + r.prem; }, 0) / premAll),
         pooled: f3(L.ratio), median: f3(L.median),
         mean: f2(cur.reduce(function (s, r) { return s + r.ratio; }, 0) / cur.length),
