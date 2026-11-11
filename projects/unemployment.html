@@ -55,6 +55,10 @@
     .say{max-width:46rem}
     .key{display:flex;flex-wrap:wrap;gap:.35rem 1.25rem;list-style:none;font-size:.875rem;color:var(--muted);margin-bottom:.75rem}
     .key svg{width:2.25rem;height:.75rem;vertical-align:middle;margin-right:.35rem}
+    /* 10.5: the tolerance slider in "What if the rule were stricter or looser?" */
+    .ctl input[type=range]{flex:1 1 12rem;max-width:20rem;min-width:0;height:2rem;margin:0;accent-color:var(--accent);cursor:pointer}
+    .ctl input[type=range]:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+    .ctl output{font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
   </style>
 </head>
 <body>
@@ -106,6 +110,7 @@
           <li><a href="#sec-regions">Regional comparison</a></li>
           <li><a href="#sec-counties">Every county at a glance</a></li>
           <li><a href="#one-county">One county, up close</a></li>
+          <li><a href="#sec-sens">What if the rule were stricter or looser?</a></li>
           <li><a href="#sec-storyline">The recovery storyline</a></li>
           <li><a href="#sec-method">How to read this, and what it leaves out</a></li>
           <li><a href="#data-source">Data source and code</a></li>
@@ -199,6 +204,25 @@
           <div class="chart-box"><canvas id="c-cty" role="img" aria-label="Line chart of the selected county's monthly unemployment rate from 2018, with its recovery line (same month of 2019 plus the tolerance) and the statewide rate."></canvas></div>
           <figcaption id="cap-cty1"></figcaption>
         </figure>
+      </div>
+    </section>
+
+    <section id="sec-sens">
+      <div class="wrap-wide">
+        <h2>What if the rule were stricter or looser?</h2>
+        <p class="say">Every recovery time on this page rests on one choice: a place counts as recovered when its rate is within <span id="tol2"></span> of the same month of 2019. Move the slider to change that tolerance and see how much the answer depends on it. Left is stricter (at 0.0 the rate must be at or below its 2019 level), right is looser. Nothing else on the page changes; this is a test of the rule, recomputed in your browser from the monthly rates.</p>
+        <div class="ctl"><label for="tolr">Tolerance</label><input type="range" id="tolr" min="0" max="2" step="0.1" value="1"><output id="tolv" for="tolr"></output><button type="button" id="tol-reset" hidden>Back to the page's rule</button></div>
+        <p class="say" id="sens-say" aria-live="polite"></p>
+        <figure class="chart">
+          <div class="chart-box"><canvas id="c-sens" role="img" aria-label="Step chart of how many of the counties had recovered by each month after their 2020 peak, under the chosen tolerance and under the page's own rule."></canvas></div>
+          <figcaption id="cap-sens"></figcaption>
+        </figure>
+        <p class="note">A cumulative step chart suits a "how long until" question: each step up is one or more counties reaching the line, and a curve that sits further left means a faster recovery. Two curves on one scale show the whole spread of counties moving, not just an average.</p>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="State and regions under the chosen tolerance">
+          <table class="data"><caption id="cap-senst"></caption>
+            <thead><tr><th scope="col">Area</th><th scope="col" class="num" id="th-s0"></th><th scope="col" class="num" id="th-s1"></th><th scope="col" class="num">Change (months)</th></tr></thead>
+            <tbody id="tb-sens"></tbody></table>
+        </div>
       </div>
     </section>
 
@@ -434,6 +458,68 @@
         show(curCty);
       })();
 
+      // what if the tolerance were different (10.5): recovery times recomputed from monthly.csv for any tolerance
+      (function () {
+        var tol0 = meta.recovery_tolerance_pts, sl = document.getElementById('tolr'), out = document.getElementById('tolv'), reset = document.getElementById('tol-reset');
+        var BROWN = '#7A6A55', nC = ctys.length;
+        function pts(t) { return t.toFixed(1) + (t === 1 ? ' point' : ' points'); }
+        function idx(k) { return +k.slice(0, 4) * 12 + (+k.slice(5)) - 1; }
+        function mo(n) { return n + (n === 1 ? ' month' : ' months'); }
+        var areas = rec.filter(function (r) { return r.kind !== 'metro'; }), after = {};
+        areas.forEach(function (r) { after[r.area] = Object.keys(series[r.area]).filter(function (k) { return k > r.peak_month; }).sort(); });
+        // months from the area's peak to the first later month on or under (same month of 2019 + tol); null if never
+        function monthsAt(r, tol) {
+          var s = series[r.area], ks = after[r.area];
+          for (var i = 0; i < ks.length; i++) { var b = s['2019-' + ks[i].slice(5)]; if (b !== undefined && s[ks[i]] <= Math.round((b + tol) * 10) / 10 + 1e-9) return idx(ks[i]) - idx(r.peak_month); }
+          return null;
+        }
+        function fileM(r) { return r.months_peak_to_recovery === '' ? null : +r.months_peak_to_recovery; }
+        // check the method against the file: at the page's own tolerance every area must give the file's number
+        areas.forEach(function (r) { var m = monthsAt(r, tol0); if (m !== fileM(r)) console.error('Recovery months mismatch for ' + r.area + ': recomputed ' + m + ', file ' + r.months_peak_to_recovery); });
+        var span = idx(meta.latest_month) - Math.min.apply(null, ctys.map(function (r) { return idx(r.peak_month); }));
+        var xs = []; for (var x = 0; x <= span; x++) xs.push(x);
+        function cum(list) { return xs.map(function (x) { return list.filter(function (m) { return m !== null && m <= x; }).length; }); }
+        function median(list) { var v = list.map(function (m) { return m === null ? Infinity : m; }).sort(function (a, b) { return a - b; }), h = v.length / 2; return v.length % 2 ? v[(v.length - 1) / 2] : (v[h - 1] + v[h]) / 2; }
+        function fm(x) { return x === Infinity || x === null ? 'not yet' : (x % 1 ? x.toFixed(1) : String(x)); }
+        function within(list, n) { return list.filter(function (m) { return m !== null && m <= n; }).length; }
+        var base = ctys.map(fileM), baseMed = median(base), baseYr = within(base, 12);
+        var tblAreas = [S].concat(regs.slice().sort(function (a, b) { return (+b.months_peak_to_recovery) - (+a.months_peak_to_recovery) || (a.area < b.area ? -1 : 1); }));
+        var nycR = R['New York City'];
+        document.getElementById('tol2').textContent = pts(tol0);
+        sl.value = tol0;
+        var sc = NYCharts.line(document.getElementById('c-sens'), xs.map(String), [
+          { label: 'x', data: [], pointRadius: 0, stepped: true, borderWidth: 2.5 },
+          { label: 'The page\'s rule (' + pts(tol0) + ')', data: cum(base), pointRadius: 0, stepped: true, borderDash: [6, 4], color: BROWN }
+        ], { xTitle: 'Months since each county\'s 2020 peak', yTitle: 'Counties recovered (of ' + nC + ')', legend: true });
+        sc.options.scales.y.max = nC;
+        sc.options.plugins.legend.labels = { usePointStyle: true, pointStyle: 'line', boxWidth: 30 };   // the key shows solid against dashed, not two boxes
+        sc.options.scales.x.ticks = { maxTicksLimit: 10, maxRotation: 0 };
+        sc.options.plugins.tooltip = { callbacks: { title: function (it) { return mo(+it[0].label) + ' after the peak'; } } };
+        document.getElementById('th-s0').textContent = 'Page\'s rule (' + tol0.toFixed(1) + ')';
+        function draw() {
+          var tol = Math.round(+sl.value * 10) / 10, same = tol === tol0;
+          var now = ctys.map(function (r) { return monthsAt(r, tol); });
+          out.textContent = pts(tol); sl.setAttribute('aria-valuetext', pts(tol) + (same ? ', the page\'s rule' : tol < tol0 ? ', stricter than the page\'s rule' : ', looser than the page\'s rule'));
+          reset.hidden = same;
+          sc.data.datasets[0].label = 'Tolerance of ' + pts(tol) + (same ? ' (same as the page\'s rule)' : '');
+          sc.data.datasets[0].data = cum(now);
+          sc.stop(); sc.update('none');   // no animation: a redraw that lands during one would be overwritten when it ends
+          var med = median(now), yr = within(now, 12), never = ctys.filter(function (r, i) { return now[i] === null; });
+          var changed = now.filter(function (m, i) { return m !== base[i]; }).length;
+          var sM = monthsAt(S, tol), nM = monthsAt(nycR, tol), say;
+          if (same) say = 'This is the page\'s own rule. With a tolerance of <strong>' + pts(tol) + '</strong>, the median county took ' + fm(med) + ' months to recover and ' + yr + ' of the ' + nC + ' counties were back within 12 months of their peak. The state took ' + fm(sM) + ' months and the New York City region ' + fm(nM) + '. Move the slider to see what a stricter or looser rule would say.';
+          else say = 'With a tolerance of <strong>' + pts(tol) + '</strong>, ' + (tol < tol0 ? 'stricter' : 'looser') + ' than the page\'s rule, the median county took ' + fm(med) + ' months to recover, against ' + fm(baseMed) + ' under the page\'s rule, and ' + yr + ' of the ' + nC + ' counties were back within 12 months of their peak, against ' + baseYr + '. The recovery time changes for ' + changed + ' of the ' + nC + ' counties. The state took ' + fm(sM) + ' months (' + fm(fileM(S)) + ' under the page\'s rule) and the New York City region ' + fm(nM) + ' (' + fm(fileM(nycR)) + ').';
+          if (never.length) say += ' Under this rule ' + (never.length <= 3 ? never.map(function (r) { return esc(r.area); }).join(' and ') : never.length + ' counties') + (never.length === 1 ? ' has' : ' have') + ' not recovered as of ' + latestLbl + '.';
+          document.getElementById('sens-say').innerHTML = say;
+          document.getElementById('cap-sens').textContent = 'Number of the ' + nC + ' counties counted as recovered by each month after their own 2020 peak, up to ' + latestLbl + '. Solid line: a tolerance of ' + pts(tol) + '. Dashed line: the page\'s rule, ' + pts(tol0) + '.' + (never.length ? ' The solid line stops short of ' + nC + ' because ' + never.length + (never.length === 1 ? ' county has' : ' counties have') + ' not recovered under this rule.' : '');
+          document.getElementById('th-s1').textContent = 'This tolerance (' + tol.toFixed(1) + ')';
+          document.getElementById('cap-senst').textContent = 'Months from peak to recovery for the state and the ten labor market regions, under the page\'s rule and under a tolerance of ' + pts(tol);
+          rowsInto('tb-sens', tblAreas.map(function (r) { var a = fileM(r), b = monthsAt(r, tol); return [T(r.area), N(fm(a)), N(fm(b)), N(a === null || b === null ? '' : (b - a > 0 ? '+' : '') + (b - a))]; }));
+        }
+        sl.addEventListener('input', draw);
+        reset.addEventListener('click', function () { sl.value = tol0; draw(); sl.focus(); });
+        draw();
+      })();
 
       // recovery storyline (all figures computed from recovery_summary.csv)
       (function () {
