@@ -52,6 +52,7 @@
     .park-key{display:flex;flex-wrap:wrap;gap:.35rem 1.25rem;font-size:.875rem;color:var(--muted);margin-top:.5rem}
     .park-key span::before{content:"";display:inline-block;width:.8rem;height:.8rem;margin-right:.4rem;vertical-align:-.08rem;background:var(--band-3)}
     .park-key .k-win::before{background:var(--c1)}
+    .park-key .k-tot::before{width:1.3rem;height:0;background:none;border-top:2px dashed var(--muted);vertical-align:.28rem}
   </style>
 </head>
 <body>
@@ -200,11 +201,19 @@
     <section id="sec-finder">
       <div class="wrap-wide">
         <h2>Find a park near you</h2>
-        <p>New York State groups its parks into regions. Pick the region you live in or plan to visit to see its facilities, busiest first. Regions are OPRHP's own groupings, not exact distances, so a park in a neighboring region may be closer to you.</p>
+        <p>New York State groups its parks into regions. Pick the region you live in or plan to visit to see its facilities, busiest first. Regions are OPRHP's own groupings, not exact distances, so a park in a neighboring region may be closer to you. The chart shows how that region's visits have moved over the years, set against the other regions; the list of its parks follows.</p>
         <div class="finder">
           <label for="region">Region</label>
           <select id="region"></select>
+          <label for="rmeasure">Show</label>
+          <select id="rmeasure"></select>
         </div>
+        <p class="note" id="region-sum" aria-live="polite"></p>
+        <figure class="chart">
+          <div class="chart-box"><canvas id="c-region" role="img" aria-label="Line chart of yearly visits by region."></canvas></div>
+          <div class="park-key" id="region-key"></div>
+          <figcaption id="cap-region"></figcaption>
+        </figure>
         <p class="note" id="finder-sum" aria-live="polite"></p>
         <div class="table-scroll finder-scroll" tabindex="0" role="region" aria-label="Parks in the selected region">
           <table class="data"><caption id="cap-find"></caption>
@@ -362,6 +371,58 @@
       }
       sel.addEventListener('change', render);
       render();
+
+      // The chosen region's trend, drawn over the other regions. The same Region menu drives this chart and the table below it.
+      // "Show" switches between visits and an index (first year = 100), which puts large and small regions on one scale.
+      var msel = document.getElementById('rmeasure');
+      msel.innerHTML = '<option value="v">Visits (millions)</option><option value="i">Change since ' + first.year + ' (' + first.year + ' = 100)</option>';
+      var rnames = names.slice().sort(), TOTAL = 'All regions together';
+      var rcss = getComputedStyle(document.documentElement);
+      function rvar(n, d) { return (rcss.getPropertyValue(n) || '').trim() || d; }
+      var cOn = NYCharts.palette[0], cOff = rvar('--band-3', '#95B3D7'), cTot = rvar('--muted', '#4D4D4D');
+      function ord(n) { var s = ['th', 'st', 'nd', 'rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); }
+      var rds = rnames.map(function (n) { return { label: n, data: yt.map(function () { return null; }), color: cOff }; });
+      rds.push({ label: TOTAL, data: yt.map(function () { return null; }), color: cTot, borderDash: [6, 4], pointRadius: 0, order: 1, hidden: true });
+      var rchart = NYCharts.line(document.getElementById('c-region'), yt.map(function (y) { return String(y.year); }), rds, { yTitle: 'Visits (millions)', legend: false });
+      function renderRegion() {
+        var rg = sel.value, idx = msel.value === 'i';
+        var me = rl.filter(function (r) { return r.r === rg; })[0];
+        var mg = gr.filter(function (r) { return r.r === rg; })[0];
+        var pk = yt.map(function (y) { return { y: y.year, v: regs[rg][y.year] || 0 }; }).reduce(function (a, b) { return b.v > a.v ? b : a; });
+        var t = rg + ' had ' + mil(me.a) + ' million visits in ' + last.year + ', against ' + mil(me.b) + ' million in ' + first.year;
+        if (mg) t += ' (' + pct(mg.g) + '). It ranks ' + ord(rl.indexOf(me) + 1) + ' of ' + rl.length + ' regions by visits in ' + last.year + ' and ' + ord(gr.indexOf(mg) + 1) + ' of ' + gr.length + ' by change since ' + first.year + '; all regions together changed ' + pct(growth) + '.';
+        else t += '.';
+        t += ' Its highest year was ' + pk.y + ' (' + mil(pk.v) + ' million).';
+        document.getElementById('region-sum').textContent = t;
+        document.getElementById('region-key').innerHTML = '<span class="k-win">' + esc(rg) + '</span><span>The other ' + (rnames.length - 1) + ' regions</span>' + (idx ? '<span class="k-tot">' + TOTAL + '</span>' : '');
+        document.getElementById('cap-region').textContent = (idx
+          ? 'Each region\'s visits as a percentage of its own ' + first.year + ' figure, so every line starts at 100 and a value of 150 means half again as many visits as in ' + first.year + '. This puts large and small regions on one scale. The dashed line is all regions together.'
+          : 'Visits to all facilities in each region, by year, in millions.')
+          + ' The dark line is ' + rg + '; choose another region in the menu to highlight it. A park is counted under the region the source gave it in that year, and a region\'s line can move because a facility was added or changed how it counts.';
+        document.getElementById('c-region').setAttribute('aria-label', 'Line chart of ' + (idx ? 'visits by region with ' + first.year + ' set to 100' : 'visits by region in millions') + ', ' + first.year + ' to ' + last.year + ', with ' + rg + ' highlighted.');
+        if (!rchart) return;
+        rchart.data.datasets.forEach(function (ds) {
+          var tot = ds.label === TOTAL, on = ds.label === rg;
+          var series = yt.map(function (y) { return tot ? y.att : (regs[ds.label][y.year] == null ? null : regs[ds.label][y.year]); });
+          var base = series[0];
+          ds.data = series.map(function (v) { return v == null || (idx && !base) ? null : idx ? +(v / base * 100).toFixed(1) : +(v / 1e6).toFixed(2); });
+          if (tot) { ds.hidden = !idx; return; }
+          ds.borderColor = ds.backgroundColor = on ? cOn : cOff;
+          ds.borderWidth = on ? 3 : 1.5;
+          ds.pointRadius = on ? 2 : 0;
+          ds.order = on ? 0 : 2;
+        });
+        rchart.options.scales.y.title.text = idx ? 'Visits, ' + first.year + ' = 100' : 'Visits (millions)';
+        // The tooltip names only the highlighted region (and the all-regions line); every region's values are in the table under the chart.
+        rchart.options.plugins.tooltip = {
+          filter: function (c) { return c.dataset.label === rg || c.dataset.label === TOTAL; },
+          callbacks: { label: function (c) { return c.dataset.label + ': ' + (idx ? c.parsed.y.toFixed(1) + ' (' + pct(c.parsed.y - 100) + ' since ' + first.year + ')' : c.parsed.y.toFixed(2) + ' million visits'); } }
+        };
+        rchart.update();
+      }
+      sel.addEventListener('change', renderRegion);
+      msel.addEventListener('change', renderRegion);
+      renderRegion();
 
       // One park, year by year. Every facility in the file can be picked, including ones no longer listed.
       // The year columns (y2003, y2004, ...) are read from the file's own header, so a refresh that adds a year needs no edit here.
