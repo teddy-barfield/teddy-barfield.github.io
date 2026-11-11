@@ -77,11 +77,21 @@
       <h1 style="margin-top:1.5rem">[Project title]</h1>
       <p class="lede">[One-sentence headline finding.]</p>
       <p class="meta">[Tools, e.g. Python, Chart.js] · Data last pulled [YYYY-MM-DD]</p>
+      <!-- On this page: one link per section below, in page order. Each link text is that section's heading; the last link goes to the data-source block. Keep the list and the headings in step. -->
+      <nav class="toc" aria-label="On this page">
+        <p class="toc-title">On this page</p>
+        <ol>
+          <li><a href="#sec-question">The question</a></li>
+          <li><a href="#sec-results">Results</a></li>
+          <li><a href="#sec-method">Approach and caveats</a></li>
+          <li><a href="#data-source">Data source and code</a></li>
+        </ol>
+      </nav>
     </div>
   </header>
 
   <main>
-    <section>
+    <section id="sec-question">
       <div class="wrap">
         <h2>The question</h2>
         <div class="prose"><p>[What this page tries to answer, and why it matters.]</p></div>
@@ -91,7 +101,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="sec-results">
       <div class="wrap-wide">
         <h2>Results</h2>
         <figure class="chart">
@@ -121,11 +131,11 @@
       </div>
     </section>
 
-    <section>
+    <section id="sec-method">
       <div class="wrap">
         <h2>Approach and caveats</h2>
         <div class="prose"><p>[Method in plain language, then limitations.]</p></div>
-        <aside class="data-source" aria-label="Data source">
+        <aside class="data-source" id="data-source" aria-label="Data source">
           <dl>
             <dt>Dataset</dt><dd>[Dataset name]</dd>
             <dt>Agency</dt><dd>[Agency]</dd>

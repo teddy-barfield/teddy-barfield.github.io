@@ -97,11 +97,25 @@
       <h1 style="margin-top:1.5rem">Unemployment across New York</h1>
       <p class="lede" id="lede">Loading the latest figures from the data files.</p>
       <p class="meta">Python, Chart.js · Data last pulled <span id="pulled">2026-11-10</span></p>
+      <!-- On this page: one link per section below, in page order. Each link text is that section's heading; the last link goes to the data-source block. Keep the list and the headings in step. -->
+      <nav class="toc" aria-label="On this page">
+        <p class="toc-title">On this page</p>
+        <ol>
+          <li><a href="#sec-question">The question</a></li>
+          <li><a href="#sec-shock">The 2020 shock, statewide</a></li>
+          <li><a href="#sec-regions">Regional comparison</a></li>
+          <li><a href="#sec-counties">Every county at a glance</a></li>
+          <li><a href="#one-county">One county, up close</a></li>
+          <li><a href="#sec-storyline">The recovery storyline</a></li>
+          <li><a href="#sec-method">How to read this, and what it leaves out</a></li>
+          <li><a href="#data-source">Data source and code</a></li>
+        </ol>
+      </nav>
     </div>
   </header>
 
   <main>
-    <section>
+    <section id="sec-question">
       <div class="wrap">
         <h2>The question</h2>
         <div class="prose"><p>In spring 2020 unemployment jumped almost everywhere. How big was the jump in each part of New York, and how long did it take each county, metro area and region to get back to where it was before? Every figure below is computed in your browser from the processed data files, so none is typed in by hand.</p></div>
@@ -109,7 +123,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="sec-shock">
       <div class="wrap-wide">
         <h2>The 2020 shock, statewide</h2>
         <figure class="chart">
@@ -120,7 +134,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="sec-regions">
       <div class="wrap-wide">
         <h2>Regional comparison</h2>
         <p>New York State's Department of Labor groups counties into ten labor market regions. Pick a region to compare its monthly rate with the state.</p>
@@ -141,7 +155,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="sec-counties">
       <div class="wrap-wide">
         <h2>Every county at a glance</h2>
         <p>One small chart per county, all on the same vertical scale (0% to <span id="ymax"></span>%) so they can be compared by eye. The shaded band marks the spring 2020 peak window. Sort to see who was hit hardest or recovered last. Press any county to see it up close.</p>
@@ -188,21 +202,21 @@
       </div>
     </section>
 
-    <section>
+    <section id="sec-storyline">
       <div class="wrap">
         <h2>The recovery storyline</h2>
         <div class="prose" id="story" aria-live="polite"><p>Loading the recovery write-up from the data files.</p></div>
       </div>
     </section>
 
-    <section>
+    <section id="sec-method">
       <div class="wrap">
         <h2>How to read this, and what it leaves out</h2>
         <div class="prose">
           <p id="method"></p>
           <p>The unemployment rate is the share of the labor force (people working or actively looking for work) who are looking and have no job. It does not count people who stopped looking, so a falling rate can partly reflect people leaving the labor force. County figures are model-based estimates, and small counties are noisier than large ones.</p>
         </div>
-        <aside class="data-source" aria-label="Data source">
+        <aside class="data-source" id="data-source" aria-label="Data source">
           <dl>
             <dt>Dataset</dt><dd>Local Area Unemployment Statistics: Beginning 1976</dd>
             <dt>Agency</dt><dd>New York State Department of Labor</dd>

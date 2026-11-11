@@ -90,11 +90,23 @@
       <h1 style="margin-top:1.5rem">Motor vehicle crashes</h1>
       <p class="lede" id="lede">Loading the latest figures from the data files.</p>
       <p class="meta">Python, Chart.js · Data last pulled <span id="pulled">2026-11-10</span></p>
+      <!-- On this page: one link per section below, in page order. Each link text is that section's heading; the last link goes to the data-source block. Keep the list and the headings in step. -->
+      <nav class="toc" aria-label="On this page">
+        <p class="toc-title">On this page</p>
+        <ol>
+          <li><a href="#sec-question">The question</a></li>
+          <li><a href="#sec-counties">Crashes by county: how often, and how serious</a></li>
+          <li><a href="#sec-when">When crashes happen: hour by day of week</a></li>
+          <li><a href="#sec-conditions">Weather, road surface and light</a></li>
+          <li><a href="#sec-method">How to read this, and what it leaves out</a></li>
+          <li><a href="#data-source">Data source and code</a></li>
+        </ol>
+      </nav>
     </div>
   </header>
 
   <main>
-    <section>
+    <section id="sec-question">
       <div class="wrap">
         <h2>The question</h2>
         <div class="prose"><p>Where and when do crashes happen in New York, and where and when are they more serious? An actuary separates <em>frequency</em> (how often crashes happen) from <em>severity</em> (how bad they are when they do), so this page shows both. Every figure is computed in your browser from the processed data files.</p></div>
@@ -102,7 +114,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="sec-counties">
       <div class="wrap-wide">
         <h2>Crashes by county: how often, and how serious</h2>
         <div class="ctl">
@@ -130,7 +142,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="sec-when">
       <div class="wrap-wide">
         <h2>When crashes happen: hour by day of week</h2>
         <p>Each cell is one hour of one weekday, summed over <span data-fig="nyears_w">…</span> years. Darker means more (or, in the second view, more serious). Read down a column to follow a day, across a row to compare days at the same hour.</p>
@@ -153,7 +165,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="sec-conditions">
       <div class="wrap-wide">
         <h2>Weather, road surface and light</h2>
         <div class="ctl">
@@ -177,7 +189,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="sec-method">
       <div class="wrap">
         <h2>How to read this, and what it leaves out</h2>
         <div class="prose">
@@ -195,7 +207,7 @@
           <h3>What this page does not show</h3>
           <p>It does not show the cause of any crash, the fault of any driver, or the chance that a given trip ends in a crash. It uses crashes as recorded, with no adjustment for under-reporting, and compares counties with no adjustment for road type, climate or traffic mix. It is best used to ask where to look more closely, for example by pairing the data with VMT if that becomes available. The <span data-fig="unk">…</span> crashes with an unknown county are left out of the county table only.</p>
         </div>
-        <aside class="data-source" aria-label="Data source">
+        <aside class="data-source" id="data-source" aria-label="Data source">
           <dl>
             <dt>Dataset</dt><dd>Motor Vehicle Crashes - Case Information: Four Year Window</dd>
             <dt>Agency</dt><dd>New York State Department of Motor Vehicles (DMV)</dd>

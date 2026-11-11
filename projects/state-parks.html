@@ -94,11 +94,26 @@
       <h1 style="margin-top:1.5rem">State park attendance</h1>
       <p class="lede" id="lede">Loading the latest figures from the data files.</p>
       <p class="meta">Python, Chart.js · Data last pulled <span id="pulled">2026-11-10</span></p>
+      <!-- On this page: one link per section below, in page order. Each link text is that section's heading; the last link goes to the data-source block. Keep the list and the headings in step. -->
+      <nav class="toc" aria-label="On this page">
+        <p class="toc-title">On this page</p>
+        <ol>
+          <li><a href="#sec-question">The question</a></li>
+          <li><a href="#sec-by-year">Total attendance by year</a></li>
+          <li><a href="#sec-busiest">The 15 busiest parks</a></li>
+          <li><a href="#sec-growing">Growing fastest, and hidden gems</a></li>
+          <li><a href="#one-park">One park, year by year</a></li>
+          <li><a href="#sec-findings">What the numbers say</a></li>
+          <li><a href="#sec-finder">Find a park near you</a></li>
+          <li><a href="#sec-method">How the lists were built</a></li>
+          <li><a href="#data-source">Data source and code</a></li>
+        </ol>
+      </nav>
     </div>
   </header>
 
   <main>
-    <section>
+    <section id="sec-question">
       <div class="wrap">
         <h2>The question</h2>
         <div class="prose"><p>How many visits do New York State parks and historic sites receive each year, which ones are busiest, and which are growing or worth discovering? Every figure below is computed in your browser from the processed data files, so none is typed in by hand.</p></div>
@@ -106,7 +121,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="sec-by-year">
       <div class="wrap-wide">
         <h2>Total attendance by year</h2>
         <figure class="chart">
@@ -117,7 +132,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="sec-busiest">
       <div class="wrap-wide">
         <h2>The 15 busiest parks</h2>
         <figure class="chart">
@@ -132,7 +147,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="sec-growing">
       <div class="wrap-wide">
         <h2>Growing fastest, and hidden gems</h2>
         <div class="lists">
@@ -175,14 +190,14 @@
       </div>
     </section>
 
-    <section>
+    <section id="sec-findings">
       <div class="wrap">
         <h2>What the numbers say</h2>
         <div class="prose" id="story"></div>
       </div>
     </section>
 
-    <section>
+    <section id="sec-finder">
       <div class="wrap-wide">
         <h2>Find a park near you</h2>
         <p>New York State groups its parks into regions. Pick the region you live in or plan to visit to see its facilities, busiest first. Regions are OPRHP's own groupings, not exact distances, so a park in a neighboring region may be closer to you.</p>
@@ -199,14 +214,14 @@
       </div>
     </section>
 
-    <section>
+    <section id="sec-method">
       <div class="wrap">
         <h2>How the lists were built</h2>
         <div class="prose">
           <p id="method"></p>
           <p>Attendance is a count of visits reported by each facility, not of distinct people, and methods of counting differ by site (for example, gate counts versus estimates). Facilities open, close or change how they count, so the system total partly grows because facilities were added.</p>
         </div>
-        <aside class="data-source" aria-label="Data source">
+        <aside class="data-source" id="data-source" aria-label="Data source">
           <dl>
             <dt>Dataset</dt><dd>State Park Annual Attendance Figures by Facility: Beginning 2003</dd>
             <dt>Agency</dt><dd>New York State Office of Parks, Recreation and Historic Preservation (OPRHP)</dd>

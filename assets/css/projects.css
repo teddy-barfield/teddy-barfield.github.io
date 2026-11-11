@@ -122,3 +122,17 @@ nav.pager { padding: 0 0 3rem; }
   .pager-prev, .pager-next { grid-column: 1; }
   .pager-next { text-align: left; }
 }
+
+/* "On this page" jump list under the title of each data page: one link per section, in page order.
+   It is a <nav>, so the first rule undoes the main menu's padding and link colours from style.css. */
+nav.toc { margin-top: 1.75rem; padding: .85rem 1.1rem 1rem; background: var(--tint); border: 1px solid var(--rule); border-left: 4px solid var(--accent); font-size: .95rem; }
+.toc-title { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--mark); }
+.toc ol { list-style: none; margin-top: .35rem; }
+.toc li { break-inside: avoid; }
+.toc a { display: inline-block; padding: .2rem 0; color: var(--accent); text-decoration: underline; }
+.toc a:hover { color: var(--mark); }
+@media (min-width: 640px) {
+  .toc ol { columns: 2; column-gap: 2rem; }
+}
+/* a little air above whatever a jump link lands on */
+section[id], h2[id], .data-source[id] { scroll-margin-top: 1rem; }

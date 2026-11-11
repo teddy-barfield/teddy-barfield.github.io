@@ -87,11 +87,23 @@
       <h1 style="margin-top:1.5rem">Auto insurer complaint rankings</h1>
       <p class="lede" id="lede">Loading the latest figures from the data files.</p>
       <p class="meta">Python, Chart.js · Data last pulled <span id="pulled">2026-11-10</span></p>
+      <!-- On this page: one link per section below, in page order. Each link text is that section's heading; the last link goes to the data-source block. Keep the list and the headings in step. -->
+      <nav class="toc" aria-label="On this page">
+        <p class="toc-title">On this page</p>
+        <ol>
+          <li><a href="#sec-question">The question</a></li>
+          <li><a href="#sec-insurers">Every insurer, latest year</a></li>
+          <li><a href="#sec-trend">Trend by insurer</a></li>
+          <li><a href="#sec-best">Best and most improved</a></li>
+          <li><a href="#methodology">Methodology and limitations</a></li>
+          <li><a href="#data-source">Data source and code</a></li>
+        </ol>
+      </nav>
     </div>
   </header>
 
   <main>
-    <section>
+    <section id="sec-question">
       <div class="wrap">
         <h2>The question</h2>
         <div class="prose">
@@ -101,7 +113,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="sec-insurers">
       <div class="wrap-wide">
         <h2>Every insurer, latest year</h2>
         <p class="note" id="table-intro"></p>
@@ -130,7 +142,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="sec-trend">
       <div class="wrap-wide">
         <h2>Trend by insurer</h2>
         <p class="note">The thick line is the whole market: all upheld complaints divided by all premium that year. Pick insurers to compare (up to six). Lines are drawn only for years the insurer was ranked.</p>
@@ -152,7 +164,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="sec-best">
       <div class="wrap-wide">
         <h2>Best and most improved</h2>
         <div class="callout" id="callout"></div>
@@ -196,7 +208,7 @@
             <li><strong>This is not a recommendation.</strong> The ratio is one lagging indicator. It says nothing about price, coverage or claim payment speed, and a low ratio does not mean an insurer is the right choice for a given driver.</li>
           </ul>
         </div>
-        <aside class="data-source" aria-label="Data source">
+        <aside class="data-source" id="data-source" aria-label="Data source">
           <dl>
             <dt>Dataset</dt><dd>Automobile Insurance Company Complaint Rankings: Beginning 2009</dd>
             <dt>Agency</dt><dd>New York State Department of Financial Services (DFS)</dd>
