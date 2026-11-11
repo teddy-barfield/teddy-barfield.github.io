@@ -48,6 +48,12 @@
     table.data th[aria-sort]::after{content:" \25BC";font-size:.7em}
     .county-key{font-size:.875rem;color:var(--muted);margin-top:.5rem}
     .county-key span::before{content:"";display:inline-block;width:.8rem;height:.8rem;margin-right:.4rem;vertical-align:-.08rem;background:var(--c2)}
+    /* Frequency-against-severity scatter: one dot per county, linked to "Find a county" */
+    #sec-counties h3{font:600 1.15rem var(--serif);margin-top:2rem}
+    #sec-counties h3+p{max-width:46rem;margin-top:.5rem}
+    #c-scatter{touch-action:manipulation}
+    #scatter-sel{font-size:1rem;color:var(--ink);max-width:46rem}
+    #scatter-sel.on::before{content:"";display:inline-block;width:.8rem;height:.8rem;margin-right:.4rem;vertical-align:-.05rem;border-radius:50%;background:var(--c2);box-shadow:0 0 0 1.5px #000}
   </style>
 </head>
 <body>
@@ -134,6 +140,13 @@
           <p class="county-key" id="county-key" hidden><span>The county chosen in "Find a county"</span></p>
         </figure>
         <div class="callout warn"><strong>Do not read this as a driving-risk ranking.</strong> <span id="callout"></span></div>
+        <h3 id="scatter-h">Frequency against severity, county by county</h3>
+        <p>Each dot is one county. Further right means more recorded crashes per resident; higher up means a larger share of its crashes involved an injury or death. The dashed lines are the median county on each measure, and they divide the counties into the four groups named in the table below. Press a dot, or use "Find a county" above, to mark one county here, in the bar chart and in the table.</p>
+        <figure class="chart">
+          <div class="chart-box tall"><canvas id="c-scatter" data-has-table role="img" aria-label="Scatter chart of New York counties: crashes per 1,000 residents per year against the share of crashes involving an injury or death."></canvas></div>
+          <p class="note" id="scatter-sel"></p>
+          <figcaption id="cap-scatter"></figcaption>
+        </figure>
         <div class="table-scroll scroll-y" id="county-scroll" tabindex="0" role="region" aria-label="All counties table">
           <table class="data"><caption id="cap-ct"></caption>
             <thead><tr><th scope="col">County</th><th scope="col" class="num" data-m="f">Crashes per 1,000 residents per year</th><th scope="col" class="num" data-m="fk">Fatal crashes per 100,000 per year</th><th scope="col" class="num" data-m="sh">Injury or fatal share</th><th scope="col">Group</th></tr></thead>
@@ -377,7 +390,103 @@
             + d1(sel.f) + ' crashes per 1,000 residents per year (rank ' + rankOf(sel, 'f') + ' of ' + n + '); '
             + d1(sel.fk) + ' fatal crashes per 100,000 residents per year (rank ' + rankOf(sel, 'fk') + ')' + (sel.low ? ', an unstable rate because it rests on fewer than ' + am.low_fatal_threshold + ' fatal crashes' : '') + '; '
             + d1(sel.sh) + '% of its crashes involved an injury or death (rank ' + rankOf(sel, 'sh') + '). Rank 1 is the highest. Group: ' + sel.q.charAt(0).toLowerCase() + sel.q.slice(1) + '.';
+        drawScatter(sel);
       }
+      // Scatter: frequency (x) against injury-or-fatal share (y), one dot per county, with the two median lines.
+      // It is built once; drawCounty() calls drawScatter() so the county chosen in "Find a county" is marked here too,
+      // and pressing a dot chooses that county in the menu.
+      var scatter, scatterEl = document.getElementById('c-scatter');
+      var inkC = '#1A1A1A', FONT = '"Public Sans", system-ui, sans-serif';
+      function haloText(g, text, x, y, align, base, weight) {
+        g.font = (weight || 600) + ' 12px ' + FONT; g.textAlign = align; g.textBaseline = base;
+        g.lineJoin = 'round'; g.lineWidth = 4; g.strokeStyle = '#fff'; g.strokeText(text, x, y);
+        g.fillStyle = inkC; g.fillText(text, x, y);
+      }
+      var scatterMarks = { id: 'scatterMarks',
+        beforeDatasetsDraw: function (ch) {   // median lines, under the dots
+          var a = ch.chartArea, g = ch.ctx, x = ch.scales.x.getPixelForValue(M.f.med), y = ch.scales.y.getPixelForValue(M.sh.med);
+          g.save(); g.strokeStyle = '#000'; g.lineWidth = 1.5; g.setLineDash([5, 4]);
+          g.beginPath(); g.moveTo(x, a.top); g.lineTo(x, a.bottom); g.moveTo(a.left, y); g.lineTo(a.right, y); g.stroke(); g.restore();
+        },
+        afterDatasetsDraw: function (ch) {    // median labels and the few direct labels, over the dots
+          var a = ch.chartArea, g = ch.ctx, x = ch.scales.x.getPixelForValue(M.f.med), y = ch.scales.y.getPixelForValue(M.sh.med);
+          g.save();
+          haloText(g, 'Median ' + d1(M.f.med), x + 6, a.top + 4, 'left', 'top');
+          haloText(g, 'Median ' + d1(M.sh.med) + '%', a.left + 6, y - 5, 'left', 'bottom');
+          var S = (ch.$labels || []).filter(function (L) { return L.sel; })[0];
+          (ch.$labels || []).forEach(function (L) {
+            // a name that would sit on top of the chosen county's name is left out
+            if (S && L !== S && Math.abs(ch.scales.y.getPixelForValue(L.r.sh) - ch.scales.y.getPixelForValue(S.r.sh)) < 18 && Math.abs(ch.scales.x.getPixelForValue(L.r.f) - ch.scales.x.getPixelForValue(S.r.f)) < 110) return;
+            var px = ch.scales.x.getPixelForValue(L.r.f), py = ch.scales.y.getPixelForValue(L.r.sh), off = L.sel ? 12 : 9;
+            var w = g.measureText(L.r.c).width, left = px + off + w > a.right - 2;
+            haloText(g, L.r.c, px + (left ? -off : off), py, left ? 'right' : 'left', 'middle', L.sel ? 600 : 500);
+          });
+          g.restore();
+        } };
+      function choose(name) {   // set "Find a county" from the scatter without the page jumping under the finger
+        var before = scatterEl.getBoundingClientRect().top;
+        pick.value = pick.value === name ? '' : name;
+        drawCounty(true);
+        window.scrollBy({ top: scatterEl.getBoundingClientRect().top - before, behavior: 'instant' });
+      }
+      function drawScatter(sel) {
+        var hiF = byF[0], hiS = byS[byS.length - 1];
+        var pts = C.filter(function (r) { return r !== sel; }); if (sel) pts.push(sel);   // the chosen county is drawn last, on top
+        var data = pts.map(function (r) { return { x: r.f, y: r.sh, r: r }; });
+        var labels = [hiF, hiS].filter(function (r, i, a) { return r !== sel && a.indexOf(r) === i; }).map(function (r) { return { r: r }; });
+        if (sel) labels.push({ r: sel, sel: true });
+        var selNote = document.getElementById('scatter-sel');
+        selNote.className = 'note' + (sel ? ' on' : '');
+        selNote.textContent = sel
+          ? sel.c + ' County: ' + d1(sel.f) + ' crashes per 1,000 residents per year (' + (sel.f >= M.f.med ? 'above' : 'below') + ' the median county, ' + d1(M.f.med) + ') and ' + d1(sel.sh) + '% of its crashes involved an injury or death (' + (sel.sh >= M.sh.med ? 'above' : 'below') + ' the median, ' + d1(M.sh.med) + '%). Press its dot again to clear it.'
+          : 'No county is marked. Press a dot to mark one.';
+        scatterEl.setAttribute('aria-label', 'Scatter chart of the ' + C.length + ' New York counties: crashes per 1,000 residents per year across, share of crashes involving an injury or death up, with dashed lines at the median county on each.' + (sel ? ' ' + sel.c + ' County is marked.' : '') + ' Every county\'s figures are in the table that follows.');
+        if (!window.Chart) return;
+        var blue = NYCharts.palette[0], gold = NYCharts.palette[1], small = scatterEl.parentNode.clientWidth < 500;   // smaller dots on a phone, where they crowd
+        var ds = {
+          label: 'Counties', data: data, clip: false,
+          pointBackgroundColor: pts.map(function (r) { return r === sel ? gold : blue; }),
+          pointBorderColor: pts.map(function (r) { return r === sel ? '#000' : '#fff'; }),
+          pointBorderWidth: pts.map(function (r) { return r === sel ? 1.5 : 1; }),
+          pointRadius: pts.map(function (r) { return r === sel ? 8 : small ? 4 : 5; }),
+          pointHoverRadius: pts.map(function (r) { return r === sel ? 9 : small ? 6 : 7; }),
+          pointHoverBackgroundColor: pts.map(function (r) { return r === sel ? gold : blue; }),
+          pointHoverBorderColor: '#000', pointHoverBorderWidth: 1.5
+        };
+        if (scatter) { scatter.data.datasets[0] = ds; scatter.$labels = labels; scatter.update('none'); return; }
+        scatter = new Chart(scatterEl, {
+          type: 'scatter', data: { datasets: [ds] }, plugins: [scatterMarks],
+          options: {
+            layout: { padding: { top: 6, right: 10 } },
+            interaction: { mode: 'nearest', intersect: false },
+            onHover: function (e, els) { e.native.target.style.cursor = els.length ? 'pointer' : ''; },
+            onClick: function (e, _els, ch) {
+              var hit = ch.getElementsAtEventForMode(e, 'nearest', { intersect: false }, false)[0]; if (!hit) return;
+              var el = hit.element, dx = el.x - e.x, dy = el.y - e.y;
+              if (dx * dx + dy * dy <= 24 * 24) choose(ch.data.datasets[0].data[hit.index].r.c);
+            },
+            plugins: { legend: { display: false }, tooltip: { displayColors: false, callbacks: {
+              title: function (it) { return it[0].raw.r.c + ' County'; },
+              label: function (it) { var r = it.raw.r; return [d1(r.f) + ' crashes per 1,000 residents per year', d1(r.sh) + '% injury or fatal share', r.q]; } } } },
+            scales: {
+              x: { beginAtZero: true, title: { display: true, text: M.f.axis }, grid: { display: false } },
+              y: { title: { display: true, text: M.sh.axis }, ticks: { callback: function (v) { return v + '%'; } } }
+            }
+          }
+        });
+        scatter.$labels = labels; scatter.update('none');
+      }
+      // Caption: the four groups are counted from the file's own group column.
+      (function () {
+        var g = function (q) { return C.filter(function (r) { return r.q === q; }).length; };
+        var others = C.filter(function (r) { return nyc.indexOf(r) < 0; });
+        var apart = nyc.length && others.every(function (o) { return nyc.every(function (r) { return r.f < o.f && r.sh > o.sh; }); });
+        document.getElementById('cap-scatter').textContent = 'Each of the ' + C.length + ' counties is one dot, ' + y0 + '-' + y1 + '. The dashed lines mark the median county: ' + d1(M.f.med) + ' crashes per 1,000 residents per year and ' + d1(M.sh.med) + '% of crashes involving an injury or death. '
+          + g('High frequency, high severity') + ' counties are above both medians, ' + g('High frequency, low severity') + ' are above on frequency only, ' + g('Low frequency, high severity') + ' are above on injury-or-fatal share only and ' + g('Low frequency, low severity') + ' are below both.'
+          + (apart ? ' The ' + word(nyc.length) + ' dots at the top left are the New York City counties, each with a lower frequency and a higher share than every other county; the note above explains why that probably reflects what gets reported.' : '')
+          + ' The county with the highest value on each axis is named on the chart.';
+      })();
+
       metricSel.addEventListener('change', function () { drawCounty(true); });
       pick.addEventListener('change', function () { drawCounty(true); });
       drawCounty(false);
