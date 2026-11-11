@@ -31,6 +31,10 @@
   <style>
     .controls{display:flex;flex-wrap:wrap;gap:.75rem 1rem;align-items:center;margin:1rem 0}
     .controls select,.controls button{font:inherit;padding:.35rem .6rem;max-width:100%;min-width:0}
+    .controls input[type=search]{font:inherit;padding:.35rem .6rem;border:1px solid var(--muted);border-radius:0;background:#fff;color:var(--ink);flex:1 1 14rem;max-width:22rem;min-width:0}
+    .controls input[type=search]:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+    #tbl-status{color:var(--ink);margin-top:0}
+    #tbl td.none{white-space:normal;color:var(--muted)}
     .chips{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0}
     .chips li{background:var(--sheet);padding:.2rem .3rem .2rem .6rem;font-size:.85rem;border-left:4px solid var(--mark)}
     .chips button{font:inherit;border:0;background:none;cursor:pointer;padding:0 .3rem}
@@ -102,9 +106,12 @@
         <h2>Every insurer, latest year</h2>
         <p class="note" id="table-intro"></p>
         <div class="controls">
+          <label for="find">Find an insurer</label>
+          <input type="search" id="find" autocomplete="off" spellcheck="false" placeholder="Type part of a name">
           <label><input type="checkbox" id="hide-small"> Hide insurers with under $<span data-fig="small_m">…</span> million of premium (marked †)</label>
         </div>
-        <div class="table-scroll" tabindex="0" role="region" aria-label="Insurer table, sortable">
+        <p class="note" id="tbl-status" role="status" aria-live="polite"></p>
+        <div class="table-scroll" id="tbl-box" tabindex="0" role="region" aria-label="Insurer table, sortable">
           <table class="data" id="tbl">
             <caption id="tbl-cap"></caption>
             <thead><tr>
@@ -118,7 +125,8 @@
             <tbody></tbody>
           </table>
         </div>
-        <p class="note">Rank 1 is the lowest ratio. Click a column heading to sort. A † marks an insurer with under $<span data-fig="small_m">…</span> million of premium, where one or two complaints can produce an extreme ratio.</p>
+        <div class="controls"><button type="button" id="more" aria-controls="tbl" hidden></button></div>
+        <p class="note">Rank 1 is the lowest ratio. Click a column heading to sort; the search and the short view follow the sort, so sorting by premium shows the largest insurers first. A † marks an insurer with under $<span data-fig="small_m">…</span> million of premium, where one or two complaints can produce an extreme ratio.</p>
       </div>
     </section>
 
@@ -285,17 +293,56 @@
         var b = document.createElement('button'); b.type = 'button'; b.textContent = th.textContent; th.textContent = ''; th.appendChild(b);
         b.addEventListener('click', function () { var k = th.dataset.k; if (sortK === k) dir = -dir; else { sortK = k; dir = (k === 'name' || k === 'rank' || k === 'ratio') ? 1 : -1; } draw(); });
       });
+      // Search and short view: the table shows the first PAGE rows of the current sort until "Show all" is pressed,
+      // and the search box narrows it to insurers whose name contains every word typed.
+      var PAGE = 20, showAll = false, find = document.getElementById('find'), more = document.getElementById('more'), status = document.getElementById('tbl-status');
+      function matcher(q) {
+        var words = q.toLowerCase().split(/\s+/).filter(Boolean);
+        return function (name) { var n = name.toLowerCase(); return words.every(function (w) { return n.indexOf(w) >= 0; }); };
+      }
       function draw() {
         ths.forEach(function (th) { if (th.dataset.k === sortK) th.setAttribute('aria-sort', dir > 0 ? 'ascending' : 'descending'); else th.removeAttribute('aria-sort'); });
-        var d = cur.filter(function (r) { return !(hide.checked && r.small); }).sort(function (a, b) {
+        var q = find.value.trim(), hit = matcher(q);
+        var pool = cur.filter(function (r) { return !(hide.checked && r.small); });
+        var d = pool.filter(function (r) { return hit(r.name); }).sort(function (a, b) {
           var x = a[sortK], y = b[sortK]; return (typeof x === 'string' ? x.localeCompare(y) : x - y) * dir || a.rank - b.rank; });
+        var shown = showAll ? d : d.slice(0, PAGE);
         var tb = document.querySelector('#tbl tbody'); tb.innerHTML = '';
-        d.forEach(function (r) {
+        shown.forEach(function (r) {
           var tr = document.createElement('tr');
           tr.innerHTML = '<td>' + esc(r.name) + (r.small ? ' †' : '') + '</td><td class="num">' + r.rank + '</td><td class="num">' + r.ratio.toFixed(4) + '</td><td class="num">' + r.upheld + '</td><td class="num">' + r.total + '</td><td class="num">' + money(r.prem) + '</td>';
           tb.appendChild(tr);
         });
+        var noun = hide.checked ? 'insurers with at least $' + int(SMALL) + ' million of premium' : 'insurers';
+        var SORT_WORDS = { rank: 'DFS rank', ratio: 'complaint ratio', upheld: 'upheld complaints', total: 'all complaints', prem: 'premium' };
+        var order = sortK === 'name' ? 'sorted by name (' + (dir > 0 ? 'A to Z' : 'Z to A') + ')' : 'sorted by ' + SORT_WORDS[sortK] + (dir > 0 ? ' (lowest first)' : ' (highest first)');
+        var msg;
+        if (!d.length) {
+          msg = 'No insurer in the ' + last + ' table matches "' + q + '".';
+          var hidden = cur.filter(function (r) { return hide.checked && r.small && hit(r.name); }).length;
+          if (hidden) msg += ' ' + hidden + (hidden === 1 ? ' match is' : ' matches are') + ' hidden by the under-$' + int(SMALL) + '-million box above.';
+          // insurers that were ranked in an earlier year but not the latest one
+          var seen = {}; cur.forEach(function (r) { seen[r.naic] = 1; });
+          var gone = {}; rows.forEach(function (r) { if (!seen[r.naic] && hit(r.name) && (!gone[r.naic] || r.year > gone[r.naic].year)) gone[r.naic] = r; });
+          var g = Object.keys(gone).map(function (k) { return gone[k]; }).sort(function (a, b) { return b.year - a.year || a.name.localeCompare(b.name); });
+          if (g.length) msg += ' Ranked in earlier years only: ' + g.slice(0, 3).map(function (r) { return r.name + ' (last ranked ' + r.year + ')'; }).join('; ') + (g.length > 3 ? '; and ' + (g.length - 3) + ' more' : '') + '. Earlier years are in the trend chart below.';
+          var tr = document.createElement('tr'); tr.innerHTML = '<td class="none" colspan="6">No matching insurer.</td>'; tb.appendChild(tr);
+        } else if (q) {
+          msg = (shown.length < d.length ? 'Showing ' + shown.length + ' of the ' + d.length : d.length + ' of ' + pool.length) + ' ' + (shown.length < d.length ? noun + ' that match "' + q + '"' : noun + (d.length === 1 ? ' matches "' : ' match "') + q + '"') + ', ' + order + '.';
+        } else {
+          msg = (shown.length < d.length ? 'Showing ' + shown.length + ' of ' + d.length + ' ' : 'Showing all ' + d.length + ' ') + noun + ', ' + order + '.';
+        }
+        status.textContent = msg;
+        more.hidden = d.length <= PAGE;
+        more.textContent = showAll ? 'Show only the first ' + PAGE : 'Show all ' + d.length + (q ? ' matches' : ' insurers');
+        more.setAttribute('aria-expanded', showAll ? 'true' : 'false');
       }
+      find.addEventListener('input', draw);
+      more.addEventListener('click', function () {
+        showAll = !showAll; draw();
+        // after shortening a long table, bring its top back into view
+        if (!showAll) { var box = document.getElementById('tbl-box'); if (box.getBoundingClientRect().top < 0) box.scrollIntoView(); }
+      });
       hide.addEventListener('change', draw); draw();
 
       /* ---- trend chart ---- */
