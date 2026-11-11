@@ -136,3 +136,6 @@ nav.toc { margin-top: 1.75rem; padding: .85rem 1.1rem 1rem; background: var(--ti
 }
 /* a little air above whatever a jump link lands on */
 section[id], h2[id], .data-source[id] { scroll-margin-top: 1rem; }
+
+/* Line under a card grid ("See all ...", "Also on this site ..."): a gap so it does not touch the cards */
+.cards-more { margin-top: 1.25rem; }
