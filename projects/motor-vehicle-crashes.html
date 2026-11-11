@@ -40,6 +40,14 @@
     .heat td{padding:.25rem .15rem;text-align:center;border:1px solid #fff}
     @media(max-width:600px){.heat{font-size:.68rem}.heat th{padding:.2rem .15rem}.heat td{padding:.3rem 0}}
     .scroll-y{max-height:440px;overflow:auto}
+    /* County explorer: the measure menu re-ranks the chart and table; the county menu marks one county in both */
+    #county-sum{font-size:1rem;color:var(--ink);max-width:46rem}
+    .scroll-y tbody th{position:static}
+    table.data tr.sel>*{background:#F6ECD9}
+    table.data tr.sel>th{box-shadow:inset 4px 0 0 var(--c2)}
+    table.data th[aria-sort]::after{content:" \25BC";font-size:.7em}
+    .county-key{font-size:.875rem;color:var(--muted);margin-top:.5rem}
+    .county-key span::before{content:"";display:inline-block;width:.8rem;height:.8rem;margin-right:.4rem;vertical-align:-.08rem;background:var(--c2)}
   </style>
 </head>
 <body>
@@ -96,15 +104,27 @@
 
     <section>
       <div class="wrap-wide">
-        <h2>Crashes per resident, by county</h2>
+        <h2>Crashes by county: how often, and how serious</h2>
+        <div class="ctl">
+          <label for="county-metric">Rank counties by</label>
+          <select id="county-metric">
+            <option value="f">How often: crashes per 1,000 residents</option>
+            <option value="fk">Deaths: fatal crashes per 100,000 residents</option>
+            <option value="sh">How serious: injury or fatal share of crashes</option>
+          </select>
+          <label for="county-pick">Find a county</label>
+          <select id="county-pick"><option value="">None selected</option></select>
+        </div>
+        <p class="note" id="county-sum" role="status" aria-live="polite"></p>
         <figure class="chart">
           <div class="chart-box tall"><canvas id="c-county" data-has-table role="img" aria-label="Horizontal bar chart of the 15 New York counties with the most reported crashes per 1,000 residents per year."></canvas></div>
           <figcaption id="cap-county"></figcaption>
+          <p class="county-key" id="county-key" hidden><span>The county chosen in "Find a county"</span></p>
         </figure>
         <div class="callout warn"><strong>Do not read this as a driving-risk ranking.</strong> <span id="callout"></span></div>
-        <div class="table-scroll scroll-y" tabindex="0" role="region" aria-label="All counties table">
+        <div class="table-scroll scroll-y" id="county-scroll" tabindex="0" role="region" aria-label="All counties table">
           <table class="data"><caption id="cap-ct"></caption>
-            <thead><tr><th scope="col">County</th><th scope="col" class="num">Crashes per 1,000 residents per year</th><th scope="col" class="num">Fatal crashes per 100,000 per year</th><th scope="col" class="num">Injury or fatal share</th><th scope="col">Group</th></tr></thead>
+            <thead><tr><th scope="col">County</th><th scope="col" class="num" data-m="f">Crashes per 1,000 residents per year</th><th scope="col" class="num" data-m="fk">Fatal crashes per 100,000 per year</th><th scope="col" class="num" data-m="sh">Injury or fatal share</th><th scope="col">Group</th></tr></thead>
             <tbody id="tb-county"></tbody></table>
         </div>
       </div>
@@ -270,7 +290,7 @@
       var injTot = ys.filter(function (r) { return INJ[r.severity]; }).reduce(function (s, r) { return s + +r.crashes; }, 0);
       var perYr = total / years.length, nYrs = word(years.length);
 
-      var C = county.map(function (r) { return { c: title(r.county), f: +r.crashes_per_1000_per_year, fk: +r.fatal_per_100k_per_year, sh: +r.injury_or_fatal_share_pct, q: r.quadrant, low: r.low_fatal_count === '1', pop: +r.population_avg, n: +r.crashes }; });
+      var C = county.map(function (r) { return { c: title(r.county), f: +r.crashes_per_1000_per_year, fk: +r.fatal_per_100k_per_year, sh: +r.injury_or_fatal_share_pct, q: r.quadrant, low: r.low_fatal_count === '1', pop: +r.population_avg, n: +r.crashes, fatal: +r.fatal }; });
       var byF = C.slice().sort(function (a, b) { return b.f - a.f; });
       var byS = C.slice().sort(function (a, b) { return a.sh - b.sh; });
 
@@ -281,17 +301,74 @@
       li(st, '<span class="num">' + d1(injTot / total * 100) + '%</span><span class="lbl">of crashes involved injury or death</span>');
       li(st, '<span class="num">' + d1(am.median_frequency) + '</span><span class="lbl">median county: crashes per 1,000 residents per year</span>');
 
-      // County chart
-      var top = byF.slice(0, 15);
-      NYCharts.bar(document.getElementById('c-county'), top.map(function (r) { return r.c; }),
-        [{ label: 'Crashes per 1,000 residents per year', data: top.map(function (r) { return r.f; }) }], { horizontal: true, xTitle: 'Crashes per 1,000 residents per year' });
-      document.getElementById('cap-county').textContent = 'The 15 counties with the most reported crashes per 1,000 residents per year, averaged over ' + y0 + '-' + y1 + '. The median county is ' + d1(am.median_frequency) + '.';
+      // County chart and table. "Rank counties by" picks the measure; "Find a county" marks one county in both.
+      var top = byF.slice(0, 15);   // the 15 highest on frequency, used by the callout text
       var lowest = byF.slice(-5).reverse().map(function (r) { return (r.c === 'New York' ? 'New York County' : r.c) + ' (' + d1(r.f) + ')'; }).join(', ');
       var hi = byF[0], nyc = ['Bronx', 'Kings', 'New York', 'Queens', 'Richmond'].map(function (n) { return C.filter(function (r) { return r.c === n; })[0]; }).filter(Boolean);
       var nycShare = nyc.length ? d1(Math.min.apply(null, nyc.map(function (r) { return r.sh; }))) + '% to ' + d1(Math.max.apply(null, nyc.map(function (r) { return r.sh; }))) + '%' : '';
-      document.getElementById('callout').textContent = 'The rate divides crashes by residents, not by miles driven, so rural and visitor-heavy counties look worse than their driving may warrant: ' + hi.c + ' tops the list at ' + d1(hi.f) + ' with only ' + int(hi.pop) + ' residents. The lowest are ' + lowest + '. The New York City counties have the lowest frequencies but injury-or-fatal shares of ' + nycShare + ' (median county ' + d1(am.median_injury_or_fatal_share_pct) + '%), which probably reflects what gets reported (minor property-damage crashes often go unreported) rather than safer or riskier driving.';
-      document.getElementById('cap-ct').textContent = 'All ' + C.length + ' counties, by crashes per 1,000 residents. Group compares each county with the median county on frequency and on injury-or-fatal share. An asterisk marks counties with fewer than ' + am.low_fatal_threshold + ' fatal crashes in ' + nYrs + ' years, whose fatal rates are unstable.';
-      rowsInto('tb-county', byF.map(function (r) { return [T(r.c), N(d1(r.f)), N(d1(r.fk) + (r.low ? '*' : '')), N(d1(r.sh) + '%'), T(r.q)]; }));
+      document.getElementById('callout').textContent = 'The crashes-per-resident rate divides crashes by residents, not by miles driven, so rural and visitor-heavy counties look worse than their driving may warrant: ' + hi.c + ' tops that list at ' + d1(hi.f) + ' with only ' + int(hi.pop) + ' residents. The lowest are ' + lowest + '. The New York City counties have the lowest frequencies but injury-or-fatal shares of ' + nycShare + ' (median county ' + d1(am.median_injury_or_fatal_share_pct) + '%), which probably reflects what gets reported (minor property-damage crashes often go unreported) rather than safer or riskier driving.';
+
+      function median(k) { var a = C.map(function (r) { return r[k]; }).sort(function (x, y) { return x - y; }), n = a.length; return n % 2 ? a[(n - 1) / 2] : (a[n / 2 - 1] + a[n / 2]) / 2; }
+      var LOWNOTE = 'An asterisk marks counties with fewer than ' + am.low_fatal_threshold + ' fatal crashes in ' + nYrs + ' years, whose fatal rates are unstable';
+      var M = {
+        f:  { axis: 'Crashes per 1,000 residents per year', by: 'crashes per 1,000 residents', med: am.median_frequency, unit: '',
+              aria: 'the most reported crashes per 1,000 residents per year',
+              cap: function () { return 'The 15 counties with the most reported crashes per 1,000 residents per year, averaged over ' + y0 + '-' + y1 + '. The median county is ' + d1(M.f.med) + '.'; } },
+        fk: { axis: 'Fatal crashes per 100,000 residents per year', by: 'fatal crashes per 100,000 residents', med: median('fk'), unit: '',
+              aria: 'the most fatal crashes per 100,000 residents per year',
+              cap: function (rows) { return 'The 15 counties with the most fatal crashes per 100,000 residents per year, averaged over ' + y0 + '-' + y1 + '. The median county is ' + d1(M.fk.med) + '. ' + LOWNOTE + ': ' + rows.slice(0, 15).filter(function (r) { return r.low; }).length + ' of these 15.'; } },
+        sh: { axis: 'Injury or fatal share of crashes (%)', by: 'the share of crashes that involved an injury or death', med: am.median_injury_or_fatal_share_pct, unit: '%',
+              aria: 'the largest share of recorded crashes involving an injury or death',
+              cap: function () { return 'The 15 counties where the largest share of recorded crashes involved an injury or death, ' + y0 + '-' + y1 + '. The median county is ' + d1(M.sh.med) + '%. This is the mix of outcomes among recorded crashes, not a rate per resident, and it rises wherever fewer minor crashes are reported.'; } }
+      };
+      // Dashed line at the median county, drawn on the county chart only.
+      var medianLine = { id: 'medianLine', afterDatasetsDraw: function (ch) {
+        var o = ch.options.plugins.medianLine; if (!o || o.value == null) return;
+        var x = ch.scales.x.getPixelForValue(o.value), a = ch.chartArea, g = ch.ctx;
+        g.save(); g.strokeStyle = '#000'; g.lineWidth = 1.5; g.setLineDash([5, 4]);
+        g.beginPath(); g.moveTo(x, a.top); g.lineTo(x, a.bottom); g.stroke();
+        g.setLineDash([]); g.fillStyle = '#000'; g.font = '600 12px "Public Sans", system-ui, sans-serif'; g.textBaseline = 'bottom';
+        var right = x + 6 + g.measureText(o.text).width < a.right;
+        g.textAlign = right ? 'left' : 'right'; g.fillText(o.text, x + (right ? 6 : -6), a.bottom - 4); g.restore();
+      } };
+      if (window.Chart) Chart.register(medianLine);
+
+      var pick = document.getElementById('county-pick'), metricSel = document.getElementById('county-metric'), countyChart;
+      C.slice().sort(function (a, b) { return a.c < b.c ? -1 : 1; }).forEach(function (r) { var o = document.createElement('option'); o.value = r.c; o.textContent = r.c; pick.appendChild(o); });
+      function rankOf(r, k) { return 1 + C.filter(function (x) { return x[k] > r[k]; }).length; }
+      function star(r, k) { return k === 'fk' && r.low ? '*' : ''; }
+      function drawCounty(moveTable) {
+        var k = metricSel.value, m = M[k], sel = C.filter(function (r) { return r.c === pick.value; })[0];
+        var rows = C.slice().sort(function (a, b) { return b[k] - a[k] || (a.c < b.c ? -1 : 1); });
+        var bars = rows.slice(0, 15), extra = sel && bars.indexOf(sel) < 0;
+        if (extra) bars.push(sel);
+        var accent = NYCharts.palette[1], base = NYCharts.palette[0];
+        if (countyChart) countyChart.destroy();
+        countyChart = NYCharts.bar(document.getElementById('c-county'),
+          bars.map(function (r) { return r.c + star(r, k) + (r === sel && extra ? ' (#' + rankOf(r, k) + ')' : ''); }),
+          [{ label: m.axis, data: bars.map(function (r) { return r[k]; }), backgroundColor: bars.map(function (r) { return r === sel ? accent : base; }), borderColor: bars.map(function (r) { return r === sel ? accent : base; }) }],
+          { horizontal: true, xTitle: m.axis });
+        if (countyChart) { countyChart.options.plugins.medianLine = { value: m.med, text: 'Median ' + d1(m.med) + m.unit }; countyChart.update('none'); }
+        document.getElementById('c-county').setAttribute('aria-label', 'Horizontal bar chart of the 15 New York counties with ' + m.aria + (extra ? ', plus ' + sel.c + ' County' : '') + '. A dashed line marks the median county.');
+        document.getElementById('cap-county').textContent = m.cap(rows) + ' The dashed line marks the median county.' + (extra ? ' ' + sel.c + ' County, ranked ' + rankOf(sel, k) + ' of ' + C.length + ', is added below the 15 for comparison.' : '');
+        document.getElementById('county-key').hidden = !sel;
+        document.getElementById('cap-ct').textContent = 'All ' + C.length + ' counties, by ' + m.by + '. Group compares each county with the median county on frequency and on injury-or-fatal share. ' + LOWNOTE + '.';
+        document.querySelectorAll('#county-scroll thead th').forEach(function (th) { if (th.dataset.m === k) th.setAttribute('aria-sort', 'descending'); else th.removeAttribute('aria-sort'); });
+        document.getElementById('tb-county').innerHTML = rows.map(function (r) {
+          return '<tr' + (r === sel ? ' class="sel" aria-current="true"' : '') + '><th scope="row">' + esc(r.c) + '</th><td class="num">' + d1(r.f) + '</td><td class="num">' + d1(r.fk) + (r.low ? '*' : '') + '</td><td class="num">' + d1(r.sh) + '%</td><td>' + esc(r.q) + '</td></tr>';
+        }).join('');
+        var box = document.getElementById('county-scroll'), tr = box.querySelector('tr.sel');
+        if (moveTable) box.scrollTop = tr ? Math.max(0, tr.offsetTop - box.querySelector('thead').offsetHeight - 8) : 0;
+        var sumEl = document.getElementById('county-sum'), n = C.length;
+        sumEl.textContent = !sel ? 'Choose a county to see where it ranks on all three measures and to mark it in the chart and the table.'
+          : sel.c + ' County (about ' + int(sel.pop) + ' residents): ' + int(sel.n) + ' recorded crashes in ' + nYrs + ' years, ' + int(sel.fatal) + ' of them fatal. '
+            + d1(sel.f) + ' crashes per 1,000 residents per year (rank ' + rankOf(sel, 'f') + ' of ' + n + '); '
+            + d1(sel.fk) + ' fatal crashes per 100,000 residents per year (rank ' + rankOf(sel, 'fk') + ')' + (sel.low ? ', an unstable rate because it rests on fewer than ' + am.low_fatal_threshold + ' fatal crashes' : '') + '; '
+            + d1(sel.sh) + '% of its crashes involved an injury or death (rank ' + rankOf(sel, 'sh') + '). Rank 1 is the highest. Group: ' + sel.q.charAt(0).toLowerCase() + sel.q.slice(1) + '.';
+      }
+      metricSel.addEventListener('change', function () { drawCounty(true); });
+      pick.addEventListener('change', function () { drawCounty(true); });
+      drawCounty(false);
 
       // Heatmap
       var H = agg(hd, function (r) { return r.day + '|' + r.hour; });
