@@ -41,6 +41,20 @@
     .sm .band{fill:#F1E3E0}
     .sm .ln{fill:none;stroke:var(--c1,#376092);stroke-width:1.5}
     .sm .ref{stroke:var(--rule);stroke-width:1}
+    /* 9.5: each small chart and each county name in the table is a button that opens the county up close */
+    .sm li.has-btn{padding:0}
+    .sm button{all:unset;display:block;box-sizing:border-box;width:100%;height:100%;padding:.4rem .5rem;cursor:pointer}
+    .sm button:hover{background:var(--tint)}
+    .sm button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+    .sm li.on{border-color:var(--accent);box-shadow:inset 0 0 0 2px var(--accent)}
+    table.data tbody th button{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+    table.data tbody tr.on th,table.data tbody tr.on td{background:var(--sheet)}
+    .ctl button{font:inherit;font-weight:600;padding:.5rem .75rem;border:1px solid var(--accent);border-radius:6px;background:#fff;color:var(--accent);cursor:pointer}
+    .ctl button:hover{background:var(--tint)}
+    #one-county h2:focus{outline:none}
+    .say{max-width:46rem}
+    .key{display:flex;flex-wrap:wrap;gap:.35rem 1.25rem;list-style:none;font-size:.875rem;color:var(--muted);margin-bottom:.75rem}
+    .key svg{width:2.25rem;height:.75rem;vertical-align:middle;margin-right:.35rem}
   </style>
 </head>
 <body>
@@ -130,7 +144,7 @@
     <section>
       <div class="wrap-wide">
         <h2>Every county at a glance</h2>
-        <p>One small chart per county, all on the same vertical scale (0% to <span id="ymax"></span>%) so they can be compared by eye. The shaded band marks the spring 2020 peak window. Sort to see who was hit hardest or recovered last.</p>
+        <p>One small chart per county, all on the same vertical scale (0% to <span id="ymax"></span>%) so they can be compared by eye. The shaded band marks the spring 2020 peak window. Sort to see who was hit hardest or recovered last. Press any county to see it up close.</p>
         <div class="ctl"><label for="sort">Sort counties by</label>
           <select id="sort">
             <option value="jump">Size of the jump (largest first)</option>
@@ -152,6 +166,25 @@
             </tr></thead>
             <tbody id="tb-cty"></tbody></table>
         </div>
+      </div>
+    </section>
+
+    <section id="one-county">
+      <div class="wrap-wide">
+        <h2 id="h-cty" tabindex="-1">One county, up close</h2>
+        <p class="say">Pick a county here, or press a small chart or a county name in the table above. The dotted <strong>recovery line</strong> is the county's own rate in the same month of 2019 plus <span id="tol"></span> point, drawn from the peak onward. The county counts as recovered in the first month after its peak when its rate is on or under that line, so you can see the definition at work instead of taking the number on trust.</p>
+        <div class="ctl"><label for="cty">County</label><select id="cty"></select><button type="button" id="back" hidden>Back to where you were</button></div>
+        <p class="say" id="cty-say" aria-live="polite"></p>
+        <figure class="chart">
+          <ul class="key" aria-label="Chart key">
+            <li><svg viewBox="0 0 36 12" aria-hidden="true"><line x1="0" y1="6" x2="36" y2="6" stroke="#376092" stroke-width="2.5"/></svg>the county</li>
+            <li><svg viewBox="0 0 36 12" aria-hidden="true"><line x1="0" y1="6" x2="36" y2="6" stroke="#9B2C2C" stroke-width="2.5" stroke-dasharray="2 3"/></svg>its recovery line</li>
+            <li><svg viewBox="0 0 36 12" aria-hidden="true"><line x1="0" y1="6" x2="36" y2="6" stroke="#7A6A55" stroke-width="2" stroke-dasharray="6 4"/></svg>New York State</li>
+            <li><svg viewBox="0 0 36 12" aria-hidden="true"><circle cx="18" cy="6" r="4.5" fill="#376092"/></svg>February 2020, the peak, and the recovery month</li>
+          </ul>
+          <div class="chart-box"><canvas id="c-cty" role="img" aria-label="Line chart of the selected county's monthly unemployment rate from 2018, with its recovery line (same month of 2019 plus the tolerance) and the statewide rate."></canvas></div>
+          <figcaption id="cap-cty1"></figcaption>
+        </figure>
       </div>
     </section>
 
@@ -293,6 +326,7 @@
       // small multiples
       var ymax = Math.ceil(Math.max.apply(null, ctys.map(function (r) { return +r.peak_rate; })) / 5) * 5;
       document.getElementById('ymax').textContent = ymax;
+      var curCty = jumpMax.area;   // the county shown up close; starts on the largest jump
       var W = 120, H = 60, n = months.length;
       var iPeakA = months.indexOf('2020-03'), iPeakB = months.indexOf('2020-06');
       function spark(a) {
@@ -307,7 +341,7 @@
         if (k === 'name') list.sort(function (a, b) { return a.area < b.area ? -1 : 1; });
         else list.sort(function (a, b) { return (+b[FLD[k]]) - (+a[FLD[k]]) || (a.area < b.area ? -1 : 1); });
         document.getElementById('sm').innerHTML = list.map(function (r) {
-          return '<li><span class="nm">' + esc(r.area.replace(' County', '')) + '</span><span class="st">peak ' + r.peak_rate + '% · ' + r.months_peak_to_recovery + ' mo</span>' + spark(r.area) + '</li>';
+          return '<li class="has-btn' + (r.area === curCty ? ' on' : '') + '"><button type="button" data-a="' + esc(r.area) + '"' + (r.area === curCty ? ' aria-current="true"' : '') + '><span class="nm">' + esc(r.area.replace(' County', '')) + '</span><span class="st">peak ' + r.peak_rate + '% · ' + r.months_peak_to_recovery + ' mo</span>' + spark(r.area) + '</button></li>';
         }).join('');
       }
       document.getElementById('sort').addEventListener('change', drawSm);
@@ -318,12 +352,73 @@
       var cur = { k: 'jump', dir: -1 };
       function drawT() {
         rows.sort(function (a, b) { var x = a[cur.k], y = b[cur.k]; return (x < y ? -1 : x > y ? 1 : 0) * cur.dir; });
-        rowsInto('tb-cty', rows.map(function (r) { return [T(r.area), N(r.feb.toFixed(1) + '%'), N(r.peak.toFixed(1) + '%'), N(r.jump.toFixed(1)), N(r.months), N(sgn(r.vs))]; }));
+        rowsInto('tb-cty', rows.map(function (r) { return [{ t: '<button type="button" data-a="' + esc(r.area) + '">' + esc(r.area) + '</button>' }, N(r.feb.toFixed(1) + '%'), N(r.peak.toFixed(1) + '%'), N(r.jump.toFixed(1)), N(r.months), N(sgn(r.vs))]; }));
         document.querySelectorAll('th[aria-sort]').forEach(function (th) { var b = th.querySelector('button'); th.setAttribute('aria-sort', b && b.dataset.k === cur.k ? (cur.dir > 0 ? 'ascending' : 'descending') : 'none'); });
         document.getElementById('cap-cty').textContent = 'All ' + rows.length + ' counties. Click a column heading to sort.';
+        markRow();
       }
+      function markRow() { document.querySelectorAll('#tb-cty tr').forEach(function (tr) { var b = tr.querySelector('button[data-a]'); tr.classList.toggle('on', !!b && b.dataset.a === curCty); }); }
       document.querySelectorAll('button[data-k]').forEach(function (b) { b.addEventListener('click', function () { var k = b.dataset.k; cur = { k: k, dir: cur.k === k ? -cur.dir : (k === 'area' ? 1 : -1) }; drawT(); }); });
       drawT();
+
+      // one county up close (9.5): its rate, its recovery line (same month of 2019 + tolerance) and the state
+      (function () {
+        var tol = meta.recovery_tolerance_pts, csel = document.getElementById('cty'), back = document.getElementById('back'), from = null;
+        var RED = NYCharts.negative, BROWN = '#7A6A55';
+        document.getElementById('tol').textContent = tol.toFixed(1);
+        csel.innerHTML = ctys.slice().sort(function (a, b) { return a.area < b.area ? -1 : 1; }).map(function (r) { return '<option value="' + esc(r.area) + '">' + esc(r.area) + '</option>'; }).join('');
+        function line19(a, k) { var b = series[a]['2019-' + k.slice(5)]; return b === undefined ? null : Math.round((b + tol) * 10) / 10; }
+        var cc = NYCharts.line(document.getElementById('c-cty'), labels, [
+          { label: 'x', data: [], pointRadius: 0 },
+          { label: 'Recovery line (same month of 2019 + ' + tol.toFixed(1) + ' pt)', data: [], pointRadius: 0, borderDash: [2, 3], color: RED },
+          { label: 'New York State', data: vals('New York State'), pointRadius: 0, borderDash: [6, 4], color: BROWN }
+        ], { yTitle: 'Unemployment rate (%)', legend: false });
+        function more(k, v) { return ctys.filter(function (r) { return r[k] !== '' && +r[k] > v; }).length; }
+        function drawCty() {
+          var a = curCty, r = R[a], others = ctys.length - 1;
+          var d = vals(a), rl = months.map(function (k) { return k >= r.peak_month ? line19(a, k) : null; });
+          // check the picture against the file: the first month after the peak on or under the line must be the file's recovery month
+          var seen = '';
+          for (var i = 0; i < months.length; i++) if (months[i] > r.peak_month && d[i] !== null && rl[i] !== null && d[i] <= rl[i] + 1e-9) { seen = months[i]; break; }
+          if (seen !== r.recovered_month) console.error('Recovery month mismatch for ' + a + ': chart ' + seen + ', file ' + r.recovered_month);
+          var marks = ['2020-02', r.peak_month, r.recovered_month];
+          cc.data.datasets[0].label = a; cc.data.datasets[0].data = d;
+          cc.data.datasets[0].pointRadius = months.map(function (k) { return marks.indexOf(k) >= 0 ? 5 : 0; });
+          cc.data.datasets[0].pointHoverRadius = months.map(function (k) { return marks.indexOf(k) >= 0 ? 6 : 3; });
+          cc.data.datasets[1].data = rl;
+          cc.update();
+          var jm = more('jump_pts', +r.jump_pts), mm = more('months_peak_to_recovery', +r.months_peak_to_recovery);
+          function cnt(n, what) { return n === 0 ? 'none of the other ' + others + ' counties ' + what : n + ' of the other ' + others + ' counties ' + what; }
+          var say = '<strong>' + esc(a) + '</strong> went from ' + r.feb2020_rate + '% in February 2020 to a peak of ' + r.peak_rate + '% in ' + ym(r.peak_month) + ', a jump of ' + r.jump_pts + ' points; ' + cnt(jm, 'had a larger jump') + '. ';
+          if (r.recovered_month) {
+            var ri = months.indexOf(r.recovered_month);
+            say += 'Its rate was first on or under its recovery line in ' + ym(r.recovered_month) + ' (' + d[ri].toFixed(1) + '% against a line of ' + rl[ri].toFixed(1) + '%), ' + r.months_peak_to_recovery + ' months after the peak; ' + cnt(mm, 'took longer') + '. ';
+          } else say += 'Its rate has not yet been on or under its recovery line. ';
+          say += 'In ' + latestLbl + ' it was ' + r.latest_rate + '%, ' + sgn(+r.latest_vs_same_month_2019) + ' points against ' + latestMon + ' 2019. The state went from ' + S.feb2020_rate + '% to ' + S.peak_rate + '% and took ' + S.months_peak_to_recovery + ' months.';
+          document.getElementById('cty-say').innerHTML = say;
+          document.getElementById('cap-cty1').textContent = a + ' and New York State, monthly, January 2018 to ' + latestLbl + '. The recovery line starts at the county\'s peak (' + ym(r.peak_month) + ') and repeats the 2019 seasonal pattern, lifted by ' + tol.toFixed(1) + ' point. Being on or under the line once counts as recovered, even if the rate rises above it again later.' + (meta.missing_months_statewide.length ? ' ' + meta.missing_months_statewide.map(ym).join(', ') + ' is missing from the source.' : '');
+        }
+        function show(a) {
+          curCty = a; csel.value = a; drawCty(); markRow();
+          document.querySelectorAll('#sm li').forEach(function (li) { var b = li.querySelector('button'), on = b.dataset.a === a; li.classList.toggle('on', on); if (on) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
+        }
+        function pick(e) {
+          var b = e.target.closest('button[data-a]'); if (!b) return;
+          from = { box: e.currentTarget.id, a: b.dataset.a };
+          show(b.dataset.a); back.hidden = false;
+          var h = document.getElementById('h-cty'); h.scrollIntoView(); h.focus({ preventScroll: true });
+        }
+        document.getElementById('sm').addEventListener('click', pick);
+        document.getElementById('tb-cty').addEventListener('click', pick);
+        back.addEventListener('click', function () {
+          var t = null;
+          if (from) document.querySelectorAll('#' + from.box + ' button[data-a]').forEach(function (b) { if (b.dataset.a === from.a) t = b; });
+          back.hidden = true; from = null;
+          if (t) { t.scrollIntoView({ block: 'center' }); t.focus({ preventScroll: true }); }
+        });
+        csel.addEventListener('change', function () { show(csel.value); });
+        show(curCty);
+      })();
 
 
       // recovery storyline (all figures computed from recovery_summary.csv)

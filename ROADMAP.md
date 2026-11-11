@@ -112,5 +112,5 @@ Rules for every task in a round:
 - [x] 9.2 Polish `projects/auto-complaints.html`: make it more polished and more interactive. Choose one improvement. Examples: search or filter in a table, linked highlighting between a chart and its table, richer tooltips, a control that changes what a chart compares, a clearer first screen, smoother behaviour on a phone.
 - [x] 9.3 Polish `projects/state-parks.html`, on the same terms as 9.2.
 - [x] 9.4 Polish `projects/motor-vehicle-crashes.html`, on the same terms as 9.2.
-- [ ] 9.5 Polish `projects/unemployment.html`, on the same terms as 9.2.
+- [x] 9.5 Polish `projects/unemployment.html`, on the same terms as 9.2.
 - [ ] 9.6 Polish `projects/subway-comeback.html`, on the same terms as 9.2. Then start the next round: append a "Round N+1" heading below this one with a fresh copy of these six tasks, unchecked and renumbered (Round 2 is 10.1–10.6, Round 3 is 11.1–11.6, and so on), adding a polish task for any data page built since this round began.
