@@ -35,6 +35,13 @@
     @media(max-width:600px){table.data #tb-top th{min-width:0}}   /* the rank column holds a number, not a name */
     .ctl select{font:inherit;padding:.5rem .75rem;border:1px solid var(--rule);border-radius:6px;background:#fff;color:inherit;max-width:100%}
     .yoy-say{max-width:46rem;padding:.8rem 1rem;background:var(--tint);border-left:4px solid var(--accent)}
+    /* Biggest days: the chart and the table mark the same chosen day */
+    #c-days{touch-action:manipulation}
+    #tb-top button.day{all:unset;cursor:pointer;color:var(--accent);text-decoration:underline;padding:.2rem 0}
+    #tb-top button.day:hover{color:var(--mark)}
+    #tb-top button.day:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+    #tb-top tr.is-on th,#tb-top tr.is-on td{background:#F6EBD3}
+    #tb-top tr.is-on button.day{color:var(--ink);font-weight:600}
   </style>
 </head>
 <body>
@@ -156,6 +163,13 @@
         <h2>The biggest days</h2>
         <p>The ten days with the most riders for a mode since January 1, 2021. Days are ranked by the raw count of riders, not by share of baseline, because the weekend baselines are single days and would put weekend days on top. Days before 2021 are left out because the busiest days in the whole dataset are simply the baseline week and the days just before the shutdown.</p>
         <div class="ctl"><label for="m3">Mode</label><select id="m3"></select></div>
+        <p>The chart shows where those ten days sit in the whole run of daily counts: the line is every day since January 1, 2021 and the gold dots are the ten days in the table. Press a dot, or a date in the table, to mark that day in both places and compare it with an ordinary day of the same month.</p>
+        <p id="day-say" class="yoy-say" aria-live="polite"></p>
+        <figure class="chart">
+          <div class="chart-box"><canvas id="c-days" data-has-table role="img" aria-label="Line chart of the number of riders on every day since January 1, 2021 for the selected mode, with the ten days that had the most riders marked as gold dots. The ten days are listed in the table that follows."></canvas></div>
+          <figcaption id="cap-days"></figcaption>
+        </figure>
+        <p class="note">A line of every single day keeps what a monthly average hides: the weekly dip at weekends, the holiday troughs and the single days that stand out. Marking the ten biggest days on it shows at a glance whether the records are recent or old, and whether they cluster in one season. The count axis starts at zero so that the height of the line is in proportion to the number of riders.</p>
         <div class="table-scroll" tabindex="0" role="region" aria-label="Biggest days">
           <table class="data"><caption id="cap-top"></caption>
             <thead><tr><th scope="col">Rank</th><th scope="col">Date</th><th scope="col">Day</th><th scope="col" class="num">Riders</th><th scope="col" class="num">Share of baseline</th></tr></thead>
@@ -348,15 +362,77 @@
 
       // Biggest days
       var CUT = '2021-01-01';
+      var DOW = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      function dow(d) { var p = d.split('-'); return DOW[new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])).getUTCDay()]; }
+      var daysEl = document.getElementById('c-days'), GOLD = NYCharts.palette[1], c5, topRows = [], series = [], pinned = null;
+      function topAt(i) { for (var k = 0; k < topRows.length; k++) if (topRows[k].idx === i) return k; return -1; }
+      // The marked day: one sentence, one bigger dot, one shaded table row
+      function showPin() {
+        var m = sel3.value, unit = UNIT[m] || 'riders', say;
+        var k = -1; topRows.forEach(function (r, i) { if (r.date === pinned) k = i; });
+        if (k < 0) say = NAMES[m] + '. No day is marked. Press a gold dot on the chart, or a date in the table, to compare that day with an ordinary day of the same month.';
+        else {
+          var r = topRows[k], mk = r.date.slice(0, 7), t = r.day_type === 'weekday' ? 'weekday' : 'weekend', o = Y[m][mk][t], a = o[0] / o[1];
+          say = NAMES[m] + ', number ' + (k + 1) + ' of the ten: ' + dow(r.date) + ', ' + ymd(r.date) + ', with ' + nf(r.count) + ' ' + unit + ' (' + pct(+r.share_of_baseline) + ' of the baseline). That is ' + change(+r.count, a) + ' the average ' + (t === 'weekday' ? 'weekday' : 'weekend day') + ' in ' + ym(mk) + (mk === lastMonth && !lastComplete ? ' so far' : '') + ', which was ' + nf(Math.round(a)) + ' over ' + o[1] + ' days.';
+        }
+        document.getElementById('day-say').textContent = say;
+        Array.prototype.forEach.call(document.querySelectorAll('#tb-top tr'), function (tr) {
+          var on = tr.getAttribute('data-date') === pinned; tr.classList.toggle('is-on', on); tr.querySelector('button').setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        if (c5) c5.update();
+      }
+      function pin(d) { pinned = pinned === d ? null : d; showPin(); }
+      function nearTop(e) {   // the gold dot within reach of a click or tap, if any
+        if (!c5) return -1;
+        var box = daysEl.getBoundingClientRect(), x = e.clientX - box.left, y = e.clientY - box.top, pts = c5.getDatasetMeta(1).data, best = -1, bd = 22 * 22;
+        topRows.forEach(function (r, k) { var p = pts[r.idx]; if (!p) return; var d = (p.x - x) * (p.x - x) + (p.y - y) * (p.y - y); if (d < bd) { bd = d; best = k; } });
+        return best;
+      }
+      daysEl.addEventListener('click', function (e) { var k = nearTop(e); if (k >= 0) pin(topRows[k].date); });
+      daysEl.addEventListener('mousemove', function (e) { daysEl.style.cursor = nearTop(e) >= 0 ? 'pointer' : ''; });
+      document.getElementById('tb-top').addEventListener('click', function (e) { var b = e.target.closest('button.day'); if (b) pin(b.closest('tr').getAttribute('data-date')); });
+
       function drawTop() {
-        var m = sel3.value;
-        var rows = daily.filter(function (r) { return r.mode === m && r.date >= CUT; }).sort(function (a, b) { return +b.count - +a.count; }).slice(0, 10);
+        var m = sel3.value, unit = UNIT[m] || 'riders';
+        series = daily.filter(function (r) { return r.mode === m && r.date >= CUT; }).sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+        series.forEach(function (r, i) { r.idx = i; });
+        var rows = topRows = series.slice().sort(function (a, b) { return +b.count - +a.count; }).slice(0, 10);
+        pinned = null;
         document.getElementById('cap-top').textContent = NAMES[m] + ': ten days with the most riders since January 1, 2021';
         document.getElementById('tb-top').innerHTML = rows.map(function (r, i) {
-          return '<tr><th scope="row">' + (i + 1) + '</th><td>' + ymd(r.date) + '</td><td>' + cap(r.day_type) + '</td><td class="num">' + nf(r.count) + '</td><td class="num">' + pct(+r.share_of_baseline) + '</td></tr>';
+          return '<tr data-date="' + r.date + '"><th scope="row">' + (i + 1) + '</th><td><button type="button" class="day" aria-pressed="false" title="Mark this day on the chart">' + ymd(r.date) + '</button></td><td>' + cap(r.day_type) + '</td><td class="num">' + nf(r.count) + '</td><td class="num">' + pct(+r.share_of_baseline) + '</td></tr>';
         }).join('');
         var wk = rows.filter(function (r) { return r.day_type !== 'weekday'; }).length;
         document.getElementById('note-top').textContent = wk + ' of these ten days fall on a weekend. Ranking is by raw riders; the share column is shown for context.';
+
+        // Chart: every day since the cutoff, with the ten days of the table as gold dots
+        var starts = []; series.forEach(function (r, i) { if (i && r.date.slice(0, 4) !== series[i - 1].date.slice(0, 4)) starts.push(i); });
+        if (c5) c5.destroy();
+        c5 = NYCharts.line(daysEl, series.map(function (r) { return r.date; }), [
+          { label: cap(unit) + ' each day', data: series.map(function (r) { return +r.count; }), borderWidth: 1, pointRadius: 0, pointHoverRadius: 3 },
+          { label: 'The ten biggest days', color: GOLD, showLine: false, data: series.map(function (r, i) { return topAt(i) >= 0 ? +r.count : null; }),
+            pointRadius: function (c) { return series[c.dataIndex] && series[c.dataIndex].date === pinned ? 9 : 5; },
+            pointHoverRadius: function (c) { return series[c.dataIndex] && series[c.dataIndex].date === pinned ? 9 : 7; },
+            pointBorderColor: function (c) { return series[c.dataIndex] && series[c.dataIndex].date === pinned ? '#000' : '#fff'; },
+            pointHoverBorderColor: '#000', pointBorderWidth: function (c) { return series[c.dataIndex] && series[c.dataIndex].date === pinned ? 2.5 : 1.5; } }
+        ], { yTitle: cap(unit) + ' per day' });
+        c5.options.scales.y.ticks = { callback: function (v) { return compact(v); } };
+        c5.options.scales.x.afterBuildTicks = function (ax) { ax.ticks = starts.map(function (i) { return { value: i }; }); };   // one tick per January 1
+        c5.options.scales.x.ticks = { autoSkip: false, maxRotation: 0, callback: function (v) { return series[v] ? series[v].date.slice(0, 4) : ''; } };
+        c5.options.scales.x.grid = { display: true };
+        c5.options.plugins.legend.onClick = function () {};   // both series stay on: the dots are the point of the chart
+        c5.options.plugins.tooltip = { filter: function (c) { return c.datasetIndex === 0; }, callbacks: {
+          title: function (it) { if (!it.length) return ''; var r = series[it[0].dataIndex]; return dow(r.date) + ', ' + ymd(r.date); },
+          label: function (c) { return nf(c.parsed.y) + ' ' + unit; },
+          afterLabel: function (c) { var k = topAt(c.dataIndex); return k >= 0 ? 'Number ' + (k + 1) + ' of the ten biggest days' : ''; } } };
+        c5.update();
+
+        var by = {}, ys = [];
+        rows.forEach(function (r) { var y = r.date.slice(0, 4); if (!by[y]) { by[y] = 0; ys.push(y); } by[y]++; });
+        ys.sort().reverse();
+        var miss = (meta.missing_dates[m] || []).filter(function (d) { return d >= CUT; }).length;
+        document.getElementById('cap-days').textContent = NAMES[m] + ': ' + unit + ' on each day from ' + ymd(series[0].date) + ' to ' + ymd(series[series.length - 1].date) + ' (' + nf(series.length) + ' days), with the ten biggest days in gold. Of the ten, ' + ys.map(function (y) { return by[y] + (by[y] === 1 ? ' is' : ' are') + ' in ' + y; }).join(', ').replace(/, ([^,]*)$/, ' and $1') + '.' + (miss ? ' The source has no count for this mode on ' + miss + ' day' + (miss > 1 ? 's' : '') + ' in this period; the line joins the days on either side.' : '');
+        showPin();
       }
       sel3.addEventListener('change', drawTop); drawTop();
 
