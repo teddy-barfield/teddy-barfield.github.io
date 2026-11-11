@@ -73,7 +73,13 @@
 
   <header>
     <div class="wrap">
-      <a class="back" href="../index.html">Back to home</a>
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="ny-data/index.html">New York by the Numbers</a></li>
+          <li aria-current="page">Unemployment across NY</li>
+        </ol>
+      </nav>
       <h1 style="margin-top:1.5rem">Unemployment across New York</h1>
       <p class="lede" id="lede">Loading the latest figures from the data files.</p>
       <p class="meta">Python, Chart.js · Data last pulled <span id="pulled">2026-11-10</span></p>
@@ -176,6 +182,15 @@
         </div>
       </div>
     </section>
+
+    <!-- Project pager: the order follows the hub page and the Projects menu. Keep the three in step. -->
+    <nav class="pager" aria-label="More New York data projects">
+      <div class="wrap">
+        <a class="pager-prev" href="motor-vehicle-crashes.html"><span class="pager-dir">Previous project</span><span class="pager-title">Motor vehicle crashes</span></a>
+        <a class="pager-next" href="subway-comeback.html"><span class="pager-dir">Next project</span><span class="pager-title">The subway comeback</span></a>
+        <a class="pager-all" href="ny-data/index.html">All New York data projects</a>
+      </div>
+    </nav>
   </main>
 
   <footer>

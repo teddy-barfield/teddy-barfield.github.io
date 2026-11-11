@@ -32,5 +32,5 @@ After a refresh, run `node scripts/make_og_images.js` (needs Node and Playwright
 
 - `assets/css/projects.css`, `assets/js/charts.js` — shared styles and chart setup (Chart.js from cdnjs).
 - `assets/img/og-*.png` — link preview images (`og:image`), built by `scripts/make_og_images.js`.
-- `projects/_template.html` — starting point for a new project page.
+- `projects/_template.html` — starting point for a new project page. Each data page carries a breadcrumb and previous/next project links in plain HTML; when adding a page, extend that chain as well as the hub cards and the Projects menu.
 - `ROADMAP.md`, `LOG.md`, `docs/site-audit.md` — plan, run log and site inventory.

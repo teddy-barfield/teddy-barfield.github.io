@@ -93,3 +93,32 @@ table.data th[aria-sort="descending"] button::after { content: " \25BC"; font-si
 .chart-data summary { cursor: pointer; color: var(--accent); padding: .25rem 0; }
 .chart-data-scroll { max-height: 22rem; overflow: auto; }
 .chart-data-scroll table.data th[scope=row] { position: static; background: none; font-weight: 400; }
+
+/* Breadcrumb trail at the top of the hub and the data pages (replaces "Back to home").
+   It is a <nav>, so the first rule undoes the main menu's padding from style.css. */
+nav.crumbs { padding: 0; font-size: .95rem; }
+.crumbs ol { list-style: none; display: flex; flex-wrap: wrap; gap: .15rem .5rem; }
+.crumbs li { display: flex; gap: .5rem; color: var(--muted); }
+.crumbs li + li::before { content: "\203A"; color: var(--muted); }   /* › between steps, not read as a link */
+.crumbs a { color: var(--accent); text-decoration: underline; }
+.crumbs a:hover { color: var(--mark); }
+
+/* Previous / next project links at the foot of each data page */
+nav.pager { padding: 0 0 3rem; }
+.pager .wrap { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; font-size: 1rem; align-items: stretch; }
+.pager a { display: block; padding: .8rem 1rem; background: var(--tint); border: 1px solid var(--rule); border-top: 4px solid var(--accent); color: var(--ink); text-decoration: none; min-width: 0; }
+.pager a:hover, .pager a:focus-visible { background: var(--sheet); color: var(--ink); text-decoration: none; }
+.pager a:hover .pager-title { text-decoration: underline; }
+.pager-prev { grid-column: 1; }
+.pager-next { grid-column: 2; text-align: right; }
+.pager-dir { display: block; font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--mark); }
+.pager-prev .pager-dir::before { content: "\2190\00A0"; }
+.pager-next .pager-dir::after { content: "\00A0\2192"; }
+.pager-title { display: block; margin-top: .15rem; font: 600 1.15rem/1.25 var(--serif); }
+.pager a.pager-all { grid-column: 1 / -1; text-align: center; border-top-width: 1px; background: none; color: var(--accent); font-weight: 600; text-decoration: underline; }
+.pager a.pager-all:hover { color: var(--mark); background: var(--tint); }
+@media (max-width: 480px) {
+  .pager .wrap { grid-template-columns: minmax(0, 1fr); }
+  .pager-prev, .pager-next { grid-column: 1; }
+  .pager-next { text-align: left; }
+}
