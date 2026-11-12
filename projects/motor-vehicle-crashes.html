@@ -49,8 +49,8 @@
     .county-key{font-size:.875rem;color:var(--muted);margin-top:.5rem}
     .county-key span::before{content:"";display:inline-block;width:.8rem;height:.8rem;margin-right:.4rem;vertical-align:-.08rem;background:var(--c2)}
     /* Frequency-against-severity scatter: one dot per county, linked to "Find a county" */
-    #sec-counties h3{font:600 1.15rem var(--serif);margin-top:2rem}
-    #sec-counties h3+p{max-width:46rem;margin-top:.5rem}
+    #sec-counties h3,#sec-when h3{font:600 1.15rem var(--serif);margin-top:2rem}
+    #sec-counties h3+p,#sec-when h3+p{max-width:46rem;margin-top:.5rem}
     #c-scatter{touch-action:manipulation}
     #scatter-sel{font-size:1rem;color:var(--ink);max-width:46rem}
     #scatter-sel.on::before{content:"";display:inline-block;width:.8rem;height:.8rem;margin-right:.4rem;vertical-align:-.05rem;border-radius:50%;background:var(--c2);box-shadow:0 0 0 1.5px #000}
@@ -175,6 +175,21 @@
           <div class="chart-box"><canvas id="c-hour" role="img" aria-label="Line chart of fatal crashes per 1,000 crashes for each hour of the day, with weekday and weekend lines."></canvas></div>
           <figcaption id="cap-hour"></figcaption>
         </figure>
+        <h3 id="month-h">Through the year: month by month</h3>
+        <p>The same split between how often and how serious, by calendar month. The line is the average of the <span data-fig="nyears_w">…</span> years taken together, and the shaded band runs from the lowest single year to the highest for that month, so a wide band means the years disagree and the month's figure is less certain.</p>
+        <div class="ctl">
+          <label for="month-metric">Show</label>
+          <select id="month-metric">
+            <option value="day">How often: crashes per day</option>
+            <option value="fatal">Fatal crashes per 1,000 crashes</option>
+            <option value="inj">How serious: injury or fatal share of crashes</option>
+          </select>
+        </div>
+        <p class="note" id="month-sum" role="status" aria-live="polite"></p>
+        <figure class="chart">
+          <div class="chart-box"><canvas id="c-month" role="img" aria-label="Line chart by calendar month."></canvas></div>
+          <figcaption id="cap-month"></figcaption>
+        </figure>
       </div>
     </section>
 
@@ -269,8 +284,8 @@
       return rows.filter(function (r) { return r.length === h.length; }).map(function (r) { var o = {}; h.forEach(function (k, i) { o[k] = r[i]; }); return o; });
     }
     function get(u, json) { return fetch(BASE + u).then(function (r) { if (!r.ok) throw new Error(u); return json ? r.json() : r.text().then(csv); }); }
-    Promise.all([get('county_frequency_severity.csv'), get('hour_dow_severity.csv'), get('weather_severity.csv'), get('road_surface_severity.csv'), get('lighting_severity.csv'), get('year_severity.csv'), get('meta.json', 1), get('analysis_meta.json', 1)])
-    .then(function (r) { init(r[0], r[1], { weather: r[2], road_surface: r[3], lighting: r[4] }, r[5], r[6], r[7]); })
+    Promise.all([get('county_frequency_severity.csv'), get('hour_dow_severity.csv'), get('weather_severity.csv'), get('road_surface_severity.csv'), get('lighting_severity.csv'), get('year_severity.csv'), get('meta.json', 1), get('analysis_meta.json', 1), get('month_severity.csv')])
+    .then(function (r) { init(r[0], r[1], { weather: r[2], road_surface: r[3], lighting: r[4] }, r[5], r[6], r[7], r[8]); })
     .catch(function (e) { document.getElementById('lede').textContent = 'The data files could not be loaded (' + e.message + ').'; });
 
     function int(x) { return Math.round(x).toLocaleString('en-US'); }
@@ -306,7 +321,7 @@
     function word(n) { return WORDS[n] || String(n); }
     var MINCELL = 500, MINCOND = 1000;   // smallest heatmap cell given a fatal rate; smallest condition drawn on the chart
 
-    function init(county, hd, cond, ys, meta, am) {
+    function init(county, hd, cond, ys, meta, am, mon) {
       document.getElementById('pulled').textContent = meta.pulled;
       document.getElementById('pulled2').textContent = meta.pulled;
       var years = meta.years, y0 = years[0], y1 = years[years.length - 1];
@@ -544,6 +559,78 @@
         [{ label: 'Weekday (Mon-Fri)', data: wk.map(function (v) { return +v.toFixed(2); }) }, { label: 'Weekend (Sat-Sun)', data: we.map(function (v) { return +v.toFixed(2); }) }], { yTitle: 'Fatal crashes per 1,000 crashes' });
       var pk = wk.indexOf(Math.max.apply(null, wk)), pe = we.indexOf(Math.max.apply(null, we)), lo = wk.indexOf(Math.min.apply(null, wk));
       document.getElementById('cap-hour').textContent = 'Severity by hour: the share of crashes that are fatal is highest overnight (weekday peak ' + d1(wk[pk]) + ' per 1,000 at ' + hourLbl(pk) + ', weekend peak ' + d1(we[pe]) + ' at ' + hourLbl(pe) + ') and lowest around ' + hourLbl(lo) + ' on weekdays (' + d1(wk[lo]) + '). The evening rush hours have the most crashes, but a smaller fraction of them are fatal.';
+
+      // Month of the year: the pooled average of all years as a line, the lowest and highest single year as a band.
+      // Counts are divided by the days in each month (leap years included) so short months are not understated.
+      (function () {
+        var MON = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var A = agg(mon, function (r) { return r.year + '|' + (+r.month); });
+        function days(y, m) { return new Date(y, m, 0).getDate(); }   // m is 1-12
+        var MM = {
+          day:   { axis: 'Crashes per day', dp: 0, unit: '', val: function (a) { return a.n / a.days; }, what: 'recorded crashes per day' },
+          fatal: { axis: 'Fatal crashes per 1,000 crashes', dp: 2, unit: '', val: function (a) { return a.fatal / a.n * 1000; }, what: 'fatal crashes per 1,000 crashes' },
+          inj:   { axis: 'Injury or fatal share of crashes (%)', dp: 1, unit: '%', val: function (a) { return a.inj / a.n * 100; }, what: 'the share of crashes involving an injury or death' }
+        };
+        // one entry per month: the pooled cell and each year's cell; a year with no rows for a month is left out of that month
+        var cells = MON.map(function (_, i) {
+          var pool = { n: 0, fatal: 0, inj: 0, days: 0 }, per = [];
+          years.forEach(function (y) {
+            var a = A[y + '|' + (i + 1)]; if (!a || !a.n) return;
+            var c = { n: a.n, fatal: a.fatal, inj: a.inj, days: days(y, i + 1), y: y };
+            per.push(c); pool.n += c.n; pool.fatal += c.fatal; pool.inj += c.inj; pool.days += c.days;
+          });
+          return { pool: pool, per: per };
+        });
+        if (cells.some(function (c) { return !c.per.length; })) { document.getElementById('month-h').hidden = true; return; }
+        var sel = document.getElementById('month-metric'), canvas = document.getElementById('c-month'), chart;
+        var blue = NYCharts.palette[0], band = 'rgba(55,96,146,.18)', clear = 'rgba(0,0,0,0)';
+        function fmt(v, m) { return (m.dp ? v.toFixed(m.dp) : int(v)) + m.unit; }
+        function draw() {
+          var k = sel.value, m = MM[k];
+          var avg = cells.map(function (c) { return m.val(c.pool); });
+          var lo = cells.map(function (c) { return Math.min.apply(null, c.per.map(m.val)); });
+          var hi = cells.map(function (c) { return Math.max.apply(null, c.per.map(m.val)); });
+          var rd = function (a) { return a.map(function (v) { return +v.toFixed(m.dp); }); };
+          var iMax = avg.indexOf(Math.max.apply(null, avg)), iMin = avg.indexOf(Math.min.apply(null, avg));
+          var fat = [].concat.apply([], cells.map(function (c) { return c.per.map(function (a) { return a.fatal; }); }));
+          var widest = cells.map(function (_, i) { return hi[i] - lo[i]; }), iW = widest.indexOf(Math.max.apply(null, widest));
+          var txt = 'Taking ' + y0 + '-' + y1 + ' together, ' + MON[iMax] + ' has the highest figure (' + fmt(avg[iMax], m) + ') and ' + MON[iMin] + ' the lowest (' + fmt(avg[iMin], m) + '), ' + (k === 'inj' ? d1(+avg[iMax].toFixed(1) - +avg[iMin].toFixed(1)) + ' percentage points lower' : 'so the highest month is ' + d1((avg[iMax] / avg[iMin] - 1) * 100) + '% above the lowest') + '. The years differ most in ' + MON[iW] + ', from ' + fmt(lo[iW], m) + ' to ' + fmt(hi[iW], m) + '.';
+          if (k === 'day') txt += ' Counts are divided by the number of days in each month, so February is not understated for being short.';
+          if (k === 'fatal') txt += ' One month of one year holds only ' + int(Math.min.apply(null, fat)) + ' to ' + int(Math.max.apply(null, fat)) + ' fatal crashes, so single years jump about: read the line, not the edges of the band.';
+          if (k === 'inj') txt += ' This is the mix of outcomes among recorded crashes, not the chance of being hurt, and it moves with how many minor crashes are reported.';
+          document.getElementById('month-sum').textContent = txt;
+          var yrs = nYrs + '-year';
+          canvas.setAttribute('aria-label', 'Line chart of ' + m.what + ' for each calendar month, ' + y0 + '-' + y1 + ': the ' + yrs + ' average, with the lowest and the highest single year.');
+          document.getElementById('cap-month').textContent = m.axis.replace(' (%)', '') + ' by calendar month, ' + y0 + '-' + y1 + '. The line pools all ' + nYrs + ' years; the band runs from the lowest to the highest single year. ' + (k === 'day' ? 'There is no measure here of how much driving happens in each month, so a month with more crashes may simply be a month with more driving.' : 'This divides by crashes, not by miles driven, so it describes the mix of outcomes in each month and not the risk of driving in it.');
+          var A3 = nYrs.charAt(0).toUpperCase() + nYrs.slice(1) + '-year average';
+          var ds = [
+            { label: A3, data: rd(avg), borderWidth: 2.5, pointRadius: 3 },
+            { label: 'Lowest year', data: rd(lo), borderColor: clear, backgroundColor: clear, pointRadius: 0, pointHoverRadius: 0, borderWidth: 0 },
+            { label: 'Highest year', data: rd(hi), borderColor: clear, backgroundColor: band, pointRadius: 0, pointHoverRadius: 0, borderWidth: 0, fill: '-1' }
+          ];
+          if (!chart) {
+            chart = NYCharts.line(canvas, MON.map(function (s) { return s.slice(0, 3); }), ds, { yTitle: m.axis });
+            if (!chart) return;
+            chart.options.plugins.legend.labels.filter = function (it) { return it.datasetIndex !== 1; };
+            chart.options.plugins.legend.labels.generateLabels = function (ch) {
+              return Chart.defaults.plugins.legend.labels.generateLabels(ch).map(function (it) {
+                if (it.datasetIndex === 2) { it.text = 'Lowest to highest single year'; it.fillStyle = band; it.strokeStyle = band; }
+                return it;
+              });
+            };
+            chart.options.plugins.legend.onClick = function () {};   // the band needs both of its edges, so legend items do not toggle
+            chart.options.plugins.tooltip = { callbacks: {
+              title: function (it) { return MON[it[0].dataIndex]; },
+              label: function (it) { var mm = MM[sel.value]; return it.dataset.label + ': ' + fmt(it.parsed.y, mm); } } };
+          } else {
+            ds.forEach(function (d, i) { chart.data.datasets[i].data = d.data; });
+            chart.options.scales.y.title.text = m.axis;
+          }
+          chart.update();
+        }
+        sel.addEventListener('change', draw);
+        draw();
+      })();
 
       // Conditions
       var cc;
