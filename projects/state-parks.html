@@ -52,6 +52,8 @@
     .park-key{display:flex;flex-wrap:wrap;gap:.35rem 1.25rem;font-size:.875rem;color:var(--muted);margin-top:.5rem}
     .park-key span::before{content:"";display:inline-block;width:.8rem;height:.8rem;margin-right:.4rem;vertical-align:-.08rem;background:var(--band-3)}
     .park-key .k-win::before{background:var(--c1)}
+    .finder[hidden],.park-key[hidden]{display:none}
+    .note.like{font-size:1rem;color:var(--ink);max-width:46rem}
     .park-key .k-tot::before{width:1.3rem;height:0;background:none;border-top:2px dashed var(--muted);vertical-align:.28rem}
   </style>
 </head>
@@ -125,11 +127,17 @@
     <section id="sec-by-year">
       <div class="wrap-wide">
         <h2>Total attendance by year</h2>
+        <div class="finder">
+          <label for="tview">Count</label>
+          <select id="tview"></select>
+        </div>
         <figure class="chart">
           <div class="chart-box"><canvas id="c-total" role="img" aria-label="Bar chart of total state park attendance in millions of visits for each year from 2003 to 2025."></canvas></div>
+          <div class="park-key" id="total-key" hidden></div>
           <figcaption id="cap-total">Each bar is one year of attendance across every facility in the dataset, in millions of visits. Bars rise left to right.</figcaption>
         </figure>
         <p class="note" id="note-total"></p>
+        <p class="note like" id="like-sum" aria-live="polite"></p>
       </div>
     </section>
 
@@ -310,9 +318,52 @@
       li(st, '<span class="num">' + last.fac + '</span><span class="lbl">facilities reporting in ' + last.year + ' (' + first.fac + ' in ' + first.year + ')</span>');
 
       // Chart 1
-      NYCharts.bar(document.getElementById('c-total'), yt.map(function (y) { return String(y.year); }),
+      var tchart = NYCharts.bar(document.getElementById('c-total'), yt.map(function (y) { return String(y.year); }),
         [{ label: 'Visits (millions)', data: yt.map(function (y) { return +(y.att / 1e6).toFixed(2); }) }], { yTitle: 'Visits (millions)' });
       document.getElementById('note-total').textContent = 'The number of facilities reporting changed over time (' + Math.min.apply(null, yt.map(function (y) { return y.fac; })) + ' to ' + Math.max.apply(null, yt.map(function (y) { return y.fac; })) + '), so part of the rise comes from facilities being added. The total set a new high in ' + lateRecords + ' of the ' + (yt.length - 1) + ' years after ' + first.year + '.';
+
+      // Like for like: the facilities that reported more than zero visits in every year (the "continuous" flag in the file),
+      // set against all the others. The same set of places in every year, so facilities being added cannot move it.
+      var tcols = Object.keys(fs[0]).filter(function (k) { return /^y\d{4}$/.test(k); }).sort();
+      var same = fs.filter(function (r) { return r.continuous === '1'; });
+      var coh = yt.map(function (y) { var k = 'y' + y.year; return same.reduce(function (s, r) { return s + (+r[k] || 0); }, 0); });
+      var tsel = document.getElementById('tview');
+      if (same.length && tcols.length === yt.length) {
+        var c0 = coh[0], cL = coh[coh.length - 1], cGrowth = (cL / c0 - 1) * 100;
+        var cPeakI = coh.indexOf(Math.max.apply(null, coh));
+        var added = last.att - first.att, cAdded = cL - c0;
+        var others = fs.length - same.length;
+        document.getElementById('like-sum').textContent = 'Like for like: ' + same.length + ' of the ' + fs.length + ' facility names in the dataset reported visits in every year from ' + first.year + ' to ' + last.year + '. Counting only those, visits went from ' + mil(c0) + ' million in ' + first.year + ' to ' + mil(cL) + ' million in ' + last.year + ', a rise of ' + Math.round(cGrowth) + '%, against ' + Math.round(growth) + '% for every facility together; their highest year was ' + yt[cPeakI].year + ' (' + mil(coh[cPeakI]) + ' million). They account for ' + mil(cAdded) + ' million of the ' + mil(added) + ' million visits added since ' + first.year + ', and for ' + Math.round(cL / last.att * 100) + '% of all visits in ' + last.year + ' (' + Math.round(c0 / first.att * 100) + '% in ' + first.year + '). So ' + Math.round(cAdded / added * 100) + '% of the rise is more visits to one fixed set of places. The remainder comes from the other ' + others + ' facility names, which mix sites that opened or closed with sites that reported zero in some year or that the source lists under more than one name, so it cannot be divided further here. The Count menu above the chart splits each bar into these two parts.';
+        tsel.innerHTML = '<option value="all">Every facility in the dataset</option><option value="split">Split: the ' + same.length + ' facilities reporting every year, and the rest</option>';
+        var capAll = document.getElementById('cap-total').textContent, ariaAll = document.getElementById('c-total').getAttribute('aria-label');
+        var cLight = (getComputedStyle(document.documentElement).getPropertyValue('--band-3') || '').trim() || '#95B3D7';
+        var allData = yt.map(function (y) { return +(y.att / 1e6).toFixed(2); });
+        var renderTotal = function () {
+          var split = tsel.value === 'split', key = document.getElementById('total-key');
+          key.hidden = !split;
+          key.innerHTML = split ? '<span class="k-win">The ' + same.length + ' facilities that reported visits in every year</span><span>All other facilities (' + others + ' names)</span>' : '';
+          document.getElementById('cap-total').textContent = split
+            ? 'Each bar is one year, in millions of visits, and its full height is the total for every facility. The dark part is the ' + same.length + ' facilities that reported more than zero visits in every year from ' + first.year + ' to ' + last.year + ', so it follows the same set of places throughout. The light part is every other facility: ones that opened, closed, reported zero in some year, or are listed under more than one name in the source.'
+            : capAll;
+          document.getElementById('c-total').setAttribute('aria-label', split
+            ? 'Stacked bar chart of state park attendance in millions of visits for each year from ' + first.year + ' to ' + last.year + ', split into the ' + same.length + ' facilities that reported visits in every year and all other facilities.'
+            : ariaAll);
+          if (!tchart) return;
+          var c = NYCharts.palette[0];
+          tchart.data.datasets = split
+            ? [{ label: same.length + ' facilities reporting every year (millions)', data: coh.map(function (v) { return +(v / 1e6).toFixed(2); }), backgroundColor: c, borderColor: c },
+               { label: 'All other facilities (millions)', data: yt.map(function (y, i) { return +((y.att - coh[i]) / 1e6).toFixed(2); }), backgroundColor: cLight, borderColor: cLight }]
+            : [{ label: 'Visits (millions)', data: allData, backgroundColor: c, borderColor: c }];
+          tchart.options.scales.x.stacked = tchart.options.scales.y.stacked = split;
+          tchart.options.interaction.mode = split ? 'index' : 'nearest';
+          tchart.options.plugins.tooltip = split ? { callbacks: {
+            label: function (x) { var i = x.dataIndex, v = x.datasetIndex === 0 ? coh[i] : yt[i].att - coh[i]; return (x.datasetIndex === 0 ? 'Reporting every year: ' : 'All others: ') + mil(v) + ' million (' + Math.round(v / yt[i].att * 100) + '%)'; },
+            footer: function (xs) { return xs.length ? 'Every facility: ' + mil(yt[xs[0].dataIndex].att) + ' million' : ''; } } } : {};
+          tchart.update();
+        };
+        tsel.addEventListener('change', renderTotal);
+        if (!tchart) tsel.parentNode.hidden = true;
+      } else { tsel.parentNode.hidden = true; }
 
       // Top 15
       var cur = fs.filter(function (r) { return r.att_2025 !== ''; }).map(function (r) { return { f: r.facility, reg: r.region, a: +r.att_2025, e: +r.avg_2003_2005, n: +r.avg_2023_2025, g: r.growth_pct === '' ? null : +r.growth_pct, latest: +r.latest_year }; });
