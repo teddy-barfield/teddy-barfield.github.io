@@ -42,9 +42,32 @@
     .tc:disabled{border-color:var(--rule);color:var(--muted);background:none;cursor:default}
     .tc .sw{display:inline-block;width:.65rem;height:.65rem;margin-right:.35rem;border:1px solid #fff;vertical-align:-.05rem}
     #tbl tr.on-chart td{background:var(--tint)}
-    .chips{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0}
-    .chips li{background:var(--sheet);padding:.2rem .3rem .2rem .6rem;font-size:.85rem;border-left:4px solid var(--mark)}
-    .chips button{font:inherit;border:0;background:none;cursor:pointer;padding:0 .3rem}
+    /* Year readout under the trend chart: one row per line on the chart, with the counts behind that year's point */
+    .readout{margin:.5rem 0 1.5rem}
+    .rd-head{display:flex;flex-wrap:wrap;gap:.4rem .5rem;align-items:center}
+    .rd-head label{font-weight:600}
+    .rd-head select,.rd-head button{font:inherit;padding:.3rem .6rem;min-width:0}
+    .rd-head button{min-width:2.4rem;cursor:pointer}
+    .rd-head button:disabled{cursor:default}
+    .rd-head .note{margin:0;flex:1 1 14rem}
+    .rd-list{list-style:none;margin-top:.6rem;border-top:1px solid var(--rule)}
+    .rd-list li{display:grid;grid-template-columns:.8rem minmax(0,1fr) 2.2rem;gap:.1rem .55rem;align-items:baseline;padding:.5rem 0;border-bottom:1px solid var(--rule);font-size:.92rem}
+    .rd-sw{width:.75rem;height:.75rem;align-self:start;margin-top:.4rem}
+    .rd-name{font-weight:600;overflow-wrap:anywhere}
+    .rd-ratio,.rd-detail,.rd-rank{grid-column:2}
+    .rd-ratio b{font-variant-numeric:tabular-nums}
+    .rd-ratio,.rd-rank{white-space:nowrap}
+    .rd-none{grid-column:2;color:var(--muted)}
+    .rd-x{grid-column:3;grid-row:1;font:inherit;font-size:1.15rem;line-height:1.2;border:1px solid var(--rule);background:#fff;color:var(--ink);cursor:pointer;padding:.1rem 0;align-self:start}
+    .rd-x:hover{background:var(--sheet)}
+    .rd-x:focus-visible,.rd-head button:focus-visible,.rd-head select:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+    @media(max-width:600px){.rd-head label,.rd-head .note{flex:0 0 100%}}
+    @media(min-width:900px){
+      .rd-list li{grid-template-columns:.8rem minmax(0,2.3fr) 7.5rem minmax(0,2.9fr) minmax(0,1.5fr) 2.2rem}
+      .rd-ratio,.rd-detail,.rd-rank,.rd-x{grid-column:auto;grid-row:auto}
+      .rd-none{grid-column:3 / 6}
+      .rd-none + .rd-x{grid-column:6}
+    }
     .note{font-size:.875rem;color:var(--muted);margin-top:.5rem}
     .lists{display:grid;gap:1rem;grid-template-columns:minmax(0,1fr)}
     @media(min-width:760px){.lists{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -153,19 +176,29 @@
     <section id="sec-trend">
       <div class="wrap-wide">
         <h2>Trend by insurer</h2>
-        <p class="note">The thick line is the whole market: all upheld complaints divided by all premium that year. Pick insurers to compare (up to <span data-fig="max_sel">…</span>), here or with the button beside each name in the table above. Lines are drawn only for years the insurer was ranked.</p>
+        <p class="note">The thick line is the whole market: all upheld complaints divided by all premium that year. Pick insurers to compare (up to <span data-fig="max_sel">…</span>), here or with the button beside each name in the table above. Lines are drawn only for years the insurer was ranked. The list under the chart gives the counts behind each point for one year: choose the year there, or point at a year on the chart.</p>
         <div class="controls">
           <label for="pick">Add an insurer</label>
           <select id="pick"></select>
           <button type="button" id="add">Add</button>
         </div>
-        <ul class="chips" id="chips" aria-label="Insurers on the chart"></ul>
         <figure class="chart">
           <div class="chart-box trend">
             <canvas id="chart-trend" data-has-table role="img" aria-label="Line chart of complaint ratio by year for the market and the chosen insurers"></canvas>
           </div>
           <figcaption>Complaint ratio (upheld complaints per $1 million of premium) by DFS filing year. Lower is better. <span data-if-dup>The <span data-fig="dup">…</span> year is left out because the source's <span data-fig="dup">…</span> table is identical to <span data-fig="dup_prev">…</span> (see caveats).</span></figcaption>
         </figure>
+        <div class="readout">
+          <div class="rd-head">
+            <label for="yr">Behind the points in</label>
+            <button type="button" id="yr-prev" aria-label="Earlier year">&#9664;</button>
+            <select id="yr"></select>
+            <button type="button" id="yr-next" aria-label="Later year">&#9654;</button>
+            <p class="note">Or point at a year on the chart (on a phone, tap it). The dashed line on the chart marks the year shown.</p>
+          </div>
+          <ul class="rd-list" id="readout" aria-label="Lines on the chart, with the figures for the chosen year"></ul>
+          <p class="note" id="rd-note" hidden>† Under $<span data-fig="small_m">…</span> million of premium that year, where one or two complaints can produce an extreme ratio.</p>
+        </div>
         <div class="table-scroll" tabindex="0" role="region" aria-label="Chart values">
           <table class="data" id="trend-tbl"><caption>Chart values (complaint ratio by year)</caption><thead></thead><tbody></tbody></table>
         </div>
@@ -400,20 +433,76 @@
       var pick = document.getElementById('pick');
       Object.keys(byN).sort(function (a, b) { return byN[a].name.localeCompare(byN[b].name); }).forEach(function (k) {
         var o = document.createElement('option'); o.value = k; o.textContent = byN[k].name; pick.appendChild(o); });
-      var chart;
+      var chart, MARKET = '#222';
+      // Year readout: the year whose figures are listed under the chart. It opens on the latest year and follows
+      // the Year menu, its two arrow buttons, and the pointer (or a tap) on the chart. A dashed line marks it on the chart.
+      var selYear = last, yrSel = document.getElementById('yr'), yrPrev = document.getElementById('yr-prev'), yrNext = document.getElementById('yr-next');
+      cy.forEach(function (y) { var o = document.createElement('option'); o.value = y; o.textContent = y; yrSel.appendChild(o); });
+      if (window.Chart && !Chart.registry.plugins.get('yearMark')) Chart.register({ id: 'yearMark', beforeDatasetsDraw: function (c) {
+        if (c.$mark == null || c.$mark < 0) return;
+        var x = c.scales.x.getPixelForValue(c.$mark), a = c.chartArea, g = c.ctx;
+        g.save(); g.fillStyle = 'rgba(55,96,146,.10)'; g.fillRect(x - 9, a.top, 18, a.bottom - a.top);
+        g.strokeStyle = '#254061'; g.lineWidth = 1.5; g.setLineDash([5, 4]); g.beginPath(); g.moveTo(x, a.top); g.lineTo(x, a.bottom); g.stroke(); g.restore();
+      } });
+      function cell(tag, cls, text) { var e = document.createElement(tag); e.className = cls; if (text != null) e.textContent = text; return e; }
+      function readout() {
+        var S = ys.filter(function (s) { return s.year === selYear; })[0], ul = document.getElementById('readout'), anySmall = false;
+        ul.innerHTML = '';
+        function row(colour, name, ratio, detail, rank, k) {
+          var e = document.createElement('li'), sw = cell('span', 'rd-sw'); sw.style.background = colour; e.appendChild(sw);
+          e.appendChild(cell('span', 'rd-name', name));
+          if (ratio == null) e.appendChild(cell('span', 'rd-none', 'Not ranked by DFS in ' + selYear + '.'));
+          else {
+            var r = cell('span', 'rd-ratio'); r.appendChild(cell('b', '', ratio)); r.appendChild(document.createTextNode(' per $1M')); e.appendChild(r);
+            e.appendChild(cell('span', 'rd-detail', detail)); e.appendChild(cell('span', 'rd-rank', rank));
+          }
+          if (k) { var b = cell('button', 'rd-x', '\u00D7'); b.type = 'button'; b.setAttribute('aria-label', 'Remove ' + byN[k].name + ' from the chart');
+            b.addEventListener('click', function () { toggle(k); pick.focus(); }); e.appendChild(b); }
+          ul.appendChild(e);
+        }
+        function counts(u, t, p) { return int(u) + ' upheld of ' + int(t) + (t === 1 ? ' complaint' : ' complaints') + ' on $' + money(p) + 'M of premium'; }
+        row(MARKET, 'Whole market', f3(S.ratio), counts(S.upheld, S.total, S.prem), S.n + ' insurers ranked');
+        sel.forEach(function (k, i) {
+          var r = byN[k].y[selYear];
+          if (r && r.small) anySmall = true;
+          if (r) row(NYCharts.palette[i % 9], byN[k].name + (r.small ? ' †' : ''), r.ratio.toFixed(3), counts(r.upheld, r.total, r.prem), 'DFS rank ' + r.rank + ' of ' + S.n, k);
+          else row(NYCharts.palette[i % 9], byN[k].name, null, null, null, k);
+        });
+        document.getElementById('rd-note').hidden = !anySmall;
+        var i = cy.indexOf(selYear);
+        yrSel.value = selYear; yrPrev.disabled = i <= 0; yrNext.disabled = i >= cy.length - 1;
+      }
+      function setYear(y) {
+        if (y === selYear || cy.indexOf(y) < 0) return;
+        selYear = y;
+        if (chart) { chart.$mark = cy.indexOf(y); chart.draw(); }
+        readout();
+      }
+      yrSel.addEventListener('change', function () { setYear(+yrSel.value); });
+      // the arrows keep focus on themselves until the end of the range, then hand it to the menu (a disabled button cannot hold focus)
+      function step(d, btn) { setYear(cy[cy.indexOf(selYear) + d]); if (btn.disabled) yrSel.focus(); }
+      yrPrev.addEventListener('click', function () { step(-1, yrPrev); });
+      yrNext.addEventListener('click', function () { step(1, yrNext); });
       function trend() {
-        var ds = [{ label: 'Whole market', data: cy.map(function (y) { return ys.filter(function (s) { return s.year === y; })[0].ratio; }), color: '#222', borderWidth: 4, pointRadius: 3, borderDash: [] }];
+        var ds = [{ label: 'Whole market', data: cy.map(function (y) { return ys.filter(function (s) { return s.year === y; })[0].ratio; }), color: MARKET, borderWidth: 4, pointRadius: 3, borderDash: [] }];
         sel.forEach(function (k, i) { ds.push({ label: byN[k].name, spanGaps: true, data: cy.map(function (y) { var r = byN[k].y[y]; return r ? r.ratio : null; }), color: NYCharts.palette[i % 9] }); });
         if (chart) chart.destroy();
         chart = NYCharts.line(document.getElementById('chart-trend'), cy, ds, { yTitle: 'Upheld complaints per $1M premium', xTitle: 'DFS filing year', legend: true });
+        if (chart) {
+          // Pointing at (or tapping) a year chooses it for the list under the chart. On a narrow chart the pop-up label is
+          // turned off, because it covered the lines and ran off the edge; on a wide one it shows three decimals, as the tables do.
+          var pickYear = function (e, els) { if (els && els.length) setYear(cy[els[0].index]); };
+          var narrow = document.getElementById('chart-trend').parentNode.clientWidth < 500;
+          chart.$mark = cy.indexOf(selYear);
+          chart.options.onHover = pickYear; chart.options.onClick = pickYear;
+          chart.options.plugins.tooltip = narrow ? { enabled: false } : { callbacks: { label: function (c) { return c.dataset.label + ': ' + (c.parsed.y == null ? 'not ranked' : c.parsed.y.toFixed(3)); } } };
+          chart.update('none');
+        }
         var tb = document.querySelector('#trend-tbl tbody'), th = document.querySelector('#trend-tbl thead');
         th.innerHTML = '<tr><th scope="col">Series</th>' + cy.map(function (y) { return '<th scope="col" class="num">' + y + '</th>'; }).join('') + '</tr>';
         tb.innerHTML = '';
         ds.forEach(function (d) { var tr = document.createElement('tr'); tr.innerHTML = '<td>' + esc(d.label) + '</td>' + d.data.map(function (v) { return '<td class="num">' + (v == null ? '–' : v.toFixed(3)) + '</td>'; }).join(''); tb.appendChild(tr); });
-        var ch = document.getElementById('chips'); ch.innerHTML = '';
-        sel.forEach(function (k) { var e = document.createElement('li'); e.appendChild(document.createTextNode(byN[k].name));
-          var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Remove ' + byN[k].name); b.textContent = '×';
-          b.addEventListener('click', function () { toggle(k); }); e.appendChild(b); ch.appendChild(e); });
+        readout();
         sync();
       }
       document.getElementById('add').addEventListener('click', function () { if (sel.indexOf(pick.value) < 0) toggle(pick.value); });

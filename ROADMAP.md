@@ -127,7 +127,7 @@ Rules for every task in a round:
 ### Round 3
 
 - [x] 11.1 Site-wide improvement: make the site more logically organised or easier to navigate. Choose one feature and build it. Examples of the kind of thing meant: previous/next links between projects, a consistent "on this page" jump list, breadcrumbs back to the hub, clearer grouping or ordering of projects, faster loading, removing duplicated code shared by the data pages. This task may edit the homepage layout (not its About, exam or contact text), the hub, the five data pages and the shared CSS and JS.
-- [ ] 11.2 Polish `projects/auto-complaints.html`: make it more polished and more interactive. Choose one improvement. Examples: search or filter in a table, linked highlighting between a chart and its table, richer tooltips, a control that changes what a chart compares, a clearer first screen, smoother behaviour on a phone.
+- [x] 11.2 Polish `projects/auto-complaints.html`: make it more polished and more interactive. Choose one improvement. Examples: search or filter in a table, linked highlighting between a chart and its table, richer tooltips, a control that changes what a chart compares, a clearer first screen, smoother behaviour on a phone.
 - [ ] 11.3 Polish `projects/state-parks.html`, on the same terms as 11.2.
 - [ ] 11.4 Polish `projects/motor-vehicle-crashes.html`, on the same terms as 11.2.
 - [ ] 11.5 Polish `projects/unemployment.html`, on the same terms as 11.2.
