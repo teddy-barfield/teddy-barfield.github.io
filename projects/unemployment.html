@@ -58,6 +58,8 @@
     /* 10.5: the tolerance slider in "What if the rule were stricter or looser?" */
     .ctl input[type=range]{flex:1 1 12rem;max-width:20rem;min-width:0;height:2rem;margin:0;accent-color:var(--accent);cursor:pointer}
     .ctl input[type=range]:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+    /* 11.5: a label stays with its own menu when the controls wrap on a phone */
+    .ctl .pair{display:flex;flex-wrap:wrap;gap:.4rem .75rem;align-items:center;max-width:100%}
     .ctl output{font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
   </style>
 </head>
@@ -142,12 +144,13 @@
     <section id="sec-regions">
       <div class="wrap-wide">
         <h2>Regional comparison</h2>
-        <p>New York State's Department of Labor groups counties into ten labor market regions. Pick a region to compare its monthly rate with the state.</p>
-        <div class="ctl"><label for="reg">Region</label><select id="reg"></select></div>
+        <p>New York State's Department of Labor groups counties into ten labor market regions. Pick a region to compare its monthly rate with the state. Use Show to switch between the rate itself and its gap to the same month of 2019, which is the comparison the recovery times on this page are built on.</p>
+        <div class="ctl"><span class="pair"><label for="reg">Region</label><select id="reg"></select></span><span class="pair"><label for="regv">Show</label><select id="regv"><option value="rate">Unemployment rate</option><option value="gap">Gap to the same month of 2019</option></select></span></div>
         <figure class="chart">
           <div class="chart-box"><canvas id="c-reg" role="img" aria-label="Line chart comparing the monthly unemployment rate of the selected region with the state, from 2018."></canvas></div>
           <figcaption id="cap-reg" aria-live="polite"></figcaption>
         </figure>
+        <p class="note">The gap view subtracts the rate in the same calendar month of 2019 from every month. That takes the seasonal pattern out, so 2019 is a flat zero by construction, and anything above zero is unemployment over and above what that time of year looked like before the shock. The dotted line is this page's tolerance (<span id="tol-reg"></span>): a place counts as recovered in the first month after its peak when its line is on or under it, and larger dots mark the region's peak and that month. The gap at the peak is measured against the same month of 2019, so it differs from the "jump" in the table below, which is measured from February 2020.</p>
         <figure class="chart">
           <div class="chart-box short"><canvas id="c-rec" data-has-table role="img" aria-label="Horizontal bar chart of months from the 2020 peak until each region's rate was back within one point of the same month in 2019."></canvas></div>
           <figcaption id="cap-rec"></figcaption>
@@ -343,13 +346,51 @@
       regs.sort(function (a, b) { return a.area < b.area ? -1 : 1; });
       sel.innerHTML = regs.map(function (r) { return '<option value="' + esc(r.area) + '">' + esc(r.area) + '</option>'; }).join('');
       var rc = NYCharts.line(document.getElementById('c-reg'), labels, [{ label: 'x', data: [] }, { label: 'New York State', data: vals('New York State'), pointRadius: 0, borderDash: [5, 4], color: '#7A6A55' }], { yTitle: 'Unemployment rate (%)' });
-      function drawReg() {
-        var a = sel.value, r = R[a];
-        rc.data.datasets[0].label = a; rc.data.datasets[0].data = vals(a); rc.data.datasets[0].pointRadius = 0;
-        rc.data.datasets[0].borderColor = rc.data.datasets[0].backgroundColor = NYCharts.palette[0];
-        rc.update();
-        document.getElementById('cap-reg').textContent = a + ': ' + r.feb2020_rate + '% in February 2020, peak ' + r.peak_rate + '% in ' + ym(r.peak_month) + ', ' + r.latest_rate + '% in ' + latestLbl + '. Statewide: ' + S.feb2020_rate + '%, ' + S.peak_rate + '%, ' + S.latest_rate + '%.';
+      // 11.5: the same chart as a gap to the same month of 2019, with the page's tolerance drawn on it
+      var selV = document.getElementById('regv'), regCanvas = document.getElementById('c-reg'), tolR = meta.recovery_tolerance_pts;
+      var tolTxt = tolR.toFixed(1) + (tolR === 1 ? ' point' : ' points');
+      var rateLabel = regCanvas.getAttribute('aria-label');
+      document.getElementById('tol-reg').textContent = tolTxt;
+      function gaps(a) { return months.map(function (k) { var v = series[a][k], b = series[a]['2019-' + k.slice(5)]; return v === undefined || b === undefined ? null : Math.round((v - b) * 10) / 10; }); }
+      function ds(label, data, color, dash, radius) { return { label: label, data: data, borderColor: color, backgroundColor: color, borderWidth: 2, tension: 0, pointRadius: radius || 0, borderDash: dash || [], spanGaps: false }; }
+      // check the gap view against the file: first month after the peak on or under the tolerance, and the latest gap
+      [S].concat(regs).forEach(function (r) {
+        var g = gaps(r.area), seen = '';
+        for (var i = 0; i < months.length; i++) if (months[i] > r.peak_month && g[i] !== null && g[i] <= tolR + 1e-9) { seen = months[i]; break; }
+        if (seen !== r.recovered_month) console.error('Gap view: recovery month mismatch for ' + r.area + ': chart ' + seen + ', file ' + r.recovered_month);
+        if (g[months.length - 1] !== +r.latest_vs_same_month_2019) console.error('Gap view: latest gap mismatch for ' + r.area + ': chart ' + g[months.length - 1] + ', file ' + r.latest_vs_same_month_2019);
+      });
+      rc.options.plugins.legend.labels = { usePointStyle: true, pointStyle: 'line', boxWidth: 30 };   // the key shows solid, dashed and dotted lines, not boxes
+      rc.options.layout = { padding: { top: 8 } };   // room for the dot on the peak
+      rc.options.plugins.tooltip = { callbacks: { label: function (c) { var y = c.parsed.y; return c.dataset.label + ': ' + (selV.value === 'gap' ? sgn(y) + ' pts' : y + '%'); } } };
+      function gapSay(r, g, name) {
+        var t = name + ': ' + sgn(g[months.indexOf(r.peak_month)]) + ' points against the same month of 2019 at its peak in ' + ym(r.peak_month);
+        if (r.recovered_month) t += ', first within ' + tolTxt + ' in ' + ym(r.recovered_month) + ' (' + sgn(g[months.indexOf(r.recovered_month)]) + '), ' + r.months_peak_to_recovery + ' months later';
+        else t += ', not yet within ' + tolTxt;
+        return t + ', and ' + sgn(+r.latest_vs_same_month_2019) + ' in ' + latestLbl + '.';
       }
+      function drawReg() {
+        var a = sel.value, r = R[a], gap = selV.value === 'gap';
+        var narrow = (regCanvas.closest('.chart-box').clientWidth || window.innerWidth) < 500;
+        if (gap) {
+          var g = gaps(a), gs = gaps('New York State'), marks = [r.peak_month, r.recovered_month];
+          var reg = ds(a, g, NYCharts.palette[0], null, months.map(function (k) { return marks.indexOf(k) >= 0 ? 5 : 0; }));
+          reg.clip = 10;
+          reg.pointHoverRadius = months.map(function (k) { return marks.indexOf(k) >= 0 ? 6 : 3; });
+          rc.data.datasets = [reg, ds('New York State', gs, '#7A6A55', [5, 4]), ds('Tolerance (' + tolTxt + ')', months.map(function () { return tolR; }), NYCharts.negative, [2, 3])];
+          rc.options.scales.y.title = { display: true, text: narrow ? ['Points above the', 'same month of 2019'] : 'Points above the same month of 2019' };
+          regCanvas.setAttribute('aria-label', 'Line chart of the gap, in percentage points, between the monthly unemployment rate and the same month of 2019, for the selected region and the state, from 2018, with the recovery tolerance drawn as a dotted line.');
+          rc.update();
+          document.getElementById('cap-reg').textContent = gapSay(r, g, a) + ' ' + gapSay(S, gs, 'Statewide');
+        } else {
+          rc.data.datasets = [ds(a, vals(a), NYCharts.palette[0]), ds('New York State', vals('New York State'), '#7A6A55', [5, 4])];
+          rc.options.scales.y.title = { display: true, text: 'Unemployment rate (%)' };
+          regCanvas.setAttribute('aria-label', rateLabel);
+          rc.update();
+          document.getElementById('cap-reg').textContent = a + ': ' + r.feb2020_rate + '% in February 2020, peak ' + r.peak_rate + '% in ' + ym(r.peak_month) + ', ' + r.latest_rate + '% in ' + latestLbl + '. Statewide: ' + S.feb2020_rate + '%, ' + S.peak_rate + '%, ' + S.latest_rate + '%.';
+        }
+      }
+      selV.addEventListener('change', drawReg);
       sel.addEventListener('change', drawReg);
       sel.value = 'New York City'; if (sel.value !== 'New York City') sel.selectedIndex = 0;
       drawReg();
