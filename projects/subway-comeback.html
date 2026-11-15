@@ -34,6 +34,7 @@
     .ctl label{font-weight:600}
     @media(max-width:600px){table.data #tb-top th{min-width:0}}   /* the rank column holds a number, not a name */
     .ctl select{font:inherit;padding:.5rem .75rem;border:1px solid var(--rule);border-radius:6px;background:#fff;color:inherit;max-width:100%}
+    .ctl .pair{display:flex;flex-wrap:wrap;gap:.4rem .75rem;align-items:center;max-width:100%}
     .yoy-say{max-width:46rem;padding:.8rem 1rem;background:var(--tint);border-left:4px solid var(--accent)}
     /* Biggest days: the chart and the table mark the same chosen day */
     #c-days{touch-action:manipulation}
@@ -92,6 +93,7 @@
           <li><a href="#sec-curves">Recovery curves by mode</a></li>
           <li><a href="#sec-weekday-weekend">Weekday versus weekend</a></li>
           <li><a href="#yoy">Each year against the last</a></li>
+          <li><a href="#sec-week">The shape of the week</a></li>
           <li><a href="#sec-biggest-days">The biggest days</a></li>
           <li><a href="#sec-story">The comeback story</a></li>
           <li><a href="#sec-method">How to read this, and what it leaves out</a></li>
@@ -155,6 +157,23 @@
           <figcaption id="cap-yoy"></figcaption>
         </figure>
         <p class="note">One line per year on a shared month axis is the usual way to separate a trend from a seasonal pattern: if each year's line sits above the one before it, ridership is growing whatever the time of year. Older years are drawn lighter and the latest year darkest and thickest. Weekdays are shown first because a count for all days depends on how many weekends a month happens to contain; public holidays that fall on a weekday are still counted as weekdays here.</p>
+      </div>
+    </section>
+
+    <section id="sec-week">
+      <div class="wrap-wide">
+        <h2>The shape of the week</h2>
+        <p>The weekday lines in the charts above treat Monday to Friday as one group. This one takes the week apart. For each year it finds the typical count for each day of the week (the median: the middle value of all that year's Mondays, all its Tuesdays, and so on) and, in the first view, shows it as a share of a typical midweek day in the same year, which is the median of all its Tuesdays, Wednesdays and Thursdays. Because each year is measured against its own midweek, the overall level of ridership drops out and only the shape of the week is left, so years can be compared without the March 2020 yardstick. The dashed line is the baseline week itself, for reference. Pick a mode, and switch the view to see the counts behind the shares.</p>
+        <div class="ctl">
+          <span class="pair"><label for="m5">Mode</label><select id="m5"></select></span>
+          <span class="pair"><label for="v5">Show</label><select id="v5"><option value="index">Share of a midweek day</option><option value="count">Riders on a typical day</option></select></span>
+        </div>
+        <p id="week-say" class="yoy-say" aria-live="polite"></p>
+        <figure class="chart">
+          <div class="chart-box"><canvas id="c-week" role="img" aria-label="Line chart with the seven days of the week, Monday to Sunday, along the bottom and one line per year, showing the typical count on each day of the week for the selected mode, with the baseline week of March 2020 as a dashed line."></canvas></div>
+          <figcaption id="cap-week"></figcaption>
+        </figure>
+        <p class="note">The median is used instead of the average because public holidays, several of which always fall on a Monday, and a few counts in the source that look faulty would pull an average down, while the middle value is not moved by a handful of unusual days. The days of the week are categories, not a time series, but they have a fixed order, and a line lets the eye follow one year's shape across the week; seven sets of bars side by side would not fit a phone screen. The baseline-week line is one day of each kind, so small gaps between it and the yearly lines should not be read closely. The chart describes what the counts did; it cannot say why the shape of the week changed.</p>
       </div>
     </section>
 
@@ -298,6 +317,62 @@
       }
       sel2.addEventListener('change', drawWk); drawWk();
 
+      // The shape of the week: the median count on each day of the week, per year, against the same year's midweek median (computed from daily_share.csv)
+      var sel5 = document.getElementById('m5'), view5 = document.getElementById('v5');
+      modes.forEach(function (m) { var o = document.createElement('option'); o.value = m; o.textContent = NAMES[m]; sel5.appendChild(o); });
+      var WD = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+      var W = {}, lastBy = {};   // W[mode][year or 'base'][0 = Monday .. 6 = Sunday] = list of daily counts
+      daily.forEach(function (r) {
+        var p = r.date.split('-'), d = (new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])).getUTCDay() + 6) % 7;
+        var k = r.date >= meta.baseline_window[0] && r.date <= meta.baseline_window[1] ? 'base' : p[0];
+        var mm = (W[r.mode] = W[r.mode] || {}), o = (mm[k] = mm[k] || [[], [], [], [], [], [], []]);
+        o[d].push(+r.count);
+        if (!lastBy[r.mode] || r.date > lastBy[r.mode]) lastBy[r.mode] = r.date;
+      });
+      function median(a) { a = a.slice().sort(function (x, y) { return x - y; }); var n = a.length; return !n ? null : n % 2 ? a[(n - 1) / 2] : (a[n / 2 - 1] + a[n / 2]) / 2; }
+      function profile(m, k) {   // the seven medians, the midweek median (Tuesday to Thursday pooled) and the days behind each
+        var o = W[m] && W[m][k]; if (!o) return null;
+        var mid = median(o[1].concat(o[2], o[3]));
+        return mid ? { d: o.map(median), mid: mid, n: o.map(function (a) { return a.length; }) } : null;
+      }
+      var baseYear = meta.baseline_window[1].slice(0, 4);
+      var c6;
+      function drawWeek() {
+        var m = sel5.value, idx = view5.value === 'index', unit = UNIT[m] || 'riders';
+        view5.options[1].textContent = cap(unit) + ' on a typical day';
+        // The year of the baseline week is left out: after that week it is the shutdown, not a normal week.
+        var yrs = Object.keys(W[m]).filter(function (k) { return k !== 'base' && k > baseYear && profile(m, k); }).sort();
+        var lastY = yrs[yrs.length - 1], partial = lastBy[m].slice(5) !== '12-31';
+        function val(p, i) { return p.d[i] == null ? null : idx ? Math.round(p.d[i] / p.mid * 1000) / 10 : Math.round(p.d[i]); }
+        var B = profile(m, 'base'), ds = [];
+        if (B) ds.push({ label: 'Baseline week, ' + ym(meta.baseline_window[0]), color: GOLD5, borderDash: [6, 4], borderWidth: 2.5, pointRadius: 3, pointHoverRadius: 5, data: WD.map(function (_, i) { return val(B, i); }) });
+        yrs.forEach(function (y, i) {
+          var p = profile(m, y), newest = y === lastY;
+          ds.push({ label: y + (newest && partial ? ' so far' : ''), color: shade(i, yrs.length), borderWidth: newest ? 3.5 : 2, pointRadius: newest ? 3 : 2, pointHoverRadius: 5, data: WD.map(function (_, j) { return val(p, j); }) });
+        });
+        if (c6) c6.destroy();
+        var old = document.getElementById('c-week').closest('figure').querySelector('details.chart-data'); if (old) old.remove();
+        c6 = NYCharts.line(document.getElementById('c-week'), WD.map(function (d) { return d.slice(0, 3); }), ds, { yTitle: idx ? 'Share of a typical midweek day (%)' : cap(unit) + ' on a typical day (median)' });
+        c6.options.scales.y.ticks = { callback: function (v) { return idx ? v + '%' : compact(v); } };
+        c6.options.plugins.legend.labels = { usePointStyle: true, pointStyle: 'line', boxWidth: 30 };   // the key shows the dashed line as a dashed line
+        c6.options.plugins.tooltip = { callbacks: {
+          title: function (it) { return it.length ? WD[it[0].dataIndex] : ''; },
+          label: function (c) { return c.dataset.label + ': ' + (idx ? c.parsed.y.toFixed(1) + '%' : nf(c.parsed.y)); } } };
+        c6.update();
+
+        function sh(p, i) { return pct(p.d[i] / p.mid); }
+        function four(p) { return sh(p, 0) + ', ' + sh(p, 4) + ', ' + sh(p, 5) + ' and ' + sh(p, 6); }
+        var L = profile(m, lastY), F = profile(m, yrs[0]);
+        var say = NAMES[m] + '. In ' + lastY + (partial ? ' so far (to ' + ymd(lastBy[m]) + ')' : '') + ', a typical Monday had ' + nf(Math.round(L.d[0])) + ' ' + unit + ', which is ' + sh(L, 0) + ' of a typical midweek day (' + nf(Math.round(L.mid)) + ', the median of Tuesday to Thursday). A typical Friday was at ' + sh(L, 4) + ', Saturday at ' + sh(L, 5) + ' and Sunday at ' + sh(L, 6) + '.';
+        if (yrs.length > 1) say += ' In ' + yrs[0] + ' the same four days were at ' + four(F) + '.';
+        if (B) say += ' In the baseline week (' + ymd(meta.baseline_window[0]) + ' to ' + ymd(meta.baseline_window[1]) + ', one day of each kind) they were at ' + four(B) + '.';
+        document.getElementById('week-say').textContent = say;
+        var lo = Infinity, hi = 0;
+        yrs.forEach(function (y) { profile(m, y).n.forEach(function (n) { if (n < lo) lo = n; if (n > hi) hi = n; }); });
+        var miss = (meta.missing_dates[m] || []).filter(function (d) { return d.slice(0, 4) > baseYear; }).length;
+        document.getElementById('cap-week').textContent = NAMES[m] + ': ' + (idx ? 'the median count on each day of the week as a share of the same year\'s median Tuesday-to-Thursday count' : 'the median number of ' + unit + ' on each day of the week') + ', ' + yrs[0] + ' to ' + lastY + (partial ? ' (' + lastY + ' runs to ' + ymd(lastBy[m]) + ')' : '') + '. Each yearly point is the median of ' + (lo === hi ? lo : lo + ' to ' + hi) + ' days; each baseline-week point is a single day. The rest of ' + baseYear + ' is left out because it is the shutdown year.' + (idx ? '' : ' ' + lastY + (partial ? ' does not yet include the last weeks of the year, so its counts are not strictly comparable with the full years.' : '')) + (miss ? ' The source has no count for this mode on ' + miss + ' day' + (miss > 1 ? 's' : '') + ' in these years.' : '');
+      }
+
       // Each year against the last: plain riders per day, no baseline (computed from daily_share.csv)
       var sel4 = document.getElementById('m4'), day4 = document.getElementById('d4');
       modes.forEach(function (m) { var o = document.createElement('option'); o.value = m; o.textContent = NAMES[m]; sel4.appendChild(o); });
@@ -359,6 +434,8 @@
         document.getElementById('cap-yoy').textContent = 'Average ' + unit + ' per day in each month, ' + DAYS[t] + ', ' + NAMES[m] + ', one line per year. ' + years[0] + ' starts in ' + ym(full[0]) + ', when this data begins.' + (lastComplete ? '' : ' ' + ym(lastMonth) + ' is left out because the data stop on ' + ymd(last) + '.') + (miss ? ' The source has no count for this mode on ' + miss + ' day' + (miss > 1 ? 's' : '') + '; those months are averaged over the days available.' : '');
       }
       sel4.addEventListener('change', drawYoY); day4.addEventListener('change', drawYoY); drawYoY();
+      var GOLD5 = NYCharts.palette[1];
+      sel5.addEventListener('change', drawWeek); view5.addEventListener('change', drawWeek); drawWeek();
 
       // Biggest days
       var CUT = '2021-01-01';
