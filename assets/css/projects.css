@@ -135,7 +135,19 @@ nav.toc { margin-top: 1.75rem; padding: .85rem 1.1rem 1rem; background: var(--ti
   .toc ol { columns: 2; column-gap: 2rem; }
 }
 /* a little air above whatever a jump link lands on */
-section[id], h2[id], .data-source[id] { scroll-margin-top: 1rem; }
+section[id], h2[id], .data-source[id], nav.toc[id] { scroll-margin-top: 1rem; }
 
 /* Line under a card grid ("See all ...", "Also on this site ..."): a gap so it does not touch the cards */
 .cards-more { margin-top: 1.25rem; }
+
+/* "On this page" return button (added by assets/js/page-nav.js on pages that have the jump list).
+   Fixed to the bottom-right corner; shown only after the list has scrolled off the top of the screen. */
+nav.toc:focus { outline: none; }
+nav.toc:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.to-toc { position: fixed; right: 1rem; bottom: 1rem; z-index: 15; display: inline-flex; align-items: center; gap: .4rem; min-height: 2.75rem; padding: .5rem .95rem; background: var(--accent); color: #fff; font-size: .875rem; font-weight: 600; line-height: 1.2; text-decoration: none; border-radius: 3px; box-shadow: 0 4px 14px rgba(29, 43, 58, .25); }
+.to-toc::before { content: "\2191"; }   /* up arrow: decoration, the link has its own label */
+.to-toc:hover { background: var(--mark); color: #fff; }
+.to-toc:focus-visible { outline: 3px solid var(--mark); outline-offset: 3px; }
+.to-toc[hidden] { display: none; }
+body.has-to-toc > footer { padding-bottom: 5.5rem; }   /* room for the button at the very end of the page */
+@media print { .to-toc { display: none; } }
